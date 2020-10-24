@@ -13,15 +13,7 @@ def load_meals():
     return meals
 
 
-def load_history(start=None, end=None):
-    '''
-    start: dt.datetime
-    end: dt.datetime
-    '''
-
-    with open(HISTORY_FILE, 'rb') as fp:
-        history = pickle.load(fp)
-
+def filter_history(history, start=None, end=None)
     if start is not None:
         history = {
             date: entry
@@ -37,6 +29,18 @@ def load_history(start=None, end=None):
         }
 
     return history
+
+
+def load_history(start=None, end=None):
+    '''
+    start: dt.datetime
+    end: dt.datetime
+    '''
+
+    with open(HISTORY_FILE, 'rb') as fp:
+        history = pickle.load(fp)
+
+    return filter_history(history, start, end)
 
 
 def write_history_entry(date, entry):
@@ -55,18 +59,13 @@ def write_history_entries(entries):
         pickle.dump(history, fp)
 
 
-def delete_history_entry(date):
-    history = load_history()
-    history = {
-        d: entry
-        for d, entry in history.items()
-        if d != date
-    }
-    with open(HISTORY_FILE, 'wb') as fp:
-        pickle.dump(history, fp)
-
-
 def delete_history_entries(dates):
+    '''
+    dates: dt.date or iterable of dt.dates
+    '''
+    if isinstance(dates, dt.date):
+        dates = [dates]
+
     history = load_history()
     history = {
         d: entry
