@@ -16,3 +16,10 @@ Meals are loaded from the meals.json file, and a random selection of meals is su
 * Include ingredients required in meals JSON
 * Allow the generation of a shopping list from the selection recommended
 
+## Email Support
+
+Currently email support is being provided locally, loading a credentials file at runtime. This file is ignored from the git since it contains password information for the mail robot.
+
+At present if you want email support you must create an email robot and follow e.g. the information [here](https://realpython.com/python-send-email/) to allow for automated sending of emails from this address. You can also disable the email support in the script if this feature isn't required. 
+
+In the future, the solution is to have the script send a request to a web server which emails back the weekly recommendation and shopping list.
