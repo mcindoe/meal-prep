@@ -6,5 +6,9 @@ Meals are loaded from the meals.json file, and a random selection of meals is su
 
 ## Future Work
 
-Include ingredients required in meals JSON, allow the generation of a shopping list from the selection recommended. 
+* More rules - e.g. Sunday should be a roast, but don't want to recommend roasts on other days
+    - This is easy though
+* Email users with a PDF of the meal selection for that week (might be tricky with a public repo ...)
+* Include ingredients required in meals JSON
+* Allow the generation of a shopping list from the selection recommended
 
