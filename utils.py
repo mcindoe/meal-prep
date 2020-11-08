@@ -6,6 +6,7 @@ import pickle
 
 MEALS_FILE = 'meals.json'
 HISTORY_FILE = 'history.pkl'
+MAIL_CREDENTIALS_FILE = 'mail_credentials.txt'
 
 DAYS = [
     'Monday',
@@ -16,6 +17,14 @@ DAYS = [
     'Saturday',
     'Sunday'
 ]
+
+
+def get_mail_credentials():
+    "Get username, password used by mail robot"
+    with open(MAIL_CREDENTIALS_FILE, 'r') as fp:
+        lines = fp.readlines()
+    username, password = (line.rstrip('\n') for line in lines)
+    return username, password
 
 
 def load_meals():
