@@ -91,6 +91,18 @@ def delete_history_entries(dates):
     write_history(history)
 
 
+def delete_history_window(start_date, end_date):
+    "start_date, end_date: dt.date. End not included"
+
+    history = load_history()
+    history = {
+        d: entry
+        for d, entry in history.items()
+        if d < start_date or d >= end_date
+    }
+    write_history(history)
+
+
 def choose_meal(meals):
     return random.choice(list(meals.keys()))
 
