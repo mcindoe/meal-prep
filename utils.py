@@ -146,3 +146,21 @@ def is_roast(meal_name):
     if 'roast' not in meals[meal_name]:
         return False
     return meals[meal_name]['roast']
+
+
+def is_fish(meal_name):
+    meals = load_meals()
+    assert meal_name in meals.keys()
+
+    if 'protein' not in meals[meal_name]:
+        return False
+    return meals[meal_name]['protein'] == 'fish'
+
+
+def is_favourite(meal_name):
+    meals = load_meals()
+    assert meal_name in meals.keys()
+
+    if 'favourite' not in meals[meal_name]:
+        return False
+    return meals[meal_name]['favourite']
