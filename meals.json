@@ -1,8 +1,42 @@
 {
     "Spaghetti Bolognese": {
-        "protein": "beef"
+        "protein": "beef",
+        "pasta": true
     },
     "Fish Pie": {
-        "protein": "fish"
+        "protein": "fish",
+        "pasta": false
+    },
+    "Pork Belly": {
+        "protein": "pork",
+        "pasta": false
+    },
+    "Lamb Chops": {
+        "protein": "lamb",
+        "pasta": false
+    },
+    "Vegetable Roast": {
+        "protein": "vegetable",
+        "pasta": false
+    },
+    "Chicken Salad": {
+        "protein": "chicken",
+        "pasta": false
+    },
+    "Kumara Salad": {
+        "protein": "vegetable",
+        "pasta": false
+    },
+    "Shephards Pie": {
+        "protein": "lamb",
+        "pasta": false
+    },
+    "Spaghetti Carbonara": {
+        "protein": "pork",
+        "pasta": true
+    },
+    "Pasta with Chicken and Sundried Tomatoes": {
+        "protein": "chicken",
+        "pasta": true
     }
 }
