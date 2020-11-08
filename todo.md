@@ -1,0 +1,1 @@
+* One fish dish per 7 days

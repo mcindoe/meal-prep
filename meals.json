@@ -1,36 +1,24 @@
 {
     "Spaghetti Bolognese": {
         "protein": "beef",
-        "pasta": true
+        "pasta": true,
+        "favourite": true
     },
     "Fish Pie": {
         "protein": "fish"
     },
-    "Pork Belly": {
-        "protein": "pork"
-    },
-    "Lamb Chops": {
-        "protein": "lamb"
-    },
-    "Vegetable Roast": {
-        "protein": "vegetable"
-    },
-    "Chicken Salad": {
-        "protein": "chicken"
-    },
-    "Kumara Salad": {
-        "protein": "vegetable"
+    "Sticky Chinese Pork Belly": {
+        "protein": "pork",
+        "favourite": true
     },
     "Shephards Pie": {
-        "protein": "lamb"
-    },
-    "Spaghetti Carbonara": {
-        "protein": "pork",
-        "pasta": true
+        "protein": "lamb",
+        "favourite": true
     },
     "Pasta with Chicken and Sundried Tomatoes": {
         "protein": "chicken",
-        "pasta": true
+        "pasta": true,
+        "favourite": true
     },
     "Roast Pork": {
         "protein": "pork",
@@ -43,5 +31,48 @@
     "Roast Lamb": {
         "protein": "lamb",
         "roast": true
+    },
+    "Chilli con Carne": {
+        "protein": "beef",
+        "favourite": true
+    },
+    "Burgers": {
+        "protein": "beef",
+        "favourite": true
+    },
+    "Lasagne": {
+        "protein": "beef"
+    },
+    "Moussaka": {
+        "protein": "lamb"
+    },
+    "Chicken Fajitas": {
+        "protein": "chicken"
+    },
+    "Chicken and Green Bean Vermicelli Noodles": {
+        "protein": "chicken"
+    },
+    "Quiche Lorraine": {
+        "protein": "pork"
+    },
+    "Roast Beef": {
+        "protein": "beef",
+        "roast": true
+    },
+    "Chilli Chicken Thighs with Vine Tomatoes": {
+        "protein": "chicken",
+        "favourite": true
+    },
+    "Chicken Tallegio": {
+        "protein": "chicken"
+    },
+    "Beef and Ale Stew": {
+        "protein": "beef"
+    },
+    "Honey-Garlic Salmon": {
+        "protein": "fish"
+    },
+    "Indian Lamb with Spiced Lentils": {
+        "protein": "lamb"
     }
 }
