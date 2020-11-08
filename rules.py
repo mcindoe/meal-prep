@@ -1,5 +1,5 @@
 '''
-Provides the available rules on which to limit the 
+Provides the available rules on which to limit the
 meals which can be selected for a given date
 
 A meal dictionary is a dictionary name: meal_info
@@ -37,10 +37,12 @@ import datetime as dt
 
 from utils import filter_history
 from utils import get_protein
+from utils import is_roast
 from utils import is_pasta
 
 
 def not_consecutive_same_protein(meals, date, combined_history):
+    "Do not recommend the same protein two days in a row"
     previous_day = date - dt.timedelta(days=1)
     next_day = date + dt.timedelta(days=1)
 
@@ -57,10 +59,10 @@ def not_consecutive_same_protein(meals, date, combined_history):
     }
 
 
-def none_within_seven_days(meals, date, combined_history):
-    "Ensure that there is no repeated suggestion within a seven-day window"
+def not_within_seven_days(meals, date, combined_history):
+    "Do not recommend the same meal within seven days of previous occurrence"
     window_start = date - dt.timedelta(days=7)
-    window_end = date + dt.timedelta(days=8) 
+    window_end = date + dt.timedelta(days=8)
     window_history = filter_history(combined_history, window_start, window_end)
 
     return {
@@ -71,7 +73,7 @@ def none_within_seven_days(meals, date, combined_history):
 
 
 def not_consecutive_pasta(meals, date, combined_history):
-    "Ensure that two pasta dishes are not consecutively recommended"
+    "Do not recommend pasta dishes two days in a row"
     window_start = date - dt.timedelta(days=1)
     window_end = date + dt.timedelta(days=2)
     window_history = filter_history(combined_history, window_start, window_end)
@@ -80,8 +82,32 @@ def not_consecutive_pasta(meals, date, combined_history):
         return {
             name: meal_info
             for name, meal_info in meals.items()
-            if not meal_info['pasta']
+            if not is_pasta(name)
         }
 
     return meals
+
+
+def force_sunday_roast(meals, date, combined_history):
+    "Recommend only roasts on a Sunday"
+    if date.weekday() != 6:
+        return meals
+
+    return {
+        name: meal_info
+        for name, meal_info in meals.items()
+        if is_roast(name)
+    }
+
+
+def not_roast_on_non_sunday(meals, date, combined_history):
+    "If not on Sunday, do not recommend a roast"
+    if date.weekday() == 6:
+        return meals
+
+    return {
+        name: meal_info
+        for name, meal_info in meals.items()
+        if not is_roast(name)
+    }
 

@@ -4,32 +4,25 @@
         "pasta": true
     },
     "Fish Pie": {
-        "protein": "fish",
-        "pasta": false
+        "protein": "fish"
     },
     "Pork Belly": {
-        "protein": "pork",
-        "pasta": false
+        "protein": "pork"
     },
     "Lamb Chops": {
-        "protein": "lamb",
-        "pasta": false
+        "protein": "lamb"
     },
     "Vegetable Roast": {
-        "protein": "vegetable",
-        "pasta": false
+        "protein": "vegetable"
     },
     "Chicken Salad": {
-        "protein": "chicken",
-        "pasta": false
+        "protein": "chicken"
     },
     "Kumara Salad": {
-        "protein": "vegetable",
-        "pasta": false
+        "protein": "vegetable"
     },
     "Shephards Pie": {
-        "protein": "lamb",
-        "pasta": false
+        "protein": "lamb"
     },
     "Spaghetti Carbonara": {
         "protein": "pork",
@@ -38,5 +31,17 @@
     "Pasta with Chicken and Sundried Tomatoes": {
         "protein": "chicken",
         "pasta": true
+    },
+    "Roast Pork": {
+        "protein": "pork",
+        "roast": true
+    },
+    "Roast Chicken": {
+        "protein": "chicken",
+        "roast": true
+    },
+    "Roast Lamb": {
+        "protein": "lamb",
+        "roast": true
     }
 }

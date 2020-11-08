@@ -18,6 +18,8 @@ REQUIRED_DAYS = [
     'Tuesday',
     'Wednesday',
     'Thursday',
+    'Saturday',
+    'Sunday'
 ]
 
 
@@ -47,6 +49,8 @@ def get_available_meals(date, applied_rules, current_rec):
 
     for rule in applied_rules:
         meals = rule(meals, date, combined_history)
+
+    assert meals, 'ERROR: No meals remaining after filtering'
 
     return meals
 
@@ -106,7 +110,7 @@ def loop_recommend(dates, applied_rules):
 
                 user_days = [find_day(day) for day in split_user_days]
                 recommended_days = [DAYS[day.weekday()] for day in current_rec.keys()]
-                
+
                 if any([day is None for day in user_days]):
                     print("Input not recognised")
                 elif any([day not in recommended_days for day in user_days]):
@@ -121,7 +125,7 @@ def loop_recommend(dates, applied_rules):
                 rejected_meal = current_rec[date]
                 new_rule = rules_factory.dated_avoid_meal(date, rejected_meal)
                 applied_rules.append(new_rule)
-            
+
             current_rec = {
                 date: meal_choice
                 for date, meal_choice in current_rec.items()
@@ -159,9 +163,11 @@ if __name__ == '__main__':
         for day in REQUIRED_DAYS
     ]
     chosen_rules = [
-        rules.none_within_seven_days,
+        rules.not_within_seven_days,
         rules.not_consecutive_same_protein,
-        rules.not_consecutive_pasta
+        rules.not_consecutive_pasta,
+        rules.not_roast_on_non_sunday,
+        rules.force_sunday_roast
     ]
     loop_recommend(required_dates, chosen_rules)
 

@@ -133,5 +133,16 @@ def get_protein(meal_name):
 def is_pasta(meal_name):
     meals = load_meals()
     assert meal_name in meals.keys()
+
+    if 'pasta' not in meals[meal_name]:
+        return False
     return meals[meal_name]['pasta']
 
+
+def is_roast(meal_name):
+    meals = load_meals()
+    assert meal_name in meals.keys()
+
+    if 'roast' not in meals[meal_name]:
+        return False
+    return meals[meal_name]['roast']
