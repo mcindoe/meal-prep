@@ -136,7 +136,7 @@ def loop_recommend(dates, applied_rules):
             return
 
     write_history_entries(current_rec)
-    print('\nBon Appetit!\n')
+    print('\nBon Appetit! History has been updated\n')
 
 
 def next_weekday(pivot, weekday):
