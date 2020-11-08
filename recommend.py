@@ -3,21 +3,15 @@ import random
 
 import rules
 import rules_factory
+from utils import choose_meal
+from utils import display_recommendation
 from utils import filter_history
+from utils import find_day
 from utils import get_protein
 from utils import load_history
 from utils import load_meals
 from utils import write_history_entries
-
-DAYS = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday'
-]
+from utils import DAYS
 
 REQUIRED_DAYS = [
     'Monday',
@@ -25,22 +19,6 @@ REQUIRED_DAYS = [
     'Wednesday',
     'Thursday',
 ]
-
-
-def choose_meal(meals):
-    return random.choice(list(meals.keys()))
-
-
-def display_recommendation(rec):
-    sorted_dates = sorted(rec.keys())
-    day_names = [DAYS[date.weekday()] for date in sorted_dates]
-    longest_day_len = max([len(day) for day in day_names])
-
-    print('\nRecommendation for this week:\n')
-    for date, day in zip(sorted_dates, day_names):
-        recommended_meal = rec[date]
-        print("{0: <{1}} - {2}".format(day, longest_day_len, recommended_meal))
-    print()
 
 
 def get_available_meals(date, applied_rules, current_rec):
@@ -94,23 +72,6 @@ def recommend(dates, applied_rules, current_rec):
         current_rec[date] = choose_meal(available_meals)
 
     return current_rec
-
-
-def find_day(day_str):
-    '''
-    Find the day of the week from a user-input string.
-    Expected to be the start of the string.
-    '''
-
-    day_str = day_str.strip().lower()
-    matching_days = [
-        day
-        for day in DAYS
-        if day.lower().startswith(day_str)
-    ]
-    if not matching_days:
-        return None
-    return matching_days[0]
 
 
 def loop_recommend(dates, applied_rules):
@@ -170,11 +131,8 @@ def loop_recommend(dates, applied_rules):
         elif user_input == 'C':
             return
 
-    # write_history_entries(selection)
-    user_email_input = input('\nShould I email you the menu? (Y/N) ').upper()
+    write_history_entries(current_rec)
     print('\nBon Appetit!\n')
-
-
 
 
 def next_weekday(pivot, weekday):
