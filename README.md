@@ -6,8 +6,10 @@ Meals are loaded from the meals.json file, and a random selection of meals is su
 
 ## Future Work
 
-* More rules - e.g. Sunday should be a roast, but don't want to recommend roasts on other days
-    - This is easy though
+* Ingredients
+    - Populate JSON with required ingredients
+    - Once selection has been made, form a combined, sorted (by category, name) shopping list with option to ammend based on already-owned items
+    - Option to email user with shopping list 
 * Email users with a PDF of the meal selection for that week (might be tricky with a public repo ...)
     - Could include a PDF of the recipe in the email as well
     - Meals could have an optimal recipe parameter (would have stored elsewhere from the JSON), and then if present the email would contain the recipes in order
