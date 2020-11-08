@@ -64,11 +64,22 @@ def load_history(start=None, end=None):
 
 
 def write_history(history):
+    meals = load_meals()
+    for history_meal in history.values():
+        if history_meal not in meals.keys():
+            print(f"Cannot write {history_meal} to history since it is not a supported meal")
+            return
+
     with open(HISTORY_FILE, 'wb') as fp:
         pickle.dump(history, fp)
 
 
 def write_history_entry(date, entry):
+    meals = load_meals()
+    if entry not in meals.keys():
+        print(f"Cannot write {entry} to history since it is not a supported meal")
+        return
+
     history = load_history()
     history[date] = entry
     write_history(history)
