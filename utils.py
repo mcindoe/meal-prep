@@ -116,15 +116,19 @@ def choose_meal(meals):
     return random.choice(list(meals.keys()))
 
 
-def display_recommendation(rec):
-    sorted_dates = sorted(rec.keys())
+def print_history(history):
+    sorted_dates = sorted(list(history.keys()))
     day_names = [DAYS[date.weekday()] for date in sorted_dates]
     longest_day_len = max([len(day) for day in day_names])
 
-    print('\nRecommendation for this week:\n')
     for date, day in zip(sorted_dates, day_names):
-        recommended_meal = rec[date]
+        recommended_meal = history[date]
         print("{0: <{1}} - {2}".format(day, longest_day_len, recommended_meal))
+
+
+def display_recommendation(rec):
+    print('\nRecommendation for this week:\n')
+    print_history(rec)
     print()
 
 
