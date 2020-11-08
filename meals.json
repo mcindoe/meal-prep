@@ -74,5 +74,8 @@
     },
     "Indian Lamb with Spiced Lentils": {
         "protein": "lamb"
+    },
+    "Kedgeree": {
+        "protein": "fish"
     }
 }
