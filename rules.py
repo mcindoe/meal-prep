@@ -45,19 +45,19 @@ from utils import is_roast
 
 def not_consecutive_same_protein(meals, date, combined_history):
     "Do not recommend the same protein two days in a row"
-    previous_day = date - dt.timedelta(days=1)
-    next_day = date + dt.timedelta(days=1)
+    window_start = date - dt.timedelta(days=1)
+    window_end = date + dt.timedelta(days=2) 
+    window_history = filter_history(combined_history, window_start, window_end)
 
     proteins_to_avoid = []
-    if previous_day in combined_history:
-        proteins_to_avoid.append(combined_history[previous_day])
-    if next_day in combined_history:
-        proteins_to_avoid.append(combined_history[next_day])
-
+    for meal in window_history.values():
+        if get_protein(meal):
+            proteins_to_avoid.append(get_protein(meal))
+    
     return {
         name: meal_info
         for name, meal_info in meals.items()
-        if meal_info['protein'] not in proteins_to_avoid
+        if get_protein(name) not in proteins_to_avoid
     }
 
 

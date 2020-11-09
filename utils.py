@@ -163,6 +163,9 @@ def find_day(day_str):
 def get_protein(meal_name):
     meals = load_meals()
     assert meal_name in meals.keys()
+
+    if 'protein' not in meals[meal_name].keys():
+        return None
     return meals[meal_name]['protein']
 
 
