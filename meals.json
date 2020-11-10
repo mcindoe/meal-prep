@@ -2,23 +2,94 @@
     "Spaghetti Bolognese": {
         "protein": "beef",
         "pasta": true,
-        "favourite": true
+        "favourite": true,
+        "ingredients": {
+            "pork mince": 500,
+            "beef mince": 500,
+            "onion": 2,
+            "carrot": 1,
+            "celery": 2,
+            "garlic": 3,
+            "bay leaves": true,
+            "tomato puree": true,
+            "chopped tomatoes": 1,
+            "oregano": true,
+            "mixed herbs": true,
+            "spaghetti": true,
+            "parmezan": true
+        }
     },
     "Fish Pie": {
-        "protein": "fish"
+        "protein": "fish",
+        "ingredients": {
+            "potato": 900,
+            "carrot": 1,
+            "celery": 2,
+            "cheddar cheese": 150,
+            "lemon": 1,
+            "red chilli": 0.5,
+            "parsley": true,
+            "salmon fillet": 300,
+            "smoked haddock fillet": 300,
+            "raw peeled king prawns": 125,
+            "olive oil": true,
+            "baby spinach": true
+        }
     },
     "Sticky Chinese Pork Belly": {
         "protein": "pork",
-        "favourite": true
+        "favourite": true,
+        "ingredients": {
+            "pork belly slices": 1000,
+            "chicken stock": 1000,
+            "ginger": true,
+            "garlic": 3,
+            "rice wine": true,
+            "caster sugar": true,
+            "vegetable oil": true,
+            "red chilli": 2,
+            "honey": true,
+            "brown sugar": true,
+            "dark soy sauce": true,
+            "lemongrass paste": true,
+            "rice": 500
+        }
     },
     "Shephards Pie": {
         "protein": "lamb",
-        "favourite": true
+        "favourite": true,
+        "ingredients": {
+            "beef mince": 500,
+            "lamb mince": 500,
+            "olive oil": true,
+            "onion": 2,
+            "carrot": 2,
+            "thyme": true,
+            "chopped tomatoes": 1,
+            "red wine": 200,
+            "flour": true,
+            "worcestershire sauce": true,
+            "beef stock": true,
+            "potato": 1000,
+            "butter": true
+        }
     },
     "Pasta with Chicken and Sundried Tomatoes": {
         "protein": "chicken",
         "pasta": true,
-        "favourite": true
+        "favourite": true,
+        "ingredients": {
+            "penne": 300,
+            "chicken breast": 700,
+            "cayenne pepper": true,
+            "sundried tomatoes": 750,
+            "garlic": 3,
+            "cream": 250,
+            "mozarella": 100,
+            "parmezan": 100,
+            "spinach": 200,
+            "chicken stock": 250
+        }
     },
     "Roast Pork": {
         "protein": "pork",
@@ -41,7 +112,25 @@
         "favourite": true
     },
     "Lasagne": {
-        "protein": "beef"
+        "protein": "beef",
+        "ingredients": {
+            "beef mince": 900,
+            "onion": 2,
+            "celery": 2,
+            "garlic": 2,
+            "flour": true,
+            "beef stock": true,
+            "redcurrant jelly": true,
+            "tomato puree": true,
+            "thyme": true,
+            "chopped tomatoes": 2,
+            "butter": true,
+            "milk": true,
+            "dijon mustard": true,
+            "parmezan": true,
+            "lasagne sheets": true,
+            "cheddar": true
+        }
     },
     "Moussaka": {
         "protein": "lamb"
@@ -67,13 +156,51 @@
         "protein": "chicken"
     },
     "Beef and Ale Stew": {
-        "protein": "beef"
+        "protein": "beef",
+        "ingredients": {
+            "celery": 2,
+            "carrot": 2,
+            "onion": 2,
+            "bay leaves": 3,
+            "flour": true,
+            "guinness": 500,
+            "plum tomatoes": 500,
+            "stewing beef": 750,
+            "potato": 900
+        }
     },
     "Honey-Garlic Salmon": {
-        "protein": "fish"
+        "protein": "fish",
+        "ingredients": {
+            "salmon fillet": 1000,
+            "paprika": true,
+            "butter": true,
+            "garlic": 4,
+            "honey": true,
+            "soy sauce": true,
+            "fresh lemon juice": true,
+        },
+        "sides": "new potatoes and veg"
     },
     "Indian Lamb with Spiced Lentils": {
-        "protein": "lamb"
+        "protein": "lamb",
+        "ingredients": {
+            "cumin": true,
+            "cardamon": true,
+            "sunflower oil": true,
+            "onion": 1,
+            "garlic": 2,
+            "ginger": true,
+            "red chilli": 1,
+            "cinammon stick": 1,
+            "turmeric": true,
+            "boneless leg of lamb": 500,
+            "lamb stock": 600,
+            "lentils": 225,
+            "plub tomatoes": 4,
+            "lemon": 0.5,
+            "coriander": true
+        }
     },
     "Kedgeree": {
         "protein": "fish"
