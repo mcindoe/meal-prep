@@ -93,23 +93,84 @@
     },
     "Roast Pork": {
         "protein": "pork",
-        "roast": true
+        "roast": true,
+        "ingredients": {
+            "roast pork": true,
+            "cooking apple": true
+        }
     },
     "Roast Chicken": {
         "protein": "chicken",
-        "roast": true
+        "roast": true,
+        "ingredients": {
+            "roast chicken": true,
+            "onion": 1,
+            "milk": true,
+            "butter": true
+        }
     },
     "Roast Lamb": {
         "protein": "lamb",
-        "roast": true
+        "roast": true,
+        "ingredients": {
+            "roast lamb": true,
+            "mint sauce": true,
+            "mint jelly": true
+        }
+    },
+    "Roast Beef": {
+        "protein": "beef",
+        "roast": true,
+        "ingredients": {
+            "horseradish sauce": true,
+            "roast beef": true,
+            "yorkshire puddings": true
+        }
+    },
+    "General Roast": {
+        "carrot": 6,
+        "roast potatoes": 10,
+        "beans": 400,
+        "brocolli": 1,
+        "flour": true
     },
     "Chilli con Carne": {
         "protein": "beef",
-        "favourite": true
+        "favourite": true,
+        "ingredients": {
+            "beef mince": 900,
+            "onion": 1,
+            "celery": 1,
+            "carrot": 1,
+            "garlic": 2,
+            "fresh chilli": 1,
+            "kidney beans": 1,
+            "tomato puree": true,
+            "chopped tomatoes": 1,
+            "rice": 250
+        },
+        "guacamole": {
+            "avocado": 2,
+            "tobasco": true,
+            "lime juice": true
+        },
+        "sour cream": 150
     },
     "Burgers": {
         "protein": "beef",
-        "favourite": true
+        "favourite": true,
+        "ingredients": {
+            "beef chuck steak": 450,
+            "bacon": true,
+            "eggs": true,
+            "cheddar cheese": true,
+            "lettuce": true,
+            "tomato": true,
+            "mayonnaise": true,
+            "dried mustard": true,
+            "onion": 1,
+            "burger buns": 1
+        }
     },
     "Lasagne": {
         "protein": "beef",
@@ -133,27 +194,96 @@
         }
     },
     "Moussaka": {
-        "protein": "lamb"
+        "protein": "lamb",
+        "ingredients": {
+            "lamb mince": 500,
+            "aubergine": 3,
+            "onion": 2,
+            "garlic": 2,
+            "tomato puree": true,
+            "red wine": 200,
+            "cinammon": true,
+            "parsley": true,
+            "butter": true,
+            "flour": true,
+            "milk": true,
+            "parmezan": true,
+            "eggs": 2,
+            "nutmeg": true
+        }
     },
     "Chicken Fajitas": {
-        "protein": "chicken"
+        "protein": "chicken",
+        "ingredients": {
+            "chicken breast": 400,
+            "paprika": true,
+            "red onion": 2,
+            "red pepper": 1,
+            "yellow pepper": 1,
+            "coriander": true,
+            "tortilla wrap": 8,
+        },
+        "guacamole": {},
+        "sour cream": {},
+        "lime": {}
     },
     "Chicken and Green Bean Vermicelli Noodles": {
-        "protein": "chicken"
+        "protein": "chicken",
+        "ingredients": {
+            "vermicelli noodles": 200,
+            "chicken breast": 3,
+            "onion": 1,
+            "carrot": 2,
+            "red pepper": 1,
+            "celery": 1,
+            "green beans": 200,
+            "baby corn": 150,
+            "ginger": true,
+            "garlic": 2,
+            "pak-choy": 1,
+            "dark soy sauce": true,
+            "sweet chilli sauce": true
+        }
     },
     "Quiche Lorraine": {
-        "protein": "pork"
+        "protein": "pork",
+        "ingredients": {
+            "shortcrust pastry": true,
+            "double cream": 275,
+            "egg": 3,
+            "gruyere cheese": 75,
+            "bacon": 8,
+            "cherry tomatoes": true
+        }
     },
-    "Roast Beef": {
-        "protein": "beef",
-        "roast": true
-    },
-    "Chilli Chicken Thighs with Vine Tomatoes": {
+    "Chilli Chicken Thighs with Cherry Tomatoes": {
         "protein": "chicken",
-        "favourite": true
+        "favourite": true,
+        "ingredients": {
+            "chicken thigh": "two packs",
+            "red chilli": 2,
+            "garlic": 2,
+            "olive oil": true,
+            "cherry tomatoes": "two packs",
+            "rice": 200,
+        },
+        "sides": "beans or brocolli"
     },
     "Chicken Tallegio": {
-        "protein": "chicken"
+        "protein": "chicken",
+        "ingredients": {
+            "chicken breast": 6,
+            "tallegio cheese": 175,
+            "green pesto": true,
+            "basil": true,
+            "full fat cream cheese": true,
+            "breadcrumbs": true,
+            "paprika": true,
+            "vine cherry tomatoes": 400,
+            "olive oil": true,
+            "balsamic vinegar": true,
+        },
+        "sides": "new potatoes"
     },
     "Beef and Ale Stew": {
         "protein": "beef",
@@ -203,6 +333,20 @@
         }
     },
     "Kedgeree": {
-        "protein": "fish"
+        "protein": "fish",
+        "ingredients": {
+            "milk": 150,
+            "smoked haddock fillet": 400,
+            "onion": 1,
+            "garlic": 1,
+            "ginger": true,
+            "coriander": true,
+            "turmeric": true,
+            "medium curry powder": true,
+            "long-grain rice": 250,
+            "vegetable stock": 350,
+            "egg": 4,
+            "parsley": true
+        }
     }
 }
