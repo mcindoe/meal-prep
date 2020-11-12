@@ -4,8 +4,9 @@ import random
 import pickle
 
 
-MEALS_FILE = 'meals.json'
 HISTORY_FILE = 'history.pkl'
+INGREDIENTS_FILE = 'ingredients.json'
+MEALS_FILE = 'meals.json'
 MAIL_CREDENTIALS_FILE = 'mail_credentials.txt'
 
 DAYS = [
@@ -31,6 +32,24 @@ def load_meals():
     with open(MEALS_FILE, 'r') as fp:
         meals = json.load(fp)
     return meals
+
+
+def write_meals(meals):
+    # TODO: check that meals are compliant, e.g. all ingredients supported,
+    # before writing to file
+    with open(MEALS_FILE, 'w') as fp:
+        json.dump(meals, fp, indent=2)
+
+
+def load_ingredients():
+    with open(INGREDIENTS_FILE, 'r') as fp:
+        ingredients = json.load(fp)
+    return ingredients
+
+
+def write_ingredients(ingredients):
+    with open(INGREDIENTS_FILE, 'w') as fp:
+        json.dump(ingredients, fp, indent=2)
 
 
 def filter_history(history, start=None, end=None):
