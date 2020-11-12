@@ -1,0 +1,439 @@
+{
+    "pork mince": {
+        "measured_in": "grams",
+        "category": "meat"
+    },
+    "beef mince": {
+        "measured_in": "grams",
+        "category": "meat"
+    },
+    "lamb mince": {
+        "measured_in": "grams",
+        "category": "meat"
+    },
+    "onion": {
+        "measured_in": "units",
+        "category": "vegetable"
+    },
+    "celery": {
+        "measured_in": "units",
+        "category": "vegetable"
+    },
+    "garlic": {
+        "measured_in": "units",
+        "category": "vegetable"
+    },
+    "bay leaves": {
+        "measured_in": "units",
+        "category": "herbs"
+    },
+    "tomato puree": {
+        "mesaured_in": "bool",
+        "category": "condiment"
+    },
+    "chopped tomatoes": {
+        "measured_in": "units",
+        "category": "tins"
+    },
+    "oregano": {
+        "measured_in": "bool",
+        "category": "herb" 
+    },
+    "mixed herbs": {
+        "measured_in": "bool",
+        "category": "herb"
+    },
+    "spaghetti": {
+        "measured_in": "grams",
+        "category": "carbohydrate"
+    },
+    "parmezan": {
+        "measured_in": "bool",
+        "category": "cheese"
+    },
+    "potato": {
+        "measured_in": "grams",
+        "category": "vegetable"
+    },
+    "cheddar": {
+        "measured_in": "bool",
+        "category": "cheese"
+    },
+    "lemon": {
+        "measured_in": "units",
+        "category": "vegetable"
+    },
+    "red chilli": {
+        "measured_in": "units",
+        "category": "vegetable"
+    },
+    "parsley": {
+        "measured_in": "bool",
+        "category": "herb"
+    },
+    "salmon fillet": {
+        "measured_in": "grams",
+        "category": "fish"
+    },
+    "smoked haddock fillet": {
+        "measured_in": "grams",
+        "category": "fish"
+    },
+    "raw peeled king prawns": {
+        "measured_in": "grams",
+        "category": "fish"
+    },
+    "olive oil": {
+        "measured_in": "bool",
+        "category": "condiment"
+    },
+    "pork belly slices": {
+        "measured_in": "grams",
+        "category": "meat"
+    },
+    "chicken stock": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "ginger": {
+        "measured_in": "bool",
+        "category": "vegetable"
+    },
+    "garlic": {
+        "measured_in": "bool",
+        "category": "herb"
+    },
+    "rice wine": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "caster sugar": {
+        "measured_in": "bool",
+        "category": "other"
+    },
+    "vegetable oil": {
+        "measured_in": "bool",
+        "category": "other"
+    },
+    "honey": {
+        "measured_in": "bool",
+        "category": "other"
+    },
+    "brown sugar": {
+        "measured_in": "bool",
+        "category": "other"
+    },
+    "dark soy sauce": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "lemongrass paste": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "rice": {
+        "measured_in": "grams",
+        "category": "carbohydrate"
+    },
+    "thyme": {
+        "measured_in": "bool",
+        "category": "herb"
+    },
+    "red wine": {
+        "measured_in": "ml",
+        "category": "other"
+    },
+    "flour": {
+        "measured_in": "grams",
+        "category": "other"
+    },
+    "worcestershire sauce": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "beef stock": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "butter": {
+        "measured_in": "bool",
+        "category": "other"
+    },
+    "penne": {
+        "measured_in": "grams",
+        "category": "carbohydrate"
+    },
+    "chicken breast": {
+        "measured_in": "grams",
+        "category": "meat"
+    },
+    "cayenne pepper": {
+        "measured_in": "bool",
+        "category": "herb"
+    },
+    "sundried tomatoes": {
+        "measured_in": "grams",
+        "category": "vegetable"
+    },
+    "cream": {
+        "measured_in": "ml",
+        "category": "dairy"
+    },
+    "mozarella cheese": {
+        "measured_in": "grams",
+        "category": "dairy"
+    },
+    "spinach": {
+        "measured_in": "grams",
+        "category": "vegetable"
+    },
+    "chicken stock": {
+        "measured_in": "bool",
+        "category": "sauc"
+    },
+    "roast pork": {
+        "measured_in": "units",
+        "category": "meat"
+    },
+    "roast chicken": {
+        "measured_in": "units",
+        "category": "meat"
+    },
+    "roast lamb": {
+        "measured_in": "units",
+        "category": "meat"
+    },
+    "fresh chilli": {
+        "measured_in": "units",
+        "category": "vegetable"
+    },
+    "kidney beans": {
+        "measured_in": "units",
+        "category": "tins"
+    },
+    "avocado": {
+        "measured_in": "units",
+        "category": "vegetable"
+    },
+    "tobasco": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "beef chuck steak": {
+        "measured_in": "grams",
+        "category": "meat"
+    },
+    "bacon": {
+        "measured_in": "bool",
+        "category": "meat"
+    },
+    "eggs": {
+        "measured_in": "bool",
+        "category": "other"
+    },
+    "lettuce": {
+        "measured_in": "bool",
+        "category": "vegetable"
+    },
+    "tomato": {
+        "measured_in": "bool",
+        "category": "vegetable"
+    },
+    "mayonnaise": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "dried mustard": {
+        "measured_in": "bool",
+        "category": "condiment"
+    },
+    "beef stock": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "redcurrant jelly": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "thyme": {
+        "measured_in": "bool",
+        "category": "herb"
+    },
+    "milk": {
+        "measured_in": "bool",
+        "category": "dairy"
+    },
+    "dijon mustard": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "lasagne sheets": {
+        "measured_in": "bool",
+        "category": "carbohydrate"
+    },
+    "aubergine": {
+        "measured_in": "units",
+        "category": "vegetable"
+    },
+    "cinammon": {
+        "measured_in": "bool",
+        "category": "herb"
+    },
+    "nutmeg": {
+        "measured_in": "bool",
+        "category": "spice"
+    },
+    "paprika": {
+        "measured_in": "bool",
+        "category": "spice"
+    },
+    "red onion": {
+        "measured_in": "units",
+        "category": "vegetable"
+    },
+    "red pepper": {
+        "measured_in": "units",
+        "category": "vegetable"
+    },
+    "yellow pepper": {
+        "measured_in": "units",
+        "category": "vegetable"
+    },
+    "coriander": {
+        "measured_in": "bool",
+        "category": "herb"
+    },
+    "tortilla wrap": {
+        "measured_in": "bool",
+        "category": "carbohydrate"
+    },
+    "vermicelli noodles": {
+        "measured_in": "bool",
+        "category": "carbohydrate"
+    },
+    "green beans": {
+        "measured_in": "grams",
+        "category": "vegetable"
+    },
+    "baby corn": {
+        "measured_in": "grams",
+        "category": "vegetable"
+    },
+    "pak-choy": {
+        "measured_in": "units",
+        "category": "vegetable"
+    },
+    "sweet chilli sauce": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "shortcrust pastry": {
+        "measured_in": "bool",
+        "category": "other"
+    },
+    "double cream": {
+        "measured_in": "ml",
+        "category": "dairy"
+    },
+    "gruyere cheese": {
+        "measured_in": "bool",
+        "category": "dairy"
+    },
+    "chicken thigh": {
+        "measured_in": "grams",
+        "category": "meat"
+    },
+    "cherry tomatoes": {
+        "measured_in": "units",
+        "category": "vegetable",
+        "unit": "packs"
+    },
+    "taleggio cheese": {
+        "measured_in": "bool",
+        "category": "dairy"
+    },
+    "green pesto": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "basil": {
+        "measured_in": "bool",
+        "category": "herb"
+    },
+    "full fat cream cheese": {
+        "measured_in": "bool",
+        "category": "dairy"
+    },
+    "breadcrumbs": {
+        "measured_in": "bool",
+        "category": "other"
+    },
+    "paprika": {
+        "measured_in": "bool",
+        "category": "spice"
+    },
+    "balsamic vinegar": {
+        "measured_in": "bool",
+        "category": "other"
+    },
+    "guinness": {
+        "measured_in": "ml",
+        "category": "other"
+    },
+    "plum tomatoes": {
+        "measured_in": "grams",
+        "category": "vegetable"
+    },
+    "stewing beef": {
+        "measured_in": "grams",
+        "category": "meat"
+    },
+    "soy sauce": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "fresh lemon juice": {
+        "measured_in": "bool",
+        "category": "other"
+    },
+    "cumin": {
+        "measured_in": "bool",
+        "category": "spice"
+    },
+    "cardomon": {
+        "measured_in": "bool",
+        "category": "spice"
+    },
+    "sunflower oil": {
+        "measured_in": "bool",
+        "category": "other"
+    },
+    "turmeric": {
+        "measured_in": "bool",
+        "category": "spice"
+    },
+    "boneless leg of lamb": {
+        "measured_in": "grams",
+        "category": "meat"
+    },
+    "lamb stock": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "smoked haddock fillet": {
+        "measured_in": "grams",
+        "category": "fish"
+    },
+    "medium curry powder": {
+        "measured_in": "bool",
+        "category": "spice"
+    },
+    "vegetable stock": {
+        "measured_in": "bool",
+        "category": "sauce"
+    },
+    "parsley": {
+        "measured_in": "bool",
+        "category": "herb"
+    }
+}

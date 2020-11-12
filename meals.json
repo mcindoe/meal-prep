@@ -221,7 +221,7 @@
             "red pepper": 1,
             "yellow pepper": 1,
             "coriander": true,
-            "tortilla wrap": 8,
+            "tortilla wrap": 8
         },
         "guacamole": {},
         "sour cream": {},
@@ -265,7 +265,7 @@
             "garlic": 2,
             "olive oil": true,
             "cherry tomatoes": "two packs",
-            "rice": 200,
+            "rice": 200
         },
         "sides": "beans or brocolli"
     },
@@ -281,7 +281,7 @@
             "paprika": true,
             "vine cherry tomatoes": 400,
             "olive oil": true,
-            "balsamic vinegar": true,
+            "balsamic vinegar": true
         },
         "sides": "new potatoes"
     },
@@ -308,7 +308,7 @@
             "garlic": 4,
             "honey": true,
             "soy sauce": true,
-            "fresh lemon juice": true,
+            "fresh lemon juice": true
         },
         "sides": "new potatoes and veg"
     },
@@ -327,7 +327,7 @@
             "boneless leg of lamb": 500,
             "lamb stock": 600,
             "lentils": 225,
-            "plub tomatoes": 4,
+            "plum tomatoes": 4,
             "lemon": 0.5,
             "coriander": true
         }
