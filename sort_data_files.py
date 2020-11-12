@@ -1,5 +1,7 @@
+from utils import load_ingredients
 from utils import load_meals
-from utils import write_meal_entries
+from utils import write_ingredients
+from utils import write_meals
 
 
 def sort_meals():
@@ -19,7 +21,7 @@ def sort_ingredients():
         ingredient_name: ingredients[ingredient_name]
         for ingredient_name in sorted_ingredient_names
     }
-    write_ingredients_sorted_ingredients
+    write_ingredients(sorted_ingredients)
 
 
 if __name__ == '__main__':
