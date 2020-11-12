@@ -38,7 +38,7 @@ def write_meals(meals):
     # TODO: check that meals are compliant, e.g. all ingredients supported,
     # before writing to file
     with open(MEALS_FILE, 'w') as fp:
-        json.dump(meals, fp, indent=2)
+        json.dump(meals, fp, indent=4)
 
 
 def load_ingredients():
@@ -49,7 +49,7 @@ def load_ingredients():
 
 def write_ingredients(ingredients):
     with open(INGREDIENTS_FILE, 'w') as fp:
-        json.dump(ingredients, fp, indent=2)
+        json.dump(ingredients, fp, indent=4)
 
 
 def filter_history(history, start=None, end=None):
