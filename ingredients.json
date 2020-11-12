@@ -73,7 +73,7 @@
   },
   "cheddar": {
     "measured_in": "bool",
-    "category": "cheese"
+    "category": "dairy"
   },
   "cherry tomatoes": {
     "measured_in": "units",
@@ -250,7 +250,7 @@
   },
   "parmezan": {
     "measured_in": "bool",
-    "category": "cheese"
+    "category": "dairy"
   },
   "parsley": {
     "measured_in": "bool",
