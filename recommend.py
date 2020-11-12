@@ -50,7 +50,8 @@ def get_available_meals(date, applied_rules, current_rec):
     for rule in applied_rules:
         meals = rule(meals, date, combined_history)
 
-    assert meals, 'ERROR: No meals remaining after filtering'
+    if not meals:
+        return
 
     return meals
 
@@ -73,6 +74,9 @@ def recommend(dates, applied_rules, current_rec):
 
     for date in inv_dates:
         available_meals = get_available_meals(date, applied_rules, current_rec)
+        if available_meals is None:
+            return
+
         current_rec[date] = choose_meal(available_meals)
 
     return current_rec
@@ -89,6 +93,11 @@ def loop_recommend(dates, applied_rules):
     current_rec = {}
     while not selection_found:
         current_rec = recommend(dates, applied_rules, current_rec)
+
+        if current_rec is None:
+            print('Error: No meals match the current filters')
+            return
+
         display_recommendation(current_rec)
         user_input = input('Sound Good? (Y/N/Cancel) ')[0].upper()
 
