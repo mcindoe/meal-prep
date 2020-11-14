@@ -204,19 +204,19 @@
     "Moussaka": {
         "protein": "lamb",
         "ingredients": {
-            "aubergine": 3,
+            "aubergine": 4,
             "butter": true,
             "cinammon": true,
             "eggs": 2,
             "flour": true,
-            "garlic": 2,
-            "lamb mince": 500,
+            "garlic": true,
+            "lamb mince": 1000,
             "milk": true,
             "nutmeg": true,
             "onion": 2,
             "parmezan": true,
             "parsley": true,
-            "red wine": 200,
+            "red wine": true,
             "tomato puree": true
         }
     },
