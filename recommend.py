@@ -19,7 +19,6 @@ REQUIRED_DAYS = [
     'Wednesday',
     'Thursday',
     'Saturday',
-    'Sunday'
 ]
 
 
