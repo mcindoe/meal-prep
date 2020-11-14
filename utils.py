@@ -188,24 +188,6 @@ def get_protein(meal_name):
     return meals[meal_name]['protein']
 
 
-def is_pasta(meal_name):
-    meals = load_meals()
-    assert meal_name in meals.keys()
-
-    if 'pasta' not in meals[meal_name]:
-        return False
-    return meals[meal_name]['pasta']
-
-
-def is_roast(meal_name):
-    meals = load_meals()
-    assert meal_name in meals.keys()
-
-    if 'roast' not in meals[meal_name]:
-        return False
-    return meals[meal_name]['roast']
-
-
 def is_fish(meal_name):
     meals = load_meals()
     assert meal_name in meals.keys()
@@ -215,10 +197,20 @@ def is_fish(meal_name):
     return meals[meal_name]['protein'] == 'fish'
 
 
-def is_favourite(meal_name):
-    meals = load_meals()
-    assert meal_name in meals.keys()
+def is_attr(attr):
+    def f(meal_name):
+        meals = load_meals()
+        assert meal_name in meals.keys()
 
-    if 'favourite' not in meals[meal_name]:
-        return False
-    return meals[meal_name]['favourite']
+        if attr not in meals[meal_name]:
+            return False
+        return meals[meal_name][attr]
+    
+    return f
+
+
+is_pasta = is_attr('pasta')
+is_roast = is_attr('roast')
+is_favourite = is_attr('favourite')
+is_difficult = is_attr('difficult')
+

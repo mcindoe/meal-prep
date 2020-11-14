@@ -37,6 +37,7 @@ import datetime as dt
 
 from utils import filter_history
 from utils import get_protein
+from utils import is_difficult
 from utils import is_favourite
 from utils import is_fish
 from utils import is_pasta
@@ -46,14 +47,14 @@ from utils import is_roast
 def not_consecutive_same_protein(meals, date, combined_history):
     "Do not recommend the same protein two days in a row"
     window_start = date - dt.timedelta(days=1)
-    window_end = date + dt.timedelta(days=2) 
+    window_end = date + dt.timedelta(days=2)
     window_history = filter_history(combined_history, window_start, window_end)
 
     proteins_to_avoid = []
     for meal in window_history.values():
         if get_protein(meal):
             proteins_to_avoid.append(get_protein(meal))
-    
+
     return {
         name: meal_info
         for name, meal_info in meals.items()
@@ -83,7 +84,7 @@ def not_non_favourite_within_fourteen_days(meals, date, combined_history):
     return {
         name: meal_info
         for name, meal_info in meals.items()
-        if is_favourite(name) or name not in window_history.values() 
+        if is_favourite(name) or name not in window_history.values()
     }
 
 
@@ -141,3 +142,16 @@ def not_fish_within_seven_days(meals, date, combined_history):
         }
 
     return meals
+
+
+def not_difficult_on_weekend(meals, date, combined_history):
+    "Do not recommend dishes which are marked as difficult (time-consuming) on a weekend"
+    if date.weekday() not in [5,6]:
+        return meals
+
+    return {
+        name: meal_info
+        for name, meal_info in meals.items()
+        if not is_difficult(name)
+    }
+

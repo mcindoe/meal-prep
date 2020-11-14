@@ -176,7 +176,8 @@ if __name__ == '__main__':
         rules.not_consecutive_same_protein,
         rules.not_pasta_within_five_days,
         rules.not_roast_on_non_sunday,
-        rules.force_sunday_roast
+        rules.force_sunday_roast,
+        rules.not_difficult_on_weekend,
     ]
     loop_recommend(required_dates, chosen_rules)
 
