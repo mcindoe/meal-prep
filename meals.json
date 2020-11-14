@@ -259,9 +259,9 @@
             "protein": "beef",
             "roast beef": true,
             "roast potatoes": 10,
-            "roast": true,
             "yorkshire puddings": true
-        }
+        },
+        "roast": true
     },
     "Roast Chicken": {
         "protein": "chicken",
@@ -274,9 +274,9 @@
             "brocolli": 1,
             "carrot": 6,
             "flour": true,
-            "roast potatoes": 10,
-            "roast": true
-        }
+            "roast potatoes": 10
+        },
+        "roast": true
     },
     "Roast Lamb": {
         "protein": "lamb",
@@ -288,9 +288,9 @@
             "brocolli": 1,
             "carrot": 6,
             "flour": true,
-            "roast potatoes": 10,
-            "roast": true
-        }
+            "roast potatoes": 10
+        },
+        "roast": true
     },
     "Roast Pork": {
         "protein": "pork",
@@ -301,9 +301,9 @@
             "brocolli": 1,
             "carrot": 6,
             "flour": true,
-            "roast potatoes": 10,
-            "roast": true
-        }
+            "roast potatoes": 10
+        },
+        "roast": true
     },
     "Shephards Pie": {
         "protein": "lamb",
