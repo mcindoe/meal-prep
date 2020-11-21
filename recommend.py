@@ -166,9 +166,12 @@ def next_weekday(pivot, weekday):
 
 
 if __name__ == '__main__':
+    # required_dates = [
+    #     next_weekday(dt.date.today(), day)
+    #     for day in REQUIRED_DAYS
+    # ]
     required_dates = [
-        next_weekday(dt.date.today(), day)
-        for day in REQUIRED_DAYS
+        dt.date(2020, 11, 23)
     ]
     chosen_rules = [
         rules.not_within_seven_days,
@@ -180,4 +183,6 @@ if __name__ == '__main__':
         rules.not_difficult_on_weekend,
     ]
     loop_recommend(required_dates, chosen_rules)
+
+    # TODO: Ability to move around suggestions easily
 
