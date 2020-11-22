@@ -1,0 +1,20 @@
+{
+    "additionals": [
+        "lime",
+        "mint jelly",
+        "mint sauce",
+        "sour cream"
+    ],
+    "sides": {
+        "guacamole": {
+            "avocado": 2,
+            "lime juice": true,
+            "tobasco": true
+        }
+    },
+    "vegetables": [
+        "brocolli",
+        "green beans",
+        "new potatoes"
+    ]
+}

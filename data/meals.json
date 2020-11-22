@@ -11,7 +11,10 @@
             "plum tomatoes": 500,
             "potato": 900,
             "stewing beef": 750
-        }
+        },
+        "vegetables": [
+            "green beans"
+        ]
     },
     "Burgers": {
         "protein": "beef",
@@ -40,9 +43,14 @@
             "tortilla wrap": 8,
             "yellow pepper": 1
         },
-        "guacamole": {},
-        "sour cream": {},
-        "lime": {}
+        "sides": [
+            "guacamole"
+        ],
+        "additionals": [
+            "sour cream",
+            "lime"
+        ],
+        "salad": true
     },
     "Chicken Tallegio": {
         "protein": "chicken",
@@ -58,7 +66,9 @@
             "tallegio cheese": 175,
             "vine cherry tomatoes": 400
         },
-        "sides": "new potatoes"
+        "vegetables": [
+            "new potatoes"
+        ]
     },
     "Chicken and Green Bean Vermicelli Noodles": {
         "protein": "chicken",
@@ -89,7 +99,10 @@
             "red chilli": 2,
             "rice": 200
         },
-        "sides": "beans or brocolli"
+        "sides": [
+            "green beans",
+            "brocolli"
+        ]
     },
     "Chilli con Carne": {
         "protein": "beef",
@@ -106,12 +119,13 @@
             "rice": 250,
             "tomato puree": true
         },
-        "guacamole": {
-            "avocado": 2,
-            "lime juice": true,
-            "tobasco": true
-        },
-        "sour cream": 150
+        "sides": [
+            "guacamole"
+        ],
+        "additionals": [
+            "sour cream"
+        ],
+        "salad": true
     },
     "Fish Pie": {
         "protein": "fish",
@@ -128,7 +142,11 @@
             "red chilli": 0.5,
             "salmon fillet": 300,
             "smoked haddock fillet": 300
-        }
+        },
+        "sides": [
+            "green beans"
+        ],
+        "salad": true
     },
     "Honey-Garlic Salmon": {
         "protein": "fish",
@@ -139,9 +157,12 @@
             "honey": true,
             "paprika": true,
             "salmon fillet": 1000,
-            "soy sauce": true
+            "soy sauce": true,
+            "new potatoes": true
         },
-        "sides": "new potatoes and veg"
+        "vegetables": [
+            "green beans"
+        ] 
     },
     "Indian Lamb with Spiced Lentils": {
         "protein": "lamb",
@@ -178,7 +199,8 @@
             "smoked haddock fillet": 400,
             "turmeric": true,
             "vegetable stock": 350
-        }
+        },
+        "salad": true
     },
     "Lasagne": {
         "protein": "beef",
@@ -199,7 +221,8 @@
             "redcurrant jelly": true,
             "thyme": true,
             "tomato puree": true
-        }
+        },
+        "salad": true
     },
     "Moussaka": {
         "protein": "lamb",
@@ -218,7 +241,8 @@
             "parsley": true,
             "red wine": true,
             "tomato puree": true
-        }
+        },
+        "salad": true
     },
     "Pasta with Chicken and Sundried Tomatoes": {
         "protein": "chicken",
@@ -281,8 +305,6 @@
     "Roast Lamb": {
         "protein": "lamb",
         "ingredients": {
-            "mint jelly": true,
-            "mint sauce": true,
             "roast lamb": true,
             "beans": 400,
             "brocolli": 1,
@@ -290,6 +312,10 @@
             "flour": true,
             "roast potatoes": 10
         },
+        "additionals": [
+            "mint jelly",
+            "mint sauce"
+        ],
         "roast": true
     },
     "Roast Pork": {
@@ -322,7 +348,8 @@
             "red wine": 200,
             "thyme": true,
             "worcestershire sauce": true
-        }
+        },
+        "salad": true
     },
     "Spaghetti Bolognese": {
         "protein": "beef",
@@ -342,7 +369,8 @@
             "pork mince": 500,
             "spaghetti": true,
             "tomato puree": true
-        }
+        },
+        "salad": true
     },
     "Sticky Chinese Pork Belly": {
         "protein": "pork",
@@ -361,6 +389,9 @@
             "rice wine": true,
             "rice": 500,
             "vegetable oil": true
-        }
+        },
+        "vegetables": [
+            "green beans"
+        ]
     }
 }
