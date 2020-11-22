@@ -158,6 +158,7 @@ if __name__ == '__main__':
         rules.not_roast_on_non_sunday,
         rules.force_sunday_roast,
         rules.not_time_consuming_on_weekend,
+        rules.not_lasagne_and_moussaka_within_seven_days,
     ]
     loop_recommend(required_dates, chosen_rules)
 

@@ -146,3 +146,24 @@ def not_time_consuming_on_weekend(meals, date, combined_history):
         if not is_time_consuming(name)
     }
 
+
+def not_lasagne_and_moussaka_within_seven_days(meals, date, combined_history):
+    "Do not recommend moussaka within seven days of a lasagne"
+    relevant_meal_names = get_close_history_meal_names(combined_history, date, n_days=7)
+
+    if "Moussaka" in relevant_meal_names:
+        meals = {
+            name: meal_info
+            for name, meal_info in meals.items()
+            if name != "Lasagne"
+        }
+
+    if "Lasagne" in relevant_meal_names:
+        meals = {
+            name: meal_info
+            for name, meal_info in meals.items()
+            if name != "Moussaka"
+        }
+
+    return meals
+
