@@ -36,24 +36,23 @@ tomorrow already in the combined_history.
 import datetime as dt
 
 from utils import filter_history
+from utils import get_close_history_meal_names
 from utils import get_protein
-from utils import is_difficult
 from utils import is_favourite
 from utils import is_fish
 from utils import is_pasta
 from utils import is_roast
+from utils import is_time_consuming
 
 
 def not_consecutive_same_protein(meals, date, combined_history):
     "Do not recommend the same protein two days in a row"
-    window_start = date - dt.timedelta(days=1)
-    window_end = date + dt.timedelta(days=2)
-    window_history = filter_history(combined_history, window_start, window_end)
+    relevant_meal_names = get_close_history_meal_names(combined_history, date, n_days=1)
 
     proteins_to_avoid = []
-    for meal in window_history.values():
-        if get_protein(meal):
-            proteins_to_avoid.append(get_protein(meal))
+    for meal_name in relevant_meal_names:
+        if get_protein(meal_name) is not None:
+            proteins_to_avoid.append(get_protein(meal_name))
 
     return {
         name: meal_info
@@ -64,37 +63,31 @@ def not_consecutive_same_protein(meals, date, combined_history):
 
 def not_within_seven_days(meals, date, combined_history):
     "Do not recommend the same meal within seven days of previous occurrence"
-    window_start = date - dt.timedelta(days=7)
-    window_end = date + dt.timedelta(days=8)
-    window_history = filter_history(combined_history, window_start, window_end)
+    relevant_meal_names = get_close_history_meal_names(combined_history, date, n_days=7)
 
     return {
         name: meal_info
         for name, meal_info in meals.items()
-        if name not in window_history.values()
+        if name not in relevant_meal_names
     }
 
 
 def not_non_favourite_within_fourteen_days(meals, date, combined_history):
     "Do not recommend any non-favourite meal within fourteen days of previous occurrence"
-    window_start = date - dt.timedelta(days=14)
-    window_end = date + dt.timedelta(days=15)
-    window_history = filter_history(combined_history, window_start, window_end)
+    relevant_meal_names = get_close_history_meal_names(combined_history, date, n_days=14)
 
     return {
         name: meal_info
         for name, meal_info in meals.items()
-        if is_favourite(name) or name not in window_history.values()
+        if is_favourite(name) or name not in relevant_meal_names
     }
 
 
 def not_pasta_within_five_days(meals, date, combined_history):
     "Do not recommend pasta dishes within five days of previous occurrence"
-    window_start = date - dt.timedelta(days=5)
-    window_end = date + dt.timedelta(days=6)
-    window_history = filter_history(combined_history, window_start, window_end)
+    relevant_meal_names = get_close_history_meal_names(combined_history, date, n_days=5)
 
-    if any([is_pasta(meal) for meal in window_history.values()]):
+    if any([is_pasta(meal) for meal in relevant_meal_names]):
         return {
             name: meal_info
             for name, meal_info in meals.items()
@@ -130,11 +123,9 @@ def not_roast_on_non_sunday(meals, date, combined_history):
 
 def not_fish_within_seven_days(meals, date, combined_history):
     "Do not recommend fish dishes within seven days of previous occurrence"
-    window_start = date - dt.timedelta(days=7)
-    window_end = date + dt.timedelta(days=8)
-    window_history = filter_history(combined_history, window_start, window_end)
+    relevant_meal_names = get_close_history_meal_names(combined_history, date, n_days=7)
 
-    if any([is_fish(meal) for meal in window_history.values()]):
+    if any([is_fish(meal) for meal in relevant_meal_names]):
         return {
             name: meal_info
             for name, meal_info in meals.items()
@@ -144,14 +135,14 @@ def not_fish_within_seven_days(meals, date, combined_history):
     return meals
 
 
-def not_difficult_on_weekend(meals, date, combined_history):
-    "Do not recommend dishes which are marked as difficult (time-consuming) on a weekend"
+def not_time_consuming_on_weekend(meals, date, combined_history):
+    "Do not recommend dishes which are marked as time-consuming on a weekend"
     if date.weekday() not in [5,6]:
         return meals
 
     return {
         name: meal_info
         for name, meal_info in meals.items()
-        if not is_difficult(name)
+        if not is_time_consuming(name)
     }
 

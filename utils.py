@@ -1,24 +1,18 @@
+import calendar
 import datetime as dt
 import json
 import random
 import pickle
 
+import meal
 
-HISTORY_FILE = 'history.pkl'
-INGREDIENTS_FILE = 'ingredients.json'
-MEALS_FILE = 'meals.json'
+EXTRAS_FILE = 'data/extras.json'
+HISTORY_FILE = 'data/history.json'
+INGREDIENTS_FILE = 'data/ingredients.json'
+MEALS_FILE = 'data/meals.json'
 MAIL_CREDENTIALS_FILE = 'mail_credentials.txt'
 
-DAYS = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday'
-]
-
+JSON_INDENT = 4
 
 def get_mail_credentials():
     "Get username, password used by mail robot"
@@ -38,7 +32,7 @@ def write_meals(meals):
     # TODO: check that meals are compliant, e.g. all ingredients supported,
     # before writing to file
     with open(MEALS_FILE, 'w') as fp:
-        json.dump(meals, fp, indent=4)
+        json.dump(meals, fp, indent=JSON_INDENT)
 
 
 def load_ingredients():
@@ -49,7 +43,28 @@ def load_ingredients():
 
 def write_ingredients(ingredients):
     with open(INGREDIENTS_FILE, 'w') as fp:
-        json.dump(ingredients, fp, indent=4)
+        json.dump(ingredients, fp, indent=JSON_INDENT)
+
+
+def load_extras():
+    with open(EXTRAS_FILE, 'r') as fp:
+        extras = json.load(fp)
+    return extras
+
+
+def load_vegetables():
+    extras = load_extras()
+    return extras['vegetables']
+
+
+def load_sides():
+    extras = load_extras()
+    return extras['sides']
+
+
+def load_additionals():
+    extras = load_extras()
+    return extras['additionals']
 
 
 def filter_history(history, start=None, end=None):
@@ -72,40 +87,70 @@ def filter_history(history, start=None, end=None):
 
 def load_history(start=None, end=None):
     '''
+    Reads the history JSON file and converts
+    to a dictionary keyed by dt.dates, valued
+    by meal.Meals. Optional filtering to 
+    dates in start <= date < end.
+
     start: dt.datetime
     end: dt.datetime
     '''
+    
+    with open(HISTORY_FILE, 'r') as fp:
+        json_history = json.load(fp)
 
-    with open(HISTORY_FILE, 'rb') as fp:
-        history = pickle.load(fp)
+    history = {}
+    for date_str, meal_info in json_history.items():
+        year, month, day = [int(el) for el in date_str.split('/')]
+        date = dt.date(year, month, day)
+        
+        history[date] = meal.Meal.from_json(meal_info)
 
     return filter_history(history, start, end)
 
 
 def write_history(history):
+    '''
+    Write history dictionary information to file,
+    in a JSON format.
+
+    history (dict: key=dt.date, val=meal.Meal)
+    '''
+
     meals = load_meals()
-    for history_meal in history.values():
-        if history_meal not in meals.keys():
-            print(f"Cannot write {history_meal} to history since it is not a supported meal")
+
+    json_history = {}
+    for date, meal in history.items():
+        if meal.name not in meals.keys():
+            print(f"Cannot write {meal.name} to history - not a supported meal")
             return
 
-    with open(HISTORY_FILE, 'wb') as fp:
-        pickle.dump(history, fp)
+        date_str = date.strftime('%Y/%m/%d')
+        json_history[date_str] = meal.to_json()
+
+    sorted_keys = sorted(json_history.keys())
+    sorted_history = {
+        date_str: json_history[date_str]
+        for date_str in sorted_keys
+    }
+
+    with open(HISTORY_FILE, 'w') as fp:
+        json.dump(sorted_history, fp, indent=JSON_INDENT)
 
 
-def write_history_entry(date, entry):
+def write_history_entry(date, meal):
     meals = load_meals()
-    if entry not in meals.keys():
-        print(f"Cannot write {entry} to history since it is not a supported meal")
+    if meal.name not in meals.keys():
+        print(f"Cannot write {meal.name} to history - not a supported meal")
         return
 
     history = load_history()
-    history[date] = entry
+    history[date] = meal
     write_history(history)
 
 
 def write_history_entries(entries):
-    '''entries: dictionary of date: choice'''
+    '''entries: dictionary of dt.date: meal.Meal'''
     history = load_history()
 
     sorted_dates = sorted(list(entries.keys()))
@@ -142,18 +187,70 @@ def delete_history_window(start_date, end_date):
     write_history(history)
 
 
+def get_history_meal_names(history):
+    return [meal.name for meal in history.values()]
+
+
+def get_close_history(history, pivot, n_days):
+    start = pivot - dt.timedelta(days=n_days)
+    end = pivot + dt.timedelta(days=n_days+1)
+    return filter_history(history, start, end)
+
+
+def get_close_history_meal_names(history, pivot, n_days):
+    close_history = get_close_history(history, pivot, n_days)
+    return get_history_meal_names(close_history)
+
+
+def get_vegetables(meal):
+    meals = load_meals()
+
+    if 'vegetables' not in meals[meal].keys():
+        return None
+    return meals[meal]['vegetables']
+
+
 def choose_meal(meals):
-    return random.choice(list(meals.keys()))
+    '''
+    From the passed dict of meals, choose a meal
+    and make any additional choices (e.g. veg)
+    about the meal. Return a Meal instance
+    '''
+    name = random.choice(list(meals.keys()))
+    vegetables = get_vegetables(name)
+    if vegetables is None:
+        return meal.Meal(name)
+    veg_choice = random.choice(vegetables)
+    
+    return meal.Meal(name, [veg_choice])
+
+
+def make_date_string(date):
+    '''Return a string of dt.date in the form Sun, 22nd of Nov'''
+    day_str = calendar.day_name[date.weekday()][:3]
+    month_str = calendar.month_name[date.month][:3]
+    final_day_num = int(str(date.day)[-1])
+    
+    if final_day_num == 1:
+        day_suffix = 'st'
+    elif final_day_num == 2:
+        day_suffix = 'nd'
+    elif final_day_num == 3:
+        day_suffix = 'rd'
+    else:
+        day_suffix = 'th'
+
+    return f'{day_str}, {date.day}{day_suffix} of {month_str}'
 
 
 def print_history(history):
     sorted_dates = sorted(list(history.keys()))
-    day_names = [DAYS[date.weekday()] for date in sorted_dates]
-    longest_day_len = max([len(day) for day in day_names])
+    date_strings = [make_date_string(date) for date in sorted_dates]
+    longest_date_str_len = max([len(date_str) for date_str in date_strings])
 
-    for date, day in zip(sorted_dates, day_names):
+    for date, date_str in zip(sorted_dates, date_strings):
         recommended_meal = history[date]
-        print("{0: <{1}} - {2}".format(day, longest_day_len, recommended_meal))
+        print("{0: <{1}} - {2}".format(date_str, longest_date_str_len, recommended_meal))
 
 
 def display_recommendation(rec):
@@ -171,7 +268,7 @@ def find_day(day_str):
     day_str = day_str.strip().lower()
     matching_days = [
         day
-        for day in DAYS
+        for day in list(calendar.day_name)
         if day.lower().startswith(day_str)
     ]
     if not matching_days:
@@ -181,20 +278,15 @@ def find_day(day_str):
 
 def get_protein(meal_name):
     meals = load_meals()
-    assert meal_name in meals.keys()
+    assert meal_name in meals.keys(), f'Unsupported meal {meal_name}'
 
     if 'protein' not in meals[meal_name].keys():
         return None
     return meals[meal_name]['protein']
 
 
-def is_fish(meal_name):
-    meals = load_meals()
-    assert meal_name in meals.keys()
-
-    if 'protein' not in meals[meal_name]:
-        return False
-    return meals[meal_name]['protein'] == 'fish'
+def is_fish(meal):
+    return get_protein(meal) == 'fish'
 
 
 def is_attr(attr):
@@ -205,12 +297,28 @@ def is_attr(attr):
         if attr not in meals[meal_name]:
             return False
         return meals[meal_name][attr]
-    
+
     return f
 
 
 is_pasta = is_attr('pasta')
 is_roast = is_attr('roast')
 is_favourite = is_attr('favourite')
-is_difficult = is_attr('difficult')
+is_time_consuming = is_attr('time-consuming')
+
+
+def make_list_str(elements):
+    '''
+    Format a list into a string, separating items
+    by commas and a final " and "
+    '''
+    if elements is None:
+        return ''
+
+    if len(elements) == 1:
+        return str(elements[0])
+
+    first_elements = elements[:-1]
+    last_element = elements[-1]
+    return f'{", ".join(first_elements)} and {last_element}'
 

@@ -1,3 +1,4 @@
+import calendar
 import datetime as dt
 import random
 
@@ -11,15 +12,6 @@ from utils import get_protein
 from utils import load_history
 from utils import load_meals
 from utils import write_history_entries
-from utils import DAYS
-
-REQUIRED_DAYS = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Saturday',
-]
 
 
 def get_available_meals(date, applied_rules, current_rec):
@@ -49,9 +41,6 @@ def get_available_meals(date, applied_rules, current_rec):
     for rule in applied_rules:
         meals = rule(meals, date, combined_history)
 
-    if not meals:
-        return
-
     return meals
 
 
@@ -73,7 +62,7 @@ def recommend(dates, applied_rules, current_rec):
 
     for date in inv_dates:
         available_meals = get_available_meals(date, applied_rules, current_rec)
-        if available_meals is None:
+        if not available_meals:
             return
 
         current_rec[date] = choose_meal(available_meals)
@@ -117,7 +106,7 @@ def loop_recommend(dates, applied_rules):
                     return
 
                 user_days = [find_day(day) for day in split_user_days]
-                recommended_days = [DAYS[day.weekday()] for day in current_rec.keys()]
+                recommended_days = [calendar.day_name[day.weekday()] for day in current_rec.keys()]
 
                 if any([day is None for day in user_days]):
                     print("Input not recognised")
@@ -147,31 +136,10 @@ def loop_recommend(dates, applied_rules):
     print('\nBon Appetit! History has been updated\n')
 
 
-def next_weekday(pivot, weekday):
-    '''
-    Return the dt.date of the next occurrence of weekday
-    strictly after pivot
-
-    weekday (str): Entry of DAYS. E.g. "Monday" not "0"
-    pivot (dt.date)
-
-    Returns dt.date
-    '''
-    assert weekday in DAYS
-    week_number = DAYS.index(weekday)
-    days_ahead = week_number - pivot.weekday()
-    if days_ahead <= 0:
-        days_ahead += 7
-    return pivot + dt.timedelta(days=days_ahead)
-
-
 if __name__ == '__main__':
-    # required_dates = [
-    #     next_weekday(dt.date.today(), day)
-    #     for day in REQUIRED_DAYS
-    # ]
     required_dates = [
-        dt.date(2020, 11, 23)
+        dt.date(2020, 11, 26) + dt.timedelta(days=n)
+        for n in range(10)
     ]
     chosen_rules = [
         rules.not_within_seven_days,
@@ -180,9 +148,7 @@ if __name__ == '__main__':
         rules.not_pasta_within_five_days,
         rules.not_roast_on_non_sunday,
         rules.force_sunday_roast,
-        rules.not_difficult_on_weekend,
+        rules.not_time_consuming_on_weekend,
     ]
     loop_recommend(required_dates, chosen_rules)
-
-    # TODO: Ability to move around suggestions easily
 
