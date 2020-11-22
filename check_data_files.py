@@ -25,7 +25,7 @@ INGREDIENTS_SUPPORTED_CATEGORIES = [
     'other',
     'sauce',
     'spice',
-    'tins',
+    'tin',
     'vegetable',
 ]
 
@@ -40,7 +40,7 @@ def check_meals():
     meals = load_meals()
     errors_found = False
 
-    print('\nChecking meals.json for errors')
+    print('\nChecking meals file for errors')
 
     # we expect to have a protein entry for every meal, and those
     # protein values to be presented in the MEALS_SUPPORTED_PROTEINS list above
@@ -74,16 +74,23 @@ def check_meals():
                 errors_found = True
                 print(f'{meal} has a non-boolean favourite entry. Found {favourite}')
 
+    # we expect all ingredients in every meal to be listed in ingredients.json
+    ingredients = load_ingredients()
+    for meal, meal_info in meals.items():
+        for ingredient in meal_info['ingredients']:
+            if ingredient not in ingredients.keys():
+                errors_found = True
+                print(f'{meal} has an ingredient {ingredient} which is not in the ingredients file')
+
     if not errors_found:
         print('No errors found')
-    print()
 
 
 def check_ingredients():
     ingredients = load_ingredients()
     errors_found = False
 
-    print('\nChecking meals.json for errors')
+    print('\nChecking ingredients file for errors')
 
     for name, info in ingredients.items():
         for key in info.keys():
@@ -111,11 +118,11 @@ def check_ingredients():
 
     if not errors_found:
         print('No errors found')
-    print()
 
 
 if __name__ == '__main__':
     check_ingredients()
     check_meals()
+    print()
 
 

@@ -52,7 +52,7 @@
         ],
         "salad": true
     },
-    "Chicken Tallegio": {
+    "Chicken Taleggio": {
         "protein": "chicken",
         "ingredients": {
             "balsamic vinegar": true,
@@ -63,7 +63,7 @@
             "green pesto": true,
             "olive oil": true,
             "paprika": true,
-            "tallegio cheese": 175,
+            "taleggio cheese": 175,
             "vine cherry tomatoes": 400
         },
         "vegetables": [
@@ -155,20 +155,20 @@
             "fresh lemon juice": true,
             "garlic": 4,
             "honey": true,
+            "new potatoes": true,
             "paprika": true,
             "salmon fillet": 1000,
-            "soy sauce": true,
-            "new potatoes": true
+            "soy sauce": true
         },
         "vegetables": [
             "green beans"
-        ] 
+        ]
     },
     "Indian Lamb with Spiced Lentils": {
         "protein": "lamb",
         "ingredients": {
             "boneless leg of lamb": 500,
-            "cardamon": true,
+            "cardamom": true,
             "cinammon stick": 1,
             "coriander": true,
             "cumin": true,
@@ -188,7 +188,7 @@
         "protein": "fish",
         "ingredients": {
             "coriander": true,
-            "egg": 4,
+            "eggs": 4,
             "garlic": 1,
             "ginger": true,
             "long-grain rice": 250,
@@ -254,7 +254,7 @@
             "chicken stock": 250,
             "cream": 250,
             "garlic": 3,
-            "mozarella": 100,
+            "mozarella cheese": 100,
             "parmezan": 100,
             "penne": 300,
             "spinach": 200,
@@ -267,7 +267,7 @@
             "bacon": 8,
             "cherry tomatoes": true,
             "double cream": 275,
-            "egg": 3,
+            "eggs": 3,
             "gruyere cheese": 75,
             "shortcrust pastry": true
         }
@@ -275,17 +275,18 @@
     "Roast Beef": {
         "protein": "beef",
         "ingredients": {
-            "beans": 400,
+            "green beans": true,
             "brocolli": 1,
             "carrot": 6,
             "flour": true,
-            "horseradish sauce": true,
-            "protein": "beef",
             "roast beef": true,
             "roast potatoes": 10,
             "yorkshire puddings": true
         },
-        "roast": true
+        "roast": true,
+        "additionals": [
+            "horseradish sauce"
+        ]
     },
     "Roast Chicken": {
         "protein": "chicken",
@@ -294,7 +295,7 @@
             "milk": true,
             "onion": 1,
             "roast chicken": true,
-            "beans": 400,
+            "green beans": 400,
             "brocolli": 1,
             "carrot": 6,
             "flour": true,
@@ -306,7 +307,7 @@
         "protein": "lamb",
         "ingredients": {
             "roast lamb": true,
-            "beans": 400,
+            "green beans": 400,
             "brocolli": 1,
             "carrot": 6,
             "flour": true,
@@ -323,7 +324,7 @@
         "ingredients": {
             "cooking apple": true,
             "roast pork": true,
-            "beans": 400,
+            "green beans": 400,
             "brocolli": 1,
             "carrot": 6,
             "flour": true,

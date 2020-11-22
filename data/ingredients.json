@@ -11,6 +11,10 @@
         "measured_in": "grams",
         "category": "vegetable"
     },
+    "baby spinach": {
+        "measured_in": "bool",
+        "category": "vegetable"
+    },
     "bacon": {
         "measured_in": "bool",
         "category": "meat"
@@ -47,6 +51,10 @@
         "measured_in": "bool",
         "category": "other"
     },
+    "brocolli": {
+        "measured_in": "bool",
+        "category": "vegetable"
+    },
     "brown sugar": {
         "measured_in": "bool",
         "category": "other"
@@ -59,9 +67,13 @@
         "measured_in": "bool",
         "category": "other"
     },
-    "cardomon": {
+    "cardamom": {
         "measured_in": "bool",
         "category": "spice"
+    },
+    "carrot": {
+        "measured_in": "bool",
+        "category": "vegetable"
     },
     "caster sugar": {
         "measured_in": "bool",
@@ -102,7 +114,15 @@
     },
     "cinammon": {
         "measured_in": "bool",
-        "category": "herb"
+        "category": "spice"
+    },
+    "cinammon stick": {
+        "measured_in": "bool",
+        "category": "spice"
+    },
+    "cooking apple": {
+        "measured_in": "bool",
+        "category": "vegetable"
     },
     "coriander": {
         "measured_in": "bool",
@@ -204,9 +224,17 @@
         "measured_in": "bool",
         "category": "sauce"
     },
+    "lentils": {
+        "measured_in": "bool",
+        "category": "vegetable"
+    },
     "lettuce": {
         "measured_in": "bool",
         "category": "vegetable"
+    },
+    "long-grain rice": {
+        "measured_in": "bool",
+        "category": "carbohydrate"
     },
     "mayonnaise": {
         "measured_in": "bool",
@@ -227,6 +255,10 @@
     "mozarella cheese": {
         "measured_in": "grams",
         "category": "dairy"
+    },
+    "new potatoes": {
+        "measured_in": "bool",
+        "category": "vegetable"
     },
     "nutmeg": {
         "measured_in": "bool",
@@ -312,6 +344,10 @@
         "measured_in": "bool",
         "category": "sauce"
     },
+    "roast beef": {
+        "measured_in": "units",
+        "category": "meat"
+    },
     "roast chicken": {
         "measured_in": "units",
         "category": "meat"
@@ -323,6 +359,10 @@
     "roast pork": {
         "measured_in": "units",
         "category": "meat"
+    },
+    "roast potatoes": {
+        "measured_in": "bool",
+        "category": "vegetable"
     },
     "salmon fillet": {
         "measured_in": "grams",
@@ -404,6 +444,14 @@
         "measured_in": "bool",
         "category": "carbohydrate"
     },
+    "vine cherry tomatoes": {
+        "measured_in": "bool",
+        "category": "vegetable"
+    },
+    "vine tomatoes": {
+        "measured_in": "bool",
+        "category": "vegetable"
+    },
     "worcestershire sauce": {
         "measured_in": "bool",
         "category": "sauce"
@@ -411,5 +459,9 @@
     "yellow pepper": {
         "measured_in": "units",
         "category": "vegetable"
+    },
+    "yorkshire puddings": {
+        "measured_in": "units",
+        "category": "carbohydrate"
     }
 }
