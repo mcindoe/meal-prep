@@ -1,15 +1,18 @@
 import calendar
 import datetime as dt
+import os
 import random
 
 import rules
 import rules_factory
 from utils import choose_meal
+from utils import combine_ingredients
 from utils import display_recommendation
 from utils import filter_history
 from utils import get_protein
 from utils import load_history
 from utils import load_meals
+from utils import make_shopping_list
 from utils import write_history_entries
 from utils import match_month
 
@@ -140,6 +143,12 @@ def loop_recommend(dates, applied_rules):
 
         elif user_input == 'C':
             return
+
+    combined_ingredients = combine_ingredients([meal.ingredients for meal in current_rec.values()])
+    min_date_str = min(current_rec.keys()).strftime('%Y%m%d')
+    max_date_str = max(current_rec.keys()).strftime('%Y%m%d')
+    shopping_list_filename = os.path.join('lists', f'shopping_list_{min_date_str}_{max_date_str}.txt')
+    make_shopping_list(combined_ingredients, shopping_list_filename)
 
     write_history_entries(current_rec)
     print('\nBon Appetit! History has been updated\n')
