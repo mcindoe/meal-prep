@@ -5,6 +5,7 @@ import random
 
 import rules
 import rules_factory
+from mail import send_recommendations
 from utils import choose_meal
 from utils import combine_ingredients
 from utils import display_recommendation
@@ -73,7 +74,7 @@ def recommend(dates, applied_rules, current_rec):
     return current_rec
 
 
-def loop_recommend(dates, applied_rules):
+def loop_recommend(dates, applied_rules, mail_receipients):
     '''
     Make suggestions and prompt user to accept or
     re-suggest certain dates until a suitable
@@ -147,17 +148,23 @@ def loop_recommend(dates, applied_rules):
     combined_ingredients = combine_ingredients([meal.ingredients for meal in current_rec.values()])
     min_date_str = min(current_rec.keys()).strftime('%Y%m%d')
     max_date_str = max(current_rec.keys()).strftime('%Y%m%d')
-    shopping_list_filename = os.path.join('lists', f'shopping_list_{min_date_str}_{max_date_str}.txt')
+    shopping_list_filename = os.path.join('lists', f'Shopping List {min_date_str} - {max_date_str}.txt')
     make_shopping_list(combined_ingredients, shopping_list_filename)
 
+    send_recommendations(mail_receipients, current_rec, shopping_list_filename)
+
     write_history_entries(current_rec)
-    print('\nBon Appetit! History has been updated\n')
+    print('\nBon Appetit!\n')
 
 
 if __name__ == '__main__':
     required_dates = [
         dt.date(2020, 11, 26) + dt.timedelta(days=n)
         for n in range(10)
+    ]
+    mail_receipients = [
+        # "conormcindoe1@gmail.com",
+        "mealprepbot@gmail.com",
     ]
     chosen_rules = [
         rules.not_within_seven_days,
@@ -169,5 +176,5 @@ if __name__ == '__main__':
         rules.not_time_consuming_on_weekend,
         rules.not_lasagne_and_moussaka_within_seven_days,
     ]
-    loop_recommend(required_dates, chosen_rules)
+    loop_recommend(required_dates, chosen_rules, mail_receipients)
 

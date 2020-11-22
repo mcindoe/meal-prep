@@ -429,3 +429,7 @@ def make_shopping_list(required_ingredients, filename):
                         unit_str = unit.capitalize()
                     fp.write(f'{capitalise(name)}: {quantity} {unit_str}\n')
 
+
+def get_day_name(day_number):
+    return list(calendar.day_name)[day_number]
+

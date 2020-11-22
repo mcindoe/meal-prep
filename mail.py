@@ -5,19 +5,21 @@ from email.mime.multipart import MIMEMultipart
 from email.utils import formatdate
 from os.path import basename
 
-from utils import DAYS
+from utils import get_day_name
 from utils import get_mail_credentials
+from utils import make_date_string
 
 #TODO: Only imported for testing purposes
 import datetime as dt
 from utils import load_history
 from utils import filter_history
 
+
 def send_message(receiver, subject, text, html=None, attachments=None):
     sender_email, sender_password = get_mail_credentials()
 
     message = MIMEMultipart("alternative")
-    message["Subject"] = subject 
+    message["Subject"] = subject
     message["From"] = sender_email
     message["To"] = receiver
     message["Date"] = formatdate(localtime=True)
@@ -47,50 +49,42 @@ def send_message(receiver, subject, text, html=None, attachments=None):
         )
 
 
-def get_date_str(date):
-    day_name = DAYS[date.weekday()]
-    day = date.day
-    final_day_num = int(str(day)[-1])
-
-    if final_day_num == 1:
-        day_suffix = 'st'
-    elif final_day_num == 2:
-        day_suffix = 'nd'
-    elif final_day_num == 3:
-        day_suffix = 'rd'
-    else:
-        day_suffix = 'th'
-
-    return f'{day_name}, {day}{day_suffix}'
-
-def send_recommendations(receiver, recommendations, attachments=None):
+def send_recommendations(receivers, recommendations, shopping_list_file=None):
     dates = list(recommendations.keys())
-    
-    min_date_str = get_date_str(min(dates))
-    max_date_str = get_date_str(max(dates))
 
-    sorted_dates = sorted(list(recommendations.keys()))
+    min_date_str = make_date_string(min(dates))
+    max_date_str = make_date_string(max(dates))
 
     # Create the plain-text and HTML version of your message
     text = f'Meal recommendations for {min_date_str} to {max_date_str} are as follows:\n'
 
+    sorted_dates = sorted(list(recommendations.keys()))
     for date in sorted_dates:
-        day_name = DAYS[date.weekday()]
         meal = recommendations[date]
-        text += f'\n{day_name} - {meal}'
+        date_str = make_date_string(date)
+        text += f'\n{date_str} - {str(meal)}'
 
-    text += "\n\nRegards,\nMeal Prep Team\n"
+    text += "\nBon Appetit!\nMeal Prep Team\n"
 
-    subject = 'Meal Recommendations'
-    send_message(receiver, subject, text, attachments=attachments)
+    subject = f'Meal Recommendations {min(dates).strftime("%d/%m/%Y")} - {max(dates).strftime("%d/%m/%Y")}'
+
+    if shopping_list_file is not None:
+        attachments = [shopping_list_file]
+    else:
+        attachments = None
+
+    if isinstance(receivers, str):
+        receivers = [receivers]
+
+    for receiver in receivers:
+        send_message(receiver, subject, text, attachments=attachments)
 
 
 if __name__ == '__main__':
-    history = load_history()
-    history = filter_history(history, start=dt.date(2020, 11, 8))
-    shopping_list = 'Shopping List.txt'
+    history = load_history(start=dt.date.today())
+    shopping_list = 'lists/shopping_list_20201126_20201205.txt'
     send_recommendations(
         'mealprepbot@gmail.com',
         history,
-        attachments = [shopping_list]
+        shopping_list_file = shopping_list
     )
