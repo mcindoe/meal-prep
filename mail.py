@@ -64,7 +64,7 @@ def send_recommendations(receivers, recommendations, shopping_list_file=None):
         date_str = make_date_string(date)
         text += f'\n{date_str} - {str(meal)}'
 
-    text += "\nBon Appetit!\nMeal Prep Team\n"
+    text += "\n\nBon Appetit!\nMeal Prep Team\n"
 
     subject = f'Meal Recommendations {min(dates).strftime("%d/%m/%Y")} - {max(dates).strftime("%d/%m/%Y")}'
 
