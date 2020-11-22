@@ -423,5 +423,9 @@ def make_shopping_list(required_ingredients, filename):
                 if quantity == True:
                     fp.write(f'{capitalise(name)}\n')
                 else:
-                    fp.write(f'{capitalise(name)}: {quantity} {unit.capitalize()}\n')
+                    if unit == 'ml':
+                        unit_str = 'ml'
+                    else:
+                        unit_str = unit.capitalize()
+                    fp.write(f'{capitalise(name)}: {quantity} {unit_str}\n')
 
