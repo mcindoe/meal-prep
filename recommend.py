@@ -98,21 +98,21 @@ def loop_recommend(dates, applied_rules):
         elif user_input == 'N':
             user_index_input_accepted = False
             display_recommendation(current_rec, with_index=True)
-            user_index_input = input('Enter the meal indices to change, separated by commas: (C to Cancel)\n')
 
             while not user_index_input_accepted:
-                # break out of loop if user cancels
-                if any([el.upper() == 'C' for el in split_user_dates]):
-                    return
-
+                user_index_input = input('Enter the meal indices to change, separated by commas: (C to Cancel)\n')
                 split_user_index_input = [el.strip() for el in user_index_input.split(',')]
+
+                # break out of loop if user cancels
+                if any([el.upper() == 'C' for el in split_user_index_input]):
+                    return
 
                 inputs_are_integers = True
                 for el in split_user_index_input:
                     try:
                         int(el)
                     except ValueError:
-                        print("Input not recognised")
+                        print("Input not recognised\n")
                         inputs_are_integers = False
                         break
 
@@ -120,7 +120,7 @@ def loop_recommend(dates, applied_rules):
                     input_indices = {int(el) for el in split_user_index_input}
                     displayed_indices = range(1, len(current_rec)+1)
                     if any([el not in displayed_indices for el in input_indices]):
-                        print("Input contains a day which was not recommended")
+                        print("Input contains a day which was not recommended. Please try again:\n")
                     else:
                         user_index_input_accepted = True
                         sorted_recommended_dates = sorted(list(current_rec.keys()))
@@ -129,7 +129,7 @@ def loop_recommend(dates, applied_rules):
             # add a rule to not recommend the meals which have been rejected
             for date in user_dates:
                 rejected_meal = current_rec[date]
-                new_rule = rules_factory.dated_avoid_meal(date, rejected_meal)
+                new_rule = rules_factory.dated_avoid_meal(date, rejected_meal.name)
                 applied_rules.append(new_rule)
 
             current_rec = {

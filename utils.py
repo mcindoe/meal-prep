@@ -243,15 +243,18 @@ def make_date_string(date):
     return f'{day_str}, {date.day}{day_suffix} of {month_str}'
 
 
-def print_history(history, with_index=False):
+def print_history(history=load_history(), with_index=False):
     sorted_dates = sorted(list(history.keys()))
     date_strings = [make_date_string(date) for date in sorted_dates]
     longest_date_str_len = max([len(date_str) for date_str in date_strings])
 
+    if with_index:
+        largest_index_len = len(str(len(history)+1))
+
     for idx, (date, date_str) in enumerate(zip(sorted_dates, date_strings)):
         recommended_meal = history[date]
         if with_index:
-            print(f"{idx+1} {0: <{1}} - {2}".format(date_str, longest_date_str_len, recommended_meal))
+            print("{0: <{1}} {2: <{3}} - {4}".format(idx+1, largest_index_len, date_str, longest_date_str_len, recommended_meal))
         else:
             print("{0: <{1}} - {2}".format(date_str, longest_date_str_len, recommended_meal))
 
