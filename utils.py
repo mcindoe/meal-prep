@@ -89,13 +89,13 @@ def load_history(start=None, end=None):
     '''
     Reads the history JSON file and converts
     to a dictionary keyed by dt.dates, valued
-    by meal.Meals. Optional filtering to 
+    by meal.Meals. Optional filtering to
     dates in start <= date < end.
 
     start: dt.datetime
     end: dt.datetime
     '''
-    
+
     with open(HISTORY_FILE, 'r') as fp:
         json_history = json.load(fp)
 
@@ -103,7 +103,7 @@ def load_history(start=None, end=None):
     for date_str, meal_info in json_history.items():
         year, month, day = [int(el) for el in date_str.split('/')]
         date = dt.date(year, month, day)
-        
+
         history[date] = meal.Meal.from_json(meal_info)
 
     return filter_history(history, start, end)
@@ -221,7 +221,7 @@ def choose_meal(meals):
     if vegetables is None:
         return meal.Meal(name)
     veg_choice = random.choice(vegetables)
-    
+
     return meal.Meal(name, [veg_choice])
 
 
@@ -230,7 +230,7 @@ def make_date_string(date):
     day_str = calendar.day_name[date.weekday()][:3]
     month_str = calendar.month_name[date.month][:3]
     final_day_num = int(str(date.day)[-1])
-    
+
     if final_day_num == 1:
         day_suffix = 'st'
     elif final_day_num == 2:
@@ -320,5 +320,108 @@ def match_month(month_str):
     ]
     if not month_matches:
         return None
-    return month_matches[0] 
+    return month_matches[0]
+
+
+def match_name(name):
+    meals = load_meals()
+
+    name_matches = [
+        meal_name
+        for meal_name in meals.keys()
+        if meal_name.upper().startswith(name.upper())
+    ]
+    if not name_matches:
+        return None
+    return name_matches[0]
+
+
+def combine_ingredients(ingredients_iter):
+    combined_ingredients = {}
+    for ingredients in ingredients_iter:
+        for name, quantity in ingredients.items():
+            if name not in combined_ingredients:
+                combined_ingredients[name] = quantity
+
+            else:
+                previous_quantity = combined_ingredients[name]
+                if isinstance(previous_quantity, bool):
+                    combined_ingredients[name] = True
+                else:
+                    combined_ingredients[name] = previous_quantity + quantity
+
+    return combined_ingredients
+
+
+# Order of categories appearing in a shopping list
+CATEGORY_ORDER = [
+    'vegetable',
+    'dairy',
+    'carbohydrate',
+    'meat',
+    'fish',
+    'tin',
+    'herb',
+    'spice',
+    'condiment',
+    'sauce',
+    'other',
+]
+
+CATEGORY_PLURAL_MAP = {el: el.capitalize() for el in CATEGORY_ORDER}
+CATEGORY_PLURAL_MAP['vegetable'] = 'Vegetables'
+CATEGORY_PLURAL_MAP['carbohydrate'] = 'Carbohydrates'
+CATEGORY_PLURAL_MAP['tin'] = 'Tins'
+CATEGORY_PLURAL_MAP['herb'] = 'Herbs'
+CATEGORY_PLURAL_MAP['spice'] = 'Spices'
+CATEGORY_PLURAL_MAP['condiment'] = 'Condiments'
+CATEGORY_PLURAL_MAP['sauce'] = 'Sauces'
+
+def get_category(ingredient):
+    ingredients = load_ingredients()
+    return ingredients[ingredient]['category']
+
+
+def get_unit(ingredient):
+    ingredients = load_ingredients()
+    return ingredients[ingredient]['measured_in']
+
+
+def capitalise(input_str):
+    words = input_str.split(' ')
+    return ' '.join([word.capitalize() for word in words])
+
+
+def make_shopping_list(required_ingredients, filename):
+    full_ingredients = load_ingredients()
+    required_categories = list(set([get_category(el) for el in required_ingredients.keys()]))
+
+    categorised_list = {
+        category: {
+            name: quantity
+            for name, quantity in required_ingredients.items()
+            if full_ingredients[name]['category'] == category
+        }
+        for category in required_categories
+    }
+
+    sorted_categories = sorted(required_categories, key=lambda c: CATEGORY_ORDER.index(c))
+
+    with open(filename, 'w+') as fp:
+        for idx, category in enumerate(sorted_categories):
+            if idx == 0:
+                fp.write(f'-- {CATEGORY_PLURAL_MAP[category]} --\n')
+            else:
+                fp.write(f'\n-- {CATEGORY_PLURAL_MAP[category]} --\n')
+
+            category_entries = categorised_list[category]
+            sorted_category_names = sorted(list(category_entries.keys()))
+
+            for name in sorted_category_names:
+                quantity = category_entries[name]
+                unit = get_unit(name)
+                if quantity == True:
+                    fp.write(f'{capitalise(name)}\n')
+                else:
+                    fp.write(f'{capitalise(name)}: {quantity} {unit.capitalize()}\n')
 

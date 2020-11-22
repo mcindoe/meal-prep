@@ -51,6 +51,10 @@
         "measured_in": "bool",
         "category": "other"
     },
+    "burger buns": {
+        "measured_in": "bool",
+        "category": "carbohydrate" 
+    },
     "butter": {
         "measured_in": "bool",
         "category": "other"
@@ -71,7 +75,7 @@
         "measured_in": "units",
         "category": "vegetable"
     },
-    "cheddar": {
+    "cheddar cheese": {
         "measured_in": "bool",
         "category": "dairy"
     },
@@ -94,7 +98,7 @@
     },
     "chopped tomatoes": {
         "measured_in": "units",
-        "category": "tins"
+        "category": "tin"
     },
     "cinammon": {
         "measured_in": "bool",
@@ -178,7 +182,7 @@
     },
     "kidney beans": {
         "measured_in": "units",
-        "category": "tins"
+        "category": "tin"
     },
     "lamb mince": {
         "measured_in": "grams",
