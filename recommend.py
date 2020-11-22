@@ -7,11 +7,11 @@ import rules_factory
 from utils import choose_meal
 from utils import display_recommendation
 from utils import filter_history
-from utils import find_day
 from utils import get_protein
 from utils import load_history
 from utils import load_meals
 from utils import write_history_entries
+from utils import match_month
 
 
 def get_available_meals(date, applied_rules, current_rec):
@@ -82,7 +82,7 @@ def loop_recommend(dates, applied_rules):
     while not selection_found:
         current_rec = recommend(dates, applied_rules, current_rec)
 
-        if current_rec is None:
+        if not current_rec:
             print('Error: No meals match the current filters')
             return
 
@@ -96,26 +96,35 @@ def loop_recommend(dates, applied_rules):
             selection_found = True
 
         elif user_input == 'N':
-            user_days_found = False
-            while not user_days_found:
-                user_day_input = input('Enter the days to change, separated by a comma. (C to Cancel):\n')
-                split_user_days = user_day_input.split(',')
+            user_index_input_accepted = False
+            display_recommendation(current_rec, with_index=True)
+            user_index_input = input('Enter the meal indices to change, separated by commas: (C to Cancel)\n')
 
+            while not user_index_input_accepted:
                 # break out of loop if user cancels
-                if any([day.strip().upper() == 'C' for day in split_user_days]):
+                if any([el.upper() == 'C' for el in split_user_dates]):
                     return
 
-                user_days = [find_day(day) for day in split_user_days]
-                recommended_days = [calendar.day_name[day.weekday()] for day in current_rec.keys()]
+                split_user_index_input = [el.strip() for el in user_index_input.split(',')]
 
-                if any([day is None for day in user_days]):
-                    print("Input not recognised")
-                elif any([day not in recommended_days for day in user_days]):
-                    print("Input contains a day which was not recommended")
-                else:
-                    user_days_found = True
+                inputs_are_integers = True
+                for el in split_user_index_input:
+                    try:
+                        int(el)
+                    except ValueError:
+                        print("Input not recognised")
+                        inputs_are_integers = False
+                        break
 
-            user_dates = [next_weekday(dt.date.today(), day) for day in user_days]
+                if inputs_are_integers:
+                    input_indices = {int(el) for el in split_user_index_input}
+                    displayed_indices = range(1, len(current_rec)+1)
+                    if any([el not in displayed_indices for el in input_indices]):
+                        print("Input contains a day which was not recommended")
+                    else:
+                        user_index_input_accepted = True
+                        sorted_recommended_dates = sorted(list(current_rec.keys()))
+                        user_dates = [sorted_recommended_dates[idx-1] for idx in input_indices]
 
             # add a rule to not recommend the meals which have been rejected
             for date in user_dates:

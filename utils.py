@@ -243,37 +243,23 @@ def make_date_string(date):
     return f'{day_str}, {date.day}{day_suffix} of {month_str}'
 
 
-def print_history(history):
+def print_history(history, with_index=False):
     sorted_dates = sorted(list(history.keys()))
     date_strings = [make_date_string(date) for date in sorted_dates]
     longest_date_str_len = max([len(date_str) for date_str in date_strings])
 
-    for date, date_str in zip(sorted_dates, date_strings):
+    for idx, (date, date_str) in enumerate(zip(sorted_dates, date_strings)):
         recommended_meal = history[date]
-        print("{0: <{1}} - {2}".format(date_str, longest_date_str_len, recommended_meal))
+        if with_index:
+            print(f"{idx+1} {0: <{1}} - {2}".format(date_str, longest_date_str_len, recommended_meal))
+        else:
+            print("{0: <{1}} - {2}".format(date_str, longest_date_str_len, recommended_meal))
 
 
-def display_recommendation(rec):
-    print('\nRecommendation for this week:\n')
-    print_history(rec)
+def display_recommendation(rec, with_index=False):
+    print('\nRecommendations:\n')
+    print_history(rec, with_index)
     print()
-
-
-def find_day(day_str):
-    '''
-    Find the day of the week from a user-input string.
-    Expected to be the start of the string.
-    '''
-
-    day_str = day_str.strip().lower()
-    matching_days = [
-        day
-        for day in list(calendar.day_name)
-        if day.lower().startswith(day_str)
-    ]
-    if not matching_days:
-        return None
-    return matching_days[0]
 
 
 def get_protein(meal_name):
@@ -321,4 +307,15 @@ def make_list_str(elements):
     first_elements = elements[:-1]
     last_element = elements[-1]
     return f'{", ".join(first_elements)} and {last_element}'
+
+
+def match_month(month_str):
+    month_matches = [
+        month
+        for month in list(calendar.month_names)
+        if month.upper().startswith(month_str.upper())
+    ]
+    if not month_matches:
+        return None
+    return month_matches[0] 
 
