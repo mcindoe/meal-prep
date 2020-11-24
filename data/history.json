@@ -74,5 +74,29 @@
     "2020/11/26": {
         "name": "Burgers",
         "vegetables": null
+    },
+    "2020/11/28": {
+        "name": "Chicken Fajitas",
+        "vegetables": null
+    },
+    "2020/11/29": {
+        "name": "Roast Pork",
+        "vegetables": null
+    },
+    "2020/11/30": {
+        "name": "Shephards Pie",
+        "vegetables": null
+    },
+    "2020/12/01": {
+        "name": "Beef and Ale Stew",
+        "vegetables": [
+            "green beans"
+        ]
+    },
+    "2020/12/02": {
+        "name": "Sticky Chinese Pork Belly",
+        "vegetables": [
+            "green beans"
+        ]
     }
 }
