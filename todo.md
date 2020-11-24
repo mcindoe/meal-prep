@@ -10,4 +10,5 @@
 * Need to sanity-check ingredients file: beans e.g. have sum = 202, some are measured in grams some in units
     - Wondering why some are measured in one and some in the other ...
     - Could use this ingredients measuredin to check meals.json is compliant
-
+* Try changing meals, didn't work just now - seems to be too restrictive atm
+* Ingredients to include in brackets what meal they come from
