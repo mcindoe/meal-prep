@@ -8,7 +8,7 @@
             "flour": true,
             "guinness": 500,
             "onion": 2,
-            "plum tomatoes": 500,
+            "chopped tomatoes": 500,
             "potato": 900,
             "stewing beef": 750
         },
@@ -333,7 +333,7 @@
         "roast": true
     },
     "Shephards Pie": {
-        "protein": "lamb",
+        "protein": "beef",
         "favourite": true,
         "ingredients": {
             "beef mince": 500,
