@@ -18,6 +18,8 @@ from utils import write_history_entries
 from utils import match_month
 
 
+from pprint import pprint
+
 def get_available_meals(date, applied_rules, current_rec):
     '''
     Applies each of the applied_rules successively
@@ -159,12 +161,12 @@ def loop_recommend(dates, applied_rules, mail_receipients):
 
 if __name__ == '__main__':
     required_dates = [
-        dt.date(2020, 11, 26) + dt.timedelta(days=n)
-        for n in range(10)
+        dt.date(2020, 11, 28) + dt.timedelta(days=n)
+        for n in range(5)
     ]
     mail_receipients = [
-        # "conormcindoe1@gmail.com",
-        "mealprepbot@gmail.com",
+        "conormcindoe1@gmail.com",
+        # "mealprepbot@gmail.com",
     ]
     chosen_rules = [
         rules.not_within_seven_days,
