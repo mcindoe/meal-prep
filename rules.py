@@ -49,6 +49,8 @@ def not_consecutive_same_protein(meals, date, combined_history):
     "Do not recommend the same protein two days in a row"
     relevant_meal_names = get_close_history_meal_names(combined_history, date, n_days=1)
 
+    print('revelant meal names: ', relevant_meal_names)
+
     proteins_to_avoid = []
     for meal_name in relevant_meal_names:
         if get_protein(meal_name) is not None:

@@ -12,3 +12,5 @@
     - Could use this ingredients measuredin to check meals.json is compliant
 * Try changing meals, didn't work just now - seems to be too restrictive atm
 * Ingredients to include in brackets what meal they come from
+* Shopping list is printed in monospace font - can line up the units in each section
+

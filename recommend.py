@@ -153,19 +153,28 @@ def loop_recommend(dates, applied_rules, mail_receipients):
     shopping_list_filename = os.path.join('lists', f'Shopping List {min_date_str} - {max_date_str}.txt')
     make_shopping_list(combined_ingredients, shopping_list_filename)
 
+    write_history_entries(current_rec)
     send_recommendations(mail_receipients, current_rec, shopping_list_filename)
 
-    write_history_entries(current_rec)
     print('\nBon Appetit!\n')
 
 
 if __name__ == '__main__':
     required_dates = [
-        dt.date(2020, 11, 28) + dt.timedelta(days=n)
-        for n in range(5)
+        dt.date(2020, 12, 10),
+        dt.date(2020, 12, 12),
+        dt.date(2020, 12, 13),
+        dt.date(2020, 12, 14),
+        dt.date(2020, 12, 15),
+        dt.date(2020, 12, 16),
     ]
+
+
+
     mail_receipients = [
         "conormcindoe1@gmail.com",
+        "berniebolger@gmail.com",
+        "angus@amcindoe.com",
         # "mealprepbot@gmail.com",
     ]
     chosen_rules = [

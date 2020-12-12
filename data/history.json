@@ -98,5 +98,29 @@
         "vegetables": [
             "green beans"
         ]
+    },
+    "2020/12/03": {
+        "name": "Pasta with Chicken and Sundried Tomatoes",
+        "vegetables": null
+    },
+    "2020/12/05": {
+        "name": "Moussaka",
+        "vegetables": null
+    },
+    "2020/12/06": {
+        "name": "Roast Chicken",
+        "vegetables": null
+    },
+    "2020/12/07": {
+        "name": "Burgers",
+        "vegetables": null
+    },
+    "2020/12/08": {
+        "name": "Indian Lamb with Spiced Lentils",
+        "vegetables": null
+    },
+    "2020/12/09": {
+        "name": "Chilli con Carne",
+        "vegetables": null
     }
 }
