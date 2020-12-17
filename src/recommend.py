@@ -1,5 +1,4 @@
 import datetime as dt
-import os
 from typing import Callable
 from typing import Dict
 from typing import List
@@ -17,6 +16,8 @@ from mealprep.src.utils.meals import choose_meal
 from mealprep.src.utils.meals import load_meals
 from mealprep.src.utils.shopping_lists import combine_ingredients
 from mealprep.src.utils.shopping_lists import make_shopping_list
+
+from mealprep.config import LISTS
 
 
 def get_available_meals(
@@ -93,8 +94,9 @@ def loop_recommend(
             print("Error: No meals match the current filters")
             return
 
+        print()
         print_history(current_rec)
-        user_input = input("Sound Good? (Y/N/Cancel) ")[0].upper()
+        user_input = input("\nSound Good? (Y/N/Cancel) ")[0].upper()
 
         while user_input not in ["Y", "N", "C"]:
             user_input = input("Please enter Y(es), N(o), or C(ancel) ")[
@@ -172,32 +174,32 @@ def loop_recommend(
     )
     min_date_str = min(current_rec.keys()).strftime("%Y%m%d")
     max_date_str = max(current_rec.keys()).strftime("%Y%m%d")
-    shopping_list_filename = os.path.join(
-        "lists", f"Shopping List {min_date_str} - {max_date_str}.txt"
-    )
-    make_shopping_list(combined_ingredients, shopping_list_filename)
+    shopping_list_filepath = LISTS / \
+        f"Shopping List {min_date_str} - {max_date_str}.txt"
+
+    make_shopping_list(combined_ingredients, shopping_list_filepath)
 
     add_history_entries(current_rec)
-    send_recommendations(mail_receipients, current_rec, shopping_list_filename)
+    send_recommendations(mail_receipients, current_rec, shopping_list_filepath)
 
     print("\nBon Appetit!\n")
 
 
 if __name__ == "__main__":
     required_dates = [
-        dt.date(2020, 12, 10),
-        dt.date(2020, 12, 12),
-        dt.date(2020, 12, 13),
-        dt.date(2020, 12, 14),
-        dt.date(2020, 12, 15),
-        dt.date(2020, 12, 16),
+        dt.date(2020, 12, 20),
+        dt.date(2020, 12, 21),
+        dt.date(2020, 12, 22),
+        dt.date(2020, 12, 23),
+        dt.date(2020, 12, 24),
+        dt.date(2020, 12, 25),
     ]
 
     mail_receipients = [
-        "conormcindoe1@gmail.com",
-        "berniebolger@gmail.com",
-        "angus@amcindoe.com",
-        # "mealprepbot@gmail.com",
+        # "conormcindoe1@gmail.com",
+        # "berniebolger@gmail.com",
+        # "angus@amcindoe.com",
+        "mealprepbot@gmail.com",
     ]
     chosen_rules = [
         rules.not_within_seven_days,
