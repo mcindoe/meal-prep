@@ -1,4 +1,3 @@
-* Type checking!
 * Shopping lists currently suck
 
 * In writemeals(), check that the meals conform to some standards before writing
