@@ -11,6 +11,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formatdate
 from os.path import basename
+from pathlib import Path
 from typing import Dict
 from typing import List
 from typing import Optional
@@ -40,7 +41,7 @@ def send_message(
     subject: str,
     text: str,
     html: Optional[str] = None,
-    attachments: Optional[List[str]] = None,
+    attachments: Optional[List[Path]] = None,
 ) -> None:
 
     """
@@ -79,7 +80,7 @@ def send_message(
 def send_recommendations(
     receivers: List[str],
     recommendations: Dict[dt.date, str],
-    shopping_list_file: Optional[str] = None,
+    shopping_list_file: Optional[Path] = None,
 ) -> None:
 
     """
