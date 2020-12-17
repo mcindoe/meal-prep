@@ -1,3 +1,6 @@
+* Type checking!
+* Shopping lists currently suck
+
 * In writemeals(), check that the meals conform to some standards before writing
     - I.e. check that all ingredients are supported for example
     - Could also have a method of Meal which checks for all these things
@@ -13,4 +16,3 @@
 * Try changing meals, didn't work just now - seems to be too restrictive atm
 * Ingredients to include in brackets what meal they come from
 * Shopping list is printed in monospace font - can line up the units in each section
-
