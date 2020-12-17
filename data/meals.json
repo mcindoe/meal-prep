@@ -2,13 +2,13 @@
     "Beef and Ale Stew": {
         "protein": "beef",
         "ingredients": {
-            "bay leaves": 3,
+            "bay leaves": true,
             "carrot": 2,
             "celery": 2,
             "flour": true,
             "guinness": 500,
             "onion": 2,
-            "chopped tomatoes": 500,
+            "chopped tomatoes": 1,
             "potato": 900,
             "stewing beef": 750
         },
@@ -80,7 +80,7 @@
             "dark soy sauce": true,
             "garlic": 2,
             "ginger": true,
-            "green beans": 200,
+            "green beans": 1,
             "onion": 1,
             "pak-choy": 1,
             "red pepper": 1,
@@ -92,8 +92,8 @@
         "protein": "chicken",
         "favourite": true,
         "ingredients": {
-            "cherry tomatoes": "two packs",
-            "chicken thigh": "two packs",
+            "cherry tomatoes": 2,
+            "chicken thigh": 2,
             "garlic": 2,
             "olive oil": true,
             "red chilli": 2,
@@ -295,7 +295,7 @@
             "milk": true,
             "onion": 1,
             "roast chicken": true,
-            "green beans": 400,
+            "green beans": 1,
             "brocolli": 1,
             "carrot": 6,
             "flour": true,
@@ -307,7 +307,7 @@
         "protein": "lamb",
         "ingredients": {
             "roast lamb": true,
-            "green beans": 400,
+            "green beans": 1,
             "brocolli": 1,
             "carrot": 6,
             "flour": true,
@@ -324,7 +324,7 @@
         "ingredients": {
             "cooking apple": true,
             "roast pork": true,
-            "green beans": 400,
+            "green beans": 1,
             "brocolli": 1,
             "carrot": 6,
             "flour": true,

@@ -92,9 +92,8 @@
         "category": "dairy"
     },
     "cherry tomatoes": {
-        "measured_in": "units",
-        "category": "vegetable",
-        "unit": "packs"
+        "measured_in": "packs",
+        "category": "vegetable"
     },
     "chicken breast": {
         "measured_in": "grams",
@@ -109,7 +108,7 @@
         "category": "meat"
     },
     "chopped tomatoes": {
-        "measured_in": "units",
+        "measured_in": "tins",
         "category": "tin"
     },
     "cinammon": {
@@ -157,7 +156,7 @@
         "category": "other"
     },
     "flour": {
-        "measured_in": "grams",
+        "measured_in": "bool",
         "category": "other"
     },
     "fresh chilli": {
@@ -181,7 +180,7 @@
         "category": "vegetable"
     },
     "green beans": {
-        "measured_in": "grams",
+        "measured_in": "packs",
         "category": "vegetable"
     },
     "green pesto": {
@@ -201,7 +200,7 @@
         "category": "other"
     },
     "kidney beans": {
-        "measured_in": "units",
+        "measured_in": "tins",
         "category": "tin"
     },
     "lamb mince": {
@@ -381,7 +380,7 @@
         "category": "sauce"
     },
     "spaghetti": {
-        "measured_in": "grams",
+        "measured_in": "bool",
         "category": "carbohydrate"
     },
     "spinach": {
