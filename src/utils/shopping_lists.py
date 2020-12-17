@@ -27,14 +27,14 @@ CATEGORY_ORDER = [
     "other",
 ]
 
-CATEGORY_PLURAL_MAP = {el: el.capitalize() for el in CATEGORY_ORDER}
-CATEGORY_PLURAL_MAP["vegetable"] = "Vegetables"
-CATEGORY_PLURAL_MAP["carbohydrate"] = "Carbohydrates"
-CATEGORY_PLURAL_MAP["tin"] = "Tins"
-CATEGORY_PLURAL_MAP["herb"] = "Herbs"
-CATEGORY_PLURAL_MAP["spice"] = "Spices"
-CATEGORY_PLURAL_MAP["condiment"] = "Condiments"
-CATEGORY_PLURAL_MAP["sauce"] = "Sauces"
+CATEGORY_TO_HEADER_MAP = {el: el.capitalize() for el in CATEGORY_ORDER}
+CATEGORY_TO_HEADER_MAP["vegetable"] = "Vegetables"
+CATEGORY_TO_HEADER_MAP["carbohydrate"] = "Carbohydrates"
+CATEGORY_TO_HEADER_MAP["tin"] = "Tins"
+CATEGORY_TO_HEADER_MAP["herb"] = "Herbs"
+CATEGORY_TO_HEADER_MAP["spice"] = "Spices"
+CATEGORY_TO_HEADER_MAP["condiment"] = "Condiments"
+CATEGORY_TO_HEADER_MAP["sauce"] = "Sauces"
 
 
 def combine_ingredients(ingredients_iter: Iterable[Dict]) -> Dict:
@@ -50,11 +50,10 @@ def combine_ingredients(ingredients_iter: Iterable[Dict]) -> Dict:
                 combined_ingredients[name] = quantity
 
             else:
-                previous_quantity = combined_ingredients[name]
-                if isinstance(previous_quantity, bool):
+                if get_unit(name) == "bool":
                     combined_ingredients[name] = True
                 else:
-                    combined_ingredients[name] = previous_quantity + quantity
+                    combined_ingredients[name] += quantity
 
     return combined_ingredients
 
@@ -87,9 +86,9 @@ def make_shopping_list(
     with open(filename, "w+") as fp:
         for idx, category in enumerate(sorted_categories):
             if idx == 0:
-                fp.write(f"-- {CATEGORY_PLURAL_MAP[category]} --\n")
+                fp.write(f"-- {CATEGORY_TO_HEADER_MAP[category]} --\n")
             else:
-                fp.write(f"\n-- {CATEGORY_PLURAL_MAP[category]} --\n")
+                fp.write(f"\n-- {CATEGORY_TO_HEADER_MAP[category]} --\n")
 
             category_entries = categorised_list[category]
             sorted_category_names = sorted(list(category_entries.keys()))
@@ -97,11 +96,12 @@ def make_shopping_list(
             for name in sorted_category_names:
                 quantity = category_entries[name]
                 unit = get_unit(name)
-                if quantity is True:
+                if unit == "bool":
                     fp.write(f"{capitalise(name)}\n")
+                elif unit == "units":
+                    fp.write(f"{capitalise(name)}: {quantity}\n")
+                elif unit == "ml":
+                    fp.write(f"{capitalise(name)}: {quantity} ml\n")
                 else:
-                    if unit == "ml":
-                        unit_str = "ml"
-                    else:
-                        unit_str = unit.capitalize()
+                    unit_str = unit.capitalize()
                     fp.write(f"{capitalise(name)}: {quantity} {unit_str}\n")
