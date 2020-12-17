@@ -8,8 +8,6 @@ import datetime as dt
 from typing import Dict
 from typing import List
 
-from typing import TYPE_CHECKING
-
 
 def make_date_string(date: dt.date) -> str:
     """
