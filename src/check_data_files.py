@@ -8,10 +8,10 @@ from mealprep.src.utils.meals import load_meals
 
 MEALS_SUPPORTED_PROTEINS = [
     "beef",
-    "fish",
-    "pork",
     "chicken",
+    "fish",
     "lamb",
+    "pork",
 ]
 
 INGREDIENTS_SUPPORTED_KEYS = [
@@ -34,7 +34,14 @@ INGREDIENTS_SUPPORTED_CATEGORIES = [
     "vegetable",
 ]
 
-INGREDIENTS_SUPPORTED_MEASURED_IN = ["units", "bool", "grams", "ml"]
+INGREDIENTS_SUPPORTED_MEASURED_IN = [
+    "bool",
+    "grams",
+    "ml",
+    "packs",
+    "tins",
+    "units",
+]
 
 
 def check_meals() -> None:
