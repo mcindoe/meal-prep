@@ -8,7 +8,7 @@ import datetime as dt
 from typing import Dict
 from typing import List
 
-from mealprep.src.utils.meals import Meal
+from typing import TYPE_CHECKING
 
 
 def make_date_string(date: dt.date) -> str:
@@ -28,7 +28,7 @@ def make_date_string(date: dt.date) -> str:
     return f"{day_str}, {date.day}{day_suffix} of {month_str}"
 
 
-def print_history(history: Dict[dt.date, Meal], with_index: bool = False):
+def print_history(history: Dict, with_index: bool = False):
     """
     Neatly prints a history dictionary.
 
@@ -38,8 +38,8 @@ def print_history(history: Dict[dt.date, Meal], with_index: bool = False):
     left-hand-side to allow users to easily refer to parts of the
     history when making choices.
 
-    :history: Dict[dt.date, Meal] - the history to be printed
-    :with_index: bool - whether to print indices alongside the history
+    :param history: Dict[dt.date, Meal] - the history to be printed
+    :param with_index: whether to print indices alongside the history
     """
 
     sorted_dates = sorted(list(history.keys()))
