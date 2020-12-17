@@ -13,6 +13,7 @@ from typing import Union
 
 from mealprep.config import DATA
 from mealprep.config import JSON_INDENT
+from mealprep.src.utils.display import capitalise
 from mealprep.src.utils.display import make_list_str
 
 MEALS_FILE = DATA / "meals.json"
@@ -35,7 +36,7 @@ class Meal:
     def __str__(self):
         if self.vegetables is None:
             return self.name
-        return f"{self.name} with {make_list_str(self.vegetables)}"
+        return f"{self.name} with {capitalise(make_list_str(self.vegetables))}"
 
     @property
     def ingredients(self):
