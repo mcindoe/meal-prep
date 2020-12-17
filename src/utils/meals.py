@@ -31,7 +31,7 @@ class Meal:
     def __repr__(self):
         if self.vegetables is None:
             return f"Meal({self.name})"
-        return f"Meal({self.name}, {self.vegetables})"
+        return f"Meal({self.name}, {capitalise(self.vegetables)})"
 
     def __str__(self):
         if self.vegetables is None:
