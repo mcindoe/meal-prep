@@ -170,7 +170,7 @@ def loop_recommend(
             return
 
     combined_ingredients = combine_ingredients(
-        [meal.ingredients for meal in current_rec.values()]
+        {meal: meal.ingredients for meal in current_rec.values()}
     )
     min_date_str = min(current_rec.keys()).strftime("%Y%m%d")
     max_date_str = max(current_rec.keys()).strftime("%Y%m%d")

@@ -2,7 +2,6 @@
 Provides functionality for the creation of shopping lists
 """
 
-from collections.abc import Iterable
 from pathlib import Path
 from typing import Dict
 from typing import Union
@@ -37,34 +36,49 @@ CATEGORY_TO_HEADER_MAP["condiment"] = "Condiments"
 CATEGORY_TO_HEADER_MAP["sauce"] = "Sauces"
 
 
-def combine_ingredients(ingredients_iter: Iterable[Dict]) -> Dict:
+def combine_ingredients(meal_ingredients: Dict) -> Dict:
     """
     Groups together the ingredients required for all elements of the
     ingeredients iterable into one dictionary representing the total
     quantities required of each key.
+
+    :param ingredients_dict: dict with meals as keys, ingredients
+        for each meal as values
+    :return: dict with ingredients as keys, value is a dictionary with
+        the generating meals list, and the total quantity required
     """
     combined_ingredients = {}
-    for ingredients in ingredients_iter:
-        for name, quantity in ingredients.items():
-            if name not in combined_ingredients:
-                combined_ingredients[name] = quantity
+    for meal, ingredients in meal_ingredients.items():
+        for ingredient, quantity in ingredients.items():
+            if ingredient not in combined_ingredients:
+                combined_ingredients[ingredient] = {
+                    "required_by": [meal.name],
+                    "total": quantity,
+                }
 
             else:
-                if get_unit(name) == "bool":
-                    combined_ingredients[name] = True
-                else:
-                    combined_ingredients[name] += quantity
+                combined_ingredients[ingredient]["required_by"].append(
+                    meal.name
+                )
+                if get_unit(ingredient) != "bool":
+                    combined_ingredients[ingredient]["total"] += quantity
 
     return combined_ingredients
 
 
 def make_shopping_list(
-    required_ingredients: Dict, filename: Union[Path, str]
+    required_ingredients: Dict[str, Dict], filename: Union[Path, str]
 ) -> None:
     """
-    Create a shopping list from the requried ingredients are write to
+    Create a shopping list from the requried ingredients and write to
     file. Ingredients are grouped by category.
+
+    :param required_ingredients: dictionary with ingredients as keys,
+        values are dictionaries containing the total quantity required,
+        and the meals which require the ingredient. As returned by
+        combine_ingredients
     """
+
     full_ingredients = load_ingredients()
     required_categories = list(
         set([get_category(el) for el in required_ingredients.keys()])
@@ -72,8 +86,8 @@ def make_shopping_list(
 
     categorised_list = {
         category: {
-            name: quantity
-            for name, quantity in required_ingredients.items()
+            name: info
+            for name, info in required_ingredients.items()
             if full_ingredients[name]["category"] == category
         }
         for category in required_categories
@@ -94,14 +108,24 @@ def make_shopping_list(
             sorted_category_names = sorted(list(category_entries.keys()))
 
             for name in sorted_category_names:
-                quantity = category_entries[name]
+                required_by = category_entries[name]["required_by"]
+                required_by_str = ", ".join(required_by)
+                total = category_entries[name]["total"]
                 unit = get_unit(name)
                 if unit == "bool":
-                    fp.write(f"{capitalise(name)}\n")
+                    fp.write(f"{capitalise(name)}\n\t- {required_by_str}\n")
                 elif unit == "units":
-                    fp.write(f"{capitalise(name)}: {quantity}\n")
+                    fp.write(
+                        f"{capitalise(name)}: {total}\n\t- {required_by_str}\n"
+                    )
                 elif unit == "ml":
-                    fp.write(f"{capitalise(name)}: {quantity} ml\n")
+                    fp.write(
+                        f"{capitalise(name)}: {total} ml"
+                        f"\n\t- {required_by_str}\n"
+                    )
                 else:
                     unit_str = unit.capitalize()
-                    fp.write(f"{capitalise(name)}: {quantity} {unit_str}\n")
+                    fp.write(
+                        f"{capitalise(name)}: {total} {unit_str} "
+                        f"\n\t- {required_by_str}\n"
+                    )
