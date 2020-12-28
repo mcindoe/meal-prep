@@ -18,7 +18,7 @@ def make_date_string(date: dt.date) -> str:
     day_str = calendar.day_name[date.weekday()][:3]
     month_str = calendar.month_name[date.month][:3]
 
-    if 4 < date.day <= 20 or 24 <= date.day <= 30:
+    if 4 <= date.day <= 20 or 24 <= date.day <= 30:
         day_suffix = "th"
     else:
         day_suffix = ["st", "nd", "rd"][date.day % 10 - 1]

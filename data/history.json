@@ -154,5 +154,35 @@
     "2020/12/20": {
         "name": "Roast Lamb",
         "vegetables": null
+    },
+    "2020/12/30": {
+        "name": "Quiche Lorraine",
+        "vegetables": null
+    },
+    "2020/12/31": {
+        "name": "Fish Pie",
+        "vegetables": null
+    },
+    "2021/01/02": {
+        "name": "Indian Lamb with Spiced Lentils",
+        "vegetables": null
+    },
+    "2021/01/03": {
+        "name": "Roast Pork",
+        "vegetables": null
+    },
+    "2021/01/04": {
+        "name": "Shephards Pie",
+        "vegetables": null
+    },
+    "2021/01/05": {
+        "name": "Pasta with Chicken and Sundried Tomatoes",
+        "vegetables": null
+    },
+    "2021/01/06": {
+        "name": "Sticky Chinese Pork Belly",
+        "vegetables": [
+            "green beans"
+        ]
     }
 }
