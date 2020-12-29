@@ -10,3 +10,9 @@
     - Wondering why some are measured in one and some in the other ...
     - Could use this ingredients measuredin to check meals.json is compliant
 * Try changing meals, didn't work just now - seems to be too restrictive atm
+
+* utils/display I think - there was a bug when running on Louisa's machine.
+    - I imported Iterable from collections.abc, which was not subscriptable
+    - Tried to use it as Iterable[float] e.g. in one of these scripts but supposedly that's not valid
+
+* Add install instructions to repo README 
