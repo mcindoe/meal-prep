@@ -1,0 +1,60 @@
+-- Vegetables --
+Brocolli
+Carrot: 10 Bool
+Celery: 2 Units
+Cooking Apple
+Ginger
+Green Beans: 402 Grams
+Onion: 4 Units
+Plum Tomatoes: 500 Grams
+Potato: 1900 Grams
+Red Chilli: 2 Units
+Red Onion: 2 Units
+Red Pepper
+Roast Potatoes: 10 Bool
+Yellow Pepper
+
+-- Carbohydrates --
+Rice: 500 Grams
+Tortilla Wrap: 8 Bool
+
+-- Meat --
+Beef Mince: 500 Grams
+Chicken Breast: 400 Grams
+Lamb Mince: 500 Grams
+Pork Belly Slices: 1000 Grams
+Roast Pork
+Stewing Beef: 750 Grams
+
+-- Tins --
+Chopped Tomatoes
+
+-- Herbs --
+Bay Leaves: 3 Units
+Coriander
+Garlic: 3 Bool
+Thyme
+
+-- Spices --
+Paprika
+
+-- Condiments --
+Olive Oil
+
+-- Sauces --
+Beef Stock
+Chicken Stock: 1000 Bool
+Dark Soy Sauce
+Lemongrass Paste
+Rice Wine
+Worcestershire Sauce
+
+-- Other --
+Brown Sugar
+Butter
+Caster Sugar
+Flour
+Guinness: 500 ml
+Honey
+Red Wine: 200 ml
+Vegetable Oil

@@ -1,0 +1,103 @@
+-- Vegetables --
+Aubergine: 4
+	- Moussaka
+Brocolli
+	- Roast Chicken, Roast Lamb
+Carrot
+	- Roast Chicken, Beef and Ale Stew, Roast Lamb
+Celery: 2
+	- Beef and Ale Stew
+Ginger
+	- Kedgeree
+Green Beans: 3 Packs 
+	- Roast Chicken, Beef and Ale Stew, Roast Lamb
+Lettuce
+	- Burgers
+Onion: 7
+	- Kedgeree, Burgers, Roast Chicken, Moussaka, Beef and Ale Stew
+Potato: 900 Grams 
+	- Beef and Ale Stew
+Roast Potatoes
+	- Roast Chicken, Roast Lamb
+Tomato
+	- Burgers
+
+-- Dairy --
+Cheddar Cheese
+	- Burgers
+Milk
+	- Kedgeree, Roast Chicken, Moussaka
+Parmezan
+	- Moussaka
+
+-- Carbohydrates --
+Burger Buns
+	- Burgers
+Long-grain Rice
+	- Kedgeree
+
+-- Meat --
+Bacon
+	- Burgers
+Beef Chuck Steak: 450 Grams 
+	- Burgers
+Lamb Mince: 1000 Grams 
+	- Moussaka
+Roast Chicken: True
+	- Roast Chicken
+Roast Lamb: True
+	- Roast Lamb
+Stewing Beef: 750 Grams 
+	- Beef and Ale Stew
+
+-- Fish --
+Smoked Haddock Fillet: 400 Grams 
+	- Kedgeree
+
+-- Tins --
+Chopped Tomatoes: 1 Tins 
+	- Beef and Ale Stew
+
+-- Herbs --
+Bay Leaves: True
+	- Beef and Ale Stew
+Coriander
+	- Kedgeree
+Garlic
+	- Kedgeree, Moussaka
+Parsley
+	- Kedgeree, Moussaka
+
+-- Spices --
+Cinammon
+	- Moussaka
+Medium Curry Powder
+	- Kedgeree
+Nutmeg
+	- Moussaka
+Turmeric
+	- Kedgeree
+
+-- Condiments --
+Dried Mustard
+	- Burgers
+Tomato Puree
+	- Moussaka
+
+-- Sauces --
+Mayonnaise
+	- Burgers
+Vegetable Stock
+	- Kedgeree
+
+-- Other --
+Butter
+	- Roast Chicken, Moussaka
+Eggs
+	- Kedgeree, Burgers, Moussaka
+Flour
+	- Roast Chicken, Moussaka, Beef and Ale Stew, Roast Lamb
+Guinness: 500 ml
+	- Beef and Ale Stew
+Red Wine: True ml
+	- Moussaka

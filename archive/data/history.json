@@ -1,0 +1,210 @@
+{
+    "2020/11/05": {
+        "name": "Shephards Pie",
+        "vegetables": null
+    },
+    "2020/11/07": {
+        "name": "Pasta with Chicken and Sundried Tomatoes",
+        "vegetables": null
+    },
+    "2020/11/08": {
+        "name": "Roast Pork",
+        "vegetables": null
+    },
+    "2020/11/09": {
+        "name": "Chilli con Carne",
+        "vegetables": null
+    },
+    "2020/11/10": {
+        "name": "Burgers",
+        "vegetables": null
+    },
+    "2020/11/11": {
+        "name": "Chicken and Green Bean Vermicelli Noodles",
+        "vegetables": null
+    },
+    "2020/11/12": {
+        "name": "Beef and Ale Stew",
+        "vegetables": null
+    },
+    "2020/11/14": {
+        "name": "Lasagne",
+        "vegetables": null
+    },
+    "2020/11/15": {
+        "name": "Roast Chicken",
+        "vegetables": null
+    },
+    "2020/11/16": {
+        "name": "Moussaka",
+        "vegetables": null
+    },
+    "2020/11/17": {
+        "name": "Chicken Taleggio",
+        "vegetables": null
+    },
+    "2020/11/18": {
+        "name": "Kedgeree",
+        "vegetables": null
+    },
+    "2020/11/19": {
+        "name": "Pasta with Chicken and Sundried Tomatoes",
+        "vegetables": null
+    },
+    "2020/11/21": {
+        "name": "Chilli con Carne",
+        "vegetables": null
+    },
+    "2020/11/22": {
+        "name": "Roast Lamb",
+        "vegetables": null
+    },
+    "2020/11/23": {
+        "name": "Honey-Garlic Salmon",
+        "vegetables": null
+    },
+    "2020/11/24": {
+        "name": "Quiche Lorraine",
+        "vegetables": null
+    },
+    "2020/11/25": {
+        "name": "Chilli Chicken Thighs with Cherry Tomatoes",
+        "vegetables": null
+    },
+    "2020/11/26": {
+        "name": "Burgers",
+        "vegetables": null
+    },
+    "2020/11/28": {
+        "name": "Chicken Fajitas",
+        "vegetables": null
+    },
+    "2020/11/29": {
+        "name": "Roast Pork",
+        "vegetables": null
+    },
+    "2020/11/30": {
+        "name": "Shephards Pie",
+        "vegetables": null
+    },
+    "2020/12/01": {
+        "name": "Beef and Ale Stew",
+        "vegetables": [
+            "green beans"
+        ]
+    },
+    "2020/12/02": {
+        "name": "Sticky Chinese Pork Belly",
+        "vegetables": [
+            "green beans"
+        ]
+    },
+    "2020/12/03": {
+        "name": "Pasta with Chicken and Sundried Tomatoes",
+        "vegetables": null
+    },
+    "2020/12/05": {
+        "name": "Moussaka",
+        "vegetables": null
+    },
+    "2020/12/06": {
+        "name": "Roast Chicken",
+        "vegetables": null
+    },
+    "2020/12/07": {
+        "name": "Burgers",
+        "vegetables": null
+    },
+    "2020/12/08": {
+        "name": "Indian Lamb with Spiced Lentils",
+        "vegetables": null
+    },
+    "2020/12/09": {
+        "name": "Chilli con Carne",
+        "vegetables": null
+    },
+    "2020/12/10": {
+        "name": "Chilli Chicken Thighs with Cherry Tomatoes",
+        "vegetables": null
+    },
+    "2020/12/12": {
+        "name": "Chicken and Green Bean Vermicelli Noodles",
+        "vegetables": null
+    },
+    "2020/12/13": {
+        "name": "Roast Beef",
+        "vegetables": null
+    },
+    "2020/12/14": {
+        "name": "Quiche Lorraine",
+        "vegetables": null
+    },
+    "2020/12/16": {
+        "name": "Honey-Garlic Salmon",
+        "vegetables": null
+    },
+    "2020/12/17": {
+        "name": "Pasta with Chicken and Sundried Tomatoes",
+        "vegetables": null
+    },
+    "2020/12/19": {
+        "name": "Chilli con Carne",
+        "vegetables": null
+    },
+    "2020/12/20": {
+        "name": "Kedgeree",
+        "vegetables": null
+    },
+    "2020/12/21": {
+        "name": "Burgers",
+        "vegetables": null
+    },
+    "2020/12/22": {
+        "name": "Roast Chicken",
+        "vegetables": null
+    },
+    "2020/12/23": {
+        "name": "Moussaka",
+        "vegetables": null
+    },
+    "2020/12/24": {
+        "name": "Beef and Ale Stew",
+        "vegetables": [
+            "green beans"
+        ]
+    },
+    "2020/12/25": {
+        "name": "Roast Lamb",
+        "vegetables": null
+    },
+    "2020/12/30": {
+        "name": "Quiche Lorraine",
+        "vegetables": null
+    },
+    "2020/12/31": {
+        "name": "Fish Pie",
+        "vegetables": null
+    },
+    "2021/01/02": {
+        "name": "Indian Lamb with Spiced Lentils",
+        "vegetables": null
+    },
+    "2021/01/03": {
+        "name": "Roast Pork",
+        "vegetables": null
+    },
+    "2021/01/04": {
+        "name": "Shephards Pie",
+        "vegetables": null
+    },
+    "2021/01/05": {
+        "name": "Pasta with Chicken and Sundried Tomatoes",
+        "vegetables": null
+    },
+    "2021/01/06": {
+        "name": "Sticky Chinese Pork Belly",
+        "vegetables": [
+            "green beans"
+        ]
+    }
+}
