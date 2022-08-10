@@ -33,9 +33,18 @@ class Meal:
 
 class MealCollection:
     def __init__(self, meals: Iterable[Meal]):
-        assert all(isinstance(x, Meal) for x in meals)
-
         self.meals = tuple(x for x in meals)
+
+        # TODO: Note that these asserts need to be after the object is constructed,
+        # since otherwise generator expressions are exhausted by the time it comes to initialise
+        assert all(isinstance(x, Meal) for x in self.meals)
+
+    @staticmethod
+    def from_supported_meals() -> "MealCollection":
+        return MealCollection(x for x in Meals.values())
+
+    def __repr__(self) -> str:
+        return str(self.meals)
 
 
 class MealDiary:
@@ -78,7 +87,7 @@ class MealDiary:
             json.dump(self.get_representation(), fp, indent=2)
 
     @staticmethod
-    def from_file(file_path: Path) -> MealDiary:
+    def from_file(file_path: Path) -> "MealDiary":
         try:
             with open(file_path, "r") as fp:
                 dict_representation = json.load(fp)
@@ -99,7 +108,7 @@ class MealDiary:
     def from_history_file() -> None:
         return MealDiary.from_file(MEAL_HISTORY_FILEPATH)
 
-    def upsert(self, other: MealDiary) -> MealDiary:
+    def upsert(self, other: "MealDiary") -> "MealDiary":
         return MealDiary(self.meal_diary | other.meal_diary)
 
 
