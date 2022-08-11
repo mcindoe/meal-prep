@@ -51,12 +51,12 @@ class UserInputGetter(ABC):
     def get_input(self) -> Any:
         """
         Keep attempting to retrieve a user input, parseable and in the
-        set of supported results, until successful. Exit if an EXIT_SIGNAL
-        is passed. Return None if unsuccessful
+        set of supported results (if specified), until successful. Exit
+        if an EXIT_SIGNAL is passed. Return None if unsuccessful
         """
 
         while True:
-            # Get a valid value. Exit on EXIT_SIGNAL
+            # Keep requesting input until a parsable value or EXIT_SIGNAL is passed
             while True:
                 inp = input(self.request_value_message)
                 inp = inp.strip()
