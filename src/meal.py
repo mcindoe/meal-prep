@@ -46,16 +46,20 @@ class MealCollection:
     def __repr__(self) -> str:
         return str(self.meals)
 
+    def __bool__(self) -> bool:
+        return len(self.meals) > 0
+
 
 class MealDiary:
     DATE_FORMAT = "%Y-%m-%d"
 
     def __init__(self, meal_diary: Dict[dt.date, Meal]):
         assert isinstance(meal_diary, dict)
-        assert all(isinstance(x, dt.date) for x in meal_diary.keys())
-        assert all(isinstance(x, Meal) for x in meal_diary.values())
 
         self.meal_diary = copy(meal_diary)
+
+        assert all(isinstance(x, dt.date) for x in self.meal_diary.keys())
+        assert all(isinstance(x, Meal) for x in self.meal_diary.values())
 
     @property
     def dates(self):
@@ -110,6 +114,13 @@ class MealDiary:
 
     def upsert(self, other: "MealDiary") -> "MealDiary":
         return MealDiary(self.meal_diary | other.meal_diary)
+
+    def filter_by_time_delta(self, date: dt.date, time_delta: dt.timedelta):
+        return MealDiary({
+            meal_date: meal
+            for meal_date, meal in self.items()
+            if abs(meal_date - date) <= time_delta
+        })
 
 
 class Meals(BaseEnum):
