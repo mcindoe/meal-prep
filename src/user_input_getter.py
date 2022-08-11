@@ -36,7 +36,7 @@ class UserInputGetter(ABC):
         return value in self.supported_options
 
     def is_exit_signal(self, value: str) -> bool:
-        return value.lower().strip() == UserInputGetter.EXIT_SIGNAL.lower()
+        return value.lower() == UserInputGetter.EXIT_SIGNAL.lower()
 
     @staticmethod
     @abstractmethod
