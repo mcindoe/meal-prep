@@ -3,6 +3,7 @@ from abc import abstractmethod
 import re
 from typing import Any
 from typing import Iterable
+from typing import Union
 
 
 class UserInputGetter(ABC):
@@ -10,17 +11,28 @@ class UserInputGetter(ABC):
 
     def __init__(
         self,
-        supported_options: Iterable[Any],
+        supported_options: Union[None, Iterable[Any]] = None,
         request_value_message="Enter value",
         could_not_parse_message="Could not parse input",
         not_supported_message="Unsupported option passed"
     ):
-        self.supported_options = {x for x in supported_options}
+        if supported_options is None:
+            self.supported_options = None
+        else:
+            self.supported_options = {x for x in supported_options}
+
         self.request_value_message = f"{request_value_message} ({UserInputGetter.EXIT_SIGNAL} to quit): "
         self.could_not_parse_message = could_not_parse_message
-        self.not_supported_message = f"{not_supported_message}. Supported: {list(self.supported_options)}"
+
+        if self.supported_options is None:
+            self.not_supported_message = None
+        else:
+            self.not_supported_message = f"{not_supported_message}. Supported: {list(self.supported_options)}"
 
     def is_supported(self, value: Any) -> bool:
+        if self.supported_options is None:
+            return True
+
         return value in self.supported_options
 
     def is_exit_signal(self, value: str) -> bool:
@@ -47,6 +59,7 @@ class UserInputGetter(ABC):
             # Get a valid value. Exit on EXIT_SIGNAL
             while True:
                 inp = input(self.request_value_message)
+                inp = inp.strip()
 
                 if self.is_exit_signal(inp):
                     return
@@ -66,7 +79,7 @@ class UserInputGetter(ABC):
 class IntegerInputGetter(UserInputGetter):
     regex = re.compile("^[-+]?[0-9]+$")
 
-    def __init__(self, supported_options: Iterable[int]):
+    def __init__(self, supported_options: Union[None, Iterable[int]] = None):
         super().__init__(supported_options)
 
     @staticmethod
