@@ -3,31 +3,26 @@ from abc import abstractmethod
 import re
 from typing import Any
 from typing import Iterable
+from typing import Tuple
 from typing import Union
 
 
 class UserInputGetter(ABC):
     EXIT_SIGNAL = "Q"
 
-    def __init__(
-        self,
-        supported_options: Union[None, Iterable[Any]] = None,
-        request_value_message="Enter value",
-        could_not_parse_message="Could not parse input",
-        not_supported_message="Unsupported option passed"
-    ):
+    REQUEST_VALUE_MESSAGE = "Enter value"
+    COULD_NOT_PARSE_MESSAGE = "Could not parse input"
+    NOT_SUPPORTED_MESSAGE = "Unsupported option passed"
+
+    MULTIPLE_REQUEST_VALUE_MESSAGE = "Enter values, separated by a comma"
+    MULTIPLE_COULD_NOT_PARSE_MESSAGE = "Could not parse inputs"
+    MULTIPLE_NOT_SUPPORTED_MESSAGE = "Unsupported options passed"
+
+    def __init__(self, supported_options: Union[None, Iterable[Any]] = None):
         if supported_options is None:
             self.supported_options = None
         else:
             self.supported_options = {x for x in supported_options}
-
-        self.request_value_message = f"{request_value_message} ({UserInputGetter.EXIT_SIGNAL} to quit): "
-        self.could_not_parse_message = could_not_parse_message
-
-        if self.supported_options is None:
-            self.not_supported_message = None
-        else:
-            self.not_supported_message = f"{not_supported_message}. Supported: {list(self.supported_options)}"
 
     def is_supported(self, value: Any) -> bool:
         if self.supported_options is None:
@@ -55,10 +50,12 @@ class UserInputGetter(ABC):
         if an EXIT_SIGNAL is passed. Return None if unsuccessful
         """
 
+        request_value_message = f"{self.REQUEST_VALUE_MESSAGE} ({UserInputGetter.EXIT_SIGNAL} to quit): "
+
         while True:
             # Keep requesting input until a parsable value or EXIT_SIGNAL is passed
             while True:
-                inp = input(self.request_value_message)
+                inp = input(request_value_message)
                 inp = inp.strip()
 
                 if self.is_exit_signal(inp):
@@ -68,12 +65,49 @@ class UserInputGetter(ABC):
                     inp = self.parse(inp)
                     break
 
-                print(self.could_not_parse_message)
+                print(self.COULD_NOT_PARSE_MESSAGE)
 
             if self.is_supported(inp):
                 return inp
 
-            print(self.not_supported_message)
+            print(self.NOT_SUPPORTED_MESSAGE)
+
+    def get_multiple_inputs(self) -> Tuple[Any]:
+
+        request_value_message = (
+            f"{self.MULTIPLE_REQUEST_VALUE_MESSAGE} ({UserInputGetter.EXIT_SIGNAL} to quit): "
+        )
+
+        while True:
+            # Keep requesting input until a parsable value or EXIT_SIGNAL is passed
+            while True:
+                inp = input(request_value_message)
+                inp = inp.strip()
+
+                if self.is_exit_signal(inp):
+                    return
+
+                inp = tuple(x.strip() for x in inp.split(","))
+
+                if all(self.is_valid(x) for x in inp):
+                    inp = tuple(self.parse(x) for x in inp)
+                    break
+
+                bad_input_values = tuple(x for x in inp if not self.is_valid(x))
+                could_not_parse_message = (
+                    f"{self.MULTIPLE_COULD_NOT_PARSE_MESSAGE}. Bad values: {bad_input_values}"
+                )
+                print(could_not_parse_message)
+
+            if all(self.is_supported(x) for x in inp):
+                return inp
+
+            unsupported_values = tuple(x for x in inp if not self.is_supported(x))
+            not_supported_message = (
+                f"{self.MULTIPLE_NOT_SUPPORTED_MESSAGE}. Unsupported values: {unsupported_values}\n"
+                f"Supported options: {tuple(self.supported_options)}"
+            )
+            print(not_supported_message)
 
 
 class IntegerInputGetter(UserInputGetter):
