@@ -8,7 +8,8 @@ from typing import Iterable
 from mealprep.src.constants import BaseEnum
 from mealprep.src.constants import Unit
 from mealprep.src.ingredient import Ingredients
-from mealprep.src.ingredient_quantity import IngredientQuantity, IngredientQuantityCollection
+from mealprep.src.ingredient import IngredientQuantity
+from mealprep.src.ingredient import IngredientQuantityCollection
 from mealprep.src.loc import DATA_DIR
 
 MEAL_DIARY_FILEPATH = DATA_DIR / "meal_diary.json"
@@ -156,7 +157,80 @@ class MealDiary:
 
 
 class Meals(BaseEnum):
-    EXAMPLE = Meal(
-        "Example",
-        (IngredientQuantity(Ingredients.CARROT.value, Unit.GRAM, 100),)
+    CHILLI_CHICKEN_THIGS_WITH_CHERRY_TOMATOES = Meal(
+        name="Chilli Chicken Thigs with Cherry Tomatoes",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.CHERRY_TOMATO, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.CHICKEN_THIGH, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.OLIVE_OIL, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.RED_CHILLI, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.RICE, Unit.GRAM, 200),
+        )
+    )
+    CHILLI_CON_CARNE = Meal(
+        name="Chilli con Carne",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BEEF_MINCE, Unit.GRAM, 900),
+            IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.CHOPPED_TOMATO, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.FRESH_CHILLI, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.KIDNEY_BEAN, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.RICE, Unit.GRAM, 250),
+            IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.BOOL, True),
+        )
+    )
+    PASTA_WITH_CHICKEN_AND_SUNDRIED_TOMATOES = Meal(
+        name="Pasta with Chicken and Sundried Tomatoes",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BABY_SPINACH, Unit.GRAM, 200),
+            IngredientQuantity(Ingredients.CAYENNE_PEPPER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.CHICKEN_BREAST, Unit.GRAM, 700),
+            IngredientQuantity(Ingredients.CHICKEN_STOCK, Unit.GRAM, 250),
+            IngredientQuantity(Ingredients.CREAM, Unit.GRAM, 250),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 3),
+            IngredientQuantity(Ingredients.MOZARELLA_CHEESE, Unit.GRAM, 100),
+            IngredientQuantity(Ingredients.PARMEZAN_CHEESE, Unit.GRAM, 100),
+            IngredientQuantity(Ingredients.PENNE_PASTA, Unit.GRAM, 300),
+            IngredientQuantity(Ingredients.SUNDRIED_TOMATOES, Unit.GRAM, 750),
+        )
+    )
+    SPAGHETTI_BOLOGNAISE = Meal(
+        name="Spaghetti Bolognaise",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.BAY_LEAVES, Unit.GRAM, 500),
+            IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.CHOPPED_TOMATO, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 3),
+            IngredientQuantity(Ingredients.MIXED_HERBS, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.OREGANO, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.PARMEZAN_CHEESE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.PORK_MINCE, Unit.GRAM, 500),
+            IngredientQuantity(Ingredients.SPAGHETTI, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.BOOL, True),
+        )
+    )
+    STICKY_CHINESE_PORK_BELLY = Meal(
+        name="Sticky Chinese Pork Belly",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BROWN_SUGAR, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.CASTER_SUGAR, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.CHICKEN_STOCK, Unit.GRAM, 1000),
+            IngredientQuantity(Ingredients.DARK_SOY_SAUCE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 3),
+            IngredientQuantity(Ingredients.GINGER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.HONEY, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.LEMONGRASS_PASTE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.PORK_BELLY_SLICE, Unit.GRAM, 1000),
+            IngredientQuantity(Ingredients.RED_CHILLI, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.RICE_WINE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.RICE, Unit.GRAM, 500),
+            IngredientQuantity(Ingredients.VEGETABLE_OIL, Unit.BOOL, True),
+        )
     )

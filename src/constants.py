@@ -21,10 +21,17 @@ class Unit(BaseEnum):
     BOOL = auto()
     GRAM = auto()
     MILLILITRES = auto()
+    NUMBER = auto()
 
 
 class Category(BaseEnum):
+    CAN = auto()
+    CARBOHYDRATE = auto()
+    CONDIMENT = auto()
+    DAIRY = auto()
     FRUIT = auto()
     HERB = auto()
     MEAT = auto()
+    SAUCE = auto()
+    SPICE = auto()
     VEGETABLE = auto()
