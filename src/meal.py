@@ -22,10 +22,10 @@ class Meal:
 
     @staticmethod
     def from_name(meal_name: str):
-        for meal in Meals.values():
-            if meal.name.lower() == meal_name.lower():
-                return meal
-        raise ValueError(f'Could not find the meal "{meal_name}"')
+        try:
+            return meal_names_to_meal_map[meal_name.upper()]
+        except KeyError:
+            raise ValueError(f'Could not find the meal "{meal_name}"')
 
     def __repr__(self) -> str:
         return f'Meal(name="{self.name}")'
@@ -234,3 +234,6 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.VEGETABLE_OIL, Unit.BOOL, True),
         )
     )
+
+
+meal_names_to_meal_map = {x.value.name.upper(): x.value for x in Meals}
