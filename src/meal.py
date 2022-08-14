@@ -38,8 +38,6 @@ class MealCollection:
         else:
             self.meals = tuple(x for x in meals)
 
-        # TODO: Note that these asserts need to be after the object is constructed,
-        # since otherwise generator expressions are exhausted by the time it comes to initialise
         assert all(isinstance(x, Meal) for x in self.meals)
 
     def copy(self) -> "MealCollection":
