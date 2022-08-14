@@ -1,45 +1,39 @@
 import datetime as dt
-from pathlib import Path
 from typing import Any, Dict, Tuple
 import yaml
 
 from mealprep.src.constants import ConfigEntries
+from mealprep.src.loc import ROOT_DIR
+from mealprep.src.rule import Rule
+from mealprep.src.rule import RuleCollection
 
-
-def parse_date_from_string(date_str: str) -> dt.date:
-    separators = ("-", "/", " ")
-
-    date_str = date_str.strip()
-    for s in separators:
-        date_str = date_str.replace(s, "")
-
-    try:
-        year = int(date_str[:4])
-        month = int(date_str[4:6])
-        day = int(date_str[6:])
-
-        return dt.date(year, month, day)
-
-    except Exception as e:
-        raise ValueError(f"Unable to parse {date_str} as a date")
+config_filepath = ROOT_DIR / "config.yaml"
 
 
 class Config:
     def __init__(self) -> None:
-        with open("/home/conor/Programming/mealprep/config.yaml", "r") as fp:
+        with open(config_filepath, "r") as fp:
             self.config: Dict[Any, Any] = yaml.load(fp, yaml.SafeLoader)
 
     @property
     def email_addresses(self) -> Tuple[str]:
-        return self.config[ConfigEntries.EMAIL_ADDRESSES.value]
+        return tuple(self.config[ConfigEntries.EMAIL_ADDRESSES.value])
 
     @property
     def dates(self) -> Tuple[dt.date]:
-        date_strings = self.config[ConfigEntries.DATES.value]
-        return tuple(parse_date_from_string(x) for x in date_strings)
+        ret = tuple(self.config[ConfigEntries.DATES.value])
+        if not all(isinstance(x, dt.date) for x in ret):
+            raise ValueError("Not all config date entries are in the correct format")
+        return ret
+
+    @property
+    def rules(self) -> Tuple[Rule]:
+        rule_names = tuple(self.config[ConfigEntries.RULES.value])
+        return tuple(Rule.from_name(x) for x in rule_names)
+
+    @property
+    def rule_collection(self) -> RuleCollection:
+        return RuleCollection(self.rules)
 
 
 config = Config()
-
-MEALPREP_ROOT_DIR = Path("/home/conor/Programming/mealprep")
-MEALPREP_DATA_DIR = MEALPREP_ROOT_DIR / "data"
