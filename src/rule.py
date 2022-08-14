@@ -39,6 +39,13 @@ class Rule(ABC):
     def filter(meal_collection: MealCollection, date: dt.date, meal_diary: MealDiary) -> MealCollection:
         raise NotImplementedError("A Rule's filter method must be implemented")
 
+    @staticmethod
+    def from_name(rule_name: str):
+        for rule in Rules:
+            if rule.name.lower() == rule_name.lower():
+                return rule.value
+        raise ValueError(f'Could not find the rule "{rule_name}"')
+
 
 class RuleCollection:
     def __init__(self, rules: Iterable[Rule]):
