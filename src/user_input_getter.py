@@ -34,9 +34,9 @@ class UserInputGetter(ABC):
         return value.lower() == UserInputGetter.EXIT_SIGNAL.lower()
 
     @staticmethod
-    @abstractmethod
     def is_valid(value: str) -> bool:
-        raise NotImplementedError("is_valid must be implemented in subclasses of UserInputGetter")
+        """Check that conversion to the required type makes sense"""
+        return True
 
     @staticmethod
     def parse(value: str) -> str:
@@ -123,3 +123,6 @@ class IntegerInputGetter(UserInputGetter):
     @staticmethod
     def parse(value: str) -> int:
         return int(value)
+
+
+StringInputGetter = UserInputGetter
