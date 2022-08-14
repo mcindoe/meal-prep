@@ -9,10 +9,9 @@ from mealprep.src.constants import BaseEnum
 from mealprep.src.constants import Unit
 from mealprep.src.ingredient import Ingredients
 from mealprep.src.ingredient_quantity import IngredientQuantity, IngredientQuantityCollection
+from mealprep.src.loc import DATA_DIR
 
-MEALPREP_TOPDIR = Path("/home/conor/Programming/mealprep")
-DATA_DIR = MEALPREP_TOPDIR / "data"
-MEAL_HISTORY_FILEPATH = DATA_DIR / "meal_history.json"
+MEAL_DIARY_FILEPATH = DATA_DIR / "meal_diary.json"
 
 
 class Meal:
@@ -131,12 +130,12 @@ class MealDiary:
             for date_string, meal_name in dict_representation.items()
         })
 
-    def to_history_file(self) -> None:
-        self.to_file(MEAL_HISTORY_FILEPATH)
+    def to_project_diary(self) -> None:
+        self.to_file(MEAL_DIARY_FILEPATH)
 
     @staticmethod
-    def from_history_file() -> None:
-        return MealDiary.from_file(MEAL_HISTORY_FILEPATH)
+    def from_project_diary() -> None:
+        return MealDiary.from_file(MEAL_DIARY_FILEPATH)
 
     def upsert(self, other: "MealDiary") -> "MealDiary":
         return MealDiary(self.meal_diary | other.meal_diary)
