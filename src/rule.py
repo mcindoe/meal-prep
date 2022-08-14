@@ -1,6 +1,6 @@
 from abc import ABC
 from abc import abstractmethod
-from copy import copy
+import copy
 import datetime as dt
 from typing import Iterable
 
@@ -28,7 +28,7 @@ class Rule(ABC):
         assert isinstance(meal_collection, MealCollection)
         assert isinstance(meal_diary, MealDiary), f"Rule was pased a {type(meal_diary)}"
 
-        meal_collection = copy(meal_collection)
+        meal_collection = meal_collection.copy()
         ret = self.filter(meal_collection, date, meal_diary)
         assert isinstance(ret, MealCollection), f"Rule returned a {type(ret)}"
 
@@ -44,6 +44,9 @@ class RuleCollection:
     def __init__(self, rules: Iterable[Rule]):
         self.rules = tuple(x for x in rules)
         assert all(issubclass(x, Rule) for x in self.rules)
+
+    def copy(self) -> "RuleCollection":
+        return RuleCollection(copy.deepcopy(self.rules))
 
     def __call__(
         self,
