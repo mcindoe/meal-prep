@@ -1,4 +1,4 @@
-from copy import copy
+import copy
 import datetime as dt
 import json
 from pathlib import Path
@@ -32,12 +32,18 @@ class Meal:
 
 
 class MealCollection:
-    def __init__(self, meals: Iterable[Meal]):
-        self.meals = tuple(x for x in meals)
+    def __init__(self, meals: Iterable[Meal] = None):
+        if meals is None:
+            self.meals = tuple()
+        else:
+            self.meals = tuple(x for x in meals)
 
         # TODO: Note that these asserts need to be after the object is constructed,
         # since otherwise generator expressions are exhausted by the time it comes to initialise
         assert all(isinstance(x, Meal) for x in self.meals)
+
+    def copy(self) -> "MealCollection":
+        return MealCollection(copy.deepcopy(self.meals))
 
     @staticmethod
     def from_supported_meals() -> "MealCollection":
@@ -53,13 +59,33 @@ class MealCollection:
 class MealDiary:
     DATE_FORMAT = "%Y-%m-%d"
 
-    def __init__(self, meal_diary: Dict[dt.date, Meal]):
-        assert isinstance(meal_diary, dict)
+    def __init__(self, meal_diary: Dict[dt.date, Meal] = None):
+        assert isinstance(meal_diary, (None, dict))
 
-        self.meal_diary = copy(meal_diary)
+        if meal_diary is None:
+            self.meal_diary = dict()
+        else:
+            self.meal_diary = meal_diary.copy()
 
         assert all(isinstance(x, dt.date) for x in self.meal_diary.keys())
         assert all(isinstance(x, Meal) for x in self.meal_diary.values())
+
+    def copy(self):
+        return MealDiary(copy.deepcopy(self.meal_diary))
+
+    def __getitem__(self, date: dt.date) -> Meal:
+        if not isinstance(date, dt.date):
+            raise ValueError("Key must be date in MealDiary.__getitem__")
+
+        return self.meal_diary[date]
+
+    def __setitem__(self, date: dt.date, meal: Meal) -> None:
+        if not isinstance(date, dt.date):
+            raise ValueError("Key must be date in MealDiary.__getitem__")
+        if not isinstance(meal, Meal):
+            raise ValueError("value must be a Meal in MealDiary.__getitem__")
+
+        self.meal_diary[date] = meal
 
     @property
     def dates(self):
@@ -114,6 +140,13 @@ class MealDiary:
 
     def upsert(self, other: "MealDiary") -> "MealDiary":
         return MealDiary(self.meal_diary | other.meal_diary)
+
+    def difference(self, other: "MealDiary") -> "MealDiary":
+        return MealDiary({
+            date: meal
+            for date, meal in self.meal_diary.copy()
+            if date not in other.meal_diary.keys()
+        })
 
     def filter_by_time_delta(self, date: dt.date, time_delta: dt.timedelta):
         return MealDiary({
