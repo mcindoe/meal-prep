@@ -19,7 +19,7 @@ class IngredientCollection:
 
 class IngredientQuantity:
     def __init__(self, ingredient: Ingredient, unit: Unit, quantity: Any):
-        assert isinstance(ingredient, Ingredient)
+        assert isinstance(ingredient, Ingredients)
         assert isinstance(unit, Unit)
 
         self.ingredient = ingredient
