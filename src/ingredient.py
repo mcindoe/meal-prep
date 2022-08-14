@@ -8,6 +8,9 @@ from mealprep.src.constants import Unit
 
 class Ingredient:
     def __init__(self, name: str, category: Category):
+        assert isinstance(name, str)
+        assert isinstance(category, Category)
+
         self.name = name
         self.category = category
 
