@@ -6,7 +6,7 @@ from mealprep.src.exceptions import OutOfMealsError
 from mealprep.src.meal import MealCollection
 from mealprep.src.meal import MealDiary
 from mealprep.src.rule import RuleCollection
-from mealprep.src.user_input_getter import IntegerInputGetter
+from mealprep.src.user_input_getter import DateInputGetter
 from mealprep.src.user_input_getter import StringInputGetter
 
 
@@ -109,16 +109,10 @@ class MealSelector:
             if user_confirmed_input == "Y":
                 return recommended_diary
 
-            # TODO: Have this use e.g. "2nd, 4th" instead of indexes
-            user_changed_dates_input_getter = IntegerInputGetter(range(len(dates)))
+            user_changed_dates_input_getter = DateInputGetter(dates)
 
-            print("Date indices")
-            for idx, date in enumerate(dates):
-                print(f"{idx}\t{date.strftime(MealDiary.DATE_FORMAT)}")
-
-            print("Enter indices of dates to change")
-            changed_dates_indices = user_changed_dates_input_getter.get_multiple_inputs()
-            changed_dates = set(dates[idx] for idx in changed_dates_indices)
+            print("Enter dates to change")
+            changed_dates = set(user_changed_dates_input_getter.get_multiple_inputs())
             recommended_diary = MealDiary({
                 date: meal
                 for date, meal in recommended_diary.items()
