@@ -35,3 +35,20 @@ class Category(BaseEnum):
     SAUCE = auto()
     SPICE = auto()
     VEGETABLE = auto()
+
+
+class MealProperty(BaseEnum):
+    MEAT = auto()
+
+
+class MealTag(BaseEnum):
+    ROAST = auto()
+    VEGETARIAN = auto()
+
+
+class MealMeat(BaseEnum):
+    BEEF = auto()
+    CHICKEN = auto()
+    LAMB = auto()
+    NONE = auto()
+    PORK = auto()

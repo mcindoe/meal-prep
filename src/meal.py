@@ -2,10 +2,15 @@ import copy
 import datetime as dt
 import json
 from pathlib import Path
+from typing import Any
 from typing import Dict
 from typing import Iterable
+from typing import Optional
 
 from mealprep.src.constants import BaseEnum
+from mealprep.src.constants import MealMeat
+from mealprep.src.constants import MealProperty
+from mealprep.src.constants import MealTag
 from mealprep.src.constants import Unit
 from mealprep.src.ingredient import Ingredients
 from mealprep.src.ingredient import IngredientQuantity
@@ -16,9 +21,27 @@ MEAL_DIARY_FILEPATH = DATA_DIR / "meal_diary.json"
 
 
 class Meal:
-    def __init__(self, name: str, ingredient_quantities: IngredientQuantityCollection):
+    def __init__(
+        self,
+        name: str,
+        ingredient_quantities: IngredientQuantityCollection,
+        properties: Dict[MealProperty, Any],
+        tags: Optional[Iterable[MealTag]] = tuple()
+    ):
         self.name = name
         self.ingredient_quantities = IngredientQuantityCollection(ingredient_quantities)
+
+        assert isinstance(properties, dict)
+        assert all(isinstance(x, MealProperty) for x in properties.keys())
+
+        missing_properties = tuple(x for x in MealProperty if x not in properties.keys())
+        if missing_properties:
+            raise ValueError(f"Unspecified properties in Meal construction: {missing_properties}")
+
+        self.metadata = properties.copy()
+
+        for tag in MealTag:
+            self.metadata[tag] = tag in tags
 
     @staticmethod
     def from_name(meal_name: str):
@@ -164,7 +187,10 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.OLIVE_OIL, Unit.BOOL, True),
             IngredientQuantity(Ingredients.RED_CHILLI, Unit.NUMBER, 2),
             IngredientQuantity(Ingredients.RICE, Unit.GRAM, 200),
-        )
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.CHICKEN
+        }
     )
     CHILLI_CON_CARNE = Meal(
         name="Chilli con Carne",
@@ -179,7 +205,10 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 1),
             IngredientQuantity(Ingredients.RICE, Unit.GRAM, 250),
             IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.BOOL, True),
-        )
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.BEEF
+        }
     )
     PASTA_WITH_CHICKEN_AND_SUNDRIED_TOMATOES = Meal(
         name="Pasta with Chicken and Sundried Tomatoes",
@@ -194,7 +223,10 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.PARMEZAN_CHEESE, Unit.GRAM, 100),
             IngredientQuantity(Ingredients.PENNE_PASTA, Unit.GRAM, 300),
             IngredientQuantity(Ingredients.SUNDRIED_TOMATOES, Unit.GRAM, 750),
-        )
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.CHICKEN
+        }
     )
     SPAGHETTI_BOLOGNAISE = Meal(
         name="Spaghetti Bolognaise",
@@ -212,7 +244,10 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.PORK_MINCE, Unit.GRAM, 500),
             IngredientQuantity(Ingredients.SPAGHETTI, Unit.BOOL, True),
             IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.BOOL, True),
-        )
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.BEEF
+        }
     )
     STICKY_CHINESE_PORK_BELLY = Meal(
         name="Sticky Chinese Pork Belly",
@@ -230,7 +265,10 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.RICE_WINE, Unit.BOOL, True),
             IngredientQuantity(Ingredients.RICE, Unit.GRAM, 500),
             IngredientQuantity(Ingredients.VEGETABLE_OIL, Unit.BOOL, True),
-        )
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.PORK
+        }
     )
 
 
