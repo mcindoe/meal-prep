@@ -164,13 +164,14 @@ class DateInputGetter(UserInputGetter):
     DATE_TO_STRING_MAPS += (
         lambda date: f"{date.day}{get_day_suffix(date.day)}",
         lambda date: str(date.day),
+        lambda date: date.strftime("%A"),
+        lambda date: date.strftime("%A")[:3]
     )
 
     def __init__(self, supported_options: Iterable[dt.date]):
         super().__init__(supported_options)
 
         self.lookup_map = {}
-        # TODO: Confirm that duplicate supported_options doesn't break this. Don't think it does
         for idx, date_to_string_map in enumerate(DateInputGetter.DATE_TO_STRING_MAPS):
             string_to_date_map = {
                 date_to_string_map(date): date
