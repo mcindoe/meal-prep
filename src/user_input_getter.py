@@ -1,5 +1,8 @@
 from abc import ABC
 from abc import abstractmethod
+import datetime as dt
+import itertools
+import functools
 import re
 from typing import Any
 from typing import Iterable
@@ -25,6 +28,11 @@ class UserInputGetter(ABC):
             self.supported_options = {x for x in supported_options}
 
     def is_supported(self, value: Any) -> bool:
+        """
+        Check that the parsed input is a supported option. Typically this will
+        not need to be overloaded
+        """
+
         if self.supported_options is None:
             return True
 
@@ -111,7 +119,7 @@ class UserInputGetter(ABC):
 
 
 class IntegerInputGetter(UserInputGetter):
-    regex = re.compile("^[-+]?[0-9]+$")
+    regex = re.compile("^([-+]?[1-9][0-9]*|0)$")
 
     def __init__(self, supported_options: Union[None, Iterable[int]] = None):
         super().__init__(supported_options)
@@ -123,6 +131,67 @@ class IntegerInputGetter(UserInputGetter):
     @staticmethod
     def parse(value: str) -> int:
         return int(value)
+
+
+def get_day_suffix(day_number):
+    assert isinstance(day_number, int), "get_day_suffix must be passed an integer"
+
+    if day_number in itertools.chain(range(4, 21), range(24, 31)):
+        return "th"
+    return ("st", "nd", "rd")[day_number % 10 - 1]
+
+
+def format_date_string(date, fmt):
+    return date.strftime(fmt)
+
+
+class DateInputGetter(UserInputGetter):
+    DATE_FORMATS = (
+        "%Y-%m-%d",
+        "%Y/%m/%d",
+        "%Y%m%d",
+        "%d-%m-%Y",
+        "%d/%m/%Y",
+        "%d%m%Y",
+        "%d-%m",
+    )
+
+    DATE_TO_STRING_MAPS = tuple(
+        functools.partial(format_date_string, fmt=date_format)
+        for date_format in DATE_FORMATS
+    )
+
+    DATE_TO_STRING_MAPS += (
+        lambda date: f"{date.day}{get_day_suffix(date.day)}",
+        lambda date: str(date.day),
+    )
+
+    def __init__(self, supported_options: Iterable[dt.date]):
+        super().__init__(supported_options)
+
+        self.lookup_map = {}
+        # TODO: Confirm that duplicate supported_options doesn't break this. Don't think it does
+        for idx, date_to_string_map in enumerate(DateInputGetter.DATE_TO_STRING_MAPS):
+            string_to_date_map = {
+                date_to_string_map(date): date
+                for date in self.supported_options
+            }
+
+            # This representation of dates as strings only makes sense if it's a bijection
+            if len(string_to_date_map) == len(self.supported_options):
+                if any(k in self.lookup_map for k in string_to_date_map):
+                    raise ValueError("Found an unexpected lookup map collision")
+
+                self.lookup_map = self.lookup_map | string_to_date_map
+
+        assert len(supported_options) > 0, "DateInputGetter must be passed supported options"
+        assert all(isinstance(x, dt.date) for x in self.supported_options)
+
+    def is_valid(self, value) -> bool:
+        return value in self.lookup_map
+
+    def parse(self, value: str) -> dt.date:
+        return self.lookup_map[value]
 
 
 StringInputGetter = UserInputGetter
