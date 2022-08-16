@@ -9,6 +9,7 @@ from typing import Optional
 
 from mealprep.src.constants import BaseEnum
 from mealprep.src.constants import MealMeat
+from mealprep.src.constants import MealMetadata
 from mealprep.src.constants import MealProperty
 from mealprep.src.constants import MealTag
 from mealprep.src.constants import Unit
@@ -54,6 +55,10 @@ class Meal:
     def __repr__(self) -> str:
         return f'Meal(name="{self.name}")'
 
+    def __getitem__(self, key: MealMetadata) -> Any:
+        assert isinstance(key, MealMetadata), "Key must be a MealMetadata instance in operator[]"
+        return self.metadata[key]
+
 
 class MealCollection:
     def __init__(self, meals: Iterable[Meal] = None):
@@ -65,7 +70,7 @@ class MealCollection:
         assert all(isinstance(x, Meal) for x in self.meals)
 
     def copy(self) -> "MealCollection":
-        return MealCollection(copy.deepcopy(self.meals))
+        return MealCollection(copy.copy(self.meals))
 
     @staticmethod
     def from_supported_meals() -> "MealCollection":
