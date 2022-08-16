@@ -69,7 +69,7 @@ class UserInputGetter(ABC):
                 inp = inp.strip()
 
                 if self.is_exit_signal(inp):
-                    return
+                    exit()
 
                 if self.is_valid(inp):
                     inp = self.parse(inp)
@@ -135,6 +135,34 @@ class IntegerInputGetter(UserInputGetter):
         return int(value)
 
 
+class CaseInsensitiveStringInputGetter(UserInputGetter):
+    def __init__(self, supported_options: Union[None, Iterable[str]] = None):
+        super().__init__(supported_options)
+
+    def is_supported(self, value: Any) -> bool:
+        """
+        Check that the parsed input is a supported option. Typically this will
+        not need to be overloaded
+        """
+
+        if self.supported_options is None:
+            return True
+
+        return any(value.lower() == x.lower() for x in self.supported_options)
+
+    def parse(self, value: str) -> int:
+        if self.supported_options is None:
+            return value
+
+        # If possible, match the case of another otherwise-matching entry
+        for option in self.supported_options:
+            if option.lower() == value.lower():
+                return value
+
+        # If not possible, pass the value on unchanged to be flagged as not supported
+        return value
+
+
 def format_date_string(date, fmt):
     return date.strftime(fmt)
 
@@ -187,6 +215,3 @@ class DateInputGetter(UserInputGetter):
 
     def parse(self, value: str) -> dt.date:
         return self.lookup_map[value]
-
-
-StringInputGetter = UserInputGetter
