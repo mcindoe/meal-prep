@@ -82,6 +82,9 @@ class MealCollection:
     def __bool__(self) -> bool:
         return len(self.meals) > 0
 
+    def __len__(self) -> int:
+        return len(self.meals)
+
 
 class MealDiary:
     DATE_FORMAT = "%Y-%m-%d"
@@ -129,7 +132,7 @@ class MealDiary:
         assert all(isinstance(x, Meal) for x in self.meal_diary.values())
 
     def copy(self):
-        return MealDiary(copy.deepcopy(self.meal_diary))
+        return MealDiary(copy.copy(self.meal_diary))
 
     def __getitem__(self, date: dt.date) -> Meal:
         if not isinstance(date, dt.date):
@@ -167,8 +170,11 @@ class MealDiary:
         }
         return dict(sorted(ret.items()))
 
-    def __str__(self):
+    def __repr__(self) -> str:
         return str(self.get_representation())
+
+    def __bool__(self) -> bool:
+        return len(self.meal_diary) > 0
 
     def to_file(self, file_path: Path):
         with open(file_path, "w+") as fp:
@@ -202,7 +208,7 @@ class MealDiary:
     def difference(self, other: "MealDiary") -> "MealDiary":
         return MealDiary({
             date: meal
-            for date, meal in self.meal_diary.copy()
+            for date, meal in self.meal_diary.copy().items()
             if date not in other.meal_diary.keys()
         })
 

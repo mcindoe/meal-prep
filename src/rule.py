@@ -56,7 +56,7 @@ class RuleCollection:
         assert all(isinstance(x, Rule) for x in self.rules)
 
     def copy(self) -> "RuleCollection":
-        return RuleCollection(copy.deepcopy(self.rules))
+        return RuleCollection(copy.copy(self.rules))
 
     def __call__(
         self,
