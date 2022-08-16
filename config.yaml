@@ -2,8 +2,9 @@ email_addresses:
   - mealprepbot@gmail.com
   - testaddress@foo.bar
 dates:
-  - 2022-08-15
-  - 2022-08-16
-  - 2022-08-17
-  - 2022-08-18
-rules: [NO_VEGETABLES]
+  - 2022-02-05
+  - 2022-02-06
+  - 2022-02-08
+rules:
+  - NOT_PASTA_TWICE_WITHIN_FIVE_DAYS
+  - NOT_SAME_MEAT_ON_CONSECUTIVE_DAYS
