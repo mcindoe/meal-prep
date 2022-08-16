@@ -9,6 +9,8 @@ from typing import Iterable
 from typing import Tuple
 from typing import Union
 
+from mealprep.src.utils import get_day_suffix
+
 
 class UserInputGetter(ABC):
     EXIT_SIGNAL = "Q"
@@ -131,14 +133,6 @@ class IntegerInputGetter(UserInputGetter):
     @staticmethod
     def parse(value: str) -> int:
         return int(value)
-
-
-def get_day_suffix(day_number):
-    assert isinstance(day_number, int), "get_day_suffix must be passed an integer"
-
-    if day_number in itertools.chain(range(4, 21), range(24, 31)):
-        return "th"
-    return ("st", "nd", "rd")[day_number % 10 - 1]
 
 
 def format_date_string(date, fmt):

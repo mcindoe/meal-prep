@@ -99,7 +99,7 @@ class MealSelector:
             recommended_diary = self.recommend(dates, recommended_diary)
 
             print("Recommended meal plan:")
-            print(recommended_diary)
+            print(recommended_diary.get_pretty_print_string())
 
             print("Sound okay? Enter 'Y' or 'N'")
             user_confirmed_input = user_confirmed_getter.get_input()
