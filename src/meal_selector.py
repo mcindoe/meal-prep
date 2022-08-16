@@ -6,8 +6,8 @@ from mealprep.src.exceptions import OutOfMealsError
 from mealprep.src.meal import MealCollection
 from mealprep.src.meal import MealDiary
 from mealprep.src.rule import RuleCollection
+from mealprep.src.user_input_getter import CaseInsensitiveStringInputGetter
 from mealprep.src.user_input_getter import DateInputGetter
-from mealprep.src.user_input_getter import StringInputGetter
 
 
 class MealSelector:
@@ -82,7 +82,7 @@ class MealSelector:
             largest_number_of_choices = max(available_meals_for_next_date.values())
             meals_leaving_most_choice = [
                 meal
-                for meal in meal_choices
+                for meal in meal_choices.meals
                 if available_meals_for_next_date[meal] == largest_number_of_choices
             ]
 
@@ -92,21 +92,26 @@ class MealSelector:
         return meal_diary.difference(self.original_meal_diary)
 
     def recommend_until_confirmed(self, dates: Iterable[dt.date]) -> MealDiary:
-        user_confirmed_getter = StringInputGetter(("Y", "N"))
+        user_confirmed_getter = CaseInsensitiveStringInputGetter(("Y", "N"))
         recommended_diary = None
 
         while True:
-            recommended_diary = self.recommend(dates, recommended_diary)
+            if recommended_diary:
+                dates_to_compute_recommendations_for = tuple(
+                    x
+                    for x in dates
+                    if x not in recommended_diary.dates
+                )
+            else:
+                dates_to_compute_recommendations_for = dates
+
+            recommended_diary = self.recommend(dates_to_compute_recommendations_for, recommended_diary)
 
             print("Recommended meal plan:")
             print(recommended_diary.get_pretty_print_string())
 
             print("Sound okay? Enter 'Y' or 'N'")
-            user_confirmed_input = user_confirmed_getter.get_input()
-            if user_confirmed_input is None:
-                return
-
-            if user_confirmed_input == "Y":
+            if user_confirmed_getter.get_input() == "Y":
                 return recommended_diary
 
             user_changed_dates_input_getter = DateInputGetter(dates)
