@@ -274,7 +274,10 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN
-        }
+        },
+        tags=(
+            MealTag.PASTA,
+        )
     )
     SPAGHETTI_BOLOGNAISE = Meal(
         name="Spaghetti Bolognaise",
@@ -295,7 +298,10 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.BEEF
-        }
+        },
+        tags=(
+            MealTag.PASTA,
+        )
     )
     STICKY_CHINESE_PORK_BELLY = Meal(
         name="Sticky Chinese Pork Belly",
