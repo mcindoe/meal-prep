@@ -37,11 +37,15 @@ class Category(BaseEnum):
     VEGETABLE = auto()
 
 
-class MealProperty(BaseEnum):
+class MealMetadata(BaseEnum):
+    pass
+
+
+class MealProperty(MealMetadata):
     MEAT = auto()
 
 
-class MealTag(BaseEnum):
+class MealTag(MealMetadata):
     ROAST = auto()
     VEGETARIAN = auto()
 
