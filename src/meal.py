@@ -220,9 +220,15 @@ class MealDiary:
         })
 
     def except_dates(self, dates_to_exclude: Iterable[dt.date]) -> "MealDiary":
-        """
-        Return a copy of the MealDiary with the specified dates removed (if present)
-        """
+        "Return a copy of the MealDiary with the specified dates removed (if present)"
+
+        # Ensure dates_to_exclude is iterable
+        if isinstance(dates_to_exclude, dt.date):
+            dates_to_exclude = (dates_to_exclude, )
+
+        # Ensure only dt.dates are passed; copy to not exhaust generators
+        dates_to_exclude = set(x for x in dates_to_exclude)
+        assert all(isinstance(x, dt.date) for x in dates_to_exclude)
 
         return MealDiary({
             meal_date: meal
