@@ -35,6 +35,7 @@ class MealSelector:
         outside of this selector
         """
 
+        # TODO: Consider sorted(dates). Check that this works with genexprs
         dates = sorted(x for x in dates)
 
         if recommended_diary is None:
@@ -97,11 +98,7 @@ class MealSelector:
 
         while True:
             if recommended_diary:
-                dates_to_compute_recommendations_for = tuple(
-                    x
-                    for x in dates
-                    if x not in recommended_diary.dates
-                )
+                dates_to_compute_recommendations_for = set(dates) - set(recommended_diary.dates)
             else:
                 dates_to_compute_recommendations_for = dates
 
@@ -117,12 +114,8 @@ class MealSelector:
             user_changed_dates_input_getter = DateInputGetter(dates)
 
             print("Enter dates to change")
-            changed_dates = set(user_changed_dates_input_getter.get_multiple_inputs())
-            recommended_diary = MealDiary({
-                date: meal
-                for date, meal in recommended_diary.items()
-                if date not in changed_dates
-            })
+            dates_to_change = set(user_changed_dates_input_getter.get_multiple_inputs())
+            recommended_diary = recommended_diary.except_dates(changed_dates)
 
         # Return only the new, recommended portion of the diary
         return recommended_diary.difference(self.original_meal_diary)

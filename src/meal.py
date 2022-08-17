@@ -212,11 +212,22 @@ class MealDiary:
             if date not in other.meal_diary.keys()
         })
 
-    def filter_by_time_delta(self, date: dt.date, time_delta: dt.timedelta):
+    def filter_by_time_delta(self, date: dt.date, time_delta: dt.timedelta) -> "MealDiary":
         return MealDiary({
             meal_date: meal
             for meal_date, meal in self.items()
             if abs(meal_date - date) <= time_delta
+        })
+
+    def except_dates(self, dates_to_exclude: Iterable[dt.date]) -> "MealDiary":
+        """
+        Return a copy of the MealDiary with the specified dates removed (if present)
+        """
+
+        return MealDiary({
+            meal_date: meal
+            for meal_date, meal in self.items()
+            if meal_date not in dates_to_exclude
         })
 
     def get_pretty_print_string(self):
