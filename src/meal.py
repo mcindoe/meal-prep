@@ -108,7 +108,7 @@ class MealCollection:
         if not isinstance(other, Meal):
             raise TypeError("Error in MealCollection.append: 'other' must be of type Meal")
 
-        return MealCollection(self.meals + (meal,))
+        return MealCollection(self.meals + (other,))
 
 
 class MealDiary:
@@ -179,7 +179,7 @@ class MealDiary:
 
     @property
     def meals(self):
-        return tuple(self.meal_diary.values())
+        return MealCollection(self.meal_diary.values())
 
     def items(self):
         return self.meal_diary.items()
