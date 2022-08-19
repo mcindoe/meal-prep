@@ -285,6 +285,24 @@ class Meals(BaseEnum):
             MealProperty.MEAT: MealMeat.BEEF
         }
     )
+    BURGERS = Meal(
+        name="Burgers",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BACON, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.BEEF_CHUCK_STEAK, Unit.GRAM, 450),
+            IngredientQuantity(Ingredients.BURGER_BUNS, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.CHEDDAR_CHEESE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.DRIED_MUSTARD, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.EGGS, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.LETTUCE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.MAYONNAISE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.TOMATO, Unit.BOOL, True),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.BEEF
+        }
+    )
     CHICKEN_FAJITAS = Meal(
         name="Chicken Fajitas",
         ingredient_quantities=(
@@ -295,6 +313,24 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.RED_PEPPER, Unit.NUMBER, 1),
             IngredientQuantity(Ingredients.TORTILLA_WRAP, Unit.NUMBER, 8),
             IngredientQuantity(Ingredients.YELLOW_PEPPER, Unit.NUMBER, 1),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.CHICKEN
+        }
+    )
+    CHICKEN_TALEGGIO = Meal(
+        name="Chicken Taleggio",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BALSAMIC_VINEGAR, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.BASIL, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.BREADCRUMBS, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.CHICKEN_BREAST, Unit.NUMBER, 6),
+            IngredientQuantity(Ingredients.FULL_FAT_CREAM_CHEESE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.GREEN_PESTO, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.OLIVE_OIL, Unit.BOOL, True)
+            IngredientQuantity(Ingredients.PAPRIKA, Unit.BOOL, True)
+            IngredientQuantity(Ingredients.TALEGGIO_CHEESE, Unit.GRAM, 175)
+            IngredientQuantity(Ingredients.VINE_CHERRY_TOMATO, Unit.GRAM, 400)
         ),
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN
@@ -353,9 +389,8 @@ class Meals(BaseEnum):
             MealTag.PASTA,
         )
     )
-    # TODO: Spelling is incorrect
-    SPAGHETTI_BOLOGNAISE = Meal(
-        name="Spaghetti Bolognaise",
+    SPAGHETTI_BOLOGNESE = Meal(
+        name="Spaghetti Bolognese",
         ingredient_quantities=(
             # TODO: Uncaught duplicate ingredient entries
             IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),

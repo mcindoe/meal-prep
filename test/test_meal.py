@@ -115,7 +115,7 @@ class TestMeal:
 class TestMealCollection:
     def test_initialiser(self):
         meals = (
-            Meal.from_name("Spaghetti Bolognaise"),
+            Meal.from_name("Spaghetti Bolognese"),
             Meal.from_name("Sticky Chinese Pork Belly")
         )
         meal_collection = MealCollection(meals)
