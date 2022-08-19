@@ -160,7 +160,7 @@ class CaseInsensitiveStringInputGetter(UserInputGetter):
         # If possible, match the case of another otherwise-matching entry
         for option in self.supported_options:
             if option.lower() == value.lower():
-                return value
+                return option
 
         # If not possible, pass the value on unchanged to be flagged as not supported
         return value
