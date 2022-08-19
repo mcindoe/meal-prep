@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 from typing import Dict
 from typing import Iterable
+from typing import Union
 from typing import Optional
 
 from mealprep.src.constants import BaseEnum
@@ -29,17 +30,34 @@ class Meal:
         name: str,
         ingredient_quantities: IngredientQuantityCollection,
         properties: Dict[MealProperty, Any],
-        tags: Optional[Iterable[MealTag]] = tuple()
+        tags: Optional[Union[MealTag, Iterable[MealTag]]] = tuple()
     ):
         self.name = name
         self.ingredient_quantities = IngredientQuantityCollection(ingredient_quantities)
 
-        assert isinstance(properties, dict)
-        assert all(isinstance(x, MealProperty) for x in properties.keys())
+        if not isinstance(name, str):
+            raise TypeError("'name' argument must be a string in Meal init")
+
+        if not isinstance(properties, dict):
+            raise TypeError("'properties' argument must be a dict in Meal init")
+
+        for x in properties.keys():
+            if not isinstance(x, MealProperty):
+                raise TypeError(f"{x} is not a MealProperty in Meal init")
 
         missing_properties = tuple(x for x in MealProperty if x not in properties.keys())
         if missing_properties:
             raise ValueError(f"Unspecified properties in Meal construction: {missing_properties}")
+
+        if tags is not None:
+            if isinstance(tags, MealTag):
+                tags = (tags, )
+
+            tags = {x for x in tags}
+
+            for x in tags:
+                if not isinstance(x, MealTag):
+                    raise ValueError(f"{x} is not a MealTag in Meal init")
 
         self.metadata = properties.copy()
 
@@ -309,7 +327,7 @@ class Meals(BaseEnum):
         ingredient_quantities=(
             # TODO: Uncaught duplicate ingredient entries
             IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
-            IngredientQuantity(Ingredients.BAY_LEAVES, Unit.GRAM, 500),
+            IngredientQuantity(Ingredients.BEEF_MINCE, Unit.GRAM, 500),
             IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
             IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 2),
             IngredientQuantity(Ingredients.CHOPPED_TOMATO, Unit.NUMBER, 1),
