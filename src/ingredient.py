@@ -17,11 +17,6 @@ class Ingredient:
         self.category = category
 
 
-class IngredientCollection:
-    def __init__(self, ingredients: Iterable[Ingredient]):
-        self.ingredients = tuple(x for x in ingredients)
-
-
 class IngredientQuantity:
     def __init__(self, ingredient: Ingredient, unit: Unit, quantity: Any):
         if not isinstance(ingredient, Ingredients):
@@ -41,6 +36,10 @@ class IngredientQuantity:
 class IngredientQuantityCollection:
     def __init__(self, ingredient_quantities: Iterable[IngredientQuantity]):
         self.ingredient_quantities = tuple(x for x in ingredient_quantities)
+
+        for x in self.ingredient_quantities:
+            if not isinstance(x, IngredientQuantity):
+                raise TypeError(f"{x} is not an IngredientQuantity in IngredientQuantityCollection init")
 
 
 class Ingredients(BaseEnum):
