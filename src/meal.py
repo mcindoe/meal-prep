@@ -442,5 +442,8 @@ class Meals(BaseEnum):
         }
     )
 
+    def __repr__(self) -> str:
+        return f"Meal.{self.name}"
+
 
 meal_names_to_meal_map = {x.value.name.upper(): x.value for x in Meals}
