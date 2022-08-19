@@ -56,13 +56,14 @@ class MealSelector:
             if not meal_choices:
                 raise OutOfMealsError(f"Ran out of meals on date {date.strftime(MealDiary.DATE_FORMAT)}")
 
+            # If there is no next date to consider, choose randomly from acceptable meals
             if date == dates[-1]:
                 meal_diary[date] = random.choice(meal_choices.meals)
                 break
 
-            # Compute, for each meal, if that were the chosen meal, how many meals would be
-            # available to choose from next date
-            available_meals_for_next_date = {}
+            # Otherwise, if there is a next date, choose randomly from meals which leave as
+            # much choise as possible for the next date
+            n_available_meals_for_next_date = {}
             for meal in meal_choices.meals:
                 proposed_diary = meal_diary.copy()
                 proposed_diary[date] = meal
@@ -75,15 +76,15 @@ class MealSelector:
                     proposed_diary
                 )
 
-                available_meals_for_next_date[meal] = len(next_date_meal_choices)
+                n_available_meals_for_next_date[meal] = len(next_date_meal_choices)
 
             # Compute the subcollection of meals which maximise the number of available
             # choices for the next date
-            largest_number_of_choices = max(available_meals_for_next_date.values())
+            largest_number_of_choices = max(n_available_meals_for_next_date.values())
             meals_leaving_most_choice = [
                 meal
                 for meal in meal_choices.meals
-                if available_meals_for_next_date[meal] == largest_number_of_choices
+                if n_available_meals_for_next_date[meal] == largest_number_of_choices
             ]
 
             meal_diary[date] = random.choice(meals_leaving_most_choice)
@@ -107,14 +108,20 @@ class MealSelector:
             print(recommended_diary.get_pretty_print_string())
 
             print("Sound okay? Enter 'Y' or 'N'")
-            if user_confirmed_getter.get_input() == "Y":
+            user_confirmed_input = user_confirmed_getter.get_input()
+            if user_confirmed_input is None:
+                return
+            if user_confirmed_input == "Y":
                 return recommended_diary
 
             user_changed_dates_input_getter = DateInputGetter(dates)
 
             print("Enter dates to change")
-            dates_to_change = set(user_changed_dates_input_getter.get_multiple_inputs())
-            recommended_diary = recommended_diary.except_dates(changed_dates)
+            dates_to_change_input = user_changed_dates_input_getter.get_multiple_inputs()
+            if dates_to_change_input is None:
+                return
+            dates_to_change = set(dates_to_change_input)
+            recommended_diary = recommended_diary.except_dates(dates_to_change)
 
         # Return only the new, recommended portion of the diary
         return recommended_diary.difference(self.original_meal_diary)
