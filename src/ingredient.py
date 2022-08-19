@@ -8,8 +8,10 @@ from mealprep.src.constants import Unit
 
 class Ingredient:
     def __init__(self, name: str, category: Category):
-        assert isinstance(name, str)
-        assert isinstance(category, Category)
+        if not isinstance(name, str):
+            raise TypeError("'name' argument must be a string in Ingredient init")
+        if not isinstance(category, Category):
+            raise TypeError("'category' argument must be a Category in Ingredient init")
 
         self.name = name
         self.category = category
@@ -22,8 +24,14 @@ class IngredientCollection:
 
 class IngredientQuantity:
     def __init__(self, ingredient: Ingredient, unit: Unit, quantity: Any):
-        assert isinstance(ingredient, Ingredients)
-        assert isinstance(unit, Unit)
+        if not isinstance(ingredient, Ingredients):
+            raise TypeError(
+                "'ingredient' argument must be in the Ingredients enum in IngredientQuantity init"
+            )
+        if not isinstance(unit, Unit):
+            raise TypeError(
+                "'unit' argument must be a Unit in IngredientQuantity init"
+            )
 
         self.ingredient = ingredient
         self.unit = unit
