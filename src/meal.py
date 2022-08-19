@@ -19,7 +19,8 @@ from mealprep.src.ingredient import IngredientQuantityCollection
 from mealprep.src.utils import get_day_suffix
 from mealprep.src.loc import DATA_DIR
 
-MEAL_DIARY_FILEPATH = DATA_DIR / "meal_diary.json"
+PROJECT_DIARY_FILENAME = "meal_diary.json"
+PROJECT_DIARY_FILEPATH = DATA_DIR / PROJECT_DIARY_FILENAME
 
 
 class Meal:
@@ -196,11 +197,11 @@ class MealDiary:
         })
 
     def to_project_diary(self) -> None:
-        self.to_file(MEAL_DIARY_FILEPATH)
+        self.to_file(PROJECT_DIARY_FILEPATH)
 
     @staticmethod
     def from_project_diary() -> None:
-        return MealDiary.from_file(MEAL_DIARY_FILEPATH)
+        return MealDiary.from_file(PROJECT_DIARY_FILEPATH)
 
     def upsert(self, other: "MealDiary") -> "MealDiary":
         return MealDiary(self.meal_diary | other.meal_diary)
@@ -302,9 +303,11 @@ class Meals(BaseEnum):
             MealTag.PASTA,
         )
     )
+    # TODO: Spelling is incorrect
     SPAGHETTI_BOLOGNAISE = Meal(
         name="Spaghetti Bolognaise",
         ingredient_quantities=(
+            # TODO: Uncaught duplicate ingredient entries
             IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
             IngredientQuantity(Ingredients.BAY_LEAVES, Unit.GRAM, 500),
             IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
@@ -314,6 +317,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.MIXED_HERBS, Unit.BOOL, True),
             IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 2),
             IngredientQuantity(Ingredients.OREGANO, Unit.BOOL, True),
+            # TODO: Incorrect spelling
             IngredientQuantity(Ingredients.PARMEZAN_CHEESE, Unit.BOOL, True),
             IngredientQuantity(Ingredients.PORK_MINCE, Unit.GRAM, 500),
             IngredientQuantity(Ingredients.SPAGHETTI, Unit.BOOL, True),
