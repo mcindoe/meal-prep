@@ -56,8 +56,8 @@ class UserInputGetter(ABC):
     def get_input(self) -> Any:
         """
         Keep attempting to retrieve a user input, parseable and in the
-        set of supported results (if specified), until successful. Exit
-        if an EXIT_SIGNAL is passed. Return None if unsuccessful
+        set of supported results (if specified), until successful. Return
+        None if an EXIT_SIGNAL is sent from the user
         """
 
         request_value_message = f"{self.REQUEST_VALUE_MESSAGE} ({UserInputGetter.EXIT_SIGNAL} to quit): "
@@ -69,7 +69,7 @@ class UserInputGetter(ABC):
                 inp = inp.strip()
 
                 if self.is_exit_signal(inp):
-                    exit()
+                    return
 
                 if self.is_valid(inp):
                     inp = self.parse(inp)
@@ -83,6 +83,9 @@ class UserInputGetter(ABC):
             print(self.NOT_SUPPORTED_MESSAGE)
 
     def get_multiple_inputs(self) -> Tuple[Any]:
+        """
+        Similar to get_input(), but get multiple values separated by commas
+        """
 
         request_value_message = (
             f"{self.MULTIPLE_REQUEST_VALUE_MESSAGE} ({UserInputGetter.EXIT_SIGNAL} to quit): "
