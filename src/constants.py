@@ -16,12 +16,18 @@ class ConfigEntries(BaseEnum):
     EMAIL_ADDRESSES = "email_addresses"
     RULES = "rules"
 
+    def __repr__(self) -> str:
+        return f"ConfigEntries.{self.name}"
+
 
 class Unit(BaseEnum):
     BOOL = auto()
     GRAM = auto()
     MILLILITRE = auto()
     NUMBER = auto()
+
+    def __repr__(self) -> str:
+        return f"Unit.{self.name}"
 
 
 class Category(BaseEnum):
@@ -36,6 +42,9 @@ class Category(BaseEnum):
     SPICE = auto()
     VEGETABLE = auto()
 
+    def __repr__(self) -> str:
+        return f"Category.{self.name}"
+
 
 class MealMetadata(BaseEnum):
     pass
@@ -44,11 +53,17 @@ class MealMetadata(BaseEnum):
 class MealProperty(MealMetadata):
     MEAT = auto()
 
+    def __repr__(self) -> str:
+        return f"MealProperty.{self.name}"
+
 
 class MealTag(MealMetadata):
     ROAST = auto()
     PASTA = auto()
     VEGETARIAN = auto()
+
+    def __repr__(self) -> str:
+        return f"MealTag.{self.name}"
 
 
 class MealMeat(BaseEnum):
@@ -57,3 +72,6 @@ class MealMeat(BaseEnum):
     LAMB = auto()
     NONE = auto()
     PORK = auto()
+
+    def __repr__(self) -> str:
+        return f"MealMeat.{self.name}"
