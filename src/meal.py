@@ -276,7 +276,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 2),
             IngredientQuantity(Ingredients.CHOPPED_TOMATO, Unit.NUMBER, 1),
             IngredientQuantity(Ingredients.FLOUR, Unit.BOOL, True),
-            IngredientQuantity(Ingredients.GUINNESS, Unit.ML, 500),
+            IngredientQuantity(Ingredients.GUINNESS, Unit.MILLILITRE, 500),
             IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 2),
             IngredientQuantity(Ingredients.POTATO, Unit.GRAM, 900),
             IngredientQuantity(Ingredients.STEWING_BEEF, Unit.GRAM, 750),

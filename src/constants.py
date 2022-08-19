@@ -20,7 +20,7 @@ class ConfigEntries(BaseEnum):
 class Unit(BaseEnum):
     BOOL = auto()
     GRAM = auto()
-    MILLILITRES = auto()
+    MILLILITRE = auto()
     NUMBER = auto()
 
 
