@@ -6,6 +6,7 @@ from mealprep.src.exceptions import OutOfMealsError
 from mealprep.src.meal import MealCollection
 from mealprep.src.meal import MealDiary
 from mealprep.src.rule import RuleCollection
+from mealprep.src.rule import NotSpecifiedMealOnSpecifiedDate
 from mealprep.src.user_input_getter import CaseInsensitiveStringInputGetter
 from mealprep.src.user_input_getter import DateInputGetter
 
@@ -19,16 +20,24 @@ class MealSelector:
     ):
 
         self.meal_collection = meal_collection.copy()
-        self.rule_collection = rule_collection.copy()
+        self.original_rule_collection = rule_collection.copy()
         self.original_meal_diary = original_meal_diary.copy()
 
-    def recommend(self, dates: Iterable[dt.date], recommended_diary: MealDiary = None) -> MealDiary:
+    def recommend(
+        self,
+        dates: Iterable[dt.date],
+        rule_collection: RuleCollection,
+        recommended_diary: MealDiary = None
+    ) -> MealDiary:
         """
         Recommend a MealDiary of Meals for the specified dates
 
         The returned diary is built by choosing randomly from the subset
         of supported meals which maximise the number of choices for the
         next date
+
+        The rule_collection is the current set of rules to apply to
+        MealCollections on specified dates
 
         The recommended_diary is a current, proposed addition to the
         meal diary, as opposed to the original_meal_diary which exists
@@ -51,7 +60,7 @@ class MealSelector:
             raise ValueError("Some passed dates are already in the meal diary")
 
         for idx, date in enumerate(dates):
-            meal_choices = self.rule_collection(self.meal_collection, date, meal_diary)
+            meal_choices = rule_collection(self.meal_collection, date, meal_diary)
 
             if not meal_choices:
                 raise OutOfMealsError(f"Ran out of meals on date {date.strftime(MealDiary.DATE_FORMAT)}")
@@ -70,7 +79,7 @@ class MealSelector:
 
                 next_date = dates[idx+1]
 
-                next_date_meal_choices = self.rule_collection(
+                next_date_meal_choices = rule_collection(
                     self.meal_collection,
                     next_date,
                     proposed_diary
@@ -94,6 +103,7 @@ class MealSelector:
 
     def recommend_until_confirmed(self, dates: Iterable[dt.date]) -> MealDiary:
         user_confirmed_getter = CaseInsensitiveStringInputGetter(("Y", "N"))
+        rule_collection = self.original_rule_collection.copy()
         recommended_diary = None
 
         while True:
@@ -102,7 +112,11 @@ class MealSelector:
             else:
                 dates_to_compute_recommendations_for = dates
 
-            recommended_diary = self.recommend(dates_to_compute_recommendations_for, recommended_diary)
+            recommended_diary = self.recommend(
+                dates_to_compute_recommendations_for,
+                rule_collection,
+                recommended_diary
+            )
 
             print("Recommended meal plan:")
             print(recommended_diary.get_pretty_print_string())
@@ -121,6 +135,16 @@ class MealSelector:
             if dates_to_change_input is None:
                 return
             dates_to_change = set(dates_to_change_input)
+
+            # Don't recommend user-rejected (date, meal) pairs again
+            for date in dates_to_change:
+                meal_to_avoid = recommended_diary[date]
+                avoid_same_suggestion_rule = NotSpecifiedMealOnSpecifiedDate(
+                    date,
+                    meal_to_avoid
+                )
+                rule_collection = rule_collection.append(avoid_same_suggestion_rule)
+
             recommended_diary = recommended_diary.except_dates(dates_to_change)
 
         # Return only the new, recommended portion of the diary

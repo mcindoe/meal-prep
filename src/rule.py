@@ -58,6 +58,12 @@ class RuleCollection:
     def copy(self) -> "RuleCollection":
         return RuleCollection(copy.copy(self.rules))
 
+    def append(self, rule: Rule) -> "RuleCollection":
+        if not isinstance(rule, Rule):
+            raise TypeError("'rule' argument must be a Rule in RuleCollection.append")
+
+        return RuleCollection(self.rules + (rule,))
+
     def __call__(
         self,
         meal_collection: MealCollection,
@@ -117,6 +123,27 @@ class NotSameMeatOnConsecutiveDaysRule(Rule):
             meal
             for meal in meal_collection.meals
             if meal[MealProperty.MEAT] not in meats_to_avoid
+        )
+
+
+class NotSpecifiedMealOnSpecifiedDate(Rule):
+    def __init__(self, date: dt.date, meal_to_avoid: Meal):
+        if not isinstance(date, dt.date):
+            raise TypeError("'date' argument must be a dt.date in NotSpecifiedMealOnSpecifiedDate init")
+        if not isinstance(meal_to_avoid, Meal):
+            raise TypeError("'meal_to_avoid' argument must be a Meal in NotSpecifiedMealOnSpecifiedDate init")
+
+        self.date = date
+        self.meal_to_avoid = meal_to_avoid
+
+    def filter(self, meal_collection: MealCollection, date: dt.date, meal_diary: MealDiary) -> MealCollection:
+        if date != self.date:
+            return meal_collection
+
+        return MealCollection(
+            meal
+            for meal in meal_collection.meals
+            if meal != self.meal_to_avoid
         )
 
 
