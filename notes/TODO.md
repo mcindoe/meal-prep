@@ -10,3 +10,5 @@
 
 - [ ] Utility to display programmed meals, and ingredients to console / file
 	- Display tags on the meals, check for spelling mistakes etc, check that ingredients are in appropriate categories
+
+- [ ] Find out how to find the class name at runtime and use that to add a repr to BaseEnum, and remove it from all inherited classes
