@@ -268,6 +268,38 @@ class MealDiary:
 
 
 class Meals(BaseEnum):
+    BEEF_AND_ALE_STEW = Meal(
+        name="Beef and Ale Stew",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.CHOPPED_TOMATO, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.FLOUR, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.GUINNESS, Unit.ML, 500),
+            IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.POTATO, Unit.GRAM, 900),
+            IngredientQuantity(Ingredients.STEWING_BEEF, Unit.GRAM, 750),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.BEEF
+        }
+    )
+    CHICKEN_FAJITAS = Meal(
+        name="Chicken Fajitas",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.CHICKEN_BREAST, Unit.GRAM, 400),
+            IngredientQuantity(Ingredients.CORIANDER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.PAPRIKA, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.RED_ONION, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.RED_PEPPER, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.TORTILLA_WRAP, Unit.NUMBER, 8),
+            IngredientQuantity(Ingredients.YELLOW_PEPPER, Unit.NUMBER, 1),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.CHICKEN
+        }
+    )
     CHILLI_CHICKEN_THIGHS_WITH_CHERRY_TOMATOES = Meal(
         name="Chilli Chicken Thighs with Cherry Tomatoes",
         ingredient_quantities=(
@@ -310,7 +342,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.CREAM, Unit.GRAM, 250),
             IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 3),
             IngredientQuantity(Ingredients.MOZARELLA_CHEESE, Unit.GRAM, 100),
-            IngredientQuantity(Ingredients.PARMEZAN_CHEESE, Unit.GRAM, 100),
+            IngredientQuantity(Ingredients.PARMESAN_CHEESE, Unit.GRAM, 100),
             IngredientQuantity(Ingredients.PENNE_PASTA, Unit.GRAM, 300),
             IngredientQuantity(Ingredients.SUNDRIED_TOMATOES, Unit.GRAM, 750),
         ),
@@ -335,8 +367,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.MIXED_HERBS, Unit.BOOL, True),
             IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 2),
             IngredientQuantity(Ingredients.OREGANO, Unit.BOOL, True),
-            # TODO: Incorrect spelling
-            IngredientQuantity(Ingredients.PARMEZAN_CHEESE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.PARMESAN_CHEESE, Unit.BOOL, True),
             IngredientQuantity(Ingredients.PORK_MINCE, Unit.GRAM, 500),
             IngredientQuantity(Ingredients.SPAGHETTI, Unit.BOOL, True),
             IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.BOOL, True),
