@@ -77,6 +77,19 @@ class RuleCollection:
         return ret
 
 
+class ForceRoastOnSunday(Rule):
+    @staticmethod
+    def filter(meal_collection: MealCollection, date: dt.date, meal_diary: MealDiary) -> MealCollection:
+        if date.weekday() != 6:
+            return meal_collection
+
+        return MealCollection(
+            meal
+            for meal in meal_collection.meals
+            if meal[MealProperty.ROAST]
+        )
+
+
 class NotPastaTwiceWithinFiveDaysRule(Rule):
     @staticmethod
     def filter(meal_collection: MealCollection, date: dt.date, meal_diary: MealDiary) -> MealCollection:
@@ -92,6 +105,19 @@ class NotPastaTwiceWithinFiveDaysRule(Rule):
             meal
             for meal in meal_collection.meals
             if not meal[MealTag.PASTA]
+        )
+
+
+class NotRoastOnNonSunday(Rule):
+    @staticmethod
+    def filter(meal_collection: MealCollection, date: dt.date, meal_diary: MealDiary) -> MealCollection:
+        if date.weekday() == 6:
+            return meal_collection
+
+        return MealCollection(
+            meal
+            for meal in meal_collection.meals
+            if not meal[MealProperty.ROAST]
         )
 
 
@@ -147,7 +173,10 @@ class NotSpecifiedMealOnSpecifiedDate(Rule):
         )
 
 
+
 class Rules(BaseEnum):
+    FORCE_ROAST_ON_SUNDAY = ForceRoastOnSunday()
     NOT_PASTA_TWICE_WITHIN_FIVE_DAYS = NotPastaTwiceWithinFiveDaysRule()
+    NOT_ROAST_ON_NON_SUNDAY = NotRoastOnNonSunday()
     NOT_SAME_MEAL_WITHIN_SEVEN_DAYS = NotSameMealWithinSevenDaysRule()
     NOT_SAME_MEAT_ON_CONSECUTIVE_DAYS = NotSameMeatOnConsecutiveDaysRule()
