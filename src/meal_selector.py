@@ -35,8 +35,7 @@ class MealSelector:
         outside of this selector
         """
 
-        # TODO: Consider sorted(dates). Check that this works with genexprs
-        dates = sorted(x for x in dates)
+        dates = sorted(dates)
 
         if recommended_diary is None:
             meal_diary = self.original_meal_diary.copy()
