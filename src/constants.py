@@ -30,17 +30,18 @@ class Unit(BaseEnum):
         return f"Unit.{self.name}"
 
 
+# Ordering is the list to appear in shopping lists
 class Category(BaseEnum):
-    CAN = auto()
-    CARBOHYDRATE = auto()
-    CONDIMENT = auto()
-    DAIRY = auto()
     FRUIT = auto()
+    VEGETABLE = auto()
     HERB = auto()
+    CARBOHYDRATE = auto()
+    DAIRY = auto()
     MEAT = auto()
+    CAN = auto()
+    CONDIMENT = auto()
     SAUCE = auto()
     SPICE = auto()
-    VEGETABLE = auto()
 
     def __repr__(self) -> str:
         return f"Category.{self.name}"
