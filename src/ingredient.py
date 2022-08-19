@@ -28,9 +28,33 @@ class IngredientQuantity:
                 "'unit' argument must be a Unit in IngredientQuantity init"
             )
 
+        # TODO: Unit test
+        if unit is Unit.BOOL and quantity is not True:
+            raise TypeError(
+                "Error in IngredientQuantity init: if unit is BOOL, then quantity must be True"
+            )
+
         self.ingredient = ingredient
         self.unit = unit
         self.quantity = quantity
+
+    def __add__(self, other: "IngredientQuantity") -> "IngredientQuantity":
+        if not isinstance(other, IngredientQuantity):
+            raise TypeError("Error in IngredientQuantity.__add__: 'other' must be of type IngredientQuantity")
+
+        if self.ingredient is not other.ingredient:
+            raise TypeError("Error in IngredientQuantity.__add__: both operands must have the same ingredient field")
+
+        if self.unit is not other.unit:
+            raise TypeError("Error in IngredientQuantity.__add__: both operands must have the same unit field")
+
+        if self.unit is Unit.BOOL:
+            return IngredientQuantity(self.ingredient, Unit.BOOL, True)
+
+        return IngredientQuantity(self.ingredient, self.unit, self.quantity + other.quantity)
+
+    def __repr__(self) -> str:
+        return f"IngredientQuantity({self.ingredient}, {self.unit}, {self.quantity})"
 
 
 class IngredientQuantityCollection:
