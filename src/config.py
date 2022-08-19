@@ -17,6 +17,7 @@ class Config:
 
     @property
     def email_addresses(self) -> Tuple[str]:
+        # TODO: Add a regexp and check that email entries are valid
         return tuple(self.config[ConfigEntries.EMAIL_ADDRESSES.value])
 
     @property
