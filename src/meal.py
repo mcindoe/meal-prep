@@ -104,6 +104,12 @@ class MealCollection:
     def __len__(self) -> int:
         return len(self.meals)
 
+    def append(self, other: Meal) -> "MealCollection":
+        if not isinstance(other, Meal):
+            raise TypeError("Error in MealCollection.append: 'other' must be of type Meal")
+
+        return MealCollection(self.meals + (meal,))
+
 
 class MealDiary:
     DATE_FORMAT = "%Y-%m-%d"
@@ -327,10 +333,10 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.CHICKEN_BREAST, Unit.NUMBER, 6),
             IngredientQuantity(Ingredients.FULL_FAT_CREAM_CHEESE, Unit.BOOL, True),
             IngredientQuantity(Ingredients.GREEN_PESTO, Unit.BOOL, True),
-            IngredientQuantity(Ingredients.OLIVE_OIL, Unit.BOOL, True)
-            IngredientQuantity(Ingredients.PAPRIKA, Unit.BOOL, True)
-            IngredientQuantity(Ingredients.TALEGGIO_CHEESE, Unit.GRAM, 175)
-            IngredientQuantity(Ingredients.VINE_CHERRY_TOMATO, Unit.GRAM, 400)
+            IngredientQuantity(Ingredients.OLIVE_OIL, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.PAPRIKA, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.TALEGGIO_CHEESE, Unit.GRAM, 175),
+            IngredientQuantity(Ingredients.VINE_CHERRY_TOMATO, Unit.GRAM, 400),
         ),
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN
