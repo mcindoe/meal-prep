@@ -124,7 +124,7 @@ class ShoppingList:
 			)
 
 		with open(filepath, "w+") as fp:
-			fp.write("Shopping List")
+			fp.write("Shopping List\n")
 
 			categories = sorted(self.ingredient_summary.keys(), key = lambda x: x.order)
 
@@ -140,11 +140,11 @@ class ShoppingList:
 					quantities = self.ingredient_summary[category][ingredient]["quantities"].values()
 					meals = self.ingredient_summary[category][ingredient]["meals"]
 
-					ingredient_entry = f"- [ ] {ingredient.name}"
+					ingredient_entry = f"- [ ] {ingredient.value.name}"
 
 					ingredient_quantity_description = self.get_ingredient_quantity_description(quantities)
 					if ingredient_quantity_description:
-						ingredient_entry += f" - {ingredient_quantity_description}"
+						ingredient_entry += f": {ingredient_quantity_description}"
 
 					fp.write(f"{ingredient_entry}\n")
 
