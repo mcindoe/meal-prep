@@ -129,7 +129,7 @@ class ShoppingList:
 			categories = sorted(self.ingredient_summary.keys(), key = lambda x: x.order)
 
 			for category in categories:
-				fp.write(f"\n\n--- {category.name} ---\n")
+				fp.write(f"\n\n--- {category.list_header} ---\n")
 
 				category_ingredients = sorted(
 					self.ingredient_summary[category].keys(),
