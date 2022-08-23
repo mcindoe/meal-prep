@@ -2,9 +2,12 @@ import datetime as dt
 from typing import Iterable
 
 from mealprep.src.config import config
+from mealprep.src.loc import SHOPPING_LIST_DIR
 from mealprep.src.meal import MealCollection
 from mealprep.src.meal import MealDiary
 from mealprep.src.meal_selector import MealSelector
+from mealprep.src.shopping_list import ShoppingList
+
 
 if __name__ == "__main__":
     meal_collection = MealCollection.from_supported_meals()
@@ -23,5 +26,10 @@ if __name__ == "__main__":
         exit()
 
     new_diary = meal_diary.upsert(diary_additions)
-    print("Bon Appetit!")
     new_diary.to_project_diary()
+
+    shopping_list = ShoppingList(new_diary.meals)
+    shopping_list_filename = shopping_list.get_filename(min(dates), max(dates))
+    shopping_list.to_file(SHOPPING_LIST_DIR / shopping_list_filename)
+
+    print("Bon Appetit!")
