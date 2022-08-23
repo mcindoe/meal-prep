@@ -32,4 +32,4 @@ if __name__ == "__main__":
     shopping_list_filename = shopping_list.get_filename(min(dates), max(dates))
     shopping_list.to_file(SHOPPING_LIST_DIR / shopping_list_filename)
 
-    print("Bon Appetit!")
+    print("\nBon Appetit!")

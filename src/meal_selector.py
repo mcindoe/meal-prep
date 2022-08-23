@@ -118,10 +118,10 @@ class MealSelector:
                 recommended_diary
             )
 
-            print("Recommended meal plan:")
+            print("\nRecommended meal plan:")
             print(recommended_diary.get_pretty_print_string())
 
-            print("Sound okay? Enter 'Y' or 'N'")
+            print("\nSound okay? Enter 'Y' or 'N'")
             user_confirmed_input = user_confirmed_getter.get_input()
             if user_confirmed_input is None:
                 return
