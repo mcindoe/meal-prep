@@ -130,7 +130,7 @@ class MealSelector:
 
             user_changed_dates_input_getter = DateInputGetter(dates)
 
-            print("Enter dates to change")
+            print("\nEnter dates to change")
             dates_to_change_input = user_changed_dates_input_getter.get_multiple_inputs()
             if dates_to_change_input is None:
                 return
