@@ -28,7 +28,7 @@ if __name__ == "__main__":
     new_diary = meal_diary.upsert(diary_additions)
     new_diary.to_project_diary()
 
-    shopping_list = ShoppingList(new_diary.meals)
+    shopping_list = ShoppingList(diary_additions.meals)
     shopping_list_filename = shopping_list.get_filename(min(dates), max(dates))
     shopping_list.to_file(SHOPPING_LIST_DIR / shopping_list_filename)
 
