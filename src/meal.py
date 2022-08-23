@@ -131,9 +131,11 @@ class MealDiary:
         """
 
         weekday_str = date.strftime("%A")[:3]
+
         date_number_str = str(date.day)
         if include_date_number_spacing and date.day < 10:
             date_number_str = " " + date_number_str
+
         date_number_suffix = get_day_suffix(date.day)
         month_str = date.strftime("%B")[:3]
 
@@ -381,7 +383,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.CAYENNE_PEPPER, Unit.BOOL, True),
             IngredientQuantity(Ingredients.CHICKEN_BREAST, Unit.GRAM, 700),
             IngredientQuantity(Ingredients.CHICKEN_STOCK, Unit.GRAM, 250),
-            IngredientQuantity(Ingredients.CREAM, Unit.GRAM, 250),
+            IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 250),
             IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 3),
             IngredientQuantity(Ingredients.MOZARELLA_CHEESE, Unit.GRAM, 100),
             IngredientQuantity(Ingredients.PARMESAN_CHEESE, Unit.GRAM, 100),
