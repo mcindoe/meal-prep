@@ -21,10 +21,15 @@ class ConfigEntries(BaseEnum):
 
 
 class Unit(BaseEnum):
-    BOOL = auto()
-    GRAM = auto()
-    MILLILITRE = auto()
-    NUMBER = auto()
+    BOOL = 1, "bool", "bool"
+    GRAM = 2, "gram", "grams"
+    MILLILITRE = 3, "ml", "mls"
+    NUMBER = 4, "unit", "units"
+
+    def __init__(self, order, singular, plural):
+        self.order = order
+        self.singular = singular
+        self.plural = plural
 
     def __repr__(self) -> str:
         return f"Unit.{self.name}"
@@ -42,6 +47,9 @@ class Category(BaseEnum):
     CONDIMENT = auto()
     SAUCE = auto()
     SPICE = auto()
+
+    def __init__(self, order):
+        self.order = order
 
     def __repr__(self) -> str:
         return f"Category.{self.name}"
