@@ -10,14 +10,14 @@ class BaseEnum(Enum):
     def names(cls) -> set:
         return {x.name for x in cls}
 
+    def __repr__(self) -> str:
+        return f"{type(self).__name__}.{self.name}"
+
 
 class ConfigEntries(BaseEnum):
     DATES = "dates"
     EMAIL_ADDRESSES = "email_addresses"
     RULES = "rules"
-
-    def __repr__(self) -> str:
-        return f"ConfigEntries.{self.name}"
 
 
 class Unit(BaseEnum):
@@ -30,9 +30,6 @@ class Unit(BaseEnum):
         self.order = order
         self.singular = singular
         self.plural = plural
-
-    def __repr__(self) -> str:
-        return f"Unit.{self.name}"
 
 
 # Ordering is the list to appear in shopping lists
@@ -52,9 +49,6 @@ class Category(BaseEnum):
         self.order = order
         self.list_header = list_header
 
-    def __repr__(self) -> str:
-        return f"Category.{self.name}"
-
 
 class MealMetadata(BaseEnum):
     pass
@@ -63,17 +57,11 @@ class MealMetadata(BaseEnum):
 class MealProperty(MealMetadata):
     MEAT = auto()
 
-    def __repr__(self) -> str:
-        return f"MealProperty.{self.name}"
-
 
 class MealTag(MealMetadata):
     ROAST = auto()
     PASTA = auto()
     VEGETARIAN = auto()
-
-    def __repr__(self) -> str:
-        return f"MealTag.{self.name}"
 
 
 class MealMeat(BaseEnum):
@@ -82,6 +70,3 @@ class MealMeat(BaseEnum):
     LAMB = auto()
     NONE = auto()
     PORK = auto()
-
-    def __repr__(self) -> str:
-        return f"MealMeat.{self.name}"
