@@ -135,6 +135,3 @@ class Ingredients(BaseEnum):
     VEGETABLE_OIL = Ingredient("Vegetable Oil", Category.CONDIMENT)
     VINE_CHERRY_TOMATO = Ingredient("Vine Cherry Tomato", Category.VEGETABLE)
     YELLOW_PEPPER = Ingredient("Yellow Pepper", Category.VEGETABLE)
-
-    def __repr__(self) -> str:
-        return f"Ingredients.{self.name}"
