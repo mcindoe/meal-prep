@@ -67,7 +67,7 @@ class MealSelector:
 
             # If there is no next date to consider, choose randomly from acceptable meals
             if date == dates[-1]:
-                meal_diary[date] = random.choice(meal_choices.meals)
+                meal_diary[date] = random.choice(meal_choices)
                 break
 
             # Otherwise, if there is a next date, choose randomly from meals which leave as
@@ -90,11 +90,11 @@ class MealSelector:
             # Compute the subcollection of meals which maximise the number of available
             # choices for the next date
             largest_number_of_choices = max(n_available_meals_for_next_date.values())
-            meals_leaving_most_choice = [
+            meals_leaving_most_choice = tuple(
                 meal
                 for meal in meal_choices
                 if n_available_meals_for_next_date[meal] == largest_number_of_choices
-            ]
+            )
 
             meal_diary[date] = random.choice(meals_leaving_most_choice)
 
