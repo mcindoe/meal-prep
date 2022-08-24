@@ -108,6 +108,9 @@ class MealCollection:
     def __iter__(self):
         return BasicIterator(self.meals)
 
+    def __getitem__(self, index):
+        return self.meals[index]
+
     def append(self, other: Meal) -> "MealCollection":
         if not isinstance(other, Meal):
             raise TypeError("Error in MealCollection.append: 'other' must be of type Meal")
