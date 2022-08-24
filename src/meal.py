@@ -8,6 +8,7 @@ from typing import Iterable
 from typing import Union
 from typing import Optional
 
+from mealprep.src.basic_iterator import BasicIterator
 from mealprep.src.constants import BaseEnum
 from mealprep.src.constants import MealMeat
 from mealprep.src.constants import MealMetadata
@@ -103,6 +104,9 @@ class MealCollection:
 
     def __len__(self) -> int:
         return len(self.meals)
+
+    def __iter__(self):
+        return BasicIterator(self.meals)
 
     def append(self, other: Meal) -> "MealCollection":
         if not isinstance(other, Meal):

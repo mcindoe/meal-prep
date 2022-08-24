@@ -1,6 +1,7 @@
 from typing import Any
 from typing import Iterable
 
+from mealprep.src.basic_iterator import BasicIterator
 from mealprep.src.constants import BaseEnum
 from mealprep.src.constants import Category
 from mealprep.src.constants import Unit
@@ -64,6 +65,9 @@ class IngredientQuantityCollection:
         for x in self.ingredient_quantities:
             if not isinstance(x, IngredientQuantity):
                 raise TypeError(f"{x} is not an IngredientQuantity in IngredientQuantityCollection init")
+
+    def __iter__(self):
+        return BasicIterator(self.ingredient_quantities)
 
 
 class Ingredients(BaseEnum):

@@ -4,6 +4,7 @@ import copy
 import datetime as dt
 from typing import Iterable
 
+from mealprep.src.basic_iterator import BasicIterator
 from mealprep.src.constants import BaseEnum
 from mealprep.src.constants import Category
 from mealprep.src.meal import Meal
@@ -64,6 +65,9 @@ class RuleCollection:
 
         return RuleCollection(self.rules + (rule,))
 
+    def __iter__(self):
+        return BasicIterator(self.rules)
+
     def __call__(
         self,
         meal_collection: MealCollection,
@@ -72,7 +76,7 @@ class RuleCollection:
     ) -> MealCollection:
 
         ret = meal_collection
-        for rule in self.rules:
+        for rule in self:
             ret = rule(ret, date, meal_diary)
         return ret
 
@@ -85,7 +89,7 @@ class ForceRoastOnSunday(Rule):
 
         return MealCollection(
             meal
-            for meal in meal_collection.meals
+            for meal in meal_collection
             if meal[MealProperty.ROAST]
         )
 
@@ -103,7 +107,7 @@ class NotPastaTwiceWithinFiveDaysRule(Rule):
 
         return MealCollection(
             meal
-            for meal in meal_collection.meals
+            for meal in meal_collection
             if not meal[MealTag.PASTA]
         )
 
@@ -116,7 +120,7 @@ class NotRoastOnNonSunday(Rule):
 
         return MealCollection(
             meal
-            for meal in meal_collection.meals
+            for meal in meal_collection
             if not meal[MealTag.ROAST]
         )
 
@@ -132,7 +136,7 @@ class NotSameMealWithinSevenDaysRule(Rule):
 
         return MealCollection(
             meal
-            for meal in meal_collection.meals
+            for meal in meal_collection
             if meal.name not in meal_names_to_avoid
         )
 
@@ -147,7 +151,7 @@ class NotSameMeatOnConsecutiveDaysRule(Rule):
 
         return MealCollection(
             meal
-            for meal in meal_collection.meals
+            for meal in meal_collection
             if meal[MealProperty.MEAT] not in meats_to_avoid
         )
 
@@ -168,7 +172,7 @@ class NotSpecifiedMealOnSpecifiedDate(Rule):
 
         return MealCollection(
             meal
-            for meal in meal_collection.meals
+            for meal in meal_collection
             if meal != self.meal_to_avoid
         )
 

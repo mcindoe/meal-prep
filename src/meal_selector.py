@@ -92,7 +92,7 @@ class MealSelector:
             largest_number_of_choices = max(n_available_meals_for_next_date.values())
             meals_leaving_most_choice = [
                 meal
-                for meal in meal_choices.meals
+                for meal in meal_choices
                 if n_available_meals_for_next_date[meal] == largest_number_of_choices
             ]
 

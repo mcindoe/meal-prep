@@ -47,13 +47,13 @@ class ShoppingList:
 
 		if not isinstance(meal_collection, MealCollection):
 			raise TypeError(
-				"Error in ShoppingList init: 'meal_collection' argument must be a MealCollection"\
+				"Error in ShoppingList init: 'meal_collection' argument must be a MealCollection"
 			)
 
 		self.ingredient_summary = {}
 
-		for meal in meal_collection.meals:
-			for ingredient_quantity in meal.ingredient_quantities.ingredient_quantities:
+		for meal in meal_collection:
+			for ingredient_quantity in meal.ingredient_quantities:
 				ingredient = ingredient_quantity.ingredient
 				category = ingredient.value.category
 				unit = ingredient_quantity.unit
@@ -148,5 +148,5 @@ class ShoppingList:
 
 					fp.write(f"{ingredient_entry}\n")
 
-					ingredient_meals_entry = ", ".join(meal.name for meal in meals.meals)
+					ingredient_meals_entry = ", ".join(meal.name for meal in meals)
 					fp.write(f"\t{ingredient_meals_entry}\n")
