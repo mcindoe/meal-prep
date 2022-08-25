@@ -196,6 +196,9 @@ class DateInputGetter(UserInputGetter):
     def __init__(self, supported_options: Iterable[dt.date]):
         super().__init__(supported_options)
 
+        assert len(self.supported_options) > 0, "DateInputGetter must be passed supported options"
+        assert all(isinstance(x, dt.date) for x in self.supported_options)
+
         self.lookup_map = {}
         for idx, date_to_string_map in enumerate(DateInputGetter.DATE_TO_STRING_MAPS):
             string_to_date_map = {
@@ -208,10 +211,7 @@ class DateInputGetter(UserInputGetter):
                 if any(k in self.lookup_map for k in string_to_date_map):
                     raise ValueError("Found an unexpected lookup map collision")
 
-                self.lookup_map = self.lookup_map | string_to_date_map
-
-        assert len(supported_options) > 0, "DateInputGetter must be passed supported options"
-        assert all(isinstance(x, dt.date) for x in self.supported_options)
+                self.lookup_map |= string_to_date_map
 
     def is_valid(self, value) -> bool:
         return value in self.lookup_map
