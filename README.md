@@ -13,3 +13,11 @@ The config file `config.yaml` is used to specify runtime configuration, such as 
 The main routine is at `src/main.py`. Running this file will run the program with the runtime configuration specified in the `config.yaml` file. A selection of meals which don't violate the specified rules are suggested, and the user is prompted to accept the plan or change meals on specified dates. Once rejected, a specified (date, meal) pair will not be recomended again. This process is re-run until the user confirms the selection, or until it is not possible to generate a selection which adheres to the rules.
 
 Once confirmed, a shopping list is generated and saved in the directory `data/shoppingLists`. The list combines ingredients together where possible, and includes the meals which called for each ingredient so that the user may have the final say in what's required.
+
+## Environment
+
+* Tested using Python 3.9 and 3.10
+* Set up a new Python virtual environment using the `requirements.txt` file
+* Add the parent of the project's root directory `mealprep` to your `PYTHONPATH` environment variable
+	- Test by running `from mealprep.src.meal import *` from a directory *not* containing `mealprep`
+* Edit the file `src/loc.py` so that `ROOT_DIR` is the path to the `mealprep` project on your machine
