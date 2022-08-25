@@ -407,7 +407,6 @@ class Meals(BaseEnum):
     SPAGHETTI_BOLOGNESE = Meal(
         name="Spaghetti Bolognese",
         ingredient_quantities=(
-            # TODO: Uncaught duplicate ingredient entries
             IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
             IngredientQuantity(Ingredients.BEEF_MINCE, Unit.GRAM, 500),
             IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),

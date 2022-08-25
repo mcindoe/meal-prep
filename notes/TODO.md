@@ -9,3 +9,7 @@
 
 - [ ] Test that any requirements.txt are required. This project runs with vanilla python right?
 	- Check on the home machine. I think I just need neovim installed for my purposes. Perhaps a python linter as well, but this shouldn't be part of the project setup configuration
+
+- [ ] Check for any TODOs in the source code and move them here
+
+- [ ] Bug: uncaught duplicate ingredient entries in a meal. Test and fix. Unit tests required.
