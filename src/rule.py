@@ -125,7 +125,6 @@ class NotRoastOnNonSunday(Rule):
         )
 
 
-# TODO: May require revisiting and changed to MealTemplates
 class NotSameMealWithinSevenDaysRule(Rule):
     @staticmethod
     def filter(meal_collection: MealCollection, date: dt.date, meal_diary: MealDiary) -> MealCollection:

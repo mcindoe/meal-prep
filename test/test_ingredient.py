@@ -23,8 +23,6 @@ class TestIngredient:
         assert x.name == "Baby Spinach"
         assert x.category is Category.VEGETABLE
 
-# TODO: Need to test for types in IngredientQuantityCollection constructor
-
 
 class TestIngredientQuantity:
     def test_initialiser(self):

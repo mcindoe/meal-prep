@@ -29,7 +29,6 @@ class IngredientQuantity:
                 "'unit' argument must be a Unit in IngredientQuantity init"
             )
 
-        # TODO: Unit test
         if unit is Unit.BOOL and quantity is not True:
             raise TypeError(
                 "Error in IngredientQuantity init: if unit is BOOL, then quantity must be True"
