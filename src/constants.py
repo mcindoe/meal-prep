@@ -33,8 +33,12 @@ class Unit(BaseEnum):
         self.plural = plural
 
 
-# Ordering is the list to appear in shopping lists
 class Category(BaseEnum):
+    """
+    order - order of appearance in shopping lists
+    list_header - title of the category section in shopping lists
+    """
+
     FRUIT = 1, "Fruit"
     VEGETABLE = 2, "Vegetables"
     HERB = 3, "Herbs"
