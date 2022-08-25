@@ -1,5 +1,7 @@
 # TODO
 
+- [ ] Check through the source code for anywhere where we could be iterating directly over a Collection, but are instead using the old implementation of iterating directly over its elements.
+
 - [ ] Regex for email addresses, and verify all email addresses on config load
 
 - [ ] HEALTHY meal tag and rule
