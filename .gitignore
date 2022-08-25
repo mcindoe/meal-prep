@@ -1,4 +1,5 @@
 *__pycache__
+*.pyc
 *.mypy_cache
 mail_credentials.txt
 .DS_STORE
