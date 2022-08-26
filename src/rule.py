@@ -99,7 +99,7 @@ class NotPastaTwiceWithinFiveDaysRule(Rule):
     def filter(meal_collection: MealCollection, date: dt.date, meal_diary: MealDiary) -> MealCollection:
         pasta_within_five_days = any(
             meal[MealTag.PASTA]
-            for meal in meal_diary.filter_by_time_delta(date, dt.timedelta(days=5)).meals.meals
+            for meal in meal_diary.filter_by_time_delta(date, dt.timedelta(days=5)).meals
         )
 
         if not pasta_within_five_days:
@@ -130,7 +130,7 @@ class NotSameMealWithinSevenDaysRule(Rule):
     def filter(meal_collection: MealCollection, date: dt.date, meal_diary: MealDiary) -> MealCollection:
         meal_names_to_avoid = set(
             meal.name
-            for meal in meal_diary.filter_by_time_delta(date, dt.timedelta(days=7)).meals.meals
+            for meal in meal_diary.filter_by_time_delta(date, dt.timedelta(days=7)).meals
         )
 
         return MealCollection(
@@ -145,7 +145,7 @@ class NotSameMeatOnConsecutiveDaysRule(Rule):
     def filter(meal_collection: MealCollection, date: dt.date, meal_diary: MealDiary) -> MealCollection:
         meats_to_avoid = set(
             meal[MealProperty.MEAT]
-            for meal in meal_diary.filter_by_time_delta(date, dt.timedelta(days=1)).meals.meals
+            for meal in meal_diary.filter_by_time_delta(date, dt.timedelta(days=1)).meals
         )
 
         return MealCollection(
