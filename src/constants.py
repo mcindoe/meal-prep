@@ -45,10 +45,11 @@ class Category(BaseEnum):
     CARBOHYDRATE = 4, "Carbohydrates"
     DAIRY = 5, "Dairy"
     MEAT = 6, "Meat"
-    CAN = 7, "Cans"
-    CONDIMENT = 8, "Condiments"
-    SAUCE = 9, "Sauces"
-    SPICE = 10, "Spices"
+    FISH = 7, "Fish"
+    CAN = 8, "Cans"
+    CONDIMENT = 9, "Condiments"
+    SAUCE = 10, "Sauces"
+    SPICE = 11, "Spices"
 
     def __init__(self, order, list_header):
         self.order = order
@@ -72,6 +73,7 @@ class MealTag(MealMetadata):
 class MealMeat(BaseEnum):
     BEEF = auto()
     CHICKEN = auto()
+    FISH = auto()
     LAMB = auto()
     NONE = auto()
     PORK = auto()

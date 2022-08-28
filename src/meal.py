@@ -370,6 +370,27 @@ class Meals(BaseEnum):
             MealProperty.MEAT: MealMeat.CHICKEN
         }
     )
+    CHICKEN_AND_GREEN_BEAN_VERMICELLI_NOODLES = Meal(
+        name="Chilli Chicken Thighs with Cherry Tomatoes",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BABY_CORN, Unit.GRAM, 150),
+            IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.CHICKEN_BREAST, Unit.NUMBER, 3),
+            IngredientQuantity(Ingredients.DARK_SOY_SAUCE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.GINGER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.GREEN_BEANS, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.PAK_CHOI, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.RED_PEPPER, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.SWEET_CHILLI_SAUCE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.VERMICELLI_NOODLES, Unit.GRAM, 200),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.CHICKEN
+        }
+    )
     CHILLI_CHICKEN_THIGHS_WITH_CHERRY_TOMATOES = Meal(
         name="Chilli Chicken Thighs with Cherry Tomatoes",
         ingredient_quantities=(
@@ -400,6 +421,26 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.BEEF
+        }
+    )
+    FISH_PIE = Meal(
+        name="Fish Pie",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BABY_SPINACH, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.CHEDDAR_CHEESE, Unit.GRAM, 150),
+            IngredientQuantity(Ingredients.LEMON, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.OLIVE_OIL, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.PARSLEY, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.POTATO, Unit.GRAM, 900),
+            IngredientQuantity(Ingredients.RAW_KING_PRAWNS, Unit.GRAM, 125),
+            IngredientQuantity(Ingredients.RED_CHILLI, Unit.NUMBER, 0.5),
+            IngredientQuantity(Ingredients.SALMON_FILLET, Unit.GRAM, 300),
+            IngredientQuantity(Ingredients.SMOKED_HADDOCK_FILLET, Unit.GRAM, 300),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.FISH
         }
     )
     PASTA_WITH_CHICKEN_AND_SUNDRIED_TOMATOES = Meal(
