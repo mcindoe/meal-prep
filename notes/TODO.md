@@ -3,6 +3,10 @@
 - [ ] Unit Tests
 	- Think carefully about this. Don't just assert what has been written. Think about what is expected implicitly
 
+- [ ] Add previous meals and deprecate archive directory
+
+- [ ] Check phone for other tasks
+
 - [ ] DateInputGetter can be generalised. If no supported options are passed, then we can use standard formats such as YYYY-MM-DD. If supported options are passed, then that opens up other formats as options as already implemented
 
 - [ ] HEALTHY meal tag and rule
