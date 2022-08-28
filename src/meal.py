@@ -5,8 +5,9 @@ from pathlib import Path
 from typing import Any
 from typing import Dict
 from typing import Iterable
-from typing import Union
 from typing import Optional
+from typing import Tuple
+from typing import Union
 
 from mealprep.src.basic_iterator import BasicIterator
 from mealprep.src.constants import BaseEnum
@@ -42,9 +43,8 @@ class Meal:
         if not isinstance(properties, dict):
             raise TypeError("'properties' argument must be a dict in Meal init")
 
-        for x in properties.keys():
-            if not isinstance(x, MealProperty):
-                raise TypeError(f"{x} is not a MealProperty in Meal init")
+        if not all(isinstance(x, MealProperty) for x in properties):
+            raise TypeError("All keys in 'properties' dictionary must be MealProperties")
 
         missing_properties = tuple(x for x in MealProperty if x not in properties.keys())
         if missing_properties:
@@ -54,7 +54,7 @@ class Meal:
             if isinstance(tags, MealTag):
                 tags = (tags, )
 
-            tags = {x for x in tags}
+            tags = set(tags)
 
             for x in tags:
                 if not isinstance(x, MealTag):
@@ -76,7 +76,8 @@ class Meal:
         return f'Meal(name="{self.name}")'
 
     def __getitem__(self, key: MealMetadata) -> Any:
-        assert isinstance(key, MealMetadata), "Key must be a MealMetadata instance in operator[]"
+        if not isinstance(key, MealMetadata):
+            raise TypeError("'key' must be a MealMetadata instance")
         return self.metadata[key]
 
 
@@ -87,7 +88,8 @@ class MealCollection:
         else:
             self.meals = tuple(x for x in meals)
 
-        assert all(isinstance(x, Meal) for x in self.meals)
+        if not all(isinstance(x, Meal) for x in self.meals):
+            raise TypeError("All entries in 'meals' must be Meals in MealCollection init")
 
     def copy(self) -> "MealCollection":
         return MealCollection(copy.copy(self.meals))
@@ -97,107 +99,83 @@ class MealCollection:
         return MealCollection(x for x in Meals.values())
 
     def __repr__(self) -> str:
-        return str(self.meals)
-
-    def __bool__(self) -> bool:
-        return len(self.meals) > 0
+        return f"MealCollection({self.meals!r})"
 
     def __len__(self) -> int:
         return len(self.meals)
 
-    def __iter__(self):
+    def __bool__(self) -> bool:
+        return len(self) > 0
+
+    def __iter__(self) -> BasicIterator:
         return BasicIterator(self.meals)
 
-    def __getitem__(self, index):
+    def __getitem__(self, index) -> Meal:
         return self.meals[index]
 
-    def append(self, other: Meal) -> "MealCollection":
-        if not isinstance(other, Meal):
-            raise TypeError("Error in MealCollection.append: 'other' must be of type Meal")
+    def __add__(self, other: Union[Meal, "MealCollection"]) -> "MealCollection":
+        if isinstance(other, Meal):
+            return MealCollection(self.meals + (other,))
 
-        return MealCollection(self.meals + (other,))
+        if isinstance(other, MealCollection):
+            return MealCollection(self.meals + other.meals)
+
+        raise TypeError("'other' must be one of Meal or MealCollection")
 
 
 class MealDiary:
     DATE_FORMAT = "%Y-%m-%d"
 
-    @staticmethod
-    def get_pretty_print_date_string(
-        date: dt.date,
-        include_date_number_spacing: bool = False,
-        include_year: bool = False
-    ) -> str:
-        """
-        Get a representation of a date object as, e.g., Wed 5th Jan 22.
-
-        Args:
-        include_date_number_spacing: whether to ensure that the date number
-            portion of the returned string has two characters, by left-padding
-            numbers less than 10 with a space
-        include_year: if true, include the final two characters of the year
-        """
-
-        weekday_str = date.strftime("%A")[:3]
-
-        date_number_str = str(date.day)
-        if include_date_number_spacing and date.day < 10:
-            date_number_str = " " + date_number_str
-
-        date_number_suffix = get_day_suffix(date.day)
-        month_str = date.strftime("%B")[:3]
-
-        ret = f"{weekday_str} {date_number_str}{date_number_suffix} {month_str}"
-
-        if include_year:
-            ret += f" {date.strftime('%Y')}"
-
-        return ret
-
-    def __init__(self, meal_diary: Dict[dt.date, Meal] = None):
+    def __init__(self, meal_diary: Optional[Dict[dt.date, Meal]] = None):
         if meal_diary is not None:
-            assert isinstance(meal_diary, dict)
+            if not isinstance(meal_diary, dict):
+                raise TypeError("meal_diary, if specified, must be a dictionary in MealDiary init")
 
         if meal_diary is None:
             self.meal_diary = dict()
         else:
             self.meal_diary = meal_diary.copy()
 
-        assert all(isinstance(x, dt.date) for x in self.meal_diary.keys())
-        assert all(isinstance(x, Meal) for x in self.meal_diary.values())
+        if not all(isinstance(x, dt.date) for x in self.meal_diary):
+            raise TypeError("All keys of 'meal_diary' must be datetime.dates in MealDiary init")
 
-    def copy(self):
+        if not all(isinstance(x, Meal) for x in self.meal_diary.values()):
+            raise TypeError("All values of 'meal_diary' must be Meals in MealDiary init")
+
+    def copy(self) -> "MealDiary":
         return MealDiary(copy.copy(self.meal_diary))
 
     def __getitem__(self, date: dt.date) -> Meal:
         if not isinstance(date, dt.date):
-            raise ValueError("Key must be date in MealDiary.__getitem__")
+            raise TypeError("Key must be date in MealDiary.__getitem__")
 
         return self.meal_diary[date]
 
     def __setitem__(self, date: dt.date, meal: Meal) -> None:
         if not isinstance(date, dt.date):
-            raise ValueError("Key must be date in MealDiary.__getitem__")
+            raise TypeError("Key must be date in MealDiary.__getitem__")
         if not isinstance(meal, Meal):
-            raise ValueError("value must be a Meal in MealDiary.__getitem__")
+            raise TypeError("value must be a Meal in MealDiary.__getitem__")
 
         self.meal_diary[date] = meal
 
     @property
-    def dates(self):
+    def dates(self) -> Tuple[dt.date]:
         return tuple(self.meal_diary.keys())
 
     @property
-    def meals(self):
+    def meals(self) -> MealCollection:
         return MealCollection(self.meal_diary.values())
 
     def items(self):
         return self.meal_diary.items()
 
-    def get_representation(self):
+    def get_representation(self) -> Dict[str, str]:
         """
-        Represent the instance as a dictionary mapping date strings
-        to meal names
+        Represent the instance as a dictionary mapping date strings to
+        meal names
         """
+
         ret = {
             date.strftime(MealDiary.DATE_FORMAT): meal.name
             for date, meal in self.items()
@@ -233,7 +211,7 @@ class MealDiary:
         self.to_file(PROJECT_DIARY_FILEPATH)
 
     @staticmethod
-    def from_project_diary() -> None:
+    def from_project_diary() -> "MealDiary":
         return MealDiary.from_file(PROJECT_DIARY_FILEPATH)
 
     def upsert(self, other: "MealDiary") -> "MealDiary":
@@ -242,7 +220,7 @@ class MealDiary:
     def difference(self, other: "MealDiary") -> "MealDiary":
         return MealDiary({
             date: meal
-            for date, meal in self.meal_diary.copy().items()
+            for date, meal in self.meal_diary.items()
             if date not in other.meal_diary.keys()
         })
 
@@ -254,15 +232,18 @@ class MealDiary:
         })
 
     def except_dates(self, dates_to_exclude: Iterable[dt.date]) -> "MealDiary":
-        "Return a copy of the MealDiary with the specified dates removed (if present)"
+        """
+        Return a copy of the MealDiary with the specified dates removed
+        (if present)
+        """
 
-        # Ensure dates_to_exclude is iterable
         if isinstance(dates_to_exclude, dt.date):
             dates_to_exclude = (dates_to_exclude, )
 
-        # Ensure only dt.dates are passed; copy to not exhaust generators
         dates_to_exclude = set(x for x in dates_to_exclude)
-        assert all(isinstance(x, dt.date) for x in dates_to_exclude)
+
+        if not all(isinstance(x, dt.date) for x in dates_to_exclude):
+            raise TypeError("All passed dates must be datetime.dates")
 
         return MealDiary({
             meal_date: meal
@@ -270,8 +251,40 @@ class MealDiary:
             if meal_date not in dates_to_exclude
         })
 
-    def get_pretty_print_string(self):
-        include_date_number_spacing = any(x.day > 10 for x in self.dates)
+    @staticmethod
+    def get_pretty_print_date_string(
+        date: dt.date,
+        include_date_number_spacing: bool = False,
+        include_year: bool = False
+    ) -> str:
+        """
+        Get a representation of a date object as, e.g., Wed 5th Jan 22.
+
+        Args:
+        include_date_number_spacing: whether to ensure that the date
+            number portion of the returned string has two characters, by
+            left-padding numbers less than 10 with a space
+        include_year: if true, include the final two characters of the year
+        """
+
+        weekday_str = date.strftime("%A")[:3]
+
+        date_number_str = str(date.day)
+        if include_date_number_spacing and date.day < 10:
+            date_number_str = " " + date_number_str
+
+        date_number_suffix = get_day_suffix(date.day)
+        month_str = date.strftime("%B")[:3]
+
+        ret = f"{weekday_str} {date_number_str}{date_number_suffix} {month_str}"
+
+        if include_year:
+            ret += f" {date.strftime('%Y')}"
+
+        return ret
+
+    def get_pretty_print_string(self) -> str:
+        include_date_number_spacing = any(x.day >= 10 for x in self.dates)
         include_year = len(set(x.year for x in self.dates)) > 1
 
         lines = []

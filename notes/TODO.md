@@ -1,7 +1,5 @@
 # TODO
 
-- [ ] Check through the source code for anywhere where we could be iterating directly over a Collection, but are instead using the old implementation of iterating directly over its elements.
-
 - [ ] DateInputGetter can be generalised. If no supported options are passed, then we can use standard formats such as YYYY-MM-DD. If supported options are passed, then that opens up other formats as options as already implemented
 
 - [ ] Regex for email addresses, and verify all email addresses on config load

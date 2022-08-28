@@ -20,6 +20,7 @@ from typing import Any
 from typing import Iterable
 from typing import Optional
 from typing import Tuple
+from typing import Union
 
 from mealprep.src.utils import get_day_suffix
 
@@ -43,8 +44,8 @@ class UserInputGetter(ABC):
 
     def is_supported(self, value: Any) -> bool:
         """
-        Check that the parsed input is a supported option. Typically this will
-        not need to be overloaded
+        Check that the parsed input is a supported option. Typically this
+        will not need to be overloaded
         """
 
         if self.supported_options is None:
@@ -57,12 +58,18 @@ class UserInputGetter(ABC):
 
     @staticmethod
     def is_valid(value: str) -> bool:
-        """Check that conversion to the required type makes sense"""
+        """
+        Check that conversion to the required type makes sense
+        """
+
         return True
 
     @staticmethod
     def parse(value: str) -> str:
-        "Conversion from string to required type"
+        """
+        Convert the user input from string to the required type
+        """
+
         return value
 
     def get_input(self) -> Any:
@@ -94,7 +101,7 @@ class UserInputGetter(ABC):
 
             print(self.NOT_SUPPORTED_MESSAGE)
 
-    def get_multiple_inputs(self) -> Tuple[Any]:
+    def get_multiple_inputs(self) -> Union[None, Tuple[Any]]:
         """
         Similar to get_input(), but get multiple values separated by commas
         """
@@ -155,11 +162,6 @@ class CaseInsensitiveStringInputGetter(UserInputGetter):
         super().__init__(supported_options)
 
     def is_supported(self, value: Any) -> bool:
-        """
-        Check that the parsed input is a supported option. Typically this will
-        not need to be overloaded
-        """
-
         if self.supported_options is None:
             return True
 
@@ -208,7 +210,9 @@ class DateInputGetter(UserInputGetter):
     def __init__(self, supported_options: Iterable[dt.date]):
         super().__init__(supported_options)
 
-        assert len(self.supported_options) > 0, "DateInputGetter must be passed supported options"
+        if len(self.supported_options) == 0:
+            raise ValueError("DateInputGetter must be passed supported options")
+
         assert all(isinstance(x, dt.date) for x in self.supported_options)
 
         self.lookup_map = {}

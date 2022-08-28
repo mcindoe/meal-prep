@@ -49,12 +49,12 @@ class IngredientQuantity:
             raise TypeError("Error in IngredientQuantity.__add__: both operands must have the same unit field")
 
         if self.unit is Unit.BOOL:
-            return IngredientQuantity(self.ingredient, Unit.BOOL, True)
+            return IngredientQuantity(self.ingredient, Unit.BOOL, self.quantity or other.quantity)
 
         return IngredientQuantity(self.ingredient, self.unit, self.quantity + other.quantity)
 
     def __repr__(self) -> str:
-        return f"IngredientQuantity({self.ingredient}, {self.unit}, {self.quantity})"
+        return f"IngredientQuantity({self.ingredient!r}, {self.unit!r}, {self.quantity!r})"
 
 
 class IngredientQuantityCollection:

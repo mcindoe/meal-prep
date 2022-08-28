@@ -1,17 +1,4 @@
-"""
-Notes:
-
-Purpose of the class is to provide a neat interface to recording and writing
-ingredients required for a collection 
-
-Some sort of grouping is required:
-	- I want to group ingredients together:
-		- If we have two IngredientQuantities of the same Ingredient and Unit, they can be directly summed
-		- Otherwise, I'm going to keep them separate
-		- It's important to retain the ingredients from which each ingredient collection is composed,
-			since I'm going to display it in the final output
-"""
-
+import collections
 import datetime as dt
 from pathlib import Path
 from typing import Iterable
@@ -27,7 +14,7 @@ class ShoppingList:
 	DATE_FORMAT_FOR_FILENAME = "%Y%m%d"
 
 	@staticmethod
-	def get_filename(start_date: dt.date, end_date: dt.date):
+	def get_filename(start_date: dt.date, end_date: dt.date) -> str:
 		start_date_str = start_date.strftime(ShoppingList.DATE_FORMAT_FOR_FILENAME)
 		end_date_str = end_date.strftime(ShoppingList.DATE_FORMAT_FOR_FILENAME)
 
@@ -41,14 +28,12 @@ class ShoppingList:
 							   -> Units -> IngredientQuantity
 
 		Ingredient nodes point to the meals which contribute some of that
-		Ingredient, and the total IngredientQuantities in each represented
-		unit
+		Ingredient, and the total IngredientQuantities in each
+		represented unit
 		"""
 
 		if not isinstance(meal_collection, MealCollection):
-			raise TypeError(
-				"Error in ShoppingList init: 'meal_collection' argument must be a MealCollection"
-			)
+			raise TypeError("'meal_collection' argument must be a MealCollection")
 
 		self.ingredient_summary = {}
 
@@ -67,9 +52,7 @@ class ShoppingList:
 						"quantities": {}
 					}
 
-				self.ingredient_summary[category][ingredient]["meals"] = (
-					self.ingredient_summary[category][ingredient]["meals"].append(meal)
-				)
+				self.ingredient_summary[category][ingredient]["meals"] += meal
 
 				if unit in self.ingredient_summary[category][ingredient]["quantities"]:
 					self.ingredient_summary[category][ingredient]["quantities"][unit] += ingredient_quantity
@@ -80,26 +63,38 @@ class ShoppingList:
 	def get_ingredient_quantity_description(ingredient_quantities: Iterable[IngredientQuantity]) -> Union[str, None]:
 		"""
 		Get a human-readable description of the quantities required of a
-		given ingredient to be included in a shopping list. E.g.
+		given ingredient (to be included in a shopping list). Return None
+		in the case of only boolean units, to avoid "Apple - some" type
+		entries
 
-		((Ingredients.APPLE, Unit.BOOL, True),
-			(Ingredients.APPLE, Unit.NUMBER, 2)) -> "2 units and some extra"
+		Examples:
 
-		((Ingredients.BANANA, Unit.BOOL, True)) -> None
+		(
+			(Ingredients.APPLE, Unit.BOOL, True),
+			(Ingredients.APPLE, Unit.NUMBER, 2)
+		) -> "2 units and some extra"
+
+		((Ingredients.BANANA, Unit.BOOL, True), ) -> None
 		"""
 
 		if not all(isinstance(x, IngredientQuantity) for x in ingredient_quantities):
 			raise TypeError("Entries passed in ingredient_quantities must be IngredientQuantities")
 
-		ingredient_quantities = sorted(ingredient_quantities, key = lambda x: x.unit.order)
+		if len(set(x.ingredient for x in ingredient_quantities)) != 1:
+			raise ValueError("Multiple ingredients passed to get_ingredient_quantity_description")
 
-		bool_entry = any(x.unit == Unit.BOOL for x in ingredient_quantities)
+		# There should be no more than one of each unit passed
+		if max(collections.Counter(x.unit for x in ingredient_quantities).values()) != 1:
+			raise ValueError("Multiple entries passed for a unit in get_ingredient_quantity_description")
 
-		# If there is only one entry, and it's a BOOL, there's no message to display
-		if len(ingredient_quantities) == 1 and bool_entry:
+		units = {x.unit for x in ingredient_quantities}
+
+		# If there are only boolean entries, there's no message to display
+		if units == {Unit.BOOL}:
 			return
 
-		non_bool_quantities = tuple(x for x in ingredient_quantities if x.unit != Unit.BOOL)
+		ingredient_quantities = sorted(ingredient_quantities, key = lambda x: x.unit.order)
+		non_bool_quantities = tuple(x for x in ingredient_quantities if x.unit is not Unit.BOOL)
 
 		quantity_descriptions = [
 			f"{x.quantity} {x.unit.singular if x.quantity == 1 else x.unit.plural}"
@@ -108,7 +103,7 @@ class ShoppingList:
 
 		ingredient_quantity_description = ", ".join(quantity_descriptions)
 
-		if bool_entry:
+		if Unit.BOOL in units:
 			ingredient_quantity_description += " plus some extra"
 
 		return ingredient_quantity_description
@@ -143,7 +138,7 @@ class ShoppingList:
 					ingredient_entry = f"- [ ] {ingredient.value.name}"
 
 					ingredient_quantity_description = self.get_ingredient_quantity_description(quantities)
-					if ingredient_quantity_description:
+					if ingredient_quantity_description is not None:
 						ingredient_entry += f": {ingredient_quantity_description}"
 
 					fp.write(f"{ingredient_entry}\n")

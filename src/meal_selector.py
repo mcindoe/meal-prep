@@ -1,6 +1,8 @@
 import datetime as dt
 import random
 from typing import Iterable
+from typing import Optional
+from typing import Union
 
 from mealprep.src.exceptions import OutOfMealsError
 from mealprep.src.meal import MealCollection
@@ -27,7 +29,7 @@ class MealSelector:
         self,
         dates: Iterable[dt.date],
         rule_collection: RuleCollection,
-        recommended_diary: MealDiary = None
+        recommended_diary: Optional[MealDiary] = None
     ) -> MealDiary:
         """
         Recommend a MealDiary of Meals for the specified dates
@@ -73,7 +75,7 @@ class MealSelector:
             # Otherwise, if there is a next date, choose randomly from meals which leave as
             # much choise as possible for the next date
             n_available_meals_for_next_date = {}
-            for meal in meal_choices.meals:
+            for meal in meal_choices:
                 proposed_diary = meal_diary.copy()
                 proposed_diary[date] = meal
 
@@ -87,8 +89,8 @@ class MealSelector:
 
                 n_available_meals_for_next_date[meal] = len(next_date_meal_choices)
 
-            # Compute the subcollection of meals which maximise the number of available
-            # choices for the next date
+            # Compute the subcollection of meals which maximise the
+            # number of available choices for the next date
             largest_number_of_choices = max(n_available_meals_for_next_date.values())
             meals_leaving_most_choice = tuple(
                 meal
@@ -101,7 +103,7 @@ class MealSelector:
         # Return only the new, recommended portion of the diary
         return meal_diary.difference(self.original_meal_diary)
 
-    def recommend_until_confirmed(self, dates: Iterable[dt.date]) -> MealDiary:
+    def recommend_until_confirmed(self, dates: Iterable[dt.date]) -> Union[None, MealDiary]:
         user_confirmed_getter = CaseInsensitiveStringInputGetter(("Y", "N"))
         rule_collection = self.original_rule_collection.copy()
         recommended_diary = None

@@ -10,6 +10,7 @@ from mealprep.src.constants import Category
 from mealprep.src.meal import Meal
 from mealprep.src.meal import MealCollection
 from mealprep.src.meal import MealDiary
+from mealprep.src.meal import MealMeat
 from mealprep.src.meal import MealTag
 from mealprep.src.meal import MealProperty
 
@@ -28,13 +29,22 @@ class Rule(ABC):
         meal_diary: MealDiary
     ) -> MealCollection:
 
-        assert isinstance(meal_collection, MealCollection)
-        assert isinstance(meal_diary, MealDiary), f"Rule was pased a {type(meal_diary)}"
-        assert date not in meal_diary.dates, f"{date.strftime('%Y-%m-%d')} is in the passed MealDiary"
+        if not isinstance(meal_collection, MealCollection):
+            raise TypeError("'meal_collection' parameter must be a MealCollection")
+
+        if not isinstance(meal_diary, MealDiary):
+            raise TypeError(f"'meal_diary' parameter must be a MealDiary")
+
+        if date in meal_diary.dates:
+            raise ValueError(
+                f"Rule was passed a date, {date.strftime('%Y-%m-%d')}, which is already in the passed MealDiary"
+            )
 
         meal_collection = meal_collection.copy()
         ret = self.filter(meal_collection, date, meal_diary)
-        assert isinstance(ret, MealCollection), f"Rule returned a {type(ret)}"
+
+        if not isinstance(ret, MealCollection):
+            raise TypeError(f"Rule returned a type {type(ret)} instead of a MealCollection")
 
         return ret
 
@@ -44,17 +54,19 @@ class Rule(ABC):
         raise NotImplementedError("A Rule's filter method must be implemented")
 
     @staticmethod
-    def from_name(rule_name: str):
+    def from_name(rule_name: str) -> "Rule":
         for rule in Rules:
             if rule.name.lower() == rule_name.lower():
                 return rule.value
+
         raise ValueError(f'Could not find the rule "{rule_name}"')
 
 
 class RuleCollection:
     def __init__(self, rules: Iterable[Rule]):
         self.rules = tuple(x for x in rules)
-        assert all(isinstance(x, Rule) for x in self.rules)
+        if not all(isinstance(x, Rule) for x in self.rules):
+            raise TypeError("RuleCollection init was passed an element which is not a Rule")
 
     def copy(self) -> "RuleCollection":
         return RuleCollection(copy.copy(self.rules))
@@ -65,7 +77,7 @@ class RuleCollection:
 
         return RuleCollection(self.rules + (rule,))
 
-    def __iter__(self):
+    def __iter__(self) -> BasicIterator:
         return BasicIterator(self.rules)
 
     def __call__(
@@ -146,6 +158,7 @@ class NotSameMeatOnConsecutiveDaysRule(Rule):
         meats_to_avoid = set(
             meal[MealProperty.MEAT]
             for meal in meal_diary.filter_by_time_delta(date, dt.timedelta(days=1)).meals
+            if meal[MealProperty.MEAT] is not MealMeat.NONE
         )
 
         return MealCollection(
@@ -158,7 +171,7 @@ class NotSameMeatOnConsecutiveDaysRule(Rule):
 class NotSpecifiedMealOnSpecifiedDate(Rule):
     def __init__(self, date: dt.date, meal_to_avoid: Meal):
         if not isinstance(date, dt.date):
-            raise TypeError("'date' argument must be a dt.date in NotSpecifiedMealOnSpecifiedDate init")
+            raise TypeError("'date' argument must be a datetime.date in NotSpecifiedMealOnSpecifiedDate init")
         if not isinstance(meal_to_avoid, Meal):
             raise TypeError("'meal_to_avoid' argument must be a Meal in NotSpecifiedMealOnSpecifiedDate init")
 
