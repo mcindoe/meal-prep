@@ -7,7 +7,8 @@ def get_day_suffix(day_number: int) -> str:
     2 -> 'nd', 13 -> 'th'
     """
 
-    assert isinstance(day_number, int), "get_day_suffix must be passed an integer"
+    if not isinstance(day_number, int):
+        raise TypeError("Error in get_day_suffix: 'day_number' argument must be an integer")
 
     if day_number in itertools.chain(range(4, 21), range(24, 31)):
         return "th"
