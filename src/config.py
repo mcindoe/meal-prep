@@ -1,4 +1,5 @@
 import datetime as dt
+import re
 from typing import Tuple
 import yaml
 
@@ -11,13 +12,21 @@ config_filepath = ROOT_DIR / "config.yaml"
 
 
 class Config:
+    email_address_regex = re.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$", re.IGNORECASE)
+
     def __init__(self) -> None:
         with open(config_filepath, "r") as fp:
             self.config = yaml.load(fp, yaml.SafeLoader)
 
     @property
     def email_addresses(self) -> Tuple[str]:
-        return tuple(self.config[ConfigEntries.EMAIL_ADDRESSES.value])
+        ret = tuple(self.config[ConfigEntries.EMAIL_ADDRESSES.value])
+
+        bad_addresses = tuple(x for x in ret if not self.email_address_regex.match(x))
+        if bad_addresses:
+            raise ValueError(f"Bad email addresses in project config: {bad_addresses}")
+
+        return ret
 
     @property
     def dates(self) -> Tuple[dt.date]:
