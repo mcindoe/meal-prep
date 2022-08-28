@@ -1,3 +1,4 @@
+import collections
 import copy
 import datetime as dt
 import json
@@ -49,6 +50,11 @@ class Meal:
         missing_properties = tuple(x for x in MealProperty if x not in properties.keys())
         if missing_properties:
             raise ValueError(f"Unspecified properties in Meal construction: {missing_properties}")
+
+        # There should not be more than one entry of a given ingredient
+        # in the passed ingredient_quantities collection
+        if max(collections.Counter(x.ingredient for x in ingredient_quantities).values()) > 1:
+            raise ValueError("Passed multiple entries of the same ingredient in Meal init")
 
         if tags is not None:
             if isinstance(tags, MealTag):

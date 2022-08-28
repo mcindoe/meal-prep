@@ -12,7 +12,9 @@
 - [ ] Test that any requirements.txt are required. This project runs with vanilla python right?
 	- Check on the home machine. I think I just need neovim installed for my purposes. Perhaps a python linter as well, but this shouldn't be part of the project setup configuration
 
-- [ ] Bug: uncaught duplicate ingredient entries in a meal. Test and fix. Unit tests required.
+- [ ] Bug: uncaught duplicate ingredient entries in a meal
+	- [X] Add fix
+	- [ ] Add unit test
 
 - [ ] Unit test for IngredientQuantities that (Ingredient.X, BOOL, False) is not allowed
 
