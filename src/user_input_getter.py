@@ -1,3 +1,15 @@
+"""
+Provides a hierarchy of classes which get and parse user input.
+
+There is some understanding of the type to cast the user input string
+into, and (optionally) a set of supported options. The getter will
+continuously prompt the user for a parsable, supported option until one
+is provided, or until an exit signal is passed.
+
+If no supported options are provided, then any parsable input is accepted
+"""
+
+
 from abc import abstractmethod
 from abc import ABC
 import datetime as dt
@@ -6,8 +18,8 @@ import functools
 import re
 from typing import Any
 from typing import Iterable
+from typing import Optional
 from typing import Tuple
-from typing import Union
 
 from mealprep.src.utils import get_day_suffix
 
@@ -23,7 +35,7 @@ class UserInputGetter(ABC):
     MULTIPLE_COULD_NOT_PARSE_MESSAGE = "Could not parse inputs"
     MULTIPLE_NOT_SUPPORTED_MESSAGE = "Unsupported options passed"
 
-    def __init__(self, supported_options: Union[None, Iterable[Any]] = None):
+    def __init__(self, supported_options: Optional[Iterable[Any]] = None):
         if supported_options is None:
             self.supported_options = None
         else:
@@ -126,7 +138,7 @@ class UserInputGetter(ABC):
 class IntegerInputGetter(UserInputGetter):
     regex = re.compile("^([-+]?[1-9][0-9]*|0)$")
 
-    def __init__(self, supported_options: Union[None, Iterable[int]] = None):
+    def __init__(self, supported_options: Optional[Iterable[int]] = None):
         super().__init__(supported_options)
 
     @staticmethod
@@ -139,7 +151,7 @@ class IntegerInputGetter(UserInputGetter):
 
 
 class CaseInsensitiveStringInputGetter(UserInputGetter):
-    def __init__(self, supported_options: Union[None, Iterable[str]] = None):
+    def __init__(self, supported_options: Optional[Iterable[str]] = None):
         super().__init__(supported_options)
 
     def is_supported(self, value: Any) -> bool:
