@@ -1,5 +1,5 @@
 import datetime as dt
-from typing import Any, Dict, Tuple
+from typing import Tuple
 import yaml
 
 from mealprep.src.constants import ConfigEntries
@@ -13,7 +13,7 @@ config_filepath = ROOT_DIR / "config.yaml"
 class Config:
     def __init__(self) -> None:
         with open(config_filepath, "r") as fp:
-            self.config: Dict[Any, Any] = yaml.load(fp, yaml.SafeLoader)
+            self.config = yaml.load(fp, yaml.SafeLoader)
 
     @property
     def email_addresses(self) -> Tuple[str]:
