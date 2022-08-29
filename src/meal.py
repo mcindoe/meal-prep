@@ -443,6 +443,64 @@ class Meals(BaseEnum):
             MealProperty.MEAT: MealMeat.FISH
         }
     )
+    HONEY_GARLIC_SALMON = Meal(
+        name="Honey-Garlic Salmon",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BUTTER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.FRESH_LEMON_JUICE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 4),
+            IngredientQuantity(Ingredients.HONEY, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.PAPRIKA, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.SALMON_FILLET, Unit.GRAM, 1000),
+            IngredientQuantity(Ingredients.SOY_SAUCE, Unit.BOOL, True),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.FISH
+        }
+    )
+    INDIAN_LAMB_WITH_SPICED_LENTILS = Meal(
+        name="Indian Lamb with Spiced Lentils",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BONELESS_LEG_OF_LAMB, Unit.GRAM, 500),
+            IngredientQuantity(Ingredients.CARDAMOM, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.CINAMMON_STICK, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.CORIANDER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.CUMIN, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.GINGER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.LAMB_STOCK, Unit.MILLILITRE, 600),
+            IngredientQuantity(Ingredients.LEMON, Unit.NUMBER, 0.5),
+            IngredientQuantity(Ingredients.LENTILS, Unit.GRAM, 225),
+            IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.PLUM_TOMATOES, Unit.NUMBER, 4),
+            IngredientQuantity(Ingredients.RED_CHILLI, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.SUNFLOWER_OIL, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.TUMERIC, Unit.BOOL, True),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.LAMB
+        }
+    )
+    KEDGEREE = Meal(
+        name="Kedgeree",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.CORIANDER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.EGGS, Unit.NUMBER, 4),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.GINGER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.LONG_GRAIN_RICE, Unit.GRAM, 250),
+            IngredientQuantity(Ingredients.MEDIUM_CURRY_POWDER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.MILK, Unit.MILLILITRE, 150),
+            IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.PARSLEY, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.SMOKED_HADDOCK_FILLET, Unit.GRAM, 400),
+            IngredientQuantity(Ingredients.TUMERIC, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.VEGETABLE_STOCK, Unit.MILLILITRE, 350),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.FISH
+        }
+    )
     PASTA_WITH_CHICKEN_AND_SUNDRIED_TOMATOES = Meal(
         name="Pasta with Chicken and Sundried Tomatoes",
         ingredient_quantities=(
