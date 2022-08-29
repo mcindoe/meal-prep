@@ -18,6 +18,7 @@ class BaseEnum(Enum):
 class ConfigEntries(BaseEnum):
     DATES = "dates"
     EMAIL_ADDRESSES = "email_addresses"
+    MEALS = "meals"
     RULES = "rules"
 
 

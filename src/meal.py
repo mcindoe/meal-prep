@@ -100,10 +100,6 @@ class MealCollection:
     def copy(self) -> "MealCollection":
         return MealCollection(copy.copy(self.meals))
 
-    @staticmethod
-    def from_supported_meals() -> "MealCollection":
-        return MealCollection(x for x in Meals.values())
-
     def __repr__(self) -> str:
         return f"MealCollection({self.meals!r})"
 
@@ -371,7 +367,7 @@ class Meals(BaseEnum):
         }
     )
     CHICKEN_AND_GREEN_BEAN_VERMICELLI_NOODLES = Meal(
-        name="Chilli Chicken Thighs with Cherry Tomatoes",
+        name="Chicken and Green Bean Vermicelli Noodles",
         ingredient_quantities=(
             IngredientQuantity(Ingredients.BABY_CORN, Unit.GRAM, 150),
             IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 2),

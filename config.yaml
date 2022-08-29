@@ -10,3 +10,23 @@ rules:
   - NOT_ROAST_ON_NON_SUNDAY
   - NOT_SAME_MEAL_WITHIN_SEVEN_DAYS
   - NOT_SAME_MEAT_ON_CONSECUTIVE_DAYS
+meals:
+  - Beef and Ale Stew
+  - Burgers
+  - Chicken Fajitas
+  - Chicken Taleggio
+  - Chicken and Green Bean Vermicelli Noodles
+  - Chilli Chicken Thighs with Cherry Tomatoes
+  - Chilli con Carne
+  - Indian Lamb with Spiced Lentils
+  - Lasagne
+  - Moussaka
+  - Pasta with Chicken and Sundried Tomatoes
+  - Quiche Lorraine
+  - Roast Beef
+  - Roast Chicken
+  - Roast Lamb
+  - Roast Pork
+  - Shephards Pie
+  - Spaghetti Bolognese
+  - Sticky Chinese Pork Belly

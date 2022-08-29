@@ -10,7 +10,7 @@ from mealprep.src.shopping_list import ShoppingList
 
 
 if __name__ == "__main__":
-    meal_collection = MealCollection.from_supported_meals()
+    meal_collection = config.meal_collection
     rule_collection = config.rule_collection
     meal_diary = MealDiary.from_project_diary()
     meal_selector = MealSelector(

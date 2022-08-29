@@ -5,6 +5,8 @@ import yaml
 
 from mealprep.src.constants import ConfigEntries
 from mealprep.src.loc import ROOT_DIR
+from mealprep.src.meal import Meal
+from mealprep.src.meal import MealCollection
 from mealprep.src.rule import Rule
 from mealprep.src.rule import RuleCollection
 
@@ -34,6 +36,15 @@ class Config:
         if not all(isinstance(x, dt.date) for x in ret):
             raise ValueError("Not all config date entries are in the correct format")
         return ret
+
+    @property
+    def meals(self) -> Tuple[Meal]:
+        meal_names = tuple(self.config[ConfigEntries.MEALS.value])
+        return tuple(Meal.from_name(x) for x in meal_names)
+
+    @property
+    def meal_collection(self) -> MealCollection:
+        return MealCollection(self.meals)
 
     @property
     def rules(self) -> Tuple[Rule]:

@@ -122,9 +122,3 @@ class TestMealCollection:
 
         # MealCollections should maintain their own copy of their meals
         assert meal_collection.meals is not meals
-
-    def from_supported_meals(self):
-        """Test that we can load meals from the project supported specification"""
-
-        x = MealCollection.from_supported_meals()
-        assert isinstance(x, MealCollection)
