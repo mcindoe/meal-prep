@@ -3,7 +3,10 @@
 - [ ] Unit Tests
 	- Think carefully about this. Don't just assert what has been written. Think about what is expected implicitly
 
-- [ ] Add previous meals and deprecate archive directory
+- [ ] Consolidate old meals file
+	- [X] Copy old meals into new structure
+	- [ ] Remove old file
+		- I'm going to wait to confirm meals before doing this. Perhaps with the help of helper scripts
 
 - [ ] Check phone for other tasks
 
@@ -24,7 +27,5 @@
 	- [ ] Add unit test
 
 - [ ] Unit test for IngredientQuantities that (Ingredient.X, BOOL, False) is not allowed
-
-- [ ] Once we have changed Meals -> MealTemplates: update rule NotSameMealWithinSevenDays to be NotSameMainWithinSevenDays
 
 - [ ] Unit tests for types in IngredientQuantityCollection initialiser
