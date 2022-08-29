@@ -16,10 +16,6 @@
 
 - [ ] HEALTHY meal tag and rule
 
-- Helper Scripts
-	- Displayed programmed meals, ingredients to console
-	- Display tags on the meals, check for spelling mistakes etc, check that ingredients are in appropriate categories
-
 - [ ] Move linuxMachineRequirements.txt out of the project repository
 	- (Recall that the project runs with only a few dependencies)
 	- Check what needs to be saved on the Linux machine and remove this file
