@@ -2,6 +2,8 @@
 
 - [ ] Unit Tests
 	- Think carefully about this. Don't just assert what has been written. Think about what is expected implicitly
+	- [ ] Test for IngredientQuantities that (Ingredient.X, BOOL, False) is not allowed
+	- [ ] Tests for types in IngredientQuantityCollection initialiser
 
 - [ ] Consolidate old meals file
 	- [X] Copy old meals into new structure
@@ -25,7 +27,3 @@
 - [ ] Bug: uncaught duplicate ingredient entries in a meal
 	- [X] Add fix
 	- [ ] Add unit test
-
-- [ ] Unit test for IngredientQuantities that (Ingredient.X, BOOL, False) is not allowed
-
-- [ ] Unit tests for types in IngredientQuantityCollection initialiser
