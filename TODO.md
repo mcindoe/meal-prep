@@ -1,7 +1,5 @@
 # TODO
 
-- Config should load meal universe. It should be specified, and distinct from the database of meals which exist
-
 - [ ] Unit Tests
 	- Think carefully about this. Don't just assert what has been written. Think about what is expected implicitly
 
