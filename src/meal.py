@@ -410,7 +410,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.CHOPPED_TOMATOES, Unit.NUMBER, 1),
             IngredientQuantity(Ingredients.FRESH_CHILLI, Unit.NUMBER, 1),
             IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 2),
-            IngredientQuantity(Ingredients.KIDNEY_BEAN, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.KIDNEY_BEANS, Unit.NUMBER, 1),
             IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 1),
             IngredientQuantity(Ingredients.RICE, Unit.GRAM, 250),
             IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.BOOL, True),

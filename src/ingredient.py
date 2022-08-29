@@ -118,7 +118,7 @@ class Ingredients(BaseEnum):
     GRUYERE_CHEESE = Ingredient("Gruyere Cheese", Category.DAIRY)
     GUINNESS = Ingredient("Guinness", Category.SAUCE)
     HONEY = Ingredient("Honey", Category.CONDIMENT)
-    KIDNEY_BEAN = Ingredient("Kidney Bean", Category.CAN)
+    KIDNEY_BEANS = Ingredient("Kidney Beans", Category.CAN)
     LAMB_MINCE = Ingredient("Lamb Mince", Category.MEAT)
     LAMB_STOCK = Ingredient("Lamb Stock", Category.SAUCE)
     LASAGNE_SHEETS = Ingredient("Lasagne Sheets", Category.CARBOHYDRATE)
