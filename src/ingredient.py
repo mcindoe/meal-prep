@@ -53,6 +53,13 @@ class IngredientQuantity:
 
         return IngredientQuantity(self.ingredient, self.unit, self.quantity + other.quantity)
 
+    def __eq__(self, other) -> bool:
+        return all((
+            self.ingredient == other.ingredient,
+            self.unit == other.unit,
+            self.quantity == other.quantity
+        ))
+
     def __repr__(self) -> str:
         return f"IngredientQuantity({self.ingredient!r}, {self.unit!r}, {self.quantity!r})"
 
