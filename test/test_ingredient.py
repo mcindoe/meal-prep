@@ -25,9 +25,13 @@ class TestIngredient:
 
 
 class TestIngredientQuantity:
-    quantity1 = IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 250)
-    quantity2 = IngredientQuantity(Ingredients.PEAR, Unit.BOOL, True)
-    quantity3 = IngredientQuantity(Ingredients.PEAR, Unit.NUMBER, 2)
+    @pytest.fixture()
+    def quantities(self):
+        quantity1 = IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 250)
+        quantity2 = IngredientQuantity(Ingredients.PEAR, Unit.BOOL, True)
+        quantity3 = IngredientQuantity(Ingredients.PEAR, Unit.NUMBER, 2)
+
+        yield quantity1, quantity2, quantity3
 
     def test_initialiser(self):
         # Ingredient argument is not an Ingredient
@@ -48,24 +52,24 @@ class TestIngredientQuantity:
         assert x.unit is Unit.BOOL
         assert x.quantity is True
 
-    def test_add(self):
-        assert self.quantity1 + self.quantity1 == IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 500)
-        assert self.quantity2 + self.quantity2 == IngredientQuantity(Ingredients.PEAR, Unit.BOOL, True)
+    def test_add(self, quantities):
+        assert quantities[0] + quantities[0] == IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 500)
+        assert quantities[1] + quantities[1] == IngredientQuantity(Ingredients.PEAR, Unit.BOOL, True)
 
         with pytest.raises(TypeError):
-            self.quantity1 + self.quantity2
+            quantities[0] + quantities[1]
 
         with pytest.raises(TypeError):
-            self.quantity2 + self.quantity3
+            quantities[1] + quantities[2]
 
-    def test_eq(self):
-        assert self.quantity1 == self.quantity1
-        assert self.quantity2 == self.quantity2
-        assert self.quantity3 == self.quantity3
+    def test_eq(self, quantities):
+        assert quantities[0] == quantities[0]
+        assert quantities[1] == quantities[1]
+        assert quantities[2] == quantities[2]
 
-        assert self.quantity1 != self.quantity2
-        assert self.quantity1 != self.quantity3
-        assert self.quantity2 != self.quantity3
+        assert quantities[0] != quantities[1]
+        assert quantities[0] != quantities[2]
+        assert quantities[1] != quantities[2]
 
 
 class TestIngredientQuantityCollection:
