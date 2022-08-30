@@ -14,7 +14,7 @@ config_filepath = ROOT_DIR / "config.yaml"
 
 
 class Config:
-    email_address_regex = re.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$", re.IGNORECASE)
+    email_address_regex = re.compile(r"^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$", re.IGNORECASE)
 
     def __init__(self) -> None:
         with open(config_filepath, "r") as fp:
