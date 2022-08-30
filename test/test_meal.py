@@ -103,13 +103,15 @@ class TestMeal:
         # Construction from a single tag
         Meal(
             name="Meal Name",
-            ingredient_quantities=(),
+            ingredient_quantities=(
+                IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
+                IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
+            ),
             properties={
                 MealProperty.MEAT: MealMeat.BEEF
             },
             tags=MealTag.PASTA
         )
-
 
 
 class TestMealCollection:

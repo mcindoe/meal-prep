@@ -45,7 +45,7 @@ class TestIngredientQuantityCollection:
     def test_initialiser(self):
         ingredient_quantities = (
             IngredientQuantity(Ingredients.BABY_SPINACH, Unit.BOOL, True),
-            IngredientQuantity(Ingredients.CHERRY_TOMATO, Unit.NUMBER, 3),
+            IngredientQuantity(Ingredients.CHERRY_TOMATOES, Unit.NUMBER, 3),
             IngredientQuantity(Ingredients.CREAM, Unit.GRAM, 100),
         )
         x = IngredientQuantityCollection(ingredient_quantities)
