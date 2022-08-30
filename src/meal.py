@@ -53,8 +53,9 @@ class Meal:
 
         # There should not be more than one entry of a given ingredient
         # in the passed ingredient_quantities collection
-        if max(collections.Counter(x.ingredient for x in ingredient_quantities).values()) > 1:
-            raise ValueError("Passed multiple entries of the same ingredient in Meal init")
+        if ingredient_quantities:
+            if max(collections.Counter(x.ingredient for x in ingredient_quantities).values()) > 1:
+                raise ValueError("Passed multiple entries of the same ingredient in Meal init")
 
         if tags is not None:
             if isinstance(tags, MealTag):
