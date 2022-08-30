@@ -25,6 +25,10 @@ class TestIngredient:
 
 
 class TestIngredientQuantity:
+    quantity1 = IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 250)
+    quantity2 = IngredientQuantity(Ingredients.PEAR, Unit.BOOL, True)
+    quantity3 = IngredientQuantity(Ingredients.PEAR, Unit.NUMBER, 2)
+
     def test_initialiser(self):
         # Ingredient argument is not an Ingredient
         with pytest.raises(TypeError):
@@ -39,6 +43,25 @@ class TestIngredientQuantity:
         assert x.ingredient is Ingredients.BAY_LEAVES
         assert x.unit is Unit.BOOL
         assert x.quantity is True
+
+    def test_add(self):
+        assert self.quantity1 + self.quantity1 == IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 500)
+        assert self.quantity2 + self.quantity2 == IngredientQuantity(Ingredients.PEAR, Unit.BOOL, True)
+
+        with pytest.raises(TypeError):
+            self.quantity1 + self.quantity2
+
+        with pytest.raises(TypeError):
+            self.quantity2 + self.quantity3
+
+    def test_eq(self):
+        assert self.quantity1 == self.quantity1
+        assert self.quantity2 == self.quantity2
+        assert self.quantity3 == self.quantity3
+
+        assert self.quantity1 != self.quantity2
+        assert self.quantity1 != self.quantity3
+        assert self.quantity2 != self.quantity3
 
 
 class TestIngredientQuantityCollection:
