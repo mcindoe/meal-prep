@@ -102,7 +102,7 @@ class ForceRoastOnSunday(Rule):
         return MealCollection(
             meal
             for meal in meal_collection
-            if meal[MealProperty.ROAST]
+            if meal[MealTag.ROAST]
         )
 
 
@@ -187,7 +187,6 @@ class NotSpecifiedMealOnSpecifiedDate(Rule):
             for meal in meal_collection
             if meal != self.meal_to_avoid
         )
-
 
 
 class Rules(BaseEnum):
