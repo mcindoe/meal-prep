@@ -2,8 +2,8 @@
 
 - [ ] Unit Tests
 	- Think carefully about this. Don't just assert what has been written. Think about what is expected implicitly
-	- [ ] Test for IngredientQuantities that (Ingredient.X, BOOL, False) is not allowed
-	- [ ] Tests for types in IngredientQuantityCollection initialiser
+	- [X] Test for IngredientQuantities that (Ingredient.X, BOOL, False) is not allowed
+	- [X] Tests for types in IngredientQuantityCollection initialiser
 
 - [ ] Consolidate old meals file
 	- [X] Copy old meals into new structure
@@ -11,8 +11,6 @@
 		- I'm going to wait to confirm meals before doing this. Perhaps with the help of helper scripts
 
 - [ ] Check phone for other tasks
-
-- [ ] HEALTHY meal tag and rule
 
 - [ ] Move linuxMachineRequirements.txt out of the project repository
 	- (Recall that the project runs with only a few dependencies)
