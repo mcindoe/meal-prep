@@ -12,8 +12,6 @@
 
 - [ ] Check phone for other tasks
 
-- [ ] DateInputGetter can be generalised. If no supported options are passed, then we can use standard formats such as YYYY-MM-DD. If supported options are passed, then that opens up other formats as options as already implemented
-
 - [ ] HEALTHY meal tag and rule
 
 - [ ] Move linuxMachineRequirements.txt out of the project repository
