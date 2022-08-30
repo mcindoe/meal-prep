@@ -80,3 +80,9 @@ class TestIngredientQuantityCollection:
         # IngredientQuantityCollections should maintain their own copy of the
         # ingredient quantities
         assert x.ingredient_quantities is not ingredient_quantities
+
+        with pytest.raises(TypeError):
+            # One of the arguments is not an IngredientQuantity
+            IngredientQuantityCollection(
+                ingredient_quantities[:2] + (Ingredients.CREAM, Unit.GRAM, 100)
+            )
