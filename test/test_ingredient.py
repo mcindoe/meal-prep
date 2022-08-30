@@ -38,6 +38,10 @@ class TestIngredientQuantity:
         with pytest.raises(TypeError):
             IngredientQuantity(Ingredients.BAY_LEAVES, "BOOL", True)
 
+        # Boolean IngredientQuantity must have quantity = True
+        with pytest.raises(TypeError):
+            IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, False)
+
     def test_getters(self):
         x = IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True)
         assert x.ingredient is Ingredients.BAY_LEAVES
