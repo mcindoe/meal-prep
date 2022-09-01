@@ -18,12 +18,21 @@ class MealSelector:
         self,
         meal_collection: MealCollection,
         rule_collection: RuleCollection,
-        original_meal_diary: MealDiary
+        meal_diary: MealDiary
     ):
+
+        if not isinstance(meal_collection, MealCollection):
+            raise TypeError("'meal_collection' argument must be a MealCollection")
+
+        if not isinstance(rule_collection, RuleCollection):
+            raise TypeError("'rule_collection' argument must be a RuleCollection")
+
+        if not isinstance(meal_diary, MealDiary):
+            raise TypeError("'meal_diary' argument must be a MealDiary")
 
         self.meal_collection = meal_collection.copy()
         self.original_rule_collection = rule_collection.copy()
-        self.original_meal_diary = original_meal_diary.copy()
+        self.original_meal_diary = meal_diary.copy()
 
     def recommend(
         self,
