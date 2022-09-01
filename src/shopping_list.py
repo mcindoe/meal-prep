@@ -64,14 +64,14 @@ class ShoppingList:
         """
         Get a human-readable description of the quantities required of a
         given ingredient (to be included in a shopping list). Return None
-        in the case of only boolean units, to avoid "Apple - some" type
+        in the case of only boolean units, to avoid "PEAR - some" type
         entries
 
         Examples:
 
         (
-            (Ingredients.APPLE, Unit.BOOL, True),
-            (Ingredients.APPLE, Unit.NUMBER, 2)
+            (Ingredients.PEAR, Unit.BOOL, True),
+            (Ingredients.PEAR, Unit.NUMBER, 2)
         ) -> "2 units and some extra"
 
         ((Ingredients.BANANA, Unit.BOOL, True), ) -> None
