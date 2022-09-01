@@ -2,8 +2,15 @@
 
 - [ ] Unit Tests
 	- Think carefully about this. Don't just assert what has been written. Think about what is expected implicitly
-	- [X] Test for IngredientQuantities that (Ingredient.X, BOOL, False) is not allowed
-	- [X] Tests for types in IngredientQuantityCollection initialiser
+    - [X] config.py
+    - [X] ingredient.py
+    - [X] loc.py
+    - [X] meal.py
+    - [ ] mealselector.py
+    - [X] rule.py
+    - [ ] shoppinglist.py
+    - [ ] userinputgetter.py
+    - [X] utils.py
 
 - [ ] Consolidate old meals file
 	- [X] Copy old meals into new structure
