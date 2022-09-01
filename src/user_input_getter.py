@@ -10,7 +10,6 @@ If no supported options are provided, then any parsable input is accepted
 """
 
 
-from abc import abstractmethod
 from abc import ABC
 import datetime as dt
 import itertools
@@ -146,6 +145,11 @@ class IntegerInputGetter(UserInputGetter):
     regex = re.compile("^([-+]?[1-9][0-9]*|0)$")
 
     def __init__(self, supported_options: Optional[Iterable[int]] = None):
+        if supported_options is not None:
+            supported_options = tuple(x for x in supported_options)
+            if not all(isinstance(x, int) for x in supported_options):
+                raise TypeError("All supported options, if specified, must be integers")
+
         super().__init__(supported_options)
 
     @staticmethod
@@ -159,6 +163,11 @@ class IntegerInputGetter(UserInputGetter):
 
 class CaseInsensitiveStringInputGetter(UserInputGetter):
     def __init__(self, supported_options: Optional[Iterable[str]] = None):
+        if supported_options is not None:
+            supported_options = tuple(x for x in supported_options)
+            if not all(isinstance(x, str) for x in supported_options):
+                raise TypeError("All supported options, if specified, must be strings")
+
         super().__init__(supported_options)
 
     def is_supported(self, value: Any) -> bool:
@@ -208,12 +217,14 @@ class DateInputGetter(UserInputGetter):
     )
 
     def __init__(self, supported_options: Iterable[dt.date]):
+        supported_options = tuple(x for x in supported_options)
+        if not all(isinstance(x, dt.date) for x in supported_options):
+            raise TypeError("All supported options must be datetime.dates")
+
         super().__init__(supported_options)
 
         if len(self.supported_options) == 0:
             raise ValueError("DateInputGetter must be passed supported options")
-
-        assert all(isinstance(x, dt.date) for x in self.supported_options)
 
         self.lookup_map = {}
         for idx, date_to_string_map in enumerate(DateInputGetter.DATE_TO_STRING_MAPS):
