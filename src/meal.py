@@ -125,6 +125,9 @@ class MealCollection:
 
         raise TypeError("'other' must be one of Meal or MealCollection")
 
+    def __eq__(self, other: "MealCollection") -> bool:
+        return set(self.meals) == set(other.meals)
+
 
 class MealDiary:
     DATE_FORMAT = "%Y-%m-%d"

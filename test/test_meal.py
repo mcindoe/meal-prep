@@ -169,6 +169,13 @@ class TestMealCollection:
         assert meal_collection[0] is meals[0]
         assert meal_collection[1] is meals[1]
 
+    def test_eq(self, meals):
+        mc1 = MealCollection((meals[0], meals[1]))
+        mc2 = MealCollection((meals[1], meals[0]))
+
+        assert mc1 == mc2
+        assert mc1 != MealCollection((meals[0],))
+
 
 class TestMealDiary:
     @pytest.fixture()
