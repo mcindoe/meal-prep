@@ -55,6 +55,9 @@ class MealSelector:
         outside of this selector
         """
 
+        if isinstance(dates, dt.date):
+            dates = (dates,)
+
         dates = sorted(dates)
 
         if recommended_diary is None:
