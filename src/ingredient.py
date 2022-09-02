@@ -176,7 +176,7 @@ class Ingredients(BaseEnum):
     THYME = Ingredient("Thyme", Category.HERB)
     TOMATO = Ingredient("Tomato", Category.VEGETABLE)
     TOMATO_PUREE = Ingredient("Tomato Puree", Category.CONDIMENT)
-    TORTILLA_WRAP = Ingredient("Tortilla Wrap", Category.CARBOHYDRATE)
+    TORTILLA_WRAPS = Ingredient("Tortilla Wraps", Category.CARBOHYDRATE)
     TUMERIC = Ingredient("Tumeric", Category.SPICE)
     VEGETABLE_OIL = Ingredient("Vegetable Oil", Category.CONDIMENT)
     VEGETABLE_STOCK = Ingredient("Vegetable Stock", Category.SAUCE)

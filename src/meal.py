@@ -345,7 +345,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.PAPRIKA, Unit.BOOL, True),
             IngredientQuantity(Ingredients.RED_ONION, Unit.NUMBER, 2),
             IngredientQuantity(Ingredients.RED_PEPPER, Unit.NUMBER, 1),
-            IngredientQuantity(Ingredients.TORTILLA_WRAP, Unit.NUMBER, 8),
+            IngredientQuantity(Ingredients.TORTILLA_WRAPS, Unit.BOOL, True),
             IngredientQuantity(Ingredients.YELLOW_PEPPER, Unit.NUMBER, 1),
         ),
         properties={
