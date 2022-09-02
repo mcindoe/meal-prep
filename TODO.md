@@ -1,21 +1,9 @@
 # TODO
 
-- [ ] Unit Tests
-	- Think carefully about this. Don't just assert what has been written. Think about what is expected implicitly
-    - [X] config.py
-    - [X] ingredient.py
-    - [X] loc.py
-    - [X] meal.py
-    - [ ] mealselector.py
-    - [X] rule.py
-    - [ ] shoppinglist.py
-    - [ ] userinputgetter.py
-    - [X] utils.py
-
 - [ ] Consolidate old meals file
 	- [X] Copy old meals into new structure
+	- [X] Verify Meals definitions
 	- [ ] Remove old file
-		- I'm going to wait to confirm meals before doing this. Perhaps with the help of helper scripts
 
 - [ ] Check phone for other tasks
 
