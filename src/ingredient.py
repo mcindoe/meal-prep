@@ -105,7 +105,7 @@ class Ingredients(BaseEnum):
     CHICKEN_THIGH = Ingredient("Chicken Thigh", Category.MEAT)
     CHOPPED_TOMATOES = Ingredient("Chopped Tomatoes", Category.CAN)
     CINAMMON = Ingredient("Cinammon", Category.SPICE)
-    CINAMMON_STICKS = Ingredient("Cinammon Sticks", Category.SPICE)
+    CINAMMON_STICK = Ingredient("Cinammon Stick", Category.SPICE)
     CORIANDER = Ingredient("Coriander", Category.HERB)
     CREAM = Ingredient("Cream", Category.DAIRY)
     CUMIN = Ingredient("Cumin", Category.SPICE)

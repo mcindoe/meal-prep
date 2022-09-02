@@ -463,7 +463,7 @@ class Meals(BaseEnum):
         ingredient_quantities=(
             IngredientQuantity(Ingredients.BONELESS_LEG_OF_LAMB, Unit.GRAM, 500),
             IngredientQuantity(Ingredients.CARDAMOM, Unit.BOOL, True),
-            IngredientQuantity(Ingredients.CINAMMON_STICKS, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.CINAMMON_STICK, Unit.NUMBER, 1),
             IngredientQuantity(Ingredients.CORIANDER, Unit.BOOL, True),
             IngredientQuantity(Ingredients.CUMIN, Unit.BOOL, True),
             IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 2),
