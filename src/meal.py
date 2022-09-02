@@ -553,7 +553,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.BABY_SPINACH, Unit.GRAM, 200),
             IngredientQuantity(Ingredients.CAYENNE_PEPPER, Unit.BOOL, True),
             IngredientQuantity(Ingredients.CHICKEN_BREAST, Unit.GRAM, 700),
-            IngredientQuantity(Ingredients.CHICKEN_STOCK, Unit.GRAM, 250),
+            IngredientQuantity(Ingredients.CHICKEN_STOCK, Unit.MILLILITRE, 250),
             IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 250),
             IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 3),
             IngredientQuantity(Ingredients.MOZARELLA_CHEESE, Unit.GRAM, 100),
@@ -683,7 +683,7 @@ class Meals(BaseEnum):
         ingredient_quantities=(
             IngredientQuantity(Ingredients.BROWN_SUGAR, Unit.BOOL, True),
             IngredientQuantity(Ingredients.CASTER_SUGAR, Unit.BOOL, True),
-            IngredientQuantity(Ingredients.CHICKEN_STOCK, Unit.GRAM, 1000),
+            IngredientQuantity(Ingredients.CHICKEN_STOCK, Unit.MILLILITRE, 1000),
             IngredientQuantity(Ingredients.DARK_SOY_SAUCE, Unit.BOOL, True),
             IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 3),
             IngredientQuantity(Ingredients.GINGER, Unit.BOOL, True),
