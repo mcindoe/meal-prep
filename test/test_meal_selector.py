@@ -40,3 +40,24 @@ class TestMealSelector:
     @pytest.fixture()
     def meal_selector(self, meal_collection, rule_collection, meal_diary):
         yield MealSelector(meal_collection, rule_collection, meal_diary)
+
+    def test_recommend(self, meal_selector, rule_collection, meal_diary):
+        # Duplicate dates passed
+        with pytest.raises(ValueError):
+            duplicate_dates = (dt.date(2020, 1, 1),) * 2
+            meal_selector.recommend(duplicate_dates, rule_collection)
+
+        # Date already present in the passed diary
+        with pytest.raises(ValueError):
+            existing_dates = meal_diary.dates
+            meal_selector.recommend(
+                (existing_dates[0],),
+                rule_collection,
+                meal_diary
+            )
+
+        recommended_diary = meal_selector.recommend(
+            (dt.date(2020, 1, 1), dt.date(2020, 1, 2), dt.date(2020, 2, 1)),
+            rule_collection
+        )
+        assert isinstance(recommended_diary, MealDiary)
