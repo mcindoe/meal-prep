@@ -3,3 +3,4 @@
 *.mypy_cache
 mail_credentials.txt
 .DS_STORE
+linuxRequirements.txt
