@@ -4,9 +4,11 @@ Specify dates, and shuffle a meal plan which adheres to the specified rules. The
 
 ## Usage
 
-The user must define meals in the `Meals` enum in the file `src/meals.py`. Meals have associated *properties* and *tags*. A *property* is a key-value pair, and all properties should be provided for all meals. An example would be `meat=chicken`. A *tag* is a boolean flag which is taken to be True if present, and False otherwise, for example `Roast` or `Healthy`. The hope is that this framework allows for definitions of suitably arbitrary rules.
+A user may define new meals in the `Meals` enum in the file `src/meals.py`. This is the database of meals which the project knows about. In order to be recommended, the meal's name must be added to the `meals` list in the project config file (see below).
 
-The config file `config.yaml` is used to specify runtime configuration, such as which dates to generate a meal plan for, which rules to apply, and which meals to include is the set of possibly-recommended meals. The rules are specified by the name in the associated enum found in `src/rules.py`, and meals the corresponding enum in `src/meals.py`.
+Meals have associated *properties* and *tags*. A *property* is a key-value pair, and all properties should be provided for all meals. An example would be `meat=chicken`. A *tag* is a boolean flag which is taken to be True if present, and False otherwise, for example `Roast` or `Healthy`. The hope is that this framework allows for definitions of suitably arbitrary rules.
+
+The config file `config.yaml` is used to specify runtime configuration, such as which dates to generate a meal plan for, which rules to apply, and which meals to include is the set of possibly-recommended meals. The rules are specified by the name in the associated enum found in `src/rules.py`, and meals their name as defined in the `Meals` enum in `src/meals.py`.
 
 A `MealDiary` is a mapping from dates to meals. A rule is a filter applied to a meal collection, in the context of a date and a meal diary. This context is required to apply rules to a collection, for example for the rule "don't recommend the same meat on consecutive days" we need to know what the date in question is, and what meals have been had before and after that date (if any).
 
