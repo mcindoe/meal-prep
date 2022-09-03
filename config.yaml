@@ -1,6 +1,3 @@
-email_addresses:
-  - mealprepbot@gmail.com
-  - testaddress@foo.bar
 dates:
   - 2022-02-05
   - 2022-02-06
@@ -30,3 +27,8 @@ meals:
   - Shephards Pie
   - Spaghetti Bolognese
   - Sticky Chinese Pork Belly
+
+# email_addresses are not currently in use in the project
+email_addresses:
+  - mealprepbot@gmail.com
+  - testaddress@foo.bar
