@@ -294,7 +294,8 @@ class MealDiary:
         include_year = len(set(x.year for x in self.dates)) > 1
 
         lines = []
-        for date, meal in self.items():
+        for date in sorted(self.dates):
+            meal = self[date]
             date_str = self.get_pretty_print_date_string(date, include_date_number_spacing, include_year)
             lines.append(f"{date_str}: {meal.name}")
 
