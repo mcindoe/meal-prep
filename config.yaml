@@ -1,12 +1,19 @@
+# Date for which meals should be recommended
 dates:
   - 2022-02-05
   - 2022-02-06
   - 2022-02-08
+
+# Rules to apply when deciding on a meal plan
+# Entries should be names of elements of the Rules enum in src/rule.py
 rules:
   - NOT_PASTA_TWICE_WITHIN_FIVE_DAYS
   - NOT_ROAST_ON_NON_SUNDAY
   - NOT_SAME_MEAL_WITHIN_SEVEN_DAYS
   - NOT_SAME_MEAT_ON_CONSECUTIVE_DAYS
+
+# Meals to choose a meal plan from. Meals not in this list are not considered
+# Entries should be names of meals as defined in the Meals enum in src/meal.py
 meals:
   - Beef and Ale Stew
   - Burgers
