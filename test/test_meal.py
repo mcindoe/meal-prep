@@ -24,7 +24,7 @@ class TestMeal:
                     IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
                 ),
                 properties={},
-                tags=(MealTag.PASTA,)
+                tags=(MealTag.PASTA,),
             )
 
         # Properties not a dictionary
@@ -36,7 +36,7 @@ class TestMeal:
                     IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
                 ),
                 properties=(MealMeat.BEEF,),
-                tags=(MealTag.PASTA,)
+                tags=(MealTag.PASTA,),
             )
 
         # Properties contains non-properties
@@ -48,7 +48,7 @@ class TestMeal:
                     IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
                 ),
                 properties=({"Meat": "Beef"}),
-                tags=(MealTag.PASTA,)
+                tags=(MealTag.PASTA,),
             )
 
         # Missing properties
@@ -60,7 +60,7 @@ class TestMeal:
                     IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
                 ),
                 properties={},
-                tags=(MealTag.PASTA,)
+                tags=(MealTag.PASTA,),
             )
 
         # Ingredient Quantities contains non-Ingredients
@@ -73,7 +73,7 @@ class TestMeal:
                 properties={
                     MealProperty.MEAT: MealMeat.BEEF
                 },
-                tags=(MealTag.PASTA,)
+                tags=(MealTag.PASTA,),
             )
 
         # Tags argument contains non-Tags
@@ -87,7 +87,22 @@ class TestMeal:
                 properties={
                     MealProperty.MEAT: MealMeat.BEEF
                 },
-                tags=("PASTA",)
+                tags=("PASTA",),
+            )
+
+        # Ingredient quantities contains more than one entry of the same ingredient
+        with pytest.raises(ValueError):
+            Meal(
+                name="Meal Name",
+                ingredient_quantities=(
+                    IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
+                    IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
+                    IngredientQuantity(Ingredients.CARROT, Unit.GRAM, 100),
+                ),
+                properties={
+                    MealProperty.MEAT: MealMeat.BEEF
+                },
+                tags=(MealTag.PASTA,),
             )
 
     def test_getters(self):
@@ -112,7 +127,6 @@ class TestMeal:
         chinese_pork_belly = Meal.from_name("Sticky Chinese Pork Belly")
         assert chinese_pork_belly[MealProperty.MEAT] is MealMeat.PORK
         assert not chinese_pork_belly[MealTag.VEGETARIAN]
-
 
     def test_init_from_single_tag(self):
         # Construction from a single tag
