@@ -1,0 +1,96 @@
+Shopping List
+
+
+--- Vegetables ---
+- [ ] Carrot: 4 units
+	Turkey Sweet Potato Shepherds Pie, Beef and Ale Stew
+- [ ] Celery: 5 units
+	Turkey Sweet Potato Shepherds Pie, Beef and Ale Stew
+- [ ] Garlic Clove
+	Lemon Leek Linguine
+- [ ] Garlic Powder
+	Turkey Sweet Potato Shepherds Pie, Parmesan Crust Baked Chicken
+- [ ] Leek: 2 units
+	Lemon Leek Linguine
+- [ ] Lemon: 2 units
+	Lemon Leek Linguine
+- [ ] Onion: 3 units
+	Turkey Sweet Potato Shepherds Pie, Beef and Ale Stew
+- [ ] Potato: 900 grams
+	Beef and Ale Stew
+- [ ] Red Onion: 2 units
+	Chicken Fajitas
+- [ ] Red Pepper: 1 unit
+	Chicken Fajitas
+- [ ] Sweet Potato: 3 units
+	Turkey Sweet Potato Shepherds Pie
+- [ ] Yellow Pepper: 1 unit
+	Chicken Fajitas
+
+
+--- Herbs ---
+- [ ] Bay Leaves
+	Beef and Ale Stew
+- [ ] Chives
+	Lemon Leek Linguine
+- [ ] Coriander
+	Chicken Fajitas
+- [ ] Dried Thyme
+	Turkey Sweet Potato Shepherds Pie
+- [ ] Italian Herbs
+	Parmesan Crust Baked Chicken
+- [ ] Oregano
+	Turkey Sweet Potato Shepherds Pie
+- [ ] Parsley
+	Lemon Leek Linguine
+
+
+--- Carbohydrates ---
+- [ ] Linguine: 400 grams
+	Lemon Leek Linguine
+- [ ] Tortilla Wraps
+	Chicken Fajitas
+
+
+--- Dairy ---
+- [ ] Butter
+	Lemon Leek Linguine
+- [ ] Parmesan Cheese
+	Lemon Leek Linguine, Parmesan Crust Baked Chicken
+
+
+--- Meat ---
+- [ ] Chicken Breast: 900 grams
+	Parmesan Crust Baked Chicken, Chicken Fajitas
+- [ ] Stewing Beef: 750 grams
+	Beef and Ale Stew
+- [ ] Turkey Mince: 450 grams
+	Turkey Sweet Potato Shepherds Pie
+
+
+--- Cans ---
+- [ ] Chopped Tomatoes: 1 unit
+	Beef and Ale Stew
+
+
+--- Condiments ---
+- [ ] Coconut Milk: 150 mls
+	Turkey Sweet Potato Shepherds Pie
+- [ ] Coconut Oil
+	Turkey Sweet Potato Shepherds Pie
+- [ ] Flour
+	Beef and Ale Stew
+
+
+--- Sauces ---
+- [ ] Chicken Stock
+	Lemon Leek Linguine
+- [ ] Guinness: 500 mls
+	Beef and Ale Stew
+- [ ] Mayonnaise
+	Parmesan Crust Baked Chicken
+
+
+--- Spices ---
+- [ ] Paprika
+	Chicken Fajitas
