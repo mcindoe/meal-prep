@@ -1,8 +1,10 @@
 # Date for which meals should be recommended
 dates:
-  - 2022-02-05
-  - 2022-02-06
-  - 2022-02-08
+  - 2022-09-12
+  - 2022-09-13
+  - 2022-09-14
+  - 2022-09-15
+  - 2022-09-16
 
 # Rules to apply when deciding on a meal plan
 # Entries should be names of elements of the Rules enum in src/rule.py
@@ -16,17 +18,13 @@ rules:
 # Entries should be names of meals as defined in the Meals enum in src/meal.py
 meals:
   - Beef and Ale Stew
-  - Burgers
   - Chicken Fajitas
   - Chicken Taleggio
   - Chicken and Green Bean Vermicelli Noodles
   - Chilli Chicken Thighs with Cherry Tomatoes
   - Chilli con Carne
-  - Indian Lamb with Spiced Lentils
   - Lasagne
-  - Moussaka
   - Pasta with Chicken and Sundried Tomatoes
-  - Quiche Lorraine
   - Roast Beef
   - Roast Chicken
   - Roast Lamb
