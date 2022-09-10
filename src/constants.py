@@ -24,9 +24,11 @@ class ConfigEntries(BaseEnum):
 
 class Unit(BaseEnum):
     BOOL = 1, "bool", "bool"
-    GRAM = 2, "gram", "grams"
-    MILLILITRE = 3, "ml", "mls"
-    NUMBER = 4, "unit", "units"
+    BAG = 2, "bag", "bags"
+    JAR = 3, "jar", "jars"
+    GRAM = 4, "gram", "grams"
+    MILLILITRE = 5, "ml", "mls"
+    NUMBER = 6, "unit", "units"
 
     def __init__(self, order, singular, plural):
         self.order = order
@@ -78,3 +80,4 @@ class MealMeat(BaseEnum):
     LAMB = auto()
     NONE = auto()
     PORK = auto()
+    TURKEY = auto()

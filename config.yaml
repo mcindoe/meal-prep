@@ -18,20 +18,27 @@ rules:
 # Entries should be names of meals as defined in the Meals enum in src/meal.py
 meals:
   - Beef and Ale Stew
+  - Burgers
   - Chicken Fajitas
+  - Chicken Piccata
+  - Chicken Soup
   - Chicken Taleggio
   - Chicken and Green Bean Vermicelli Noodles
+  - Chicken and Leek Pie
   - Chilli Chicken Thighs with Cherry Tomatoes
   - Chilli con Carne
   - Lasagne
+  - Lemon Leek Linguine
+  - Parmesan Crust Baked Chicken
   - Pasta with Chicken and Sundried Tomatoes
   - Roast Beef
   - Roast Chicken
   - Roast Lamb
   - Roast Pork
-  - Shephards Pie
+  - Shepherds Pie
   - Spaghetti Bolognese
   - Sticky Chinese Pork Belly
+  - Turkey Sweet Potato Shepherds Pie
 
 # NB: email_addresses are not currently in use in the project
 email_addresses:

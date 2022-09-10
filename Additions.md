@@ -1,23 +1,26 @@
-- Soups
-	- Chicken Soup
-- Main Courses
-	- Burgers
-	- Parmesan Crusted Chicken Breast
-	- Turkey Sweet Potato Shepherds Pie
-	- Lemon Leek Linguine
-	- Chicken Piccata
-	- Filled Peppers
-	- Homemade Pizza
-		- Roberta's Recipe not the other one
+- [X] Soups
+	- [X] Chicken Soup
+- [ ] Main Courses
+	- [X] Burgers
+	- [X] Parmesan Crust Baked Chicken
+	- [X] Turkey Sweet Potato Shepherds Pie
+	- [X] Lemon Leek Linguine
+	- [X] Chicken and Leek Pie
+	- [X] Chicken Piccata
+	- [ ] Filled Peppers
+	- [ ] Homemade Pizza
+		- [ ] Roberta's Recipe not the other one
 			- Needs to add a pizza sauce, cheese, pepperoni (or call this pizza toppings)
 			- Shredded mozarella cheese
 			- Pizza sauce
-		- Write the ingredients exactly as is: e.g. 00 Flour
-	- Chicken Saltimbocca
-	- Slow-Cooker Beef Bourguignon
-	- Slow cooker honey garlic chicken and veggies
-	- Saag Paneer
-	- Curry lentils in crock pot
-	- Slow-cooker chicken tikka masala
-	- Lebanese chicken with Tahdig
-	- Chicken and Leek Pie
+		- [ ] Write the ingredients exactly as is: e.g. 00 Flour
+	- [ ] Chicken Saltimbocca
+	- [ ] Slow-Cooker Beef Bourguignon
+	- [ ] Slow cooker honey garlic chicken and veggies
+	- [ ] Saag Paneer
+	- [ ] Curry lentils in crock pot
+	- [ ] Slow-cooker chicken tikka masala
+	- [ ] Lebanese chicken with Tahdig
+
+- [ ] Add a helper script which displays just what is and is not in the main meal configuration
+- [ ] The current setup I have on maximising the forward choice causes some issues with the first meal. Maybe I should just randomly choose from the available choices. If I have a sufficiently high number of meals, then this won't be an issue. I'm just worried about running out of meals, but that could not be an issue. It won't be for our use case - we will have quite a large universe
