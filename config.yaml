@@ -1,10 +1,7 @@
 # Date for which meals should be recommended
 dates:
-  - 2022-09-12
-  - 2022-09-13
-  - 2022-09-14
-  - 2022-09-15
-  - 2022-09-16
+  - 2022-10-27
+  - 2022-10-29
 
 # Rules to apply when deciding on a meal plan
 # Entries should be names of elements of the Rules enum in src/rule.py

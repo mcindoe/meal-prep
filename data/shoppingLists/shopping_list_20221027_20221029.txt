@@ -1,0 +1,45 @@
+Shopping List
+
+
+--- Vegetables ---
+- [ ] Celery: 6 units
+	Chicken Soup
+- [ ] Mini Carrots: 1 bag
+	Chicken Soup
+- [ ] Onion: 2 units
+	Chicken Soup
+- [ ] Red Onion: 2 units
+	Chicken Fajitas
+- [ ] Red Pepper: 1 unit
+	Chicken Fajitas
+- [ ] Yellow Pepper: 1 unit
+	Chicken Fajitas
+
+
+--- Herbs ---
+- [ ] Coriander
+	Chicken Fajitas
+- [ ] Parsley
+	Chicken Soup
+
+
+--- Carbohydrates ---
+- [ ] Tortilla Wraps
+	Chicken Fajitas
+
+
+--- Meat ---
+- [ ] Boneless Skinless Chicken Thigh: 1400 grams
+	Chicken Soup
+- [ ] Chicken Breast: 400 grams
+	Chicken Fajitas
+
+
+--- Condiments ---
+- [ ] Mrs Jamison's Organic Chicken Base: 1 jar
+	Chicken Soup
+
+
+--- Spices ---
+- [ ] Paprika
+	Chicken Fajitas
