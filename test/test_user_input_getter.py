@@ -1,9 +1,9 @@
 import datetime as dt
 import pytest
 
-from mealprep.src.user_input_getter import IntegerInputGetter
 from mealprep.src.user_input_getter import CaseInsensitiveStringInputGetter
-from mealprep.src.user_input_getter import DateInputGetter
+from mealprep.src.user_input_getter import IntegerInputGetter
+from mealprep.src.user_input_getter import SpecifiedDateInputGetter
 
 
 class TestIntegerInputGetter:
@@ -142,14 +142,14 @@ class TestCaseInsensitiveStringInputGetter:
         )
 
 
-class TestDateInputGetter:
+class TestSpecifiedDateInputGetter:
     @pytest.fixture()
     def supported_options(self):
         yield (dt.date(2022, 1, 1), dt.date(2022, 2, 2), dt.date(2022, 3, 3))
 
     @pytest.fixture()
     def date_input_getter(self, supported_options):
-        yield DateInputGetter(supported_options)
+        yield SpecifiedDateInputGetter(supported_options)
 
     @pytest.fixture()
     def valid_inputs(self, supported_options):
@@ -178,10 +178,10 @@ class TestDateInputGetter:
 
     def test_initialiser(self):
         with pytest.raises(TypeError):
-            DateInputGetter(("2022-01-01",))
+            SpecifiedDateInputGetter(("2022-01-01",))
 
         with pytest.raises(ValueError):
-            DateInputGetter(tuple())
+            SpecifiedDateInputGetter(tuple())
 
     def test_is_valid(self, date_input_getter, valid_inputs, invalid_inputs):
         assert all(date_input_getter.is_valid(x) for x in valid_inputs)

@@ -9,8 +9,8 @@ from mealprep.src.meal import MealCollection
 from mealprep.src.meal import MealDiary
 from mealprep.src.rule import RuleCollection
 from mealprep.src.rule import NotSpecifiedMealOnSpecifiedDate
+from mealprep.src.user_input_getter import SpecifiedDateInputGetter
 from mealprep.src.user_input_getter import CaseInsensitiveStringInputGetter
-from mealprep.src.user_input_getter import DateInputGetter
 
 
 class MealSelector:
@@ -142,7 +142,7 @@ class MealSelector:
             if user_confirmed_input == "Y":
                 return recommended_diary
 
-            user_changed_dates_input_getter = DateInputGetter(dates)
+            user_changed_dates_input_getter = SpecifiedDateInputGetter(dates)
 
             print("\nEnter dates to change")
             dates_to_change_input = user_changed_dates_input_getter.get_multiple_inputs()

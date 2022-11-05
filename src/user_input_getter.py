@@ -193,7 +193,7 @@ def format_date_string(date, fmt):
     return date.strftime(fmt)
 
 
-class DateInputGetter(UserInputGetter):
+class SpecifiedDateInputGetter(UserInputGetter):
     DATE_FORMATS = (
         "%Y-%m-%d",
         "%Y/%m/%d",
@@ -224,10 +224,10 @@ class DateInputGetter(UserInputGetter):
         super().__init__(supported_options)
 
         if len(self.supported_options) == 0:
-            raise ValueError("DateInputGetter must be passed supported options")
+            raise ValueError("SpecifiedDateInputGetter must be passed supported options")
 
         self.lookup_map = {}
-        for idx, date_to_string_map in enumerate(DateInputGetter.DATE_TO_STRING_MAPS):
+        for idx, date_to_string_map in enumerate(SpecifiedDateInputGetter.DATE_TO_STRING_MAPS):
             string_to_date_map = {
                 date_to_string_map(date): date
                 for date in self.supported_options
