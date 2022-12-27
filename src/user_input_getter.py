@@ -200,8 +200,9 @@ def format_date_string(date: dt.date, fmt: str) -> dt.date:
 class _SpecifiedDateInputGetter(UserInputGetter):
     """
     UserInputGetter which parses strings as dates, in one of the
-    required formats, but only accepts one of the supported dates
-    which are passed to the the instance's initialiser.
+    required formats, but only accepts subsets of the specified
+    supported dates, which are passed to the the instance's
+    initialiser.
 
     Not intended to be called directly - use DateInputGetter with
     arguments in the initialiser to make use of this class
