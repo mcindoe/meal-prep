@@ -291,14 +291,6 @@ class TestMealDiary:
             dt.date(2022, 1, 10): Meal.from_name("Lasagne"),
         })
 
-        assert observed_diary_1 == expected_diary_1
-
-        print("Observed diary 1:")
-        print(observed_diary_1)
-
-        print("Expected diary 1:")
-        print(expected_diary_1)
-
         observed_diary_2 = meal_diary.filter_dates(min_date=dt.date(2022, 1, 1))
         expected_diary_2 = MealDiary({
             dt.date(2022, 1, 1): Meal.from_name("Spaghetti Bolognese"),
@@ -312,6 +304,7 @@ class TestMealDiary:
             dt.date(2022, 1, 11): Meal.from_name("Kedgeree")
         })
 
+        assert observed_diary_1 == expected_diary_1
         assert observed_diary_2 == expected_diary_2
         assert observed_diary_3 == expected_diary_3
 
