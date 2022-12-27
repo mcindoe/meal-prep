@@ -294,30 +294,18 @@ class _AnyDateInputGetter(UserInputGetter):
             return False
 
 
-class DateInputGetter(UserInputGetter):
+def DateInputGetter(*args):
     """
-    UserInputGetter which parses any string as a date. Whether
-    a string is parsable depends on whether supported dates are
-    specified (in which case only those are permissable, although
-    this allows greater flexibility on the input format), or if
-    no dates are specified, in which case any date is permissable,
-    as long as it is specified in one of the admissible formats
+    A (disguised) factory function which returns the relevant
+    date input getter depending on whether input arguments are
+    specified or not.
 
     This class abstracts away from the user the exact handling of
     date strings, which is different for when the user specifies
     supported dates and when they do not
     """
 
-    def __init__(self, *args):
-        if args:
-            self.parser = _SpecifiedDateInputGetter(*args)
-        else:
-            self.parser = _AnyDateInputGetter()
+    if args:
+        return _SpecifiedDateInputGetter(*args)
 
-        self.supported_options = self.parser.supported_options
-
-    def is_valid(self, value: str) -> bool:
-        return self.parser.is_valid(value)
-
-    def parse(self, value: str) -> dt.date:
-        return self.parser.parse(value)
+    return _AnyDateInputGetter()
