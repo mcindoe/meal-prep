@@ -9,8 +9,8 @@ from mealprep.src.meal import MealCollection
 from mealprep.src.meal import MealDiary
 from mealprep.src.rule import RuleCollection
 from mealprep.src.rule import NotSpecifiedMealOnSpecifiedDate
-from mealprep.src.user_input_getter import CaseInsensitiveStringInputGetter
 from mealprep.src.user_input_getter import DateInputGetter
+from mealprep.src.user_input_getter import CaseInsensitiveStringInputGetter
 
 
 class MealSelector:
@@ -60,6 +60,7 @@ class MealSelector:
 
         dates = sorted(dates)
 
+        # meal_diary is the union of the original meal diary and the current recommendation
         if recommended_diary is None:
             meal_diary = self.original_meal_diary.copy()
         else:
@@ -101,8 +102,8 @@ class MealSelector:
 
                 n_available_meals_for_next_date[meal] = len(next_date_meal_choices)
 
-            # Compute the subcollection of meals which maximise the
-            # number of available choices for the next date
+            # Compute the subcollection of meals which maximise the number of available
+            # choices for the next date
             largest_number_of_choices = max(n_available_meals_for_next_date.values())
             meals_leaving_most_choice = tuple(
                 meal

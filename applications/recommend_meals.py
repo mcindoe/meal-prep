@@ -1,3 +1,12 @@
+"""
+Read the config file to determine supported meals, rules to
+apply, and the dates to recommend a meal plan for; then
+continuously generate and recommend meal plans until the user
+is satisfied (or exists the program); write the updated diary
+to file and generate a shopping list
+"""
+
+
 import datetime as dt
 from typing import Iterable
 

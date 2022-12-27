@@ -197,7 +197,7 @@ class TestMealDiary:
         yield {
             dt.date(2022, 1, 1): Meal.from_name("Spaghetti Bolognese"),
             dt.date(2022, 1, 10): Meal.from_name("Lasagne"),
-            dt.date(2022, 1, 11): Meal.from_name("Kedgeree")
+            dt.date(2022, 1, 11): Meal.from_name("Kedgeree"),
         }
 
     @pytest.fixture()
@@ -224,8 +224,8 @@ class TestMealDiary:
             })
 
     def test_copy(self, meal_diary):
-        assert meal_diary.meal_diary == meal_diary.copy().meal_diary
-        assert meal_diary.meal_diary is not meal_diary.copy().meal_diary
+        assert meal_diary == meal_diary.copy()
+        assert meal_diary is not meal_diary.copy()
 
     def test_indexing(self, meal_diary):
         with pytest.raises(TypeError):
@@ -244,7 +244,7 @@ class TestMealDiary:
             altered_diary[dt.date(2022, 1, 1)] = "Spaghetti Bolognese"
 
         altered_diary[dt.date(2022, 2, 1)] = Meal.from_name("Sticky Chinese Pork Belly")
-        assert len(altered_diary.meal_diary) == 4
+        assert len(altered_diary) == 4
         assert dt.date(2022, 2, 1) in altered_diary.dates
 
     def test_loading_project_diary(self):
@@ -266,7 +266,7 @@ class TestMealDiary:
         })
         difference_diary = meal_diary.difference(overlapping_diary)
 
-        assert len(difference_diary.meal_diary) == 2
+        assert len(difference_diary) == 2
         assert dt.date(2022, 1, 1) not in difference_diary.dates
         assert dt.date(2022, 1, 10) in difference_diary.dates
         assert Meal.from_name("Spaghetti Bolognese") not in difference_diary.meals
@@ -279,7 +279,40 @@ class TestMealDiary:
         })
         observed_diary = meal_diary.filter_by_time_delta(dt.date(2022, 1, 10), dt.timedelta(days=1))
 
-        assert expected_diary.meal_diary == observed_diary.meal_diary
+        assert expected_diary == observed_diary
+
+    def test_filter_dates(self, meal_diary):
+        observed_diary_1 = meal_diary.filter_dates(
+            min_date=dt.date(2022, 1, 1),
+            max_date=dt.date(2022, 1, 11)
+        )
+        expected_diary_1 = MealDiary({
+            dt.date(2022, 1, 1): Meal.from_name("Spaghetti Bolognese"),
+            dt.date(2022, 1, 10): Meal.from_name("Lasagne"),
+        })
+
+        observed_diary_2 = meal_diary.filter_dates(min_date=dt.date(2022, 1, 1))
+        expected_diary_2 = MealDiary({
+            dt.date(2022, 1, 1): Meal.from_name("Spaghetti Bolognese"),
+            dt.date(2022, 1, 10): Meal.from_name("Lasagne"),
+            dt.date(2022, 1, 11): Meal.from_name("Kedgeree")
+        })
+
+        observed_diary_3 = meal_diary.filter_dates(min_date=dt.date(2022, 1, 5))
+        expected_diary_3 = MealDiary({
+            dt.date(2022, 1, 10): Meal.from_name("Lasagne"),
+            dt.date(2022, 1, 11): Meal.from_name("Kedgeree")
+        })
+
+        assert observed_diary_1 == expected_diary_1
+        assert observed_diary_2 == expected_diary_2
+        assert observed_diary_3 == expected_diary_3
+
+        with pytest.raises(TypeError):
+            meal_diary.filter_dates(start_date="2022-01-01")
+
+        with pytest.raises(TypeError):
+            meal_diary.filter_dates(start_date=dt.date(2022, 1, 1), end_date="2022-02-01")
 
     def test_except_dates(self, meal_diary):
         expected_diary = MealDiary({
@@ -291,8 +324,8 @@ class TestMealDiary:
         observed_diary_1 = meal_diary.except_dates(dt.date(2022, 1, 10),)
         observed_diary_2 = meal_diary.except_dates(dt.date(2022, 1, 10))
 
-        assert observed_diary_1.meal_diary == observed_diary_2.meal_diary
-        assert expected_diary.meal_diary == observed_diary_1.meal_diary
+        assert observed_diary_1 == observed_diary_2
+        assert expected_diary == observed_diary_1
 
         with pytest.raises(TypeError):
             # Passed dates must be datetime.dates

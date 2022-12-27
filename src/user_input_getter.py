@@ -189,11 +189,24 @@ class CaseInsensitiveStringInputGetter(UserInputGetter):
         return value
 
 
-def format_date_string(date, fmt):
+def format_date_string(date: dt.date, fmt: str) -> dt.date:
+    """
+    Defined to allow us to get the projection onto the first
+    argument using functools.partial
+    """
     return date.strftime(fmt)
 
 
-class DateInputGetter(UserInputGetter):
+class _SpecifiedDateInputGetter(UserInputGetter):
+    """
+    UserInputGetter which parses strings as dates, in one of the
+    required formats, but only accepts subsets of the specified
+    supported dates.
+
+    Not intended to be called directly - use DateInputGetter with
+    arguments in the initialiser to make use of this class
+    """
+
     DATE_FORMATS = (
         "%Y-%m-%d",
         "%Y/%m/%d",
@@ -216,7 +229,10 @@ class DateInputGetter(UserInputGetter):
         lambda date: date.strftime("%A")[:3]
     )
 
-    def __init__(self, supported_options: Iterable[dt.date]):
+    def __init__(self, supported_options: Union[dt.date, Iterable[dt.date]]):
+        if isinstance(supported_options, dt.date):
+            supported_options = (supported_options, )
+
         supported_options = tuple(x for x in supported_options)
         if not all(isinstance(x, dt.date) for x in supported_options):
             raise TypeError("All supported options must be datetime.dates")
@@ -224,10 +240,10 @@ class DateInputGetter(UserInputGetter):
         super().__init__(supported_options)
 
         if len(self.supported_options) == 0:
-            raise ValueError("DateInputGetter must be passed supported options")
+            raise ValueError("_SpecifiedDateInputGetter must be passed supported options")
 
         self.lookup_map = {}
-        for idx, date_to_string_map in enumerate(DateInputGetter.DATE_TO_STRING_MAPS):
+        for idx, date_to_string_map in enumerate(_SpecifiedDateInputGetter.DATE_TO_STRING_MAPS):
             string_to_date_map = {
                 date_to_string_map(date): date
                 for date in self.supported_options
@@ -245,3 +261,58 @@ class DateInputGetter(UserInputGetter):
 
     def parse(self, value: str) -> dt.date:
         return self.lookup_map[value]
+
+
+class _AnyDateInputGetter(UserInputGetter):
+    """
+    UserInputGetter which parses any string as a date, as long
+    as it is parsable in one of the specified formats.
+
+    Not intended to be called directly - use DateInputGetter with
+    no arguments in the initialiser to make use of this class
+    """
+
+    DATE_FORMATS = (
+        "%Y-%m-%d",
+        "%Y/%m/%d",
+        "%d/%m/%Y",
+        "%d-%m-%Y",
+    )
+
+    def __init__(self):
+        super().__init__()
+
+    @classmethod
+    def parse(cls, value: str) -> dt.date:
+        for fmt in _AnyDateInputGetter.DATE_FORMATS:
+            try:
+                return dt.datetime.strptime(value, fmt).date()
+            except ValueError:
+                continue
+
+        raise ValueError(f"Unable to parse input {value} in _AnyDateInputGetter.parse")
+
+    @classmethod
+    def is_valid(cls, value: str) -> bool:
+        try:
+            cls.parse(value)
+            return True
+        except ValueError:
+            return False
+
+
+def DateInputGetter(*args):
+    """
+    A (disguised) factory function which returns the relevant
+    date input getter depending on whether input arguments are
+    specified or not.
+
+    This class abstracts away from the user the exact handling of
+    date strings, which is different for when the user specifies
+    supported dates and when they do not
+    """
+
+    if args:
+        return _SpecifiedDateInputGetter(*args)
+
+    return _AnyDateInputGetter()
