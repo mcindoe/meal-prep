@@ -194,6 +194,15 @@ class MealDiary:
     def __bool__(self) -> bool:
         return len(self.meal_diary) > 0
 
+    def __eq__(self, other: "MealDiary") -> bool:
+        if not isinstance(other, MealDiary):
+            return False
+
+        return self.meal_diary == other.meal_diary
+
+    def __len__(self) -> int:
+        return len(self.meal_diary)
+
     def to_file(self, file_path: Path):
         with open(file_path, "w+") as fp:
             json.dump(self.get_representation(), fp, indent=2)
@@ -235,6 +244,36 @@ class MealDiary:
             meal_date: meal
             for meal_date, meal in self.items()
             if abs(meal_date - date) <= time_delta
+        })
+
+    def filter_dates(self, min_date: dt.date, max_date: Optional[dt.date] = None) -> "MealDiary":
+        """
+        Return a copy of the subset of the MealDiary with keys between
+        the start_date (inclusive) and end_date (exclusive)
+
+        If max_date is not specified, then return any date which is >=
+        the start_date
+        """
+
+        if not isinstance(min_date, dt.date):
+            raise TypeError("min_date must be a datetime.date")
+
+        if max_date is not None:
+            if not isinstance(max_date, dt.date):
+                raise TypeError("max_date must be a datetime.date")
+
+        if max_date is None:
+            return MealDiary({
+                meal_date: meal
+                for meal_date, meal in self.items()
+                if meal_date >= min_date
+            })
+
+        return MealDiary({
+            meal_date: meal
+            for meal_date, meal in self.items()
+            if meal_date >= min_date
+            if meal_date < max_date
         })
 
     def except_dates(self, dates_to_exclude: Iterable[dt.date]) -> "MealDiary":
