@@ -201,8 +201,7 @@ class _SpecifiedDateInputGetter(UserInputGetter):
     """
     UserInputGetter which parses strings as dates, in one of the
     required formats, but only accepts subsets of the specified
-    supported dates, which are passed to the the instance's
-    initialiser.
+    supported dates.
 
     Not intended to be called directly - use DateInputGetter with
     arguments in the initialiser to make use of this class
