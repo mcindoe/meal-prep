@@ -228,7 +228,10 @@ class _SpecifiedDateInputGetter(UserInputGetter):
         lambda date: date.strftime("%A")[:3]
     )
 
-    def __init__(self, supported_options: Iterable[dt.date]):
+    def __init__(self, supported_options: Union[dt.date, Iterable[dt.date]]):
+        if isinstance(supported_options, dt.date):
+            supported_options = (supported_options, )
+
         supported_options = tuple(x for x in supported_options)
         if not all(isinstance(x, dt.date) for x in supported_options):
             raise TypeError("All supported options must be datetime.dates")
@@ -276,7 +279,7 @@ class _AnyDateInputGetter(UserInputGetter):
     )
 
     def __init__(self):
-        pass
+        super().__init__()
 
     @classmethod
     def parse(cls, value: str) -> dt.date:
