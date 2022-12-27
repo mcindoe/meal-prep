@@ -108,13 +108,13 @@ class ShoppingList:
 
         return ingredient_quantity_description
 
-    def to_file(self, filepath: Path):
+    def to_file(self, filepath: Union[Path, str]):
         if isinstance(filepath, str):
             filepath = Path(filepath)
 
         if not filepath.parent.exists():
             raise ValueError(
-                "Error in ShoppingList.to_file: The specified filepath's parent does not exist"
+                "Error in ShoppingList.to_file: the specified filepath's parent does not exist"
             )
 
         with open(filepath, "w+") as fp:
