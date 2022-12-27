@@ -251,8 +251,8 @@ class MealDiary:
         Return a copy of the subset of the MealDiary with keys between
         the start_date (inclusive) and end_date (exclusive)
 
-        If max_date is not specified, then return any date which is >=
-        the start_date
+        If max_date is not specified, then return a copy of the subset
+        of the MealDiary with keys and date >= the specified start_date
         """
 
         if not isinstance(min_date, dt.date):
