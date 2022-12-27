@@ -275,6 +275,9 @@ class _AnyDateInputGetter(UserInputGetter):
         "%d-%m-%Y",
     )
 
+    def __init__(self):
+        pass
+
     @classmethod
     def parse(cls, value: str) -> dt.date:
         for fmt in _AnyDateInputGetter.DATE_FORMATS:
