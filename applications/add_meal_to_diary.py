@@ -20,9 +20,7 @@ MAX_PRINTED_DIARY_ENTRIES = 20
 
 
 if __name__ == "__main__":
-    meal_collection = config.meal_collection
     meal_diary = MealDiary.from_project_diary()
-
     n_printed_diary_entries = min(len(meal_diary), MAX_PRINTED_DIARY_ENTRIES)
     printed_diary_min_date = sorted(meal_diary.dates)[-n_printed_diary_entries]
     printed_diary = meal_diary.filter_dates(min_date=printed_diary_min_date)
@@ -35,6 +33,7 @@ if __name__ == "__main__":
     if date is None:
         exit()
 
+    meal_collection = config.meal_collection
     supported_meal_names = sorted(x.name for x in meal_collection)
     print("\nSupported meals:")
     print(get_print_collection_with_indices_str(supported_meal_names))
