@@ -191,7 +191,8 @@ class CaseInsensitiveStringInputGetter(UserInputGetter):
 
 def format_date_string(date: dt.date, fmt: str) -> dt.date:
     """
-    Helper function which is later reduced to a function of the first argument
+    Defined to allow us to get the projection onto the first
+    argument using functools.partial
     """
     return date.strftime(fmt)
 
