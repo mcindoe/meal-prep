@@ -309,6 +309,39 @@ class MealDiary:
 
         return "\n".join(lines)
 
+    def filter_by_max_before_and_max_after_today(
+        self,
+        max_printed_previous_diary_entries: int,
+        max_printed_next_diary_entries: int
+    ) -> "MealDiary":
+        """
+        Return a copy of this MealDiary, filtered to only dates which are close to
+        today, specifically the 'max_printed_previous_diary_entries' closest before
+        today, and the 'max_printed_next_diary_entries' closest after today
+        """
+
+        previous_dates = sorted([x for x in self.dates if x < dt.date.today()])
+        if previous_dates:
+            n_previous_dates_printed = min(len(previous_dates), max_printed_previous_diary_entries)
+            if n_previous_dates_printed > 0:
+                min_printed_date = previous_dates[-n_previous_dates_printed]
+            else:
+                min_printed_date = dt.date.today()
+        else:
+            min_printed_date = dt.date.today()
+
+        next_dates = sorted([x for x in self.dates if x >= dt.date.today()])
+        if next_dates:
+            n_next_dates_printed = min(len(next_dates), max_printed_next_diary_entries)
+            if n_next_dates_printed > 0:
+                max_printed_date = next_dates[n_next_dates_printed - 1]
+            else:
+                max_printed_date = dt.date.today()
+        else:
+            max_printed_date = None
+
+        return self.filter_dates(min_date=min_printed_date, max_date=max_printed_date)
+
 
 class Meals(BaseEnum):
     BEEF_AND_ALE_STEW = Meal(
