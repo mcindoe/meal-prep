@@ -24,14 +24,20 @@ if __name__ == "__main__":
     previous_dates = sorted([x for x in meal_diary.dates if x < dt.date.today()])
     if previous_dates:
         n_previous_dates_printed = min(len(previous_dates), MAX_PRINTED_PREVIOUS_DIARY_ENTRIES)
-        min_printed_date = previous_dates[-(n_previous_dates_printed-1)]
+        if n_previous_dates_printed > 0:
+            min_printed_date = previous_dates[-n_previous_dates_printed]
+        else:
+            min_printed_date = dt.date.today()
     else:
         min_printed_date = dt.date.today()
 
     next_dates = sorted([x for x in meal_diary.dates if x >= dt.date.today()])
     if next_dates:
         n_next_dates_printed = min(len(next_dates), MAX_PRINTED_NEXT_DIARY_ENTRIES)
-        max_printed_date = next_dates[n_next_dates_printed - 1]
+        if n_next_dates_printed > 0:
+            max_printed_date = next_dates[n_next_dates_printed - 1]
+        else:
+            max_printed_date = dt.date.today()
     else:
         max_printed_date = None
 
@@ -41,7 +47,7 @@ if __name__ == "__main__":
         print("Recent diary:\n")
         print(printed_diary.get_pretty_print_string())
 
-    date_input_getter = DateInputGetter(printed_diary.dates)
+    date_input_getter = DateInputGetter(meal_diary.dates)
     print("\nEnter dates to remove from the meal diary")
     dates_to_remove = date_input_getter.get_multiple_inputs()
     if dates_to_remove is None:
