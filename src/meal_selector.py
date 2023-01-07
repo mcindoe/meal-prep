@@ -1,5 +1,7 @@
 import datetime as dt
 import random
+from userinputgetter import CaseInsensitiveStringInputGetter
+from userinputgetter import DateInputGetter
 from typing import Iterable
 from typing import Optional
 from typing import Union
@@ -9,8 +11,6 @@ from mealprep.src.meal import MealCollection
 from mealprep.src.meal import MealDiary
 from mealprep.src.rule import RuleCollection
 from mealprep.src.rule import NotSpecifiedMealOnSpecifiedDate
-from mealprep.src.user_input_getter import DateInputGetter
-from mealprep.src.user_input_getter import CaseInsensitiveStringInputGetter
 
 
 class MealSelector:
