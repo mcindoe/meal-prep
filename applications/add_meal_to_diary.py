@@ -4,14 +4,11 @@ diary
 """
 
 
-import datetime as dt
-from typing import Iterable
 from userinputgetter import DateInputGetter
 from userinputgetter import IntegerInputGetter
 
 from mealprep.src.config import config
 from mealprep.src.meal import Meal
-from mealprep.src.meal import MealCollection
 from mealprep.src.meal import MealDiary
 from mealprep.src.utils import get_print_collection_with_indices_str
 

@@ -1,3 +1,4 @@
+import datetime as dt
 import itertools
 from typing import Iterable
 
@@ -29,5 +30,37 @@ def get_print_collection_with_indices_str(items: Iterable, start_index: int = 1)
         if idx > start_index:
             ret += "\n"
         ret += f"{idx:<{max_index_length}} - {item}"
+
+    return ret
+
+
+def get_pretty_print_date_string(
+    date: dt.date,
+    include_date_number_spacing: bool = False,
+    include_year: bool = False
+) -> str:
+    """
+    Get a representation of a date object as, e.g., Wed 5th Jan 2022.
+
+    Args:
+    include_date_number_spacing: whether to ensure that the date
+        number portion of the returned string has two characters, by
+        left-padding numbers less than 10 with a space
+    include_year: if true, include the final two characters of the year
+    """
+
+    weekday_str = date.strftime("%A")[:3]
+
+    date_number_str = str(date.day)
+    if include_date_number_spacing and date.day < 10:
+        date_number_str = " " + date_number_str
+
+    date_number_suffix = get_day_suffix(date.day)
+    month_str = date.strftime("%B")[:3]
+
+    ret = f"{weekday_str} {date_number_str}{date_number_suffix} {month_str}"
+
+    if include_year:
+        ret += f" {date.strftime('%Y')}"
 
     return ret
