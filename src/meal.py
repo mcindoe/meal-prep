@@ -21,6 +21,7 @@ from mealprep.src.ingredient import Ingredients
 from mealprep.src.ingredient import IngredientQuantity
 from mealprep.src.ingredient import IngredientQuantityCollection
 from mealprep.src.utils import get_day_suffix
+from mealprep.src.utils import get_pretty_print_date_string
 from mealprep.src.loc import DATA_DIR
 
 PROJECT_DIARY_FILENAME = "meal_diary.json"
@@ -296,38 +297,6 @@ class MealDiary:
             if meal_date not in dates_to_exclude
         })
 
-    @staticmethod
-    def get_pretty_print_date_string(
-        date: dt.date,
-        include_date_number_spacing: bool = False,
-        include_year: bool = False
-    ) -> str:
-        """
-        Get a representation of a date object as, e.g., Wed 5th Jan 22.
-
-        Args:
-        include_date_number_spacing: whether to ensure that the date
-            number portion of the returned string has two characters, by
-            left-padding numbers less than 10 with a space
-        include_year: if true, include the final two characters of the year
-        """
-
-        weekday_str = date.strftime("%A")[:3]
-
-        date_number_str = str(date.day)
-        if include_date_number_spacing and date.day < 10:
-            date_number_str = " " + date_number_str
-
-        date_number_suffix = get_day_suffix(date.day)
-        month_str = date.strftime("%B")[:3]
-
-        ret = f"{weekday_str} {date_number_str}{date_number_suffix} {month_str}"
-
-        if include_year:
-            ret += f" {date.strftime('%Y')}"
-
-        return ret
-
     def get_pretty_print_string(self) -> str:
         include_date_number_spacing = any(x.day >= 10 for x in self.dates)
         include_year = len(set(x.year for x in self.dates)) > 1
@@ -335,7 +304,7 @@ class MealDiary:
         lines = []
         for date in sorted(self.dates):
             meal = self[date]
-            date_str = self.get_pretty_print_date_string(date, include_date_number_spacing, include_year)
+            date_str = get_pretty_print_date_string(date, include_date_number_spacing, include_year)
             lines.append(f"{date_str}: {meal.name}")
 
         return "\n".join(lines)
