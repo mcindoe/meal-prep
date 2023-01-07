@@ -17,6 +17,10 @@ MAX_PRINTED_NEXT_DIARY_ENTRIES = 5
 if __name__ == "__main__":
     meal_diary = MealDiary.from_project_diary()
 
+    if not meal_diary:
+        print("Project meal diary is empty, so nothing to do")
+        exit()
+
     previous_dates = sorted([x for x in meal_diary.dates if x < dt.date.today()])
     n_previous_dates_printed = min(len(previous_dates), MAX_PRINTED_PREVIOUS_DIARY_ENTRIES)
     min_printed_date = previous_dates[-(n_previous_dates_printed-1)]
