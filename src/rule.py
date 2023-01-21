@@ -106,6 +106,24 @@ class ForceRoastOnSunday(Rule):
         )
 
 
+class NotIndianTwiceWithinTenDaysRule(Rule):
+    @staticmethod
+    def filter(meal_collection: MealCollection, date: dt.date, meal_diary: MealDiary) -> MealCollection:
+        indian_within_ten_days = any(
+            meal[MealTag.INDIAN]
+            for meal in meal_diary.filter_by_time_delta(date, dt.timedelta(days=10)).meals
+        )
+
+        if not indian_within_ten_days:
+            return meal_collection
+
+        return MealCollection(
+            meal
+            for meal in meal_collection
+            if not meal[MealTag.INDIAN]
+        )
+
+
 class NotPastaTwiceWithinFiveDaysRule(Rule):
     @staticmethod
     def filter(meal_collection: MealCollection, date: dt.date, meal_diary: MealDiary) -> MealCollection:
@@ -191,6 +209,7 @@ class NotSpecifiedMealOnSpecifiedDate(Rule):
 
 class Rules(BaseEnum):
     FORCE_ROAST_ON_SUNDAY = ForceRoastOnSunday()
+    NOT_INDIAN_TWICE_WITHIN_TEN_DAYS = NotIndianTwiceWithinTenDaysRule()
     NOT_PASTA_TWICE_WITHIN_FIVE_DAYS = NotPastaTwiceWithinFiveDaysRule()
     NOT_ROAST_ON_NON_SUNDAY = NotRoastOnNonSunday()
     NOT_SAME_MEAL_WITHIN_SEVEN_DAYS = NotSameMealWithinSevenDaysRule()

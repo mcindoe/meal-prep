@@ -1,10 +1,15 @@
 # Date for which meals should be recommended
 dates:
-  - 2023-01-26
+  - 2023-01-30
+  - 2023-01-31
+  - 2023-02-01
+  - 2023-02-02
+  - 2023-02-03
 
 # Rules to apply when deciding on a meal plan
 # Entries should be names of elements of the Rules enum in src/rule.py
 rules:
+  - NOT_INDIAN_TWICE_WITHIN_TEN_DAYS
   - NOT_PASTA_TWICE_WITHIN_FIVE_DAYS
   - NOT_ROAST_ON_NON_SUNDAY
   - NOT_SAME_MEAL_WITHIN_SEVEN_DAYS
@@ -16,23 +21,31 @@ meals:
   - Burgers
   - Chicken Fajitas
   - Chicken Piccata
+  - Chicken Saltimbocca
   - Chicken Soup
   - Chicken Taleggio
   - Chicken and Green Bean Vermicelli Noodles
   - Chicken and Leek Pie
   - Chilli Chicken Thighs with Cherry Tomatoes
   - Chilli con Carne
+  - Curry Lentils in Crock Pot
   - Lasagne
   - Lemon Leek Linguine
   - Parmesan Crust Baked Chicken
   - Pasta with Chicken and Sundried Tomatoes
+  - Pizza
   - Roast Beef
   - Roast Chicken
   - Roast Lamb
   - Roast Pork
+  - Saag Paneer
   - Shepherds Pie
+  - Slow Cooker Beef Bourgignon
+  - Slow Cooker Chicken Tikka Masala
+  - Slow Cooker Honey Garlic Chicken and Veggies
   - Spaghetti Bolognese
   - Sticky Chinese Pork Belly
+  - Turkey Stuffed Peppers
   - Turkey Sweet Potato Shepherds Pie
 
 # NB: email_addresses are not currently in use in the project

@@ -358,7 +358,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.STEWING_BEEF, Unit.GRAM, 750),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.BEEF
+            MealProperty.MEAT: MealMeat.BEEF,
         }
     )
     BURGERS = Meal(
@@ -377,7 +377,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.SHALLOT, Unit.NUMBER, 1),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.BEEF
+            MealProperty.MEAT: MealMeat.BEEF,
         }
     )
     CHICKEN_AND_GREEN_BEAN_VERMICELLI_NOODLES = Meal(
@@ -398,7 +398,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.VERMICELLI_NOODLES, Unit.GRAM, 200),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.CHICKEN
+            MealProperty.MEAT: MealMeat.CHICKEN,
         }
     )
     CHICKEN_AND_LEEK_PIE = Meal(
@@ -417,7 +417,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.WHITE_WINE, Unit.MILLILITRE, 150),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.CHICKEN
+            MealProperty.MEAT: MealMeat.CHICKEN,
         }
     )
     CHICKEN_FAJITAS = Meal(
@@ -432,7 +432,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.YELLOW_PEPPER, Unit.NUMBER, 1),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.CHICKEN
+            MealProperty.MEAT: MealMeat.CHICKEN,
         }
     )
     CHICKEN_PICCATA = Meal(
@@ -447,7 +447,22 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.RICE, Unit.GRAM, 250),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.CHICKEN
+            MealProperty.MEAT: MealMeat.CHICKEN,
+        }
+    )
+    CHICKEN_SALTIMBOCCA = Meal(
+        name="Chicken Saltimbocca",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.CHICKEN_BREAST, Unit.NUMBER, 3),
+            IngredientQuantity(Ingredients.CHICKEN_BROTH, Unit.GRAM, 400),
+            IngredientQuantity(Ingredients.LEMON, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.OLIVE_OIL, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.PARMESAN_CHEESE, Unit.GRAM, 20),
+            IngredientQuantity(Ingredients.PROSCIUTTO, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.SPINACH, Unit.GRAM, 250),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.CHICKEN,
         }
     )
     CHICKEN_SOUP = Meal(
@@ -461,7 +476,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.PARSLEY, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.CHICKEN
+            MealProperty.MEAT: MealMeat.CHICKEN,
         }
     )
     CHICKEN_TALEGGIO = Meal(
@@ -479,7 +494,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.VINE_CHERRY_TOMATOES, Unit.GRAM, 400),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.CHICKEN
+            MealProperty.MEAT: MealMeat.CHICKEN,
         }
     )
     CHILLI_CHICKEN_THIGHS_WITH_CHERRY_TOMATOES = Meal(
@@ -493,7 +508,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.RICE, Unit.GRAM, 200),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.CHICKEN
+            MealProperty.MEAT: MealMeat.CHICKEN,
         }
     )
     CHILLI_CON_CARNE = Meal(
@@ -511,7 +526,30 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.BEEF
+            MealProperty.MEAT: MealMeat.BEEF,
+        }
+    )
+    CURRY_LENTILS_IN_CROCK_POT = Meal(
+        name="Curry Lentils in Crock Pot",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BASMATI_RICE, Unit.GRAM, 400),
+            IngredientQuantity(Ingredients.CAULIFLOWER_FLOURET, Unit.GRAM, 500),
+            IngredientQuantity(Ingredients.CORIANDER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.CUMIN, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.FROZEN_PEAS, Unit.GRAM, 200),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.GINGER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.JALAPENO, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.LENTILS, Unit.GRAM, 125),
+            IngredientQuantity(Ingredients.LIGHT_COCONUT_MILK, Unit.MILLILITRE, 250),
+            IngredientQuantity(Ingredients.LIME, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.SHALLOT, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.SHELLED_PISTACHIOS, Unit.GRAM, 100),
+            IngredientQuantity(Ingredients.TOMATO_PASTE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.VEGETABLE_BROTH, Unit.BOOL, True),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.NONE,
         }
     )
     FISH_PIE = Meal(
@@ -531,7 +569,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.SMOKED_HADDOCK_FILLET, Unit.GRAM, 300),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.FISH
+            MealProperty.MEAT: MealMeat.FISH,
         }
     )
     HONEY_GARLIC_SALMON = Meal(
@@ -546,7 +584,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.SOY_SAUCE, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.FISH
+            MealProperty.MEAT: MealMeat.FISH,
         }
     )
     INDIAN_LAMB_WITH_SPICED_LENTILS = Meal(
@@ -569,7 +607,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.TUMERIC, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.LAMB
+            MealProperty.MEAT: MealMeat.LAMB,
         }
     )
     KEDGEREE = Meal(
@@ -589,7 +627,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.VEGETABLE_STOCK, Unit.MILLILITRE, 350),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.FISH
+            MealProperty.MEAT: MealMeat.FISH,
         }
     )
     LASAGNE = Meal(
@@ -613,7 +651,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.BEEF
+            MealProperty.MEAT: MealMeat.BEEF,
         }
     )
     LEMON_LEEK_LINGUINE = Meal(
@@ -630,10 +668,10 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.CHIVES, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.NONE
+            MealProperty.MEAT: MealMeat.NONE,
         },
         tags=(
-            MealTag.PASTA
+            MealTag.PASTA,
         )
     )
     MOUSSAKA = Meal(
@@ -655,7 +693,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.LAMB
+            MealProperty.MEAT: MealMeat.LAMB,
         }
     )
     PARMESAN_CRUST_BAKED_CHICKEN = Meal(
@@ -668,7 +706,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.PARMESAN_CHEESE, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.CHICKEN
+            MealProperty.MEAT: MealMeat.CHICKEN,
         }
     )
     PASTA_WITH_CHICKEN_AND_SUNDRIED_TOMATOES = Meal(
@@ -686,11 +724,29 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.SUNDRIED_TOMATOES, Unit.GRAM, 750),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.CHICKEN
+            MealProperty.MEAT: MealMeat.CHICKEN,
         },
         tags=(
             MealTag.PASTA,
         )
+    )
+    PIZZA = Meal(
+        name="Pizza",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BASIL, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.CAPUTO_DOUBLE_ZERO_FLOUR, Unit.GRAM, 300),
+            IngredientQuantity(Ingredients.FLOUR, Unit.GRAM, 300),
+            IngredientQuantity(Ingredients.ACTIVE_DRY_YEAST, Unit.GRAM, 4),
+            IngredientQuantity(Ingredients.HAM, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.HONEY, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.MOZARELLA_CHEESE, Unit.GRAM, 250),
+            IngredientQuantity(Ingredients.OLIVE_OIL, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.PASSATA, Unit.MILLILITRE, 250),
+            IngredientQuantity(Ingredients.PEPPERONI, Unit.BOOL, True),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.PORK,
+        },
     )
     QUICHE_LORRAINE = Meal(
         name="Quiche Lorraine",
@@ -703,7 +759,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.SHORTCRUST_PASTRY, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.PORK
+            MealProperty.MEAT: MealMeat.PORK,
         },
     )
     ROAST_BEEF = Meal(
@@ -712,7 +768,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.BEEF_JOINT, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.BEEF
+            MealProperty.MEAT: MealMeat.BEEF,
         },
         tags=(
             MealTag.ROAST,
@@ -724,7 +780,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.WHOLE_CHICKEN, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.CHICKEN
+            MealProperty.MEAT: MealMeat.CHICKEN,
         },
         tags=(
             MealTag.ROAST,
@@ -736,7 +792,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.LEG_OF_LAMB, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.LAMB
+            MealProperty.MEAT: MealMeat.LAMB,
         },
         tags=(
             MealTag.ROAST,
@@ -748,10 +804,34 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.PORK_JOINT, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.PORK
+            MealProperty.MEAT: MealMeat.PORK,
         },
         tags=(
             MealTag.ROAST,
+        )
+    )
+    SAAG_PANEER = Meal(
+        name="Saag Paneer",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.CAYENNE_PEPPER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.COCONUT_MILK, Unit.MILLILITRE, 350),
+            IngredientQuantity(Ingredients.CUMIN, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.DRIED_FENUGREEK, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.GARAM_MASALA, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.GHEE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.GINGER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.KOSHER_SALT, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.PANEER_CHEESE, Unit.GRAM, 350),
+            IngredientQuantity(Ingredients.SPINACH, Unit.GRAM, 450),
+            IngredientQuantity(Ingredients.TUMERIC, Unit.BOOL, True),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.NONE,
+        },
+        tags=(
+            MealTag.INDIAN,
         )
     )
     SHEPHERDS_PIE = Meal(
@@ -772,11 +852,75 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.WORCESTERSHIRE_SAUCE, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.BEEF
+            MealProperty.MEAT: MealMeat.BEEF,
         },
         tags=(
             MealTag.PASTA,
         )
+    )
+    SLOW_COOKER_BEEF_BOURGUIGNON = Meal(
+        name="Slow Cooker Beef Bourgignon",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.BEEF_BROTH, Unit.MILLILITRE, 500),
+            IngredientQuantity(Ingredients.BEEF_CHUCK_STEAK, Unit.GRAM, 900),
+            IngredientQuantity(Ingredients.BUTTER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 4),
+            IngredientQuantity(Ingredients.CIPOLLINI_ONION, Unit.GRAM, 450),
+            IngredientQuantity(Ingredients.DRY_RED_WINE, Unit.MILLILITRE, 700),
+            IngredientQuantity(Ingredients.FLOUR, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.KOSHER_SALT, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.PARSLEY, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.THICK_CUT_BACON, Unit.GRAM, 300),
+            IngredientQuantity(Ingredients.THYME, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.GRAM, 50),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.BEEF,
+        },
+    )
+    SLOW_COOKER_CHICKEN_TIKKA_MASALA = Meal(
+        name="Slow Cooker Chicken Tikka Masala",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.CAYENNE_PEPPER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.CHICKEN_BREAST, Unit.NUMBER, 4),
+            IngredientQuantity(Ingredients.CORIANDER, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.CUMIN, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.DOUBLE_CREAM, Unit.MILLILITRE, 250),
+            IngredientQuantity(Ingredients.GARAM_MASALA, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 5),
+            IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 1),
+            IngredientQuantity(Ingredients.RICE, Unit.GRAM, 500),
+            IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.YOGURT, Unit.MILLILITRE, 250),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.CHICKEN,
+        },
+        tags=(
+            MealTag.INDIAN,
+        )
+    )
+    SLOW_COOKER_HONEY_GARLIC_CHICKEN_AND_VEGGIES = Meal(
+        name="Slow Cooker Honey Garlic Chicken and Veggies",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.BABY_CARROT, Unit.GRAM, 450),
+            IngredientQuantity(Ingredients.BABY_RED_POTATO, Unit.GRAM, 450),
+            IngredientQuantity(Ingredients.CHICKEN_THIGH, Unit.NUMBER, 8),
+            IngredientQuantity(Ingredients.DRIED_BASIL, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.DRIED_OREGANO, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.GARLIC_CLOVE, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.GREEN_BEANS, Unit.GRAM, 450),
+            IngredientQuantity(Ingredients.HONEY, Unit.MILLILITRE, 100),
+            IngredientQuantity(Ingredients.KETCHUP, Unit.MILLILITRE, 50),
+            IngredientQuantity(Ingredients.PARSLEY, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.RED_PEPPER_FLAKES, Unit.BOOL, True),
+            IngredientQuantity(Ingredients.SOY_SAUCE, Unit.MILLILITRE, 100),
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.CHICKEN,
+        },
     )
     SPAGHETTI_BOLOGNESE = Meal(
         name="Spaghetti Bolognese",
@@ -796,7 +940,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.BEEF
+            MealProperty.MEAT: MealMeat.BEEF,
         },
         tags=(
             MealTag.PASTA,
@@ -820,7 +964,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.VEGETABLE_OIL, Unit.BOOL, True),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.PORK
+            MealProperty.MEAT: MealMeat.PORK,
         }
     )
     TURKEY_SWEET_POTATO_SHEPHERDS_PIE = Meal(
@@ -835,10 +979,26 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 1),
             IngredientQuantity(Ingredients.OREGANO, Unit.BOOL, True),
             IngredientQuantity(Ingredients.SWEET_POTATO, Unit.NUMBER, 3),
-            IngredientQuantity(Ingredients.TURKEY_MINCE, Unit.GRAM, 450),
+            IngredientQuantity(Ingredients.TURKEY_MINCE, Unit.GRAM, 500),
         ),
         properties={
-            MealProperty.MEAT: MealMeat.TURKEY
+            MealProperty.MEAT: MealMeat.TURKEY,
+        }
+    )
+    TURKEY_STUFFED_PEPPERS = Meal(
+        name="Turkey Stuffed Peppers",
+        ingredient_quantities=(
+            IngredientQuantity(Ingredients.EGGS, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.GREEN_PEPPER, Unit.NUMBER, 4),
+            IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 2),
+            IngredientQuantity(Ingredients.PASSATA, Unit.MILLILITRE, 500),
+            IngredientQuantity(Ingredients.RICE, Unit.GRAM, 400),
+            IngredientQuantity(Ingredients.TOMATO_SOUP, Unit.GRAM, 1),
+            IngredientQuantity(Ingredients.TURKEY_MINCE, Unit.GRAM, 500),
+
+        ),
+        properties={
+            MealProperty.MEAT: MealMeat.TURKEY,
         }
     )
 
