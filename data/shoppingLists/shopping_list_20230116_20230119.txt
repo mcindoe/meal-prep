@@ -1,0 +1,65 @@
+Shopping List
+
+
+--- Vegetables ---
+- [ ] Red Onion: 2 units
+	Chicken Fajitas
+- [ ] Red Pepper: 1 unit
+	Chicken Fajitas
+- [ ] Vine Cherry Tomatoes: 400 grams
+	Chicken Taleggio
+- [ ] Yellow Pepper: 1 unit
+	Chicken Fajitas
+
+
+--- Herbs ---
+- [ ] Basil
+	Chicken Taleggio
+- [ ] Coriander
+	Chicken Fajitas
+
+
+--- Carbohydrates ---
+- [ ] Breadcrumbs
+	Chicken Taleggio
+- [ ] Rice: 250 grams
+	Chicken Piccata
+- [ ] Tortilla Wraps
+	Chicken Fajitas
+
+
+--- Dairy ---
+- [ ] Full Fat Cream Cheese
+	Chicken Taleggio
+- [ ] Taleggio Cheese: 175 grams
+	Chicken Taleggio
+
+
+--- Meat ---
+- [ ] Chicken Breast: 400 grams, 10 units
+	Chicken Piccata, Chicken Taleggio, Chicken Fajitas
+
+
+--- Condiments ---
+- [ ] Capers: 1 jar
+	Chicken Piccata
+- [ ] Flour
+	Chicken Piccata
+- [ ] Lemon Juice: 80 mls
+	Chicken Piccata
+- [ ] Olive Oil
+	Chicken Piccata, Chicken Taleggio
+
+
+--- Sauces ---
+- [ ] Balsamic Vinegar
+	Chicken Taleggio
+- [ ] Chicken Stock: 950 mls
+	Chicken Piccata
+- [ ] Green Pesto
+	Chicken Taleggio
+
+
+--- Spices ---
+- [ ] Paprika
+	Chicken Taleggio, Chicken Fajitas

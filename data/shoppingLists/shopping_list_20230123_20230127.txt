@@ -1,0 +1,97 @@
+Shopping List
+
+
+--- Vegetables ---
+- [ ] Baby Corn: 150 grams
+	Chicken and Green Bean Vermicelli Noodles
+- [ ] Carrot: 2 units
+	Chicken and Green Bean Vermicelli Noodles
+- [ ] Celery: 3 units
+	Lasagne, Chicken and Green Bean Vermicelli Noodles
+- [ ] Garlic Clove: 4 units
+	Lasagne, Chicken and Green Bean Vermicelli Noodles
+- [ ] Ginger
+	Chicken and Green Bean Vermicelli Noodles
+- [ ] Green Beans: 1 unit
+	Chicken and Green Bean Vermicelli Noodles
+- [ ] Lettuce
+	Burgers
+- [ ] Onion: 3 units
+	Lasagne, Chicken and Green Bean Vermicelli Noodles
+- [ ] Pak Choi: 1 unit
+	Chicken and Green Bean Vermicelli Noodles
+- [ ] Red Pepper: 1 unit
+	Chicken and Green Bean Vermicelli Noodles
+- [ ] Shallot: 1 unit
+	Burgers
+
+
+--- Herbs ---
+- [ ] Italian Herbs
+	Burgers
+- [ ] Thyme
+	Lasagne
+
+
+--- Carbohydrates ---
+- [ ] Burger Buns: 1 unit
+	Burgers
+- [ ] Lasagne Sheets
+	Lasagne
+- [ ] Vermicelli Noodles: 200 grams
+	Chicken and Green Bean Vermicelli Noodles
+
+
+--- Dairy ---
+- [ ] Butter
+	Lasagne
+- [ ] Cheddar Cheese
+	Lasagne
+- [ ] Eggs
+	Burgers
+- [ ] Mature Cheddar Cheese
+	Burgers
+- [ ] Milk
+	Lasagne
+- [ ] Parmesan Cheese
+	Lasagne
+
+
+--- Meat ---
+- [ ] Bacon
+	Burgers
+- [ ] Beef Mince: 1200 grams
+	Lasagne, Burgers
+- [ ] Chicken Breast: 3 units
+	Chicken and Green Bean Vermicelli Noodles
+
+
+--- Cans ---
+- [ ] Chopped Tomatoes
+	Lasagne
+
+
+--- Condiments ---
+- [ ] Dijon Mustard
+	Lasagne
+- [ ] Dried Mustard
+	Burgers
+- [ ] Flour
+	Lasagne
+- [ ] Redcurrant Jelly
+	Lasagne
+- [ ] Sweet Chilli Sauce
+	Chicken and Green Bean Vermicelli Noodles
+- [ ] Tomato Puree
+	Lasagne
+
+
+--- Sauces ---
+- [ ] Balsamic Vinegar
+	Burgers
+- [ ] Beef Stock
+	Lasagne
+- [ ] Dark Soy Sauce
+	Chicken and Green Bean Vermicelli Noodles
+- [ ] Mayonnaise
+	Burgers
