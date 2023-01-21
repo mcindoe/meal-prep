@@ -68,6 +68,7 @@ class MealProperty(MealMetadata):
 
 
 class MealTag(MealMetadata):
+    INDIAN = auto()
     ROAST = auto()
     PASTA = auto()
     VEGETARIAN = auto()
