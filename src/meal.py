@@ -3,26 +3,24 @@ import copy
 import datetime as dt
 import json
 from pathlib import Path
-from typing import Any
-from typing import Dict
-from typing import Iterable
-from typing import Optional
-from typing import Tuple
-from typing import Union
+from typing import Any, Dict, Iterable, Optional, Tuple, Union
 
 from mealprep.src.basic_iterator import BasicIterator
-from mealprep.src.constants import BaseEnum
-from mealprep.src.constants import MealMeat
-from mealprep.src.constants import MealMetadata
-from mealprep.src.constants import MealProperty
-from mealprep.src.constants import MealTag
-from mealprep.src.constants import Unit
-from mealprep.src.ingredient import Ingredients
-from mealprep.src.ingredient import IngredientQuantity
-from mealprep.src.ingredient import IngredientQuantityCollection
-from mealprep.src.utils import get_day_suffix
-from mealprep.src.utils import get_pretty_print_date_string
+from mealprep.src.constants import (
+    BaseEnum,
+    MealMeat,
+    MealMetadata,
+    MealProperty,
+    MealTag,
+    Unit,
+)
+from mealprep.src.ingredient import (
+    IngredientQuantity,
+    IngredientQuantityCollection,
+    Ingredients,
+)
 from mealprep.src.loc import DATA_DIR
+from mealprep.src.utils import get_pretty_print_date_string
 
 PROJECT_DIARY_FILENAME = "meal_diary.json"
 PROJECT_DIARY_FILEPATH = DATA_DIR / PROJECT_DIARY_FILENAME
@@ -34,7 +32,7 @@ class Meal:
         name: str,
         ingredient_quantities: IngredientQuantityCollection,
         properties: Dict[MealProperty, Any],
-        tags: Optional[Union[MealTag, Iterable[MealTag]]] = tuple()
+        tags: Optional[Union[MealTag, Iterable[MealTag]]] = tuple(),
     ):
         self.name = name
         self.ingredient_quantities = IngredientQuantityCollection(ingredient_quantities)
@@ -60,7 +58,7 @@ class Meal:
 
         if tags is not None:
             if isinstance(tags, MealTag):
-                tags = (tags, )
+                tags = (tags,)
 
             tags = set(tags)
 
@@ -183,10 +181,7 @@ class MealDiary:
         meal names
         """
 
-        ret = {
-            date.strftime(MealDiary.DATE_FORMAT): meal.name
-            for date, meal in self.items()
-        }
+        ret = {date.strftime(MealDiary.DATE_FORMAT): meal.name for date, meal in self.items()}
         return dict(sorted(ret.items()))
 
     def __repr__(self) -> str:
@@ -218,10 +213,12 @@ class MealDiary:
         except json.decoder.JSONDecodeError:
             raise ValueError(f'Specified file "{file_path}" could not be parsed into JSON')
 
-        return MealDiary({
-            dt.datetime.strptime(date_string, MealDiary.DATE_FORMAT).date(): Meal.from_name(meal_name)
-            for date_string, meal_name in dict_representation.items()
-        })
+        return MealDiary(
+            {
+                dt.datetime.strptime(date_string, MealDiary.DATE_FORMAT).date(): Meal.from_name(meal_name)
+                for date_string, meal_name in dict_representation.items()
+            }
+        )
 
     def to_project_diary(self) -> None:
         self.to_file(PROJECT_DIARY_FILEPATH)
@@ -234,18 +231,10 @@ class MealDiary:
         return MealDiary(self.meal_diary | other.meal_diary)
 
     def difference(self, other: "MealDiary") -> "MealDiary":
-        return MealDiary({
-            date: meal
-            for date, meal in self.meal_diary.items()
-            if date not in other.meal_diary.keys()
-        })
+        return MealDiary({date: meal for date, meal in self.meal_diary.items() if date not in other.meal_diary.keys()})
 
     def filter_by_time_delta(self, date: dt.date, time_delta: dt.timedelta) -> "MealDiary":
-        return MealDiary({
-            meal_date: meal
-            for meal_date, meal in self.items()
-            if abs(meal_date - date) <= time_delta
-        })
+        return MealDiary({meal_date: meal for meal_date, meal in self.items() if abs(meal_date - date) <= time_delta})
 
     def filter_dates(self, min_date: dt.date, max_date: Optional[dt.date] = None) -> "MealDiary":
         """
@@ -264,18 +253,11 @@ class MealDiary:
                 raise TypeError("max_date must be a datetime.date")
 
         if max_date is None:
-            return MealDiary({
-                meal_date: meal
-                for meal_date, meal in self.items()
-                if meal_date >= min_date
-            })
+            return MealDiary({meal_date: meal for meal_date, meal in self.items() if meal_date >= min_date})
 
-        return MealDiary({
-            meal_date: meal
-            for meal_date, meal in self.items()
-            if meal_date >= min_date
-            if meal_date < max_date
-        })
+        return MealDiary(
+            {meal_date: meal for meal_date, meal in self.items() if meal_date >= min_date if meal_date < max_date}
+        )
 
     def except_dates(self, dates_to_exclude: Iterable[dt.date]) -> "MealDiary":
         """
@@ -284,18 +266,14 @@ class MealDiary:
         """
 
         if isinstance(dates_to_exclude, dt.date):
-            dates_to_exclude = (dates_to_exclude, )
+            dates_to_exclude = (dates_to_exclude,)
 
         dates_to_exclude = set(x for x in dates_to_exclude)
 
         if not all(isinstance(x, dt.date) for x in dates_to_exclude):
             raise TypeError("All passed dates must be datetime.dates")
 
-        return MealDiary({
-            meal_date: meal
-            for meal_date, meal in self.items()
-            if meal_date not in dates_to_exclude
-        })
+        return MealDiary({meal_date: meal for meal_date, meal in self.items() if meal_date not in dates_to_exclude})
 
     def get_pretty_print_string(self) -> str:
         include_date_number_spacing = any(x.day >= 10 for x in self.dates)
@@ -312,7 +290,7 @@ class MealDiary:
     def filter_by_max_before_and_max_after_today(
         self,
         max_printed_previous_diary_entries: int,
-        max_printed_next_diary_entries: int
+        max_printed_next_diary_entries: int,
     ) -> "MealDiary":
         """
         Return a copy of this MealDiary, filtered to only dates which are close to
@@ -359,7 +337,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.BEEF,
-        }
+        },
     )
     BURGERS = Meal(
         name="Burgers",
@@ -378,7 +356,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.BEEF,
-        }
+        },
     )
     CHICKEN_AND_GREEN_BEAN_VERMICELLI_NOODLES = Meal(
         name="Chicken and Green Bean Vermicelli Noodles",
@@ -399,7 +377,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN,
-        }
+        },
     )
     CHICKEN_AND_LEEK_PIE = Meal(
         name="Chicken and Leek Pie",
@@ -418,7 +396,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN,
-        }
+        },
     )
     CHICKEN_FAJITAS = Meal(
         name="Chicken Fajitas",
@@ -433,7 +411,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN,
-        }
+        },
     )
     CHICKEN_PICCATA = Meal(
         name="Chicken Piccata",
@@ -448,7 +426,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN,
-        }
+        },
     )
     CHICKEN_SALTIMBOCCA = Meal(
         name="Chicken Saltimbocca",
@@ -463,7 +441,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN,
-        }
+        },
     )
     CHICKEN_SOUP = Meal(
         name="Chicken Soup",
@@ -477,7 +455,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN,
-        }
+        },
     )
     CHICKEN_TALEGGIO = Meal(
         name="Chicken Taleggio",
@@ -495,7 +473,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN,
-        }
+        },
     )
     CHILLI_CHICKEN_THIGHS_WITH_CHERRY_TOMATOES = Meal(
         name="Chilli Chicken Thighs with Cherry Tomatoes",
@@ -509,7 +487,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN,
-        }
+        },
     )
     CHILLI_CON_CARNE = Meal(
         name="Chilli con Carne",
@@ -527,7 +505,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.BEEF,
-        }
+        },
     )
     CURRY_LENTILS_IN_CROCK_POT = Meal(
         name="Curry Lentils in Crock Pot",
@@ -550,7 +528,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.NONE,
-        }
+        },
     )
     FISH_PIE = Meal(
         name="Fish Pie",
@@ -570,7 +548,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.FISH,
-        }
+        },
     )
     HONEY_GARLIC_SALMON = Meal(
         name="Honey-Garlic Salmon",
@@ -585,7 +563,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.FISH,
-        }
+        },
     )
     INDIAN_LAMB_WITH_SPICED_LENTILS = Meal(
         name="Indian Lamb with Spiced Lentils",
@@ -608,7 +586,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.LAMB,
-        }
+        },
     )
     KEDGEREE = Meal(
         name="Kedgeree",
@@ -628,7 +606,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.FISH,
-        }
+        },
     )
     LASAGNE = Meal(
         name="Lasagne",
@@ -652,7 +630,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.BEEF,
-        }
+        },
     )
     LEMON_LEEK_LINGUINE = Meal(
         name="Lemon Leek Linguine",
@@ -670,9 +648,7 @@ class Meals(BaseEnum):
         properties={
             MealProperty.MEAT: MealMeat.NONE,
         },
-        tags=(
-            MealTag.PASTA,
-        )
+        tags=(MealTag.PASTA,),
     )
     MOUSSAKA = Meal(
         name="Moussaka",
@@ -694,7 +670,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.LAMB,
-        }
+        },
     )
     PARMESAN_CRUST_BAKED_CHICKEN = Meal(
         name="Parmesan Crust Baked Chicken",
@@ -707,7 +683,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN,
-        }
+        },
     )
     PASTA_WITH_CHICKEN_AND_SUNDRIED_TOMATOES = Meal(
         name="Pasta with Chicken and Sundried Tomatoes",
@@ -726,9 +702,7 @@ class Meals(BaseEnum):
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN,
         },
-        tags=(
-            MealTag.PASTA,
-        )
+        tags=(MealTag.PASTA,),
     )
     PIZZA = Meal(
         name="Pizza",
@@ -764,51 +738,35 @@ class Meals(BaseEnum):
     )
     ROAST_BEEF = Meal(
         name="Roast Beef",
-        ingredient_quantities=(
-            IngredientQuantity(Ingredients.BEEF_JOINT, Unit.BOOL, True),
-        ),
+        ingredient_quantities=(IngredientQuantity(Ingredients.BEEF_JOINT, Unit.BOOL, True),),
         properties={
             MealProperty.MEAT: MealMeat.BEEF,
         },
-        tags=(
-            MealTag.ROAST,
-        )
+        tags=(MealTag.ROAST,),
     )
     ROAST_CHICKEN = Meal(
         name="Roast Chicken",
-        ingredient_quantities=(
-            IngredientQuantity(Ingredients.WHOLE_CHICKEN, Unit.BOOL, True),
-        ),
+        ingredient_quantities=(IngredientQuantity(Ingredients.WHOLE_CHICKEN, Unit.BOOL, True),),
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN,
         },
-        tags=(
-            MealTag.ROAST,
-        )
+        tags=(MealTag.ROAST,),
     )
     ROAST_LAMB = Meal(
         name="Roast Lamb",
-        ingredient_quantities=(
-            IngredientQuantity(Ingredients.LEG_OF_LAMB, Unit.BOOL, True),
-        ),
+        ingredient_quantities=(IngredientQuantity(Ingredients.LEG_OF_LAMB, Unit.BOOL, True),),
         properties={
             MealProperty.MEAT: MealMeat.LAMB,
         },
-        tags=(
-            MealTag.ROAST,
-        )
+        tags=(MealTag.ROAST,),
     )
     ROAST_PORK = Meal(
         name="Roast Pork",
-        ingredient_quantities=(
-            IngredientQuantity(Ingredients.PORK_JOINT, Unit.BOOL, True),
-        ),
+        ingredient_quantities=(IngredientQuantity(Ingredients.PORK_JOINT, Unit.BOOL, True),),
         properties={
             MealProperty.MEAT: MealMeat.PORK,
         },
-        tags=(
-            MealTag.ROAST,
-        )
+        tags=(MealTag.ROAST,),
     )
     SAAG_PANEER = Meal(
         name="Saag Paneer",
@@ -830,9 +788,7 @@ class Meals(BaseEnum):
         properties={
             MealProperty.MEAT: MealMeat.NONE,
         },
-        tags=(
-            MealTag.INDIAN,
-        )
+        tags=(MealTag.INDIAN,),
     )
     SHEPHERDS_PIE = Meal(
         name="Shepherds Pie",
@@ -854,9 +810,7 @@ class Meals(BaseEnum):
         properties={
             MealProperty.MEAT: MealMeat.BEEF,
         },
-        tags=(
-            MealTag.PASTA,
-        )
+        tags=(MealTag.PASTA,),
     )
     SLOW_COOKER_BEEF_BOURGUIGNON = Meal(
         name="Slow Cooker Beef Bourgignon",
@@ -898,9 +852,7 @@ class Meals(BaseEnum):
         properties={
             MealProperty.MEAT: MealMeat.CHICKEN,
         },
-        tags=(
-            MealTag.INDIAN,
-        )
+        tags=(MealTag.INDIAN,),
     )
     SLOW_COOKER_HONEY_GARLIC_CHICKEN_AND_VEGGIES = Meal(
         name="Slow Cooker Honey Garlic Chicken and Veggies",
@@ -942,9 +894,7 @@ class Meals(BaseEnum):
         properties={
             MealProperty.MEAT: MealMeat.BEEF,
         },
-        tags=(
-            MealTag.PASTA,
-        )
+        tags=(MealTag.PASTA,),
     )
     STICKY_CHINESE_PORK_BELLY = Meal(
         name="Sticky Chinese Pork Belly",
@@ -965,7 +915,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.PORK,
-        }
+        },
     )
     TURKEY_SWEET_POTATO_SHEPHERDS_PIE = Meal(
         name="Turkey Sweet Potato Shepherds Pie",
@@ -983,7 +933,7 @@ class Meals(BaseEnum):
         ),
         properties={
             MealProperty.MEAT: MealMeat.TURKEY,
-        }
+        },
     )
     TURKEY_STUFFED_PEPPERS = Meal(
         name="Turkey Stuffed Peppers",
@@ -995,11 +945,10 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.RICE, Unit.GRAM, 400),
             IngredientQuantity(Ingredients.TOMATO_SOUP, Unit.GRAM, 1),
             IngredientQuantity(Ingredients.TURKEY_MINCE, Unit.GRAM, 500),
-
         ),
         properties={
             MealProperty.MEAT: MealMeat.TURKEY,
-        }
+        },
     )
 
 
