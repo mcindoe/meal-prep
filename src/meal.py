@@ -128,7 +128,17 @@ class MealCollection:
         raise TypeError("'other' must be one of Meal or MealCollection")
 
     def __eq__(self, other: "MealCollection") -> bool:
-        return set(self.meals) == set(other.meals)
+        if not isinstance(other, MealCollection):
+            return False
+
+        if len(self) != len(other):
+            return False
+
+        for x in self:
+            if x not in other:
+                return False
+
+        return True
 
 
 class MealDiary:
