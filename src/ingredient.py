@@ -62,6 +62,19 @@ class IngredientQuantityCollection:
     def __iter__(self):
         return BasicIterator(self.ingredient_quantities)
 
+    def __eq__(self, other: "IngredientQuantityCollection") -> bool:
+        if not isinstance(other, IngredientQuantityCollection):
+            return False
+
+        if len(self.ingredient_quantities) != len(other.ingredient_quantities):
+            return False
+
+        for x in self:
+            if x not in other:
+                return False
+
+        return True
+
 
 class Ingredients(BaseEnum):
     ACTIVE_DRY_YEAST = Ingredient("Active Dry Yeast", Category.CONDIMENT)

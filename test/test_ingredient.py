@@ -87,6 +87,48 @@ class TestIngredientQuantityCollection:
 
         with pytest.raises(TypeError):
             # One of the arguments is not an IngredientQuantity
-            IngredientQuantityCollection(
-                ingredient_quantities[:2] + (Ingredients.CREAM, Unit.GRAM, 100)
+            IngredientQuantityCollection(ingredient_quantities[:2] + (Ingredients.CREAM, Unit.GRAM, 100))
+
+    def test_eq(self):
+        collection = IngredientQuantityCollection(
+            (
+                IngredientQuantity(Ingredients.BASIL, Unit.BOOL, True),
+                IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 1),
+                IngredientQuantity(Ingredients.CHERRY_TOMATOES, Unit.NUMBER, 3),
             )
+        )
+        equal_collection = IngredientQuantityCollection(
+            (
+                IngredientQuantity(Ingredients.BASIL, Unit.BOOL, True),
+                IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 1),
+                IngredientQuantity(Ingredients.CHERRY_TOMATOES, Unit.NUMBER, 3),
+            )
+        )
+        assert collection == equal_collection
+
+        subset_collection = IngredientQuantityCollection(
+            (
+                IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 1),
+                IngredientQuantity(Ingredients.CHERRY_TOMATOES, Unit.NUMBER, 3),
+            )
+        )
+        assert collection != subset_collection
+
+        superset_collection = IngredientQuantityCollection(
+            (
+                IngredientQuantity(Ingredients.BASIL, Unit.BOOL, True),
+                IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 1),
+                IngredientQuantity(Ingredients.CHERRY_TOMATOES, Unit.NUMBER, 3),
+                IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.GRAM, 250),
+            )
+        )
+        assert collection != superset_collection
+
+        different_quantity_collection = IngredientQuantityCollection(
+            (
+                IngredientQuantity(Ingredients.BASIL, Unit.BOOL, True),
+                IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 42),
+                IngredientQuantity(Ingredients.CHERRY_TOMATOES, Unit.NUMBER, 3),
+            )
+        )
+        assert collection != different_quantity_collection
