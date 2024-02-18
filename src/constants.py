@@ -86,3 +86,4 @@ class MealTag(MealMetadata):
     ROAST = "Roast"
     PASTA = "Pasta"
     VEGETARIAN = "Vegetarian"
+    WINTER = "Winter"
