@@ -6,7 +6,14 @@ from mealprep.src.constants import MealMeat, MealProperty, MealTag, Unit
 from mealprep.src.ingredient import IngredientQuantity, Ingredients
 from mealprep.src.loc import ROOT_DIR
 from mealprep.src.meal import Meal
-from mealprep.src.recipe_parser import RecipeError, RecipeParser
+from mealprep.src.recipe import (
+    RecipeError,
+    _parse_ingredient_entry,
+    _parse_tag_entry,
+    _parse_unit_quantity_description,
+    parse_recipe_as_meal,
+    _parse_property_entry,
+)
 
 
 TEST_RESOURCES_DIR = ROOT_DIR / "test/resources"
@@ -22,7 +29,7 @@ class TestRecipeParser:
         )
 
         for entry, expected in test_cases:
-            assert RecipeParser._parse_unit_quantity_description(entry) == expected
+            assert _parse_unit_quantity_description(entry) == expected
 
     def test_parse_ingredient_entry(self):
         test_cases = (
@@ -45,7 +52,7 @@ class TestRecipeParser:
         )
 
         for entry, expected in test_cases:
-            assert RecipeParser._parse_ingredient_entry(entry) == expected
+            assert _parse_ingredient_entry(entry) == expected
 
     def test_parse_property_entry(self):
         test_cases = (
@@ -55,13 +62,13 @@ class TestRecipeParser:
         )
 
         for entry, expected in test_cases:
-            assert RecipeParser._parse_property_entry(entry) == expected
+            assert _parse_property_entry(entry) == expected
 
         with pytest.raises(RecipeError):
-            RecipeParser._parse_property_entry({"Foo": "Bar"})
+            _parse_property_entry({"Foo": "Bar"})
 
         with pytest.raises(RecipeError):
-            RecipeParser._parse_property_entry({"Meat": "Foo"})
+            _parse_property_entry({"Meat": "Foo"})
 
     def test_parse_meal_tag_entry(self):
         test_cases = (
@@ -71,11 +78,11 @@ class TestRecipeParser:
         )
 
         for entry, expected in test_cases:
-            assert RecipeParser._parse_tag_entry(entry) == expected
+            assert _parse_tag_entry(entry) == expected
 
     def test_parse_recipe_as_meal(self):
         beef_and_ale_stew_file_path = TEST_RESOURCES_DIR / "test_recipe.yaml"
-        meal = RecipeParser.parse_recipe_as_meal(beef_and_ale_stew_file_path)
+        meal = parse_recipe_as_meal(beef_and_ale_stew_file_path)
 
         expected_meal = Meal(
             name="Test Meal",
