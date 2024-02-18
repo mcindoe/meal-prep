@@ -1,4 +1,3 @@
-from enum import auto
 from enum import Enum
 
 
@@ -23,17 +22,18 @@ class ConfigEntries(BaseEnum):
 
 
 class Unit(BaseEnum):
-    BOOL = 1, "bool", "bool"
-    BAG = 2, "bag", "bags"
-    JAR = 3, "jar", "jars"
-    GRAM = 4, "gram", "grams"
-    MILLILITRE = 5, "ml", "mls"
-    NUMBER = 6, "unit", "units"
+    BOOL = 1, "bool", "bool", None
+    BAG = 2, "bag", "bags", "bags"
+    JAR = 3, "jar", "jars", "jars"
+    GRAM = 4, "gram", "grams", "g"
+    MILLILITRE = 5, "ml", "mls", "ml"
+    NUMBER = 6, "unit", "units", None
 
-    def __init__(self, order, singular, plural):
+    def __init__(self, order, singular, plural, abbreviation):
         self.order = order
         self.singular = singular
         self.plural = plural
+        self.abbreviation = abbreviation
 
 
 class Category(BaseEnum):
@@ -63,22 +63,26 @@ class MealMetadata(BaseEnum):
     pass
 
 
+class MealMeat(BaseEnum):
+    BEEF = "Beef"
+    CHICKEN = "Chicken"
+    FISH = "Fish"
+    LAMB = "Lamb"
+    NONE = "None"
+    PORK = "Pork"
+    TURKEY = "Turkey"
+
+
 class MealProperty(MealMetadata):
-    MEAT = auto()
+    MEAT = "Meat", MealMeat
+
+    def __init__(self, description: str, supported_values: BaseEnum):
+        self.description = description
+        self.supported_values = supported_values
 
 
 class MealTag(MealMetadata):
-    INDIAN = auto()
-    ROAST = auto()
-    PASTA = auto()
-    VEGETARIAN = auto()
-
-
-class MealMeat(BaseEnum):
-    BEEF = auto()
-    CHICKEN = auto()
-    FISH = auto()
-    LAMB = auto()
-    NONE = auto()
-    PORK = auto()
-    TURKEY = auto()
+    INDIAN = "Indian"
+    ROAST = "Roast"
+    PASTA = "Pasta"
+    VEGETARIAN = "Vegetarian"

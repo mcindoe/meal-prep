@@ -1,0 +1,95 @@
+Shopping List
+
+
+--- Vegetables ---
+- [ ] Carrot: 2 units
+	Turkey Sweet Potato Shepherds Pie
+- [ ] Cauliflower Flouret: 500 grams
+	Curry Lentils in Crock Pot
+- [ ] Celery: 3 units
+	Turkey Sweet Potato Shepherds Pie
+- [ ] Cherry Tomatoes: 2 units
+	Chilli Chicken Thighs with Cherry Tomatoes
+- [ ] Frozen Peas: 200 grams
+	Curry Lentils in Crock Pot
+- [ ] Garlic Clove: 4 units
+	Curry Lentils in Crock Pot, Chilli Chicken Thighs with Cherry Tomatoes
+- [ ] Garlic Powder
+	Turkey Sweet Potato Shepherds Pie
+- [ ] Ginger
+	Curry Lentils in Crock Pot
+- [ ] Jalapeno: 1 unit
+	Curry Lentils in Crock Pot
+- [ ] Lime: 1 unit
+	Curry Lentils in Crock Pot
+- [ ] Onion: 1 unit
+	Turkey Sweet Potato Shepherds Pie
+- [ ] Red Chilli: 2 units
+	Chilli Chicken Thighs with Cherry Tomatoes
+- [ ] Shallot: 2 units
+	Curry Lentils in Crock Pot
+- [ ] Sweet Potato: 3 units
+	Turkey Sweet Potato Shepherds Pie
+
+
+--- Herbs ---
+- [ ] Coriander
+	Curry Lentils in Crock Pot
+- [ ] Dried Thyme
+	Turkey Sweet Potato Shepherds Pie
+- [ ] Oregano
+	Turkey Sweet Potato Shepherds Pie
+
+
+--- Carbohydrates ---
+- [ ] Basmati Rice: 400 grams
+	Curry Lentils in Crock Pot
+- [ ] Rice: 450 grams
+	Chicken Piccata, Chilli Chicken Thighs with Cherry Tomatoes
+
+
+--- Meat ---
+- [ ] Chicken Breast: 4 units
+	Chicken Piccata
+- [ ] Chicken Thigh: 2 units
+	Chilli Chicken Thighs with Cherry Tomatoes
+- [ ] Turkey Mince: 500 grams
+	Turkey Sweet Potato Shepherds Pie
+
+
+--- Cans ---
+- [ ] Lentils: 125 grams
+	Curry Lentils in Crock Pot
+
+
+--- Condiments ---
+- [ ] Capers: 1 jar
+	Chicken Piccata
+- [ ] Coconut Milk: 150 mls
+	Turkey Sweet Potato Shepherds Pie
+- [ ] Coconut Oil
+	Turkey Sweet Potato Shepherds Pie
+- [ ] Flour
+	Chicken Piccata
+- [ ] Lemon Juice: 80 mls
+	Chicken Piccata
+- [ ] Light Coconut Milk: 250 mls
+	Curry Lentils in Crock Pot
+- [ ] Olive Oil
+	Chicken Piccata, Chilli Chicken Thighs with Cherry Tomatoes
+- [ ] Shelled Pistachios: 100 grams
+	Curry Lentils in Crock Pot
+- [ ] Tomato Paste
+	Curry Lentils in Crock Pot
+
+
+--- Sauces ---
+- [ ] Chicken Stock: 950 mls
+	Chicken Piccata
+- [ ] Vegetable Broth
+	Curry Lentils in Crock Pot
+
+
+--- Spices ---
+- [ ] Cumin
+	Curry Lentils in Crock Pot

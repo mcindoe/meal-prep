@@ -1,10 +1,7 @@
-from typing import Any
-from typing import Iterable
+from typing import Any, Iterable
 
 from mealprep.src.basic_iterator import BasicIterator
-from mealprep.src.constants import BaseEnum
-from mealprep.src.constants import Category
-from mealprep.src.constants import Unit
+from mealprep.src.constants import BaseEnum, Category, Unit
 
 
 class Ingredient:
@@ -21,18 +18,12 @@ class Ingredient:
 class IngredientQuantity:
     def __init__(self, ingredient: Ingredient, unit: Unit, quantity: Any):
         if not isinstance(ingredient, Ingredients):
-            raise TypeError(
-                "'ingredient' argument must be in the Ingredients enum in IngredientQuantity init"
-            )
+            raise TypeError("'ingredient' argument must be in the Ingredients enum in IngredientQuantity init")
         if not isinstance(unit, Unit):
-            raise TypeError(
-                "'unit' argument must be a Unit in IngredientQuantity init"
-            )
+            raise TypeError("'unit' argument must be a Unit in IngredientQuantity init")
 
         if unit is Unit.BOOL and quantity is not True:
-            raise TypeError(
-                "Error in IngredientQuantity init: if unit is BOOL, then quantity must be True"
-            )
+            raise TypeError("Error in IngredientQuantity init: if unit is BOOL, then quantity must be True")
 
         self.ingredient = ingredient
         self.unit = unit
@@ -54,11 +45,7 @@ class IngredientQuantity:
         return IngredientQuantity(self.ingredient, self.unit, self.quantity + other.quantity)
 
     def __eq__(self, other) -> bool:
-        return all((
-            self.ingredient == other.ingredient,
-            self.unit == other.unit,
-            self.quantity == other.quantity
-        ))
+        return all((self.ingredient == other.ingredient, self.unit == other.unit, self.quantity == other.quantity))
 
     def __repr__(self) -> str:
         return f"IngredientQuantity({self.ingredient!r}, {self.unit!r}, {self.quantity!r})"
@@ -241,3 +228,13 @@ class Ingredients(BaseEnum):
     WORCESTERSHIRE_SAUCE = Ingredient("Worcestershire Sauce", Category.SAUCE)
     YELLOW_PEPPER = Ingredient("Yellow Pepper", Category.VEGETABLE)
     YOGURT = Ingredient("Yogurt", Category.DAIRY)
+
+
+UPPER_INGREDIENT_NAME_TO_INGREDIENT_MAP = {ingredient.value.name.upper(): ingredient for ingredient in Ingredients}
+
+
+def get_ingredient_from_name(ingredient_name: str) -> Ingredient:
+    try:
+        return UPPER_INGREDIENT_NAME_TO_INGREDIENT_MAP[ingredient_name.upper()]
+    except KeyError as exc:
+        raise ValueError(f"Unable to find an Ingredient with name {ingredient_name}") from exc
