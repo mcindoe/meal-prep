@@ -8,7 +8,7 @@ from mealprep.src.loc import ROOT_DIR
 from mealprep.src.meal import Meal
 from mealprep.src.recipe import (
     RecipeError,
-    _parse_ingredient_entry,
+    _parse_ingredient_quantity_from_recipe_entry,
     _parse_tag_entry,
     _parse_unit_quantity_description,
     parse_recipe_as_meal,
@@ -31,7 +31,7 @@ class TestRecipeParser:
         for entry, expected in test_cases:
             assert _parse_unit_quantity_description(entry) == expected
 
-    def test_parse_ingredient_entry(self):
+    def test_parse_ingredient_quantity_from_recipe_entry(self):
         test_cases = (
             (
                 {"Carrot": "50g"},
@@ -52,7 +52,7 @@ class TestRecipeParser:
         )
 
         for entry, expected in test_cases:
-            assert _parse_ingredient_entry(entry) == expected
+            assert _parse_ingredient_quantity_from_recipe_entry(entry) == expected
 
     def test_parse_property_entry(self):
         test_cases = (

@@ -1,7 +1,6 @@
-Name:
-  Test Meal
+- Name: Test Meal
 
-Ingredients:
+- Ingredients:
   - Bay Leaves
   - Carrot: 2
   - Celery: 2
@@ -12,8 +11,8 @@ Ingredients:
   - Potato: 900g
   - Stewing Beef: 750g
 
-Properties:
+- Properties:
   - Meat: Beef
 
-Tags:
+- Tags:
   - Winter
