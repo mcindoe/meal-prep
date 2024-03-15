@@ -29,6 +29,8 @@ class Unit(BaseEnum):
     MILLILITRE = 5, "ml", "mls", "ml"
     NUMBER = 6, "unit", "units", None
 
+    # TODO: I think I need to separate the concept of singular and plural abbreviation
+    # Otherwise what do we do about "1 jars" in the recipe :-(
     def __init__(self, order, singular, plural, abbreviation):
         self.order = order
         self.singular = singular
