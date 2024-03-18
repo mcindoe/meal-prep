@@ -22,20 +22,28 @@ class ConfigEntries(BaseEnum):
 
 
 class Unit(BaseEnum):
-    BOOL = 1, "bool", "bool", None
-    BAG = 2, "bag", "bags", "bags"
-    JAR = 3, "jar", "jars", "jars"
+    BOOL = 1, None, None, None
+    BAG = 2, "bag", "bags", None
+    JAR = 3, "jar", "jars", None
     GRAM = 4, "gram", "grams", "g"
-    MILLILITRE = 5, "ml", "mls", "ml"
+    MILLILITRE = 5, "ml", "ml", "ml"
     NUMBER = 6, "unit", "units", None
 
-    # TODO: I think I need to separate the concept of singular and plural abbreviation
-    # Otherwise what do we do about "1 jars" in the recipe :-(
     def __init__(self, order, singular, plural, abbreviation):
         self.order = order
         self.singular = singular
         self.plural = plural
         self.abbreviation = abbreviation
+
+
+# Mapping from all unit descriptions back to the unit. E.g. g, gram, grams -> Unit.GRAM
+UNIT_IDENTIFIERS = {}
+for unit in Unit:
+    for attribute_name in ("singular", "plural", "abbreviation"):
+        unit_attribute_value = getattr(unit, attribute_name)
+        if unit_attribute_value is not None:
+            assert (unit_attribute_value not in UNIT_IDENTIFIERS) or (UNIT_IDENTIFIERS[unit_attribute_value] == unit)
+            UNIT_IDENTIFIERS[unit_attribute_value] = unit
 
 
 class Category(BaseEnum):
