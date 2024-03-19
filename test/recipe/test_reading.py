@@ -9,12 +9,11 @@ from mealprep.src.meal import Meal
 from mealprep.src.recipe.common import RecipeError
 from mealprep.src.recipe.reading import (
     _parse_ingredient_quantity_from_recipe_entry,
-    _parse_meal_tag_entry,
     _parse_meal_property_entry,
+    _parse_meal_tag_entry,
     _parse_unit_quantity_description,
     parse_recipe_as_meal,
 )
-
 
 TEST_RESOURCES_DIR = ROOT_DIR / "test/resources"
 

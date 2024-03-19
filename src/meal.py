@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 import collections
+from collections.abc import Iterable
 import copy
 import datetime as dt
 import json
-from collections.abc import Iterable
 from pathlib import Path
 from typing import Any, Optional, Tuple, Union
 
@@ -956,7 +956,7 @@ class Meals(BaseEnum):
             IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 2),
             IngredientQuantity(Ingredients.PASSATA, Unit.MILLILITRE, 500),
             IngredientQuantity(Ingredients.RICE, Unit.GRAM, 400),
-            IngredientQuantity(Ingredients.TOMATO_SOUP, Unit.GRAM, 1),
+            IngredientQuantity(Ingredients.TOMATO_SOUP, Unit.JAR, 1),
             IngredientQuantity(Ingredients.TURKEY_MINCE, Unit.GRAM, 500),
         ),
         properties={

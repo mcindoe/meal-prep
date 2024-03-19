@@ -46,20 +46,26 @@ def write_meal_as_recipe(meal: Meal, recipe_filepath: Path) -> None:
                 fp.write("\n")
 
 
-def _get_recipe_entry_from_ingredient_quantity(ingredient_quantity: IngredientQuantity) -> str:
+def _get_recipe_entry_from_ingredient_quantity(ingredient_quantity: IngredientQuantity) -> str | dict[str, int | str]:
     """
-    Return a string representing how a human would input this ingredient quantity
-    into a recipe
+    Return a representation of the ingredient quantity which the yaml writer will
+    write to file in a way which matches how a human would input this ingredient
+    quantity into a recipe.
 
-    Examples:
-        Beef Mince: 500g
-        Olive Oil
-        Pasta: 1 bag
-        Peppers: 2
-        Chopped Tomatoes: 2 jars
+    NB: The awkward return type is that strings come with unwanted quote marks if
+    they include "a: b" syntax etc.
+
+    Examples Outputs:
+        {"Beef Mince": "500g"} --> Beef Mince: 500g
+        "Olive Oil" -> Olive Oil
+        {"Pasta": "1 bag"} --> Pasta: 1 bag
+        {"Peppers": 2} -> Peppers: 2
+        {"Chopped Tomatoes": "2 jars"} -> Chopped Tomatoes: 2 jars
     """
 
-    ingredient_name = ingredient_quantity.ingredient.name
+    # TODO: Raise a PR / issue to correct the confusion between Ingredients instances and Ingredient instances,
+    # and then this line should just read ingredient_quantity.ingredient.name
+    ingredient_name = ingredient_quantity.ingredient.value.name
 
     if ingredient_quantity.unit == Unit.BOOL:
         return ingredient_name
@@ -67,7 +73,7 @@ def _get_recipe_entry_from_ingredient_quantity(ingredient_quantity: IngredientQu
     quantity = ingredient_quantity.quantity
 
     if ingredient_quantity.unit == Unit.NUMBER:
-        return f"{ingredient_name}: {quantity}"
+        return {ingredient_name: quantity}
 
     if quantity == 1:
         quantity_description = f"{quantity} {ingredient_quantity.unit.singular}"
@@ -78,4 +84,4 @@ def _get_recipe_entry_from_ingredient_quantity(ingredient_quantity: IngredientQu
         else:
             quantity_description = f"{quantity} {ingredient_quantity.unit.plural}"
 
-    return f"{ingredient_name}: {quantity_description}"
+    return {ingredient_name: quantity_description}
