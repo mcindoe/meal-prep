@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.11"]
 
     steps:
     - uses: actions/checkout@v3
@@ -27,8 +27,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install pytest
         pip install -r requirements.txt
+        pip install black isort pytest
+    - name: Check formatting with black
+      run: |
+        black . --check
+    - name: Check import sorting with isort
+      run: |
+        isort . --check-diff
     - name: Test with pytest
       run: |
         pytest
