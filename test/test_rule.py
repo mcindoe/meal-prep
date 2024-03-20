@@ -2,8 +2,8 @@ import datetime as dt
 
 import pytest
 
-from mealprep.src.meal import Meal, MealCollection, MealDiary
-from mealprep.src.rule import NotSpecifiedMealOnSpecifiedDate, Rule, Rules
+from mealprep.meal import Meal, MealCollection, MealDiary
+from mealprep.rule import NotSpecifiedMealOnSpecifiedDate, Rule, Rules
 
 
 class TrivialRule(Rule):

@@ -16,7 +16,7 @@
 #
 # from mealprep.config import DATA
 #
-# from mealprep.src.utils.display import make_date_string
+# from mealprep.utils.display import make_date_string
 #
 #
 # MAIL_CREDENTIALS_FILE = DATA / "mail_credentials.txt"

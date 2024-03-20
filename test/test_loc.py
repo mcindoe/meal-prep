@@ -1,7 +1,7 @@
 import os
 
-from mealprep.src.loc import DATA_DIR, ROOT_DIR
-from mealprep.src.meal import PROJECT_DIARY_FILENAME
+from mealprep.loc import DATA_DIR, ROOT_DIR
+from mealprep.meal import PROJECT_DIARY_FILENAME
 
 
 def test_loc():

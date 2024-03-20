@@ -6,11 +6,11 @@ is satisfied (or exists the program); write the updated diary
 to file and generate a shopping list
 """
 
-from mealprep.src.config import config
-from mealprep.src.loc import SHOPPING_LIST_DIR
-from mealprep.src.meal import MealDiary
-from mealprep.src.meal_selector import MealSelector
-from mealprep.src.shopping_list import ShoppingList
+from mealprep.config import config
+from mealprep.loc import SHOPPING_LIST_DIR
+from mealprep.meal import MealDiary
+from mealprep.meal_selector import MealSelector
+from mealprep.shopping_list import ShoppingList
 
 
 if __name__ == "__main__":

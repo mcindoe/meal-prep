@@ -2,7 +2,7 @@ import datetime as dt
 
 import pytest
 
-from mealprep.src.utils import get_day_suffix, get_pretty_print_date_string
+from mealprep.utils import get_day_suffix, get_pretty_print_date_string
 
 
 def test_get_day_suffix():

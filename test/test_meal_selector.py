@@ -2,9 +2,9 @@ import datetime as dt
 
 import pytest
 
-from mealprep.src.meal import Meal, MealCollection, MealDiary
-from mealprep.src.meal_selector import MealSelector
-from mealprep.src.rule import RuleCollection, Rules
+from mealprep.meal import Meal, MealCollection, MealDiary
+from mealprep.meal_selector import MealSelector
+from mealprep.rule import RuleCollection, Rules
 
 
 class TestMealSelector:

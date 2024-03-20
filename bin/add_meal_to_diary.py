@@ -5,9 +5,9 @@ diary
 
 from userinputgetter import DateInputGetter, IntegerInputGetter
 
-from mealprep.src.config import config
-from mealprep.src.meal import Meal, MealDiary
-from mealprep.src.utils import get_print_collection_with_indices_str
+from mealprep.config import config
+from mealprep.meal import Meal, MealDiary
+from mealprep.utils import get_print_collection_with_indices_str
 
 
 MAX_PRINTED_DIARY_ENTRIES = 20

@@ -21,4 +21,4 @@ Once confirmed, a shopping list is generated and saved in the directory `data/sh
 * Tested using Python 3.9 and 3.10
 * Set up a new Python virtual environment using the `requirements.txt` file
 * Add the parent of the project's root directory `mealprep` to your `PYTHONPATH` environment variable
-	- Test by running `from mealprep.src.meal import *` from a directory *not* containing `mealprep`
+	- Test by running `from mealprep.meal import *` from a directory *not* containing `mealprep`

@@ -3,9 +3,9 @@ import copy
 import datetime as dt
 from typing import Iterable
 
-from mealprep.src.basic_iterator import BasicIterator
-from mealprep.src.constants import BaseEnum
-from mealprep.src.meal import Meal, MealCollection, MealDiary, MealMeat, MealProperty, MealTag
+from mealprep.basic_iterator import BasicIterator
+from mealprep.constants import BaseEnum
+from mealprep.meal import Meal, MealCollection, MealDiary, MealMeat, MealProperty, MealTag
 
 
 class Rule(ABC):

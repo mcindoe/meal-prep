@@ -7,9 +7,9 @@ import datetime as dt
 
 from userinputgetter import DateInputGetter
 
-from mealprep.src.loc import SHOPPING_LIST_DIR
-from mealprep.src.meal import MealDiary
-from mealprep.src.shopping_list import ShoppingList
+from mealprep.loc import SHOPPING_LIST_DIR
+from mealprep.meal import MealDiary
+from mealprep.shopping_list import ShoppingList
 
 
 MAX_PRINTED_PREVIOUS_DIARY_ENTRIES = 5

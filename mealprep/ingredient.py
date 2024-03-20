@@ -1,7 +1,7 @@
 from typing import Any, Iterable
 
-from mealprep.src.basic_iterator import BasicIterator
-from mealprep.src.constants import BaseEnum, Category, Unit
+from mealprep.basic_iterator import BasicIterator
+from mealprep.constants import BaseEnum, Category, Unit
 
 
 class Ingredient:

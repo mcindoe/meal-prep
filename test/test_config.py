@@ -1,5 +1,5 @@
-from mealprep.src.config import config
-from mealprep.src.constants import ConfigEntries
+from mealprep.config import config
+from mealprep.constants import ConfigEntries
 
 
 def test_config():

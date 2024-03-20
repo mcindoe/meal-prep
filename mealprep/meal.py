@@ -5,11 +5,11 @@ import json
 from pathlib import Path
 from typing import Any, Dict, Iterable, Optional, Tuple, Union
 
-from mealprep.src.basic_iterator import BasicIterator
-from mealprep.src.constants import BaseEnum, MealMeat, MealMetadata, MealProperty, MealTag, Unit
-from mealprep.src.ingredient import IngredientQuantity, IngredientQuantityCollection, Ingredients
-from mealprep.src.loc import DATA_DIR
-from mealprep.src.utils import get_pretty_print_date_string
+from mealprep.basic_iterator import BasicIterator
+from mealprep.constants import BaseEnum, MealMeat, MealMetadata, MealProperty, MealTag, Unit
+from mealprep.ingredient import IngredientQuantity, IngredientQuantityCollection, Ingredients
+from mealprep.loc import DATA_DIR
+from mealprep.utils import get_pretty_print_date_string
 
 
 PROJECT_DIARY_FILENAME = "meal_diary.json"

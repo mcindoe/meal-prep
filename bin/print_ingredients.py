@@ -5,8 +5,8 @@ assignments etc
 
 from typing import Dict, Tuple
 
-from mealprep.src.constants import Category
-from mealprep.src.ingredient import Ingredients
+from mealprep.constants import Category
+from mealprep.ingredient import Ingredients
 
 
 def get_ingredients_by_category() -> Dict[Category, Tuple[Dict[str, str]]]:

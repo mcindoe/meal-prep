@@ -2,9 +2,9 @@ import datetime as dt
 
 import pytest
 
-from mealprep.src.constants import MealMeat, MealProperty, MealTag, Unit
-from mealprep.src.ingredient import IngredientQuantity, IngredientQuantityCollection, Ingredients
-from mealprep.src.meal import Meal, MealCollection, MealDiary
+from mealprep.constants import MealMeat, MealProperty, MealTag, Unit
+from mealprep.ingredient import IngredientQuantity, IngredientQuantityCollection, Ingredients
+from mealprep.meal import Meal, MealCollection, MealDiary
 
 
 class TestMeal:

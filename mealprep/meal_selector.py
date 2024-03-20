@@ -4,9 +4,9 @@ from typing import Iterable, Optional, Union
 
 from userinputgetter import CaseInsensitiveStringInputGetter, DateInputGetter
 
-from mealprep.src.exceptions import OutOfMealsError
-from mealprep.src.meal import MealCollection, MealDiary
-from mealprep.src.rule import NotSpecifiedMealOnSpecifiedDate, RuleCollection
+from mealprep.exceptions import OutOfMealsError
+from mealprep.meal import MealCollection, MealDiary
+from mealprep.rule import NotSpecifiedMealOnSpecifiedDate, RuleCollection
 
 
 class MealSelector:

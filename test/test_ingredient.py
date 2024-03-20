@@ -1,7 +1,7 @@
 import pytest
 
-from mealprep.src.constants import Category, Unit
-from mealprep.src.ingredient import (
+from mealprep.constants import Category, Unit
+from mealprep.ingredient import (
     Ingredient,
     IngredientQuantity,
     IngredientQuantityCollection,

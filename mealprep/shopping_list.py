@@ -3,9 +3,9 @@ import datetime as dt
 from pathlib import Path
 from typing import Iterable, Union
 
-from mealprep.src.constants import Unit
-from mealprep.src.ingredient import IngredientQuantity
-from mealprep.src.meal import MealCollection
+from mealprep.constants import Unit
+from mealprep.ingredient import IngredientQuantity
+from mealprep.meal import MealCollection
 
 
 class ShoppingList:

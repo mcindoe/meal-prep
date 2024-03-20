@@ -4,13 +4,13 @@ from typing import Tuple
 
 import yaml
 
-from mealprep.src.constants import ConfigEntries
-from mealprep.src.loc import ROOT_DIR
-from mealprep.src.meal import Meal, MealCollection
-from mealprep.src.rule import Rule, RuleCollection
+from mealprep.constants import ConfigEntries
+from mealprep.loc import ROOT_DIR
+from mealprep.meal import Meal, MealCollection
+from mealprep.rule import Rule, RuleCollection
 
 
-config_filepath = ROOT_DIR / "config.yaml"
+config_filepath = ROOT_DIR / "mealprep/config.yaml"
 
 
 class Config:

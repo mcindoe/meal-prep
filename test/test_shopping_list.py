@@ -1,9 +1,9 @@
 import pytest
 
-from mealprep.src.constants import Unit
-from mealprep.src.ingredient import IngredientQuantity, Ingredients
-from mealprep.src.meal import MealCollection
-from mealprep.src.shopping_list import ShoppingList
+from mealprep.constants import Unit
+from mealprep.ingredient import IngredientQuantity, Ingredients
+from mealprep.meal import MealCollection
+from mealprep.shopping_list import ShoppingList
 
 
 class TestShoppingList:
