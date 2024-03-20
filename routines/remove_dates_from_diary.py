@@ -2,13 +2,9 @@
 Remove user-specified dates from the project diary
 """
 
-
-import datetime as dt
 from userinputgetter import DateInputGetter
 
-from mealprep.src.config import config
 from mealprep.src.meal import MealDiary
-
 
 MAX_PRINTED_PREVIOUS_DIARY_ENTRIES = 15
 MAX_PRINTED_NEXT_DIARY_ENTRIES = 5
@@ -22,8 +18,7 @@ if __name__ == "__main__":
         exit()
 
     printed_diary = meal_diary.filter_by_max_before_and_max_after_today(
-        MAX_PRINTED_PREVIOUS_DIARY_ENTRIES,
-        MAX_PRINTED_NEXT_DIARY_ENTRIES
+        MAX_PRINTED_PREVIOUS_DIARY_ENTRIES, MAX_PRINTED_NEXT_DIARY_ENTRIES
     )
 
     if printed_diary:

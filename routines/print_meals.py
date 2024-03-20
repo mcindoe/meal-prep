@@ -1,12 +1,10 @@
 """
-For ingredients and metadata associated with meals, as well as whether
+Print ingredients and metadata associated with meals, as well as whether
 the meal is included in the project config collection
 """
 
-
 from mealprep.src.config import config
-from mealprep.src.meal import Meal
-from mealprep.src.meal import Meals
+from mealprep.src.meal import Meal, Meals
 from mealprep.src.shopping_list import ShoppingList
 
 

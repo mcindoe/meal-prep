@@ -3,15 +3,11 @@ Add a user-specified (date, meal) pair into the project
 diary
 """
 
-
-from userinputgetter import DateInputGetter
-from userinputgetter import IntegerInputGetter
+from userinputgetter import DateInputGetter, IntegerInputGetter
 
 from mealprep.src.config import config
-from mealprep.src.meal import Meal
-from mealprep.src.meal import MealDiary
+from mealprep.src.meal import Meal, MealDiary
 from mealprep.src.utils import get_print_collection_with_indices_str
-
 
 MAX_PRINTED_DIARY_ENTRIES = 20
 
@@ -35,7 +31,7 @@ if __name__ == "__main__":
     print("\nSupported meals:")
     print(get_print_collection_with_indices_str(supported_meal_names))
     print("\nEnter meal index:")
-    meal_index_input_getter = IntegerInputGetter(range(1, len(meal_collection)+1))
+    meal_index_input_getter = IntegerInputGetter(range(1, len(meal_collection) + 1))
     meal_index = meal_index_input_getter.get_input()
     if meal_index is None:
         exit()
