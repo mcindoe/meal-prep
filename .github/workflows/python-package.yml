@@ -33,6 +33,6 @@ jobs:
       run: |
         isort . --check --line-length 100 --multi-line 3 --lines-after-imports 2 \
         --force-sort-within-sections --dont-order-by-type --trailing-comma
-    - name: Test with pytest
+    - name: Run unit tests
       run: |
-        pytest test
+        python -m unittest test
