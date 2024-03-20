@@ -1,11 +1,12 @@
 import pytest
 
-from mealprep.src.constants import Category
-from mealprep.src.constants import Unit
-from mealprep.src.ingredient import Ingredient
-from mealprep.src.ingredient import Ingredients
-from mealprep.src.ingredient import IngredientQuantity
-from mealprep.src.ingredient import IngredientQuantityCollection
+from mealprep.src.constants import Category, Unit
+from mealprep.src.ingredient import (
+    Ingredient,
+    IngredientQuantity,
+    IngredientQuantityCollection,
+    Ingredients,
+)
 
 
 class TestIngredient:
@@ -53,8 +54,12 @@ class TestIngredientQuantity:
         assert x.quantity is True
 
     def test_add(self, quantities):
-        assert quantities[0] + quantities[0] == IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 500)
-        assert quantities[1] + quantities[1] == IngredientQuantity(Ingredients.PEAR, Unit.BOOL, True)
+        assert quantities[0] + quantities[0] == IngredientQuantity(
+            Ingredients.CREAM, Unit.MILLILITRE, 500
+        )
+        assert quantities[1] + quantities[1] == IngredientQuantity(
+            Ingredients.PEAR, Unit.BOOL, True
+        )
 
         with pytest.raises(TypeError):
             quantities[0] + quantities[1]

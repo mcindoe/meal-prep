@@ -1,8 +1,7 @@
 import pytest
 
 from mealprep.src.constants import Unit
-from mealprep.src.ingredient import Ingredients
-from mealprep.src.ingredient import IngredientQuantity
+from mealprep.src.ingredient import IngredientQuantity, Ingredients
 from mealprep.src.meal import MealCollection
 from mealprep.src.shopping_list import ShoppingList
 
@@ -21,7 +20,7 @@ class TestShoppingList:
             "2 units plus some extra"
         )
 
-        potato_ingredient_quantities = (
-            IngredientQuantity(Ingredients.POTATO, Unit.BOOL, True),
+        potato_ingredient_quantities = (IngredientQuantity(Ingredients.POTATO, Unit.BOOL, True),)
+        assert (
+            shopping_list.get_ingredient_quantity_description(potato_ingredient_quantities) is None
         )
-        assert shopping_list.get_ingredient_quantity_description(potato_ingredient_quantities) is None

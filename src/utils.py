@@ -35,9 +35,7 @@ def get_print_collection_with_indices_str(items: Iterable, start_index: int = 1)
 
 
 def get_pretty_print_date_string(
-    date: dt.date,
-    include_date_number_spacing: bool = False,
-    include_year: bool = False
+    date: dt.date, include_date_number_spacing: bool = False, include_year: bool = False
 ) -> str:
     """
     Get a representation of a date object as, e.g., Wed 5th Jan 2022.

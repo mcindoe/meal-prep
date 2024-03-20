@@ -1,8 +1,8 @@
 import datetime as dt
+
 import pytest
 
-from mealprep.src.utils import get_day_suffix
-from mealprep.src.utils import get_pretty_print_date_string
+from mealprep.src.utils import get_day_suffix, get_pretty_print_date_string
 
 
 def test_get_day_suffix():
@@ -23,9 +23,11 @@ def test_get_day_suffix():
 
 
 def test_get_pretty_print_date_string():
-    assert get_pretty_print_date_string(dt.date(2022, 1, 5), include_year=True) == "Wed 5th Jan 2022"
+    assert (
+        get_pretty_print_date_string(dt.date(2022, 1, 5), include_year=True) == "Wed 5th Jan 2022"
+    )
     assert get_pretty_print_date_string(dt.date(2022, 1, 5)) == "Wed 5th Jan"
-    assert get_pretty_print_date_string(
-        dt.date(2022, 1, 5),
-        include_date_number_spacing=True
-    ) == "Wed  5th Jan"
+    assert (
+        get_pretty_print_date_string(dt.date(2022, 1, 5), include_date_number_spacing=True)
+        == "Wed  5th Jan"
+    )

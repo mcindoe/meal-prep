@@ -1,10 +1,8 @@
 import collections
 import datetime as dt
 from pathlib import Path
-from typing import Iterable
-from typing import Union
+from typing import Iterable, Union
 
-from mealprep.src.constants import Category
 from mealprep.src.constants import Unit
 from mealprep.src.ingredient import IngredientQuantity
 from mealprep.src.meal import MealCollection
@@ -49,18 +47,24 @@ class ShoppingList:
                 if ingredient not in self.ingredient_summary[category]:
                     self.ingredient_summary[category][ingredient] = {
                         "meals": MealCollection(),
-                        "quantities": {}
+                        "quantities": {},
                     }
 
                 self.ingredient_summary[category][ingredient]["meals"] += meal
 
                 if unit in self.ingredient_summary[category][ingredient]["quantities"]:
-                    self.ingredient_summary[category][ingredient]["quantities"][unit] += ingredient_quantity
+                    self.ingredient_summary[category][ingredient]["quantities"][
+                        unit
+                    ] += ingredient_quantity
                 else:
-                    self.ingredient_summary[category][ingredient]["quantities"][unit] = ingredient_quantity
+                    self.ingredient_summary[category][ingredient]["quantities"][
+                        unit
+                    ] = ingredient_quantity
 
     @staticmethod
-    def get_ingredient_quantity_description(ingredient_quantities: Iterable[IngredientQuantity]) -> Union[str, None]:
+    def get_ingredient_quantity_description(
+        ingredient_quantities: Iterable[IngredientQuantity],
+    ) -> Union[str, None]:
         """
         Get a human-readable description of the quantities required of a
         given ingredient (to be included in a shopping list). Return None
@@ -85,7 +89,9 @@ class ShoppingList:
 
         # There should be no more than one of each unit passed
         if max(collections.Counter(x.unit for x in ingredient_quantities).values()) != 1:
-            raise ValueError("Multiple entries passed for a unit in get_ingredient_quantity_description")
+            raise ValueError(
+                "Multiple entries passed for a unit in get_ingredient_quantity_description"
+            )
 
         units = {x.unit for x in ingredient_quantities}
 
@@ -126,17 +132,20 @@ class ShoppingList:
                 fp.write(f"\n\n--- {category.list_header} ---\n")
 
                 category_ingredients = sorted(
-                    self.ingredient_summary[category].keys(),
-                    key=lambda x: x.name
+                    self.ingredient_summary[category].keys(), key=lambda x: x.name
                 )
 
                 for ingredient in category_ingredients:
-                    quantities = self.ingredient_summary[category][ingredient]["quantities"].values()
+                    quantities = self.ingredient_summary[category][ingredient][
+                        "quantities"
+                    ].values()
                     meals = self.ingredient_summary[category][ingredient]["meals"]
 
                     ingredient_entry = f"- [ ] {ingredient.value.name}"
 
-                    ingredient_quantity_description = self.get_ingredient_quantity_description(quantities)
+                    ingredient_quantity_description = self.get_ingredient_quantity_description(
+                        quantities
+                    )
                     if ingredient_quantity_description is not None:
                         ingredient_entry += f": {ingredient_quantity_description}"
 
