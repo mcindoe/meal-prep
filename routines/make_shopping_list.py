@@ -11,6 +11,7 @@ from mealprep.src.loc import SHOPPING_LIST_DIR
 from mealprep.src.meal import MealDiary
 from mealprep.src.shopping_list import ShoppingList
 
+
 MAX_PRINTED_PREVIOUS_DIARY_ENTRIES = 5
 MAX_PRINTED_NEXT_DIARY_ENTRIES = 15
 

@@ -1,7 +1,6 @@
 import os
 
-from mealprep.src.loc import ROOT_DIR
-from mealprep.src.loc import DATA_DIR
+from mealprep.src.loc import DATA_DIR, ROOT_DIR
 from mealprep.src.meal import PROJECT_DIARY_FILENAME
 
 

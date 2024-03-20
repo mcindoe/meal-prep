@@ -9,6 +9,7 @@ from mealprep.src.loc import ROOT_DIR
 from mealprep.src.meal import Meal, MealCollection
 from mealprep.src.rule import Rule, RuleCollection
 
+
 config_filepath = ROOT_DIR / "config.yaml"
 
 
