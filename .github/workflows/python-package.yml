@@ -35,4 +35,4 @@ jobs:
         --force-sort-within-sections --dont-order-by-type --trailing-comma
     - name: Test with pytest
       run: |
-        pytest
+        pytest test
