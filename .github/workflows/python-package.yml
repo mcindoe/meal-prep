@@ -28,10 +28,11 @@ jobs:
         pip install black isort pytest
     - name: Check formatting with black
       run: |
-        black . --check
+        black . --line-length 100 --check
     - name: Check import sorting with isort
       run: |
-        isort . --check-diff
+        isort . --check --line-length 100 --multi-line 3 --lines-after-imports 2 \
+        --force-sort-within-sections --dont-order-by-type --trailing-comma
     - name: Test with pytest
       run: |
         pytest
