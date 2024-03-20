@@ -35,4 +35,4 @@ jobs:
         --force-sort-within-sections --dont-order-by-type --trailing-comma
     - name: Run unit tests
       run: |
-        python -m unittest test
+        python -m unittest discover
