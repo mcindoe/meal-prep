@@ -1,16 +1,16 @@
 import datetime as dt
 import re
 from typing import Tuple
+
 import yaml
 
-from mealprep.src.constants import ConfigEntries
-from mealprep.src.loc import ROOT_DIR
-from mealprep.src.meal import Meal
-from mealprep.src.meal import MealCollection
-from mealprep.src.rule import Rule
-from mealprep.src.rule import RuleCollection
+from mealprep.constants import ConfigEntries
+from mealprep.loc import ROOT_DIR
+from mealprep.meal import Meal, MealCollection
+from mealprep.rule import Rule, RuleCollection
 
-config_filepath = ROOT_DIR / "config.yaml"
+
+config_filepath = ROOT_DIR / "mealprep/config.yaml"
 
 
 class Config:
@@ -38,7 +38,7 @@ class Config:
         return ret
 
     @property
-    def meals(self) -> Tuple[Meal]:
+    def meals(self) -> Tuple[Meal, ...]:
         meal_names = tuple(self.config[ConfigEntries.MEALS.value])
         return tuple(Meal.from_name(x) for x in meal_names)
 
@@ -47,7 +47,7 @@ class Config:
         return MealCollection(self.meals)
 
     @property
-    def rules(self) -> Tuple[Rule]:
+    def rules(self) -> Tuple[Rule, ...]:
         rule_names = tuple(self.config[ConfigEntries.RULES.value])
         return tuple(Rule.from_name(x) for x in rule_names)
 

@@ -3,14 +3,13 @@ Make a shopping list for the meals in the project
 diary between the user-specified dates
 """
 
-
 import datetime as dt
+
 from userinputgetter import DateInputGetter
 
-from mealprep.src.config import config
-from mealprep.src.loc import SHOPPING_LIST_DIR
-from mealprep.src.meal import MealDiary
-from mealprep.src.shopping_list import ShoppingList
+from mealprep.loc import SHOPPING_LIST_DIR
+from mealprep.meal import MealDiary
+from mealprep.shopping_list import ShoppingList
 
 
 MAX_PRINTED_PREVIOUS_DIARY_ENTRIES = 5
@@ -25,8 +24,7 @@ def make_shopping_list(start_date: dt.date, end_date: dt.date) -> None:
 
     meal_diary = MealDiary.from_project_diary()
     filtered_diary = meal_diary.filter_dates(
-        min_date=start_date,
-        max_date=end_date + dt.timedelta(days=1)
+        min_date=start_date, max_date=end_date + dt.timedelta(days=1)
     )
 
     if not filtered_diary:
@@ -49,8 +47,7 @@ if __name__ == "__main__":
         exit()
 
     printed_diary = meal_diary.filter_by_max_before_and_max_after_today(
-        MAX_PRINTED_PREVIOUS_DIARY_ENTRIES,
-        MAX_PRINTED_NEXT_DIARY_ENTRIES
+        MAX_PRINTED_PREVIOUS_DIARY_ENTRIES, MAX_PRINTED_NEXT_DIARY_ENTRIES
     )
 
     if printed_diary:

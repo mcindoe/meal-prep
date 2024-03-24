@@ -3,12 +3,10 @@ Print ingredients by category. Search for spelling mistakes, bad category
 assignments etc
 """
 
-from typing import Dict
-from typing import Tuple
+from typing import Dict, Tuple
 
-from mealprep.src.constants import Category
-from mealprep.src.ingredient import Ingredient
-from mealprep.src.ingredient import Ingredients
+from mealprep.constants import Category
+from mealprep.ingredient import Ingredients
 
 
 def get_ingredients_by_category() -> Dict[Category, Tuple[Dict[str, str]]]:
@@ -24,10 +22,12 @@ def get_ingredients_by_category() -> Dict[Category, Tuple[Dict[str, str]]]:
         if category not in ret:
             ret[category] = []
 
-        ret[category].append({
-            "enum_name": x.name,
-            "ingredient_name": x.value.name,
-        })
+        ret[category].append(
+            {
+                "enum_name": x.name,
+                "ingredient_name": x.value.name,
+            }
+        )
 
     return ret
 
@@ -38,19 +38,13 @@ if __name__ == "__main__":
     # Sort dictionary by the order the categories appear in a shopping list
     ingredients_by_category = {
         category: ingredients_by_category[category]
-        for category in sorted(
-            ingredients_by_category.keys(),
-            key=lambda x: x.order
-        )
+        for category in sorted(ingredients_by_category.keys(), key=lambda x: x.order)
     }
 
     print()
 
     for category, category_ingredient_names in ingredients_by_category.items():
-        category_ingredient_names = sorted(
-            category_ingredient_names,
-            key=lambda x: x["enum_name"]
-        )
+        category_ingredient_names = sorted(category_ingredient_names, key=lambda x: x["enum_name"])
 
         print(f"{category.list_header}:")
         for x in category_ingredient_names:

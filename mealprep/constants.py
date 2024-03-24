@@ -42,7 +42,9 @@ for unit in Unit:
     for attribute_name in ("singular", "plural", "abbreviation"):
         unit_attribute_value = getattr(unit, attribute_name)
         if unit_attribute_value is not None:
-            assert (unit_attribute_value not in UNIT_IDENTIFIERS) or (UNIT_IDENTIFIERS[unit_attribute_value] == unit)
+            assert (unit_attribute_value not in UNIT_IDENTIFIERS) or (
+                UNIT_IDENTIFIERS[unit_attribute_value] == unit
+            )
             UNIT_IDENTIFIERS[unit_attribute_value] = unit
 
 

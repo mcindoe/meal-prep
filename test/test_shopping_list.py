@@ -1,27 +1,25 @@
-import pytest
+import unittest
 
-from mealprep.src.constants import Unit
-from mealprep.src.ingredient import Ingredients
-from mealprep.src.ingredient import IngredientQuantity
-from mealprep.src.meal import MealCollection
-from mealprep.src.shopping_list import ShoppingList
+from mealprep.constants import Unit
+from mealprep.ingredient import IngredientQuantity, Ingredients
+from mealprep.meal import MealCollection
+from mealprep.shopping_list import ShoppingList
 
 
-class TestShoppingList:
-    @pytest.fixture()
-    def shopping_list(self):
-        return ShoppingList(MealCollection())
+class TestShoppingList(unittest.TestCase):
+    shopping_list = ShoppingList(MealCollection())
 
-    def test_get_ingredient_quantity_description(self, shopping_list):
+    def test_get_ingredient_quantity_description(self):
         pear_ingredient_quantities = (
             IngredientQuantity(Ingredients.PEAR, Unit.BOOL, True),
             IngredientQuantity(Ingredients.PEAR, Unit.NUMBER, 2),
         )
-        assert shopping_list.get_ingredient_quantity_description(pear_ingredient_quantities) == (
-            "2 units plus some extra"
+        self.assertEqual(
+            self.shopping_list.get_ingredient_quantity_description(pear_ingredient_quantities),
+            "2 units plus some extra",
         )
 
-        potato_ingredient_quantities = (
-            IngredientQuantity(Ingredients.POTATO, Unit.BOOL, True),
+        potato_ingredient_quantities = (IngredientQuantity(Ingredients.POTATO, Unit.BOOL, True),)
+        self.assertIsNone(
+            self.shopping_list.get_ingredient_quantity_description(potato_ingredient_quantities)
         )
-        assert shopping_list.get_ingredient_quantity_description(potato_ingredient_quantities) is None

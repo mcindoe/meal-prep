@@ -4,14 +4,16 @@ from pathlib import Path
 
 import yaml
 
-from mealprep.src.constants import MealProperty, MealTag, Unit
-from mealprep.src.ingredient import IngredientQuantity
-from mealprep.src.meal import Meal
-from mealprep.src.recipe.common import RecipeEntry
+from mealprep.constants import MealProperty, MealTag, Unit
+from mealprep.ingredient import IngredientQuantity
+from mealprep.meal import Meal
+from mealprep.recipe.common import RecipeEntry
 
 
 def write_meal_as_recipe(meal: Meal, recipe_filepath: Path) -> None:
-    meal_ingredients = [_get_recipe_entry_from_ingredient_quantity(x) for x in meal.ingredient_quantities]
+    meal_ingredients = [
+        _get_recipe_entry_from_ingredient_quantity(x) for x in meal.ingredient_quantities
+    ]
 
     meal_properties = []
     meal_tags = []
@@ -46,7 +48,9 @@ def write_meal_as_recipe(meal: Meal, recipe_filepath: Path) -> None:
                 fp.write("\n")
 
 
-def _get_recipe_entry_from_ingredient_quantity(ingredient_quantity: IngredientQuantity) -> str | dict[str, int | str]:
+def _get_recipe_entry_from_ingredient_quantity(
+    ingredient_quantity: IngredientQuantity,
+) -> str | dict[str, int | str]:
     """
     Return a representation of the ingredient quantity which the yaml writer will
     write to file in a way which matches how a human would input this ingredient

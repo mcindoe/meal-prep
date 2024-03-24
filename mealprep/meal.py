@@ -8,22 +8,12 @@ import json
 from pathlib import Path
 from typing import Any, Optional, Tuple, Union
 
-from mealprep.src.basic_iterator import BasicIterator
-from mealprep.src.constants import (
-    BaseEnum,
-    MealMeat,
-    MealMetadata,
-    MealProperty,
-    MealTag,
-    Unit,
-)
-from mealprep.src.ingredient import (
-    IngredientQuantity,
-    IngredientQuantityCollection,
-    Ingredients,
-)
-from mealprep.src.loc import DATA_DIR
-from mealprep.src.utils import get_pretty_print_date_string
+from mealprep.basic_iterator import BasicIterator
+from mealprep.constants import BaseEnum, MealMeat, MealMetadata, MealProperty, MealTag, Unit
+from mealprep.ingredient import IngredientQuantity, IngredientQuantityCollection, Ingredients
+from mealprep.loc import DATA_DIR
+from mealprep.utils import get_pretty_print_date_string
+
 
 PROJECT_DIARY_FILENAME = "meal_diary.json"
 PROJECT_DIARY_FILEPATH = DATA_DIR / PROJECT_DIARY_FILENAME
@@ -228,7 +218,9 @@ class MealDiary:
 
         return MealDiary(
             {
-                dt.datetime.strptime(date_string, MealDiary.DATE_FORMAT).date(): Meal.from_name(meal_name)
+                dt.datetime.strptime(date_string, MealDiary.DATE_FORMAT).date(): Meal.from_name(
+                    meal_name
+                )
                 for date_string, meal_name in dict_representation.items()
             }
         )
@@ -244,10 +236,22 @@ class MealDiary:
         return MealDiary(self.meal_diary | other.meal_diary)
 
     def difference(self, other: "MealDiary") -> "MealDiary":
-        return MealDiary({date: meal for date, meal in self.meal_diary.items() if date not in other.meal_diary.keys()})
+        return MealDiary(
+            {
+                date: meal
+                for date, meal in self.meal_diary.items()
+                if date not in other.meal_diary.keys()
+            }
+        )
 
     def filter_by_time_delta(self, date: dt.date, time_delta: dt.timedelta) -> "MealDiary":
-        return MealDiary({meal_date: meal for meal_date, meal in self.items() if abs(meal_date - date) <= time_delta})
+        return MealDiary(
+            {
+                meal_date: meal
+                for meal_date, meal in self.items()
+                if abs(meal_date - date) <= time_delta
+            }
+        )
 
     def filter_dates(self, min_date: dt.date, max_date: Optional[dt.date] = None) -> "MealDiary":
         """
@@ -266,10 +270,17 @@ class MealDiary:
                 raise TypeError("max_date must be a datetime.date")
 
         if max_date is None:
-            return MealDiary({meal_date: meal for meal_date, meal in self.items() if meal_date >= min_date})
+            return MealDiary(
+                {meal_date: meal for meal_date, meal in self.items() if meal_date >= min_date}
+            )
 
         return MealDiary(
-            {meal_date: meal for meal_date, meal in self.items() if meal_date >= min_date if meal_date < max_date}
+            {
+                meal_date: meal
+                for meal_date, meal in self.items()
+                if meal_date >= min_date
+                if meal_date < max_date
+            }
         )
 
     def except_dates(self, dates_to_exclude: Iterable[dt.date]) -> "MealDiary":
@@ -286,7 +297,13 @@ class MealDiary:
         if not all(isinstance(x, dt.date) for x in dates_to_exclude):
             raise TypeError("All passed dates must be datetime.dates")
 
-        return MealDiary({meal_date: meal for meal_date, meal in self.items() if meal_date not in dates_to_exclude})
+        return MealDiary(
+            {
+                meal_date: meal
+                for meal_date, meal in self.items()
+                if meal_date not in dates_to_exclude
+            }
+        )
 
     def get_pretty_print_string(self) -> str:
         include_date_number_spacing = any(x.day >= 10 for x in self.dates)

@@ -1,7 +1,7 @@
 from typing import Any, Iterable
 
-from mealprep.src.basic_iterator import BasicIterator
-from mealprep.src.constants import BaseEnum, Category, Unit
+from mealprep.basic_iterator import BasicIterator
+from mealprep.constants import BaseEnum, Category, Unit
 
 
 class Ingredient:
@@ -18,12 +18,16 @@ class Ingredient:
 class IngredientQuantity:
     def __init__(self, ingredient: Ingredient, unit: Unit, quantity: Any):
         if not isinstance(ingredient, Ingredients):
-            raise TypeError("'ingredient' argument must be in the Ingredients enum in IngredientQuantity init")
+            raise TypeError(
+                "'ingredient' argument must be in the Ingredients enum in IngredientQuantity init"
+            )
         if not isinstance(unit, Unit):
             raise TypeError("'unit' argument must be a Unit in IngredientQuantity init")
 
         if unit is Unit.BOOL and quantity is not True:
-            raise TypeError("Error in IngredientQuantity init: if unit is BOOL, then quantity must be True")
+            raise TypeError(
+                "Error in IngredientQuantity init: if unit is BOOL, then quantity must be True"
+            )
 
         self.ingredient = ingredient
         self.unit = unit
@@ -31,13 +35,19 @@ class IngredientQuantity:
 
     def __add__(self, other: "IngredientQuantity") -> "IngredientQuantity":
         if not isinstance(other, IngredientQuantity):
-            raise TypeError("Error in IngredientQuantity.__add__: 'other' must be of type IngredientQuantity")
+            raise TypeError(
+                "Error in IngredientQuantity.__add__: 'other' must be of type IngredientQuantity"
+            )
 
         if self.ingredient is not other.ingredient:
-            raise TypeError("Error in IngredientQuantity.__add__: both operands must have the same ingredient field")
+            raise TypeError(
+                "Error in IngredientQuantity.__add__: both operands must have the same ingredient field"
+            )
 
         if self.unit is not other.unit:
-            raise TypeError("Error in IngredientQuantity.__add__: both operands must have the same unit field")
+            raise TypeError(
+                "Error in IngredientQuantity.__add__: both operands must have the same unit field"
+            )
 
         if self.unit is Unit.BOOL:
             return IngredientQuantity(self.ingredient, Unit.BOOL, self.quantity or other.quantity)
@@ -45,7 +55,13 @@ class IngredientQuantity:
         return IngredientQuantity(self.ingredient, self.unit, self.quantity + other.quantity)
 
     def __eq__(self, other) -> bool:
-        return all((self.ingredient == other.ingredient, self.unit == other.unit, self.quantity == other.quantity))
+        return all(
+            (
+                self.ingredient == other.ingredient,
+                self.unit == other.unit,
+                self.quantity == other.quantity,
+            )
+        )
 
     def __repr__(self) -> str:
         return f"IngredientQuantity({self.ingredient!r}, {self.unit!r}, {self.quantity!r})"
@@ -57,7 +73,9 @@ class IngredientQuantityCollection:
 
         for x in self.ingredient_quantities:
             if not isinstance(x, IngredientQuantity):
-                raise TypeError(f"{x} is not an IngredientQuantity in IngredientQuantityCollection init")
+                raise TypeError(
+                    f"{x} is not an IngredientQuantity in IngredientQuantityCollection init"
+                )
 
     def __iter__(self):
         return BasicIterator(self.ingredient_quantities)
@@ -76,6 +94,9 @@ class IngredientQuantityCollection:
         return True
 
 
+# TODO: Perhaps a CSV for these? Do I ever need to enumerate over these? I can just generate a runtime list
+# of available options if I need to do that?
+# Or, perhaps it's okay to keep this enum, but let's just be careful about how it's used
 class Ingredients(BaseEnum):
     ACTIVE_DRY_YEAST = Ingredient("Active Dry Yeast", Category.CONDIMENT)
     AUBERGINE = Ingredient("Aubergine", Category.VEGETABLE)
@@ -178,7 +199,9 @@ class Ingredients(BaseEnum):
     MINI_CARROTS = Ingredient("Mini Carrots", Category.VEGETABLE)
     MIXED_HERBS = Ingredient("Mixed Herbs", Category.HERB)
     MOZARELLA_CHEESE = Ingredient("Mozarella Cheese", Category.DAIRY)
-    MRS_JAMISONS_ORGANIC_CHICKEN_BASE = Ingredient("Mrs Jamison's Organic Chicken Base", Category.CONDIMENT)
+    MRS_JAMISONS_ORGANIC_CHICKEN_BASE = Ingredient(
+        "Mrs Jamison's Organic Chicken Base", Category.CONDIMENT
+    )
     NUTMEG = Ingredient("Nutmeg", Category.SPICE)
     OLIVE_OIL = Ingredient("Olive Oil", Category.CONDIMENT)
     ONION = Ingredient("Onion", Category.VEGETABLE)
@@ -243,7 +266,9 @@ class Ingredients(BaseEnum):
     YOGURT = Ingredient("Yogurt", Category.DAIRY)
 
 
-UPPER_INGREDIENT_NAME_TO_INGREDIENT_MAP = {ingredient.value.name.upper(): ingredient for ingredient in Ingredients}
+UPPER_INGREDIENT_NAME_TO_INGREDIENT_MAP = {
+    ingredient.value.name.upper(): ingredient for ingredient in Ingredients
+}
 
 
 def get_ingredient_from_name(ingredient_name: str) -> Ingredient:

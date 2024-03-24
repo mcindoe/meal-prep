@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../adventofcode" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../autobook" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../batterycontroller" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../datastructures" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../dotfiles" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../holdem" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../leetcode" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../newdir/MealPrep" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../r4cppp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../regimedetection" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../remotesensing" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../rust/projects/fibonacci" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../rust/projects/guessing_game" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../rust/projects/hello" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../rust/projects/loops" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../rust/projects/ownership" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../rust/projects/variables" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../rust/rust_by_example" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../rust/the_rust_programming_language" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../solar" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../userinputgetter" vcs="Git" />
+  </component>
+</project>

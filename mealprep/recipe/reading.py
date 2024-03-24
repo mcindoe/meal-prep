@@ -6,10 +6,15 @@ from typing import Any
 
 import yaml
 
-from mealprep.src.constants import MealProperty, MealTag, Unit, UNIT_IDENTIFIERS
-from mealprep.src.ingredient import get_ingredient_from_name, IngredientQuantity, IngredientQuantityCollection
-from mealprep.src.meal import Meal
-from mealprep.src.recipe.common import RecipeEntry, RecipeError
+from mealprep.constants import MealProperty, MealTag, Unit, UNIT_IDENTIFIERS
+from mealprep.ingredient import (
+    get_ingredient_from_name,
+    IngredientQuantity,
+    IngredientQuantityCollection,
+)
+from mealprep.meal import Meal
+from mealprep.recipe.common import RecipeEntry, RecipeError
+
 
 ALPHABETICAL_CHARACTER_REGEX = re.compile("[a-zA-Z]")
 REQUIRED_RECIPE_ENTRIES = set(x.entry_name for x in RecipeEntry if x.required)
@@ -27,10 +32,14 @@ def parse_recipe_as_meal(recipe_filepath: Path) -> Meal:
 
     meal_name = recipe_contents[RecipeEntry.NAME.entry_name]
     meal_ingredient_quantities = tuple(
-        _parse_ingredient_quantity_from_recipe_entry(x) for x in recipe_contents[RecipeEntry.INGREDIENTS.entry_name]
+        _parse_ingredient_quantity_from_recipe_entry(x)
+        for x in recipe_contents[RecipeEntry.INGREDIENTS.entry_name]
     )
     meal_properties = dict(
-        tuple(_parse_meal_property_entry(x) for x in recipe_contents[RecipeEntry.PROPERTIES.entry_name])
+        tuple(
+            _parse_meal_property_entry(x)
+            for x in recipe_contents[RecipeEntry.PROPERTIES.entry_name]
+        )
     )
 
     if RecipeEntry.TAGS.entry_name in recipe_contents:
@@ -54,7 +63,9 @@ def _assert_recipe_contains_required_fields(recipe_contents: dict) -> None:
 
     missing_required_recipe_entries = REQUIRED_RECIPE_ENTRIES - set(recipe_contents.keys())
     if missing_required_recipe_entries:
-        error_message = f"The following required entries are missing: {sorted(missing_required_recipe_entries)}"
+        error_message = (
+            f"The following required entries are missing: {sorted(missing_required_recipe_entries)}"
+        )
         raise RecipeError(error_message)
 
 
@@ -94,7 +105,9 @@ def _parse_unit_quantity_description(description: str | int) -> tuple[Unit, int]
     raise RecipeError(f"Unable to parse unit quantity description {description}")
 
 
-def _parse_ingredient_quantity_from_recipe_entry(entry: str | dict[str, str | int]) -> IngredientQuantity:
+def _parse_ingredient_quantity_from_recipe_entry(
+    entry: str | dict[str, str | int]
+) -> IngredientQuantity:
     """
     Parse an ingredient quantity, as parsed by the yaml reader, to an
     IngredientQuantity instance. The mixed type inputs are in response
@@ -108,15 +121,21 @@ def _parse_ingredient_quantity_from_recipe_entry(entry: str | dict[str, str | in
     """
 
     if isinstance(entry, str):
-        return IngredientQuantity(ingredient=get_ingredient_from_name(entry), unit=Unit.BOOL, quantity=True)
+        return IngredientQuantity(
+            ingredient=get_ingredient_from_name(entry), unit=Unit.BOOL, quantity=True
+        )
 
     if isinstance(entry, dict):
         ingredient_name, quantity_description = tuple(entry.items())[0]
         unit, quantity = _parse_unit_quantity_description(quantity_description)
 
-        return IngredientQuantity(ingredient=get_ingredient_from_name(ingredient_name), unit=unit, quantity=quantity)
+        return IngredientQuantity(
+            ingredient=get_ingredient_from_name(ingredient_name), unit=unit, quantity=quantity
+        )
 
-    raise TypeError(f"Unsupported type {type(entry)} passed to _parse_ingredient_quantity_from_recipe_entry")
+    raise TypeError(
+        f"Unsupported type {type(entry)} passed to _parse_ingredient_quantity_from_recipe_entry"
+    )
 
 
 def _parse_meal_property_entry(entry: dict[str, str]) -> tuple[MealProperty, Any]:
@@ -131,7 +150,9 @@ def _parse_meal_property_entry(entry: dict[str, str]) -> tuple[MealProperty, Any
     try:
         property_value = supported_values[property_value_component.strip().upper()]
     except KeyError as exc:
-        raise RecipeError(f"Unable to parse {property_value_component} as a property of type {meal_property}") from exc
+        raise RecipeError(
+            f"Unable to parse {property_value_component} as a property of type {meal_property}"
+        ) from exc
 
     return meal_property, property_value
 
