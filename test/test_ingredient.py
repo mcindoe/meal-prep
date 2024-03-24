@@ -47,16 +47,18 @@ class TestIngredientQuantity(unittest.TestCase):
 
     def test_getters(self):
         x = IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True)
-        assert x.ingredient is Ingredients.BAY_LEAVES
-        assert x.unit is Unit.BOOL
-        assert x.quantity is True
+        self.assertIs(x.ingredient, Ingredients.BAY_LEAVES)
+        self.assertIs(x.unit, Unit.BOOL)
+        self.assertIs(x.quantity, True)
 
     def test_add(self):
-        assert self.quantities[0] + self.quantities[0] == IngredientQuantity(
-            Ingredients.CREAM, Unit.MILLILITRE, 500
+        self.assertEqual(
+            self.quantities[0] + self.quantities[0],
+            IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 500),
         )
-        assert self.quantities[1] + self.quantities[1] == IngredientQuantity(
-            Ingredients.PEAR, Unit.BOOL, True
+        self.assertEqual(
+            self.quantities[1] + self.quantities[1],
+            IngredientQuantity(Ingredients.PEAR, Unit.BOOL, True),
         )
 
         with self.assertRaises(TypeError):
@@ -66,13 +68,12 @@ class TestIngredientQuantity(unittest.TestCase):
             self.quantities[1] + self.quantities[2]
 
     def test_eq(self):
-        assert self.quantities[0] == self.quantities[0]
-        assert self.quantities[1] == self.quantities[1]
-        assert self.quantities[2] == self.quantities[2]
+        for n in range(3):
+            self.assertEqual(self.quantities[n], self.quantities[n])
 
-        assert self.quantities[0] != self.quantities[1]
-        assert self.quantities[0] != self.quantities[2]
-        assert self.quantities[1] != self.quantities[2]
+        self.assertNotEqual(self.quantities[0], self.quantities[1])
+        self.assertNotEqual(self.quantities[0], self.quantities[2])
+        self.assertNotEqual(self.quantities[1], self.quantities[2])
 
 
 class TestIngredientQuantityCollection(unittest.TestCase):
@@ -86,7 +87,7 @@ class TestIngredientQuantityCollection(unittest.TestCase):
 
         # IngredientQuantityCollections should maintain their own copy of the
         # ingredient self.quantities
-        assert x.ingredient_quantities is not ingredient_quantities
+        self.assertIsNot(x.ingredient_quantities, ingredient_quantities)
 
         with self.assertRaises(TypeError):
             # One of the arguments is not an IngredientQuantity
