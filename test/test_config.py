@@ -1,10 +1,13 @@
-from mealprep.src.config import config
-from mealprep.src.constants import ConfigEntries
+import unittest
+
+from mealprep.config import config
+from mealprep.constants import ConfigEntries
 
 
-def test_config():
-    for entry_name in ConfigEntries.values():
-        entry_value = getattr(config, entry_name)
+class TestConfig(unittest.TestCase):
+    def test_config(self):
+        for entry_name in ConfigEntries.values():
+            entry_value = getattr(config, entry_name)
 
-        assert isinstance(entry_value, tuple)
-        assert len(entry_value) > 0
+            self.assertTrue(isinstance(entry_value, tuple))
+            self.assertGreater(len(entry_value), 0)

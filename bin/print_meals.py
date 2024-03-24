@@ -1,13 +1,11 @@
 """
-For ingredients and metadata associated with meals, as well as whether
+Print ingredients and metadata associated with meals, as well as whether
 the meal is included in the project config collection
 """
 
-
-from mealprep.src.config import config
-from mealprep.src.meal import Meal
-from mealprep.src.meal import Meals
-from mealprep.src.shopping_list import ShoppingList
+from mealprep.config import config
+from mealprep.meal import Meal, Meals
+from mealprep.shopping_list import ShoppingList
 
 
 def print_meal_information(meal: Meal, enum_name: str) -> None:

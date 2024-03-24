@@ -1,16 +1,12 @@
 import datetime as dt
 import random
-from userinputgetter import CaseInsensitiveStringInputGetter
-from userinputgetter import DateInputGetter
-from typing import Iterable
-from typing import Optional
-from typing import Union
+from typing import Iterable, Optional, Union
 
-from mealprep.src.exceptions import OutOfMealsError
-from mealprep.src.meal import MealCollection
-from mealprep.src.meal import MealDiary
-from mealprep.src.rule import RuleCollection
-from mealprep.src.rule import NotSpecifiedMealOnSpecifiedDate
+from userinputgetter import CaseInsensitiveStringInputGetter, DateInputGetter
+
+from mealprep.exceptions import OutOfMealsError
+from mealprep.meal import MealCollection, MealDiary
+from mealprep.rule import NotSpecifiedMealOnSpecifiedDate, RuleCollection
 
 
 class MealSelector:
@@ -18,9 +14,8 @@ class MealSelector:
         self,
         meal_collection: MealCollection,
         rule_collection: RuleCollection,
-        meal_diary: MealDiary
+        meal_diary: MealDiary,
     ):
-
         if not isinstance(meal_collection, MealCollection):
             raise TypeError("'meal_collection' argument must be a MealCollection")
 
@@ -38,7 +33,7 @@ class MealSelector:
         self,
         dates: Iterable[dt.date],
         rule_collection: RuleCollection,
-        recommended_diary: Optional[MealDiary] = None
+        recommended_diary: Optional[MealDiary] = None,
     ) -> MealDiary:
         """
         Recommend a MealDiary of Meals for the specified dates
@@ -78,7 +73,9 @@ class MealSelector:
             meal_choices = rule_collection(self.meal_collection, date, meal_diary)
 
             if not meal_choices:
-                raise OutOfMealsError(f"Ran out of meals on date {date.strftime(MealDiary.DATE_FORMAT)}")
+                raise OutOfMealsError(
+                    f"Ran out of meals on date {date.strftime(MealDiary.DATE_FORMAT)}"
+                )
 
             # If there is no next date to consider, choose randomly from acceptable meals
             if date == dates[-1]:
@@ -92,12 +89,10 @@ class MealSelector:
                 proposed_diary = meal_diary.copy()
                 proposed_diary[date] = meal
 
-                next_date = dates[idx+1]
+                next_date = dates[idx + 1]
 
                 next_date_meal_choices = rule_collection(
-                    self.meal_collection,
-                    next_date,
-                    proposed_diary
+                    self.meal_collection, next_date, proposed_diary
                 )
 
                 n_available_meals_for_next_date[meal] = len(next_date_meal_choices)
@@ -128,9 +123,7 @@ class MealSelector:
                 dates_to_compute_recommendations_for = dates
 
             recommended_diary = self.recommend(
-                dates_to_compute_recommendations_for,
-                rule_collection,
-                recommended_diary
+                dates_to_compute_recommendations_for, rule_collection, recommended_diary
             )
 
             print("\nRecommended meal plan:")
@@ -154,10 +147,7 @@ class MealSelector:
             # Don't recommend user-rejected (date, meal) pairs again
             for date in dates_to_change:
                 meal_to_avoid = recommended_diary[date]
-                avoid_same_suggestion_rule = NotSpecifiedMealOnSpecifiedDate(
-                    date,
-                    meal_to_avoid
-                )
+                avoid_same_suggestion_rule = NotSpecifiedMealOnSpecifiedDate(date, meal_to_avoid)
                 rule_collection = rule_collection.append(avoid_same_suggestion_rule)
 
             recommended_diary = recommended_diary.except_dates(dates_to_change)
