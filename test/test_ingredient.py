@@ -1,4 +1,4 @@
-import pytest
+import unittest
 
 from mealprep.constants import Category, Unit
 from mealprep.ingredient import (
@@ -9,42 +9,40 @@ from mealprep.ingredient import (
 )
 
 
-class TestIngredient:
+class TestIngredient(unittest.TestCase):
     def test_initialiser(self):
         # Ingredient name is not a string
-        with pytest.raises(TypeError):
+        with self.assertRaises(TypeError):
             Ingredient(3.5, Category.DAIRY)
 
         # Ingredient category is not an element of the Category enum
-        with pytest.raises(TypeError):
+        with self.assertRaises(TypeError):
             Ingredient("Ingredient Name", "VEGETABLE")
 
     def test_getters(self):
         x = Ingredient("Baby Spinach", Category.VEGETABLE)
-        assert x.name == "Baby Spinach"
-        assert x.category is Category.VEGETABLE
+        self.assertEqual(x.name, "Baby Spinach")
+        self.assertIs(x.category, Category.VEGETABLE)
 
 
-class TestIngredientQuantity:
-    @pytest.fixture()
-    def quantities(self):
-        quantity1 = IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 250)
-        quantity2 = IngredientQuantity(Ingredients.PEAR, Unit.BOOL, True)
-        quantity3 = IngredientQuantity(Ingredients.PEAR, Unit.NUMBER, 2)
-
-        yield quantity1, quantity2, quantity3
+class TestIngredientQuantity(unittest.TestCase):
+    quantities = (
+        IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 250),
+        IngredientQuantity(Ingredients.PEAR, Unit.BOOL, True),
+        IngredientQuantity(Ingredients.PEAR, Unit.NUMBER, 2),
+    )
 
     def test_initialiser(self):
         # Ingredient argument is not an Ingredient
-        with pytest.raises(TypeError):
+        with self.assertRaises(TypeError):
             IngredientQuantity("BAY LEAVES", Unit.BOOL, True)
 
         # Unit argument is not a Unit
-        with pytest.raises(TypeError):
+        with self.assertRaises(TypeError):
             IngredientQuantity(Ingredients.BAY_LEAVES, "BOOL", True)
 
         # Boolean IngredientQuantity must have quantity = True
-        with pytest.raises(TypeError):
+        with self.assertRaises(TypeError):
             IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, False)
 
     def test_getters(self):
@@ -53,31 +51,31 @@ class TestIngredientQuantity:
         assert x.unit is Unit.BOOL
         assert x.quantity is True
 
-    def test_add(self, quantities):
-        assert quantities[0] + quantities[0] == IngredientQuantity(
+    def test_add(self):
+        assert self.quantities[0] + self.quantities[0] == IngredientQuantity(
             Ingredients.CREAM, Unit.MILLILITRE, 500
         )
-        assert quantities[1] + quantities[1] == IngredientQuantity(
+        assert self.quantities[1] + self.quantities[1] == IngredientQuantity(
             Ingredients.PEAR, Unit.BOOL, True
         )
 
-        with pytest.raises(TypeError):
-            quantities[0] + quantities[1]
+        with self.assertRaises(TypeError):
+            self.quantities[0] + self.quantities[1]
 
-        with pytest.raises(TypeError):
-            quantities[1] + quantities[2]
+        with self.assertRaises(TypeError):
+            self.quantities[1] + self.quantities[2]
 
-    def test_eq(self, quantities):
-        assert quantities[0] == quantities[0]
-        assert quantities[1] == quantities[1]
-        assert quantities[2] == quantities[2]
+    def test_eq(self):
+        assert self.quantities[0] == self.quantities[0]
+        assert self.quantities[1] == self.quantities[1]
+        assert self.quantities[2] == self.quantities[2]
 
-        assert quantities[0] != quantities[1]
-        assert quantities[0] != quantities[2]
-        assert quantities[1] != quantities[2]
+        assert self.quantities[0] != self.quantities[1]
+        assert self.quantities[0] != self.quantities[2]
+        assert self.quantities[1] != self.quantities[2]
 
 
-class TestIngredientQuantityCollection:
+class TestIngredientQuantityCollection(unittest.TestCase):
     def test_initialiser(self):
         ingredient_quantities = (
             IngredientQuantity(Ingredients.BABY_SPINACH, Unit.BOOL, True),
@@ -87,10 +85,10 @@ class TestIngredientQuantityCollection:
         x = IngredientQuantityCollection(ingredient_quantities)
 
         # IngredientQuantityCollections should maintain their own copy of the
-        # ingredient quantities
+        # ingredient self.quantities
         assert x.ingredient_quantities is not ingredient_quantities
 
-        with pytest.raises(TypeError):
+        with self.assertRaises(TypeError):
             # One of the arguments is not an IngredientQuantity
             IngredientQuantityCollection(
                 ingredient_quantities[:2] + (Ingredients.CREAM, Unit.GRAM, 100)
