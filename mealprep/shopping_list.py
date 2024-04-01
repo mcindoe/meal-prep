@@ -38,7 +38,7 @@ class ShoppingList:
         for meal in meal_collection:
             for ingredient_quantity in meal.ingredient_quantities:
                 ingredient = ingredient_quantity.ingredient
-                category = ingredient.value.category
+                category = ingredient.category
                 unit = ingredient_quantity.unit
 
                 if category not in self.ingredient_summary:
@@ -74,11 +74,11 @@ class ShoppingList:
         Examples:
 
         (
-            (Ingredients.PEAR, Unit.BOOL, True),
-            (Ingredients.PEAR, Unit.NUMBER, 2)
+            (Ingredient.from_name("Pear"), Unit.BOOL, True),
+            (Ingredient.from_name("Pear"), Unit.NUMBER, 2)
         ) -> "2 units and some extra"
 
-        ((Ingredients.BANANA, Unit.BOOL, True), ) -> None
+        ((Ingredient.from_name("Banana"), Unit.BOOL, True), ) -> None
         """
 
         if not all(isinstance(x, IngredientQuantity) for x in ingredient_quantities):
@@ -141,7 +141,7 @@ class ShoppingList:
                     ].values()
                     meals = self.ingredient_summary[category][ingredient]["meals"]
 
-                    ingredient_entry = f"- [ ] {ingredient.value.name}"
+                    ingredient_entry = f"- [ ] {ingredient.name}"
 
                     ingredient_quantity_description = self.get_ingredient_quantity_description(
                         quantities
