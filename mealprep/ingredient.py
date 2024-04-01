@@ -38,6 +38,9 @@ class Ingredient:
     def __eq__(self, other: "Ingredient") -> bool:
         return (self.name == other.name) and (self.category == other.category)
 
+    def __hash__(self) -> int:
+        return hash(f"Ingredient('{self.name}')")
+
     def __repr__(self) -> str:
         return f'Ingredient(name="{self.name}", category=Category.{self.category.name})'
 
