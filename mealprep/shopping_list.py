@@ -74,17 +74,17 @@ class ShoppingList:
         Examples:
 
         (
-            (Ingredients.PEAR, Unit.BOOL, True),
-            (Ingredients.PEAR, Unit.NUMBER, 2)
+            (Ingredient.from_name("Pear"), Unit.BOOL, True),
+            (Ingredient.from_name("Pear"), Unit.NUMBER, 2)
         ) -> "2 units and some extra"
 
-        ((Ingredients.BANANA, Unit.BOOL, True), ) -> None
+        ((Ingredient.from_name("Banana"), Unit.BOOL, True), ) -> None
         """
 
         if not all(isinstance(x, IngredientQuantity) for x in ingredient_quantities):
             raise TypeError("Entries passed in ingredient_quantities must be IngredientQuantities")
 
-        if len(set(x.ingredient for x in ingredient_quantities)) != 1:
+        if len(set(x.ingredient.name for x in ingredient_quantities)) != 1:
             raise ValueError("Multiple ingredients passed to get_ingredient_quantity_description")
 
         # There should be no more than one of each unit passed
