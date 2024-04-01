@@ -28,11 +28,12 @@ class Ingredient:
     def from_name(ingredient_name: str) -> "Ingredient":
         try:
             ingredient_info = Ingredient.SUPPORTED_INGREDIENT_INFO[ingredient_name.upper()]
-            return Ingredient(
-                name=ingredient_info["name"], category=Category[ingredient_info["category"]]
-            )
         except KeyError:
             raise ValueError(f"Unsupported ingredient name {ingredient_name}")
+
+        return Ingredient(
+            name=ingredient_info["name"], category=Category[ingredient_info["category"]]
+        )
 
     def __eq__(self, other: "Ingredient") -> bool:
         return (self.name == other.name) and (self.category == other.category)
