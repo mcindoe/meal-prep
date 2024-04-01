@@ -1,11 +1,7 @@
 import unittest
 
 from mealprep.constants import Category, Unit
-from mealprep.ingredient import (
-    Ingredient,
-    IngredientQuantity,
-    IngredientQuantityCollection,
-)
+from mealprep.ingredient import Ingredient, IngredientQuantity, IngredientQuantityCollection
 
 
 class TestIngredient(unittest.TestCase):
