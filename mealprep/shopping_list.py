@@ -84,7 +84,7 @@ class ShoppingList:
         if not all(isinstance(x, IngredientQuantity) for x in ingredient_quantities):
             raise TypeError("Entries passed in ingredient_quantities must be IngredientQuantities")
 
-        if len(set(x.ingredient.name for x in ingredient_quantities)) != 1:
+        if len(set(x.ingredient for x in ingredient_quantities)) != 1:
             raise ValueError("Multiple ingredients passed to get_ingredient_quantity_description")
 
         # There should be no more than one of each unit passed
