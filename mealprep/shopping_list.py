@@ -38,7 +38,7 @@ class ShoppingList:
         for meal in meal_collection:
             for ingredient_quantity in meal.ingredient_quantities:
                 ingredient = ingredient_quantity.ingredient
-                category = ingredient.value.category
+                category = ingredient.category
                 unit = ingredient_quantity.unit
 
                 if category not in self.ingredient_summary:
