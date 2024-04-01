@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-from pathlib import Path
 import re
+from pathlib import Path
 from typing import Any
 
 import yaml
 
 from mealprep.constants import MealProperty, MealTag, Unit, UNIT_IDENTIFIERS
 from mealprep.ingredient import (
-    get_ingredient_from_name,
+    Ingredient,
     IngredientQuantity,
     IngredientQuantityCollection,
 )
@@ -122,7 +122,7 @@ def _parse_ingredient_quantity_from_recipe_entry(
 
     if isinstance(entry, str):
         return IngredientQuantity(
-            ingredient=get_ingredient_from_name(entry), unit=Unit.BOOL, quantity=True
+            ingredient=Ingredient.from_name(entry), unit=Unit.BOOL, quantity=True
         )
 
     if isinstance(entry, dict):
@@ -130,7 +130,7 @@ def _parse_ingredient_quantity_from_recipe_entry(
         unit, quantity = _parse_unit_quantity_description(quantity_description)
 
         return IngredientQuantity(
-            ingredient=get_ingredient_from_name(ingredient_name), unit=unit, quantity=quantity
+            ingredient=Ingredient.from_name(ingredient_name), unit=unit, quantity=quantity
         )
 
     raise TypeError(

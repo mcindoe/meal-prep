@@ -1,12 +1,7 @@
 import unittest
 
 from mealprep.constants import Category, Unit
-from mealprep.ingredient import (
-    Ingredient,
-    IngredientQuantity,
-    IngredientQuantityCollection,
-    Ingredients,
-)
+from mealprep.ingredient import Ingredient, IngredientQuantity, IngredientQuantityCollection
 
 
 class TestIngredient(unittest.TestCase):
@@ -15,7 +10,7 @@ class TestIngredient(unittest.TestCase):
         with self.assertRaises(TypeError):
             Ingredient(3.5, Category.DAIRY)
 
-        # Ingredient category is not an element of the Category enum
+        # Ingredient category argument is not a Category instance
         with self.assertRaises(TypeError):
             Ingredient("Ingredient Name", "VEGETABLE")
 
@@ -24,12 +19,17 @@ class TestIngredient(unittest.TestCase):
         self.assertEqual(x.name, "Baby Spinach")
         self.assertIs(x.category, Category.VEGETABLE)
 
+    def test_initialise_from_name(self):
+        x = Ingredient.from_name("Baby Spinach")
+        self.assertEqual(x.name, "Baby Spinach")
+        self.assertIs(x.category, Category.VEGETABLE)
+
 
 class TestIngredientQuantity(unittest.TestCase):
     quantities = (
-        IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 250),
-        IngredientQuantity(Ingredients.PEAR, Unit.BOOL, True),
-        IngredientQuantity(Ingredients.PEAR, Unit.NUMBER, 2),
+        IngredientQuantity(Ingredient.from_name("Cream"), Unit.MILLILITRE, 250),
+        IngredientQuantity(Ingredient.from_name("Pear"), Unit.BOOL, True),
+        IngredientQuantity(Ingredient.from_name("Pear"), Unit.NUMBER, 2),
     )
 
     def test_initialiser(self):
@@ -39,26 +39,26 @@ class TestIngredientQuantity(unittest.TestCase):
 
         # Unit argument is not a Unit
         with self.assertRaises(TypeError):
-            IngredientQuantity(Ingredients.BAY_LEAVES, "BOOL", True)
+            IngredientQuantity(Ingredient.from_name("Bay Leaves"), "BOOL", True)
 
         # Boolean IngredientQuantity must have quantity = True
         with self.assertRaises(TypeError):
-            IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, False)
+            IngredientQuantity(Ingredient.from_name("Bay Leaves"), Unit.BOOL, False)
 
     def test_getters(self):
-        x = IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True)
-        self.assertIs(x.ingredient, Ingredients.BAY_LEAVES)
-        self.assertIs(x.unit, Unit.BOOL)
+        x = IngredientQuantity(Ingredient.from_name("Bay Leaves"), Unit.BOOL, True)
+        self.assertEqual(x.ingredient, Ingredient.from_name("Bay Leaves"))
+        self.assertEqual(x.unit, Unit.BOOL)
         self.assertIs(x.quantity, True)
 
     def test_add(self):
         self.assertEqual(
             self.quantities[0] + self.quantities[0],
-            IngredientQuantity(Ingredients.CREAM, Unit.MILLILITRE, 500),
+            IngredientQuantity(Ingredient.from_name("Cream"), Unit.MILLILITRE, 500),
         )
         self.assertEqual(
             self.quantities[1] + self.quantities[1],
-            IngredientQuantity(Ingredients.PEAR, Unit.BOOL, True),
+            IngredientQuantity(Ingredient.from_name("Pear"), Unit.BOOL, True),
         )
 
         with self.assertRaises(TypeError):
@@ -79,9 +79,9 @@ class TestIngredientQuantity(unittest.TestCase):
 class TestIngredientQuantityCollection(unittest.TestCase):
     def test_initialiser(self):
         ingredient_quantities = (
-            IngredientQuantity(Ingredients.BABY_SPINACH, Unit.BOOL, True),
-            IngredientQuantity(Ingredients.CHERRY_TOMATOES, Unit.NUMBER, 3),
-            IngredientQuantity(Ingredients.CREAM, Unit.GRAM, 100),
+            IngredientQuantity(Ingredient.from_name("Baby Spinach"), Unit.BOOL, True),
+            IngredientQuantity(Ingredient.from_name("Cherry Tomatoes"), Unit.NUMBER, 3),
+            IngredientQuantity(Ingredient.from_name("Cream"), Unit.GRAM, 100),
         )
         x = IngredientQuantityCollection(ingredient_quantities)
 
@@ -91,48 +91,50 @@ class TestIngredientQuantityCollection(unittest.TestCase):
 
         with self.assertRaises(TypeError):
             # One of the arguments is not an IngredientQuantity
-            IngredientQuantityCollection(ingredient_quantities[:2] + (Ingredients.CREAM, Unit.GRAM, 100))
+            IngredientQuantityCollection(
+                ingredient_quantities[:2] + (Ingredient.from_name("Cream"), Unit.GRAM, 100)
+            )
 
     def test_eq(self):
         collection = IngredientQuantityCollection(
             (
-                IngredientQuantity(Ingredients.BASIL, Unit.BOOL, True),
-                IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 1),
-                IngredientQuantity(Ingredients.CHERRY_TOMATOES, Unit.NUMBER, 3),
+                IngredientQuantity(Ingredient.from_name("Basil"), Unit.BOOL, True),
+                IngredientQuantity(Ingredient.from_name("Celery"), Unit.NUMBER, 1),
+                IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 3),
             )
         )
         equal_collection = IngredientQuantityCollection(
             (
-                IngredientQuantity(Ingredients.BASIL, Unit.BOOL, True),
-                IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 1),
-                IngredientQuantity(Ingredients.CHERRY_TOMATOES, Unit.NUMBER, 3),
+                IngredientQuantity(Ingredient.from_name("Basil"), Unit.BOOL, True),
+                IngredientQuantity(Ingredient.from_name("Celery"), Unit.NUMBER, 1),
+                IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 3),
             )
         )
         assert collection == equal_collection
 
         subset_collection = IngredientQuantityCollection(
             (
-                IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 1),
-                IngredientQuantity(Ingredients.CHERRY_TOMATOES, Unit.NUMBER, 3),
+                IngredientQuantity(Ingredient.from_name("Celery"), Unit.NUMBER, 1),
+                IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 3),
             )
         )
         assert collection != subset_collection
 
         superset_collection = IngredientQuantityCollection(
             (
-                IngredientQuantity(Ingredients.BASIL, Unit.BOOL, True),
-                IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 1),
-                IngredientQuantity(Ingredients.CHERRY_TOMATOES, Unit.NUMBER, 3),
-                IngredientQuantity(Ingredients.TOMATO_PUREE, Unit.GRAM, 250),
+                IngredientQuantity(Ingredient.from_name("Basil"), Unit.BOOL, True),
+                IngredientQuantity(Ingredient.from_name("Celery"), Unit.NUMBER, 1),
+                IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 3),
+                IngredientQuantity(Ingredient.from_name("Tomato Puree"), Unit.GRAM, 250),
             )
         )
         assert collection != superset_collection
 
         different_quantity_collection = IngredientQuantityCollection(
             (
-                IngredientQuantity(Ingredients.BASIL, Unit.BOOL, True),
-                IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 42),
-                IngredientQuantity(Ingredients.CHERRY_TOMATOES, Unit.NUMBER, 3),
+                IngredientQuantity(Ingredient.from_name("Basil"), Unit.BOOL, True),
+                IngredientQuantity(Ingredient.from_name("Celery"), Unit.NUMBER, 42),
+                IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 3),
             )
         )
         assert collection != different_quantity_collection

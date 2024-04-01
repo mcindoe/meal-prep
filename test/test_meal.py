@@ -2,7 +2,7 @@ import datetime as dt
 import unittest
 
 from mealprep.constants import MealMeat, MealProperty, MealTag, Unit
-from mealprep.ingredient import IngredientQuantity, IngredientQuantityCollection, Ingredients
+from mealprep.ingredient import Ingredient, IngredientQuantity, IngredientQuantityCollection
 from mealprep.meal import Meal, MealCollection, MealDiary
 
 
@@ -12,9 +12,11 @@ class TestMeal(unittest.TestCase):
         with self.assertRaises(TypeError):
             Meal(
                 name=42,
-                ingredient_quantities=(
-                    IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
-                    IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
+                ingredient_quantities=IngredientQuantityCollection(
+                    (
+                        IngredientQuantity(Ingredient.from_name("Bay Leaves"), Unit.BOOL, True),
+                        IngredientQuantity(Ingredient.from_name("Carrot"), Unit.NUMBER, 1),
+                    )
                 ),
                 properties={},
                 tags=(MealTag.PASTA,),
@@ -24,9 +26,11 @@ class TestMeal(unittest.TestCase):
         with self.assertRaises(TypeError):
             Meal(
                 name="Meal Name",
-                ingredient_quantities=(
-                    IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
-                    IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
+                ingredient_quantities=IngredientQuantityCollection(
+                    (
+                        IngredientQuantity(Ingredient.from_name("Bay Leaves"), Unit.BOOL, True),
+                        IngredientQuantity(Ingredient.from_name("Carrot"), Unit.NUMBER, 1),
+                    )
                 ),
                 properties=(MealMeat.BEEF,),
                 tags=(MealTag.PASTA,),
@@ -36,9 +40,11 @@ class TestMeal(unittest.TestCase):
         with self.assertRaises(TypeError):
             Meal(
                 name="Meal Name",
-                ingredient_quantities=(
-                    IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
-                    IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
+                ingredient_quantities=IngredientQuantityCollection(
+                    (
+                        IngredientQuantity(Ingredient.from_name("Bay Leaves"), Unit.BOOL, True),
+                        IngredientQuantity(Ingredient.from_name("Carrot"), Unit.NUMBER, 1),
+                    )
                 ),
                 properties=({"Meat": "Beef"}),
                 tags=(MealTag.PASTA,),
@@ -48,20 +54,13 @@ class TestMeal(unittest.TestCase):
         with self.assertRaises(ValueError):
             Meal(
                 name="Meal Name",
-                ingredient_quantities=(
-                    IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
-                    IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
+                ingredient_quantities=IngredientQuantityCollection(
+                    (
+                        IngredientQuantity(Ingredient.from_name("Bay Leaves"), Unit.BOOL, True),
+                        IngredientQuantity(Ingredient.from_name("Carrot"), Unit.NUMBER, 1),
+                    )
                 ),
                 properties={},
-                tags=(MealTag.PASTA,),
-            )
-
-        # Ingredient Quantities contains non-Ingredients
-        with self.assertRaises(TypeError):
-            Meal(
-                name="Meal Name",
-                ingredient_quantities=("300g of Carrot",),
-                properties={MealProperty.MEAT: MealMeat.BEEF},
                 tags=(MealTag.PASTA,),
             )
 
@@ -69,9 +68,11 @@ class TestMeal(unittest.TestCase):
         with self.assertRaises(ValueError):
             Meal(
                 name="Meal Name",
-                ingredient_quantities=(
-                    IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
-                    IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
+                ingredient_quantities=IngredientQuantityCollection(
+                    (
+                        IngredientQuantity(Ingredient.from_name("Bay Leaves"), Unit.BOOL, True),
+                        IngredientQuantity(Ingredient.from_name("Carrot"), Unit.NUMBER, 1),
+                    )
                 ),
                 properties={MealProperty.MEAT: MealMeat.BEEF},
                 tags=("PASTA",),
@@ -81,10 +82,12 @@ class TestMeal(unittest.TestCase):
         with self.assertRaises(ValueError):
             Meal(
                 name="Meal Name",
-                ingredient_quantities=(
-                    IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
-                    IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
-                    IngredientQuantity(Ingredients.CARROT, Unit.GRAM, 100),
+                ingredient_quantities=IngredientQuantityCollection(
+                    (
+                        IngredientQuantity(Ingredient.from_name("Bay Leaves"), Unit.BOOL, True),
+                        IngredientQuantity(Ingredient.from_name("Carrot"), Unit.NUMBER, 1),
+                        IngredientQuantity(Ingredient.from_name("Carrot"), Unit.GRAM, 100),
+                    )
                 ),
                 properties={MealProperty.MEAT: MealMeat.BEEF},
                 tags=(MealTag.PASTA,),
@@ -93,9 +96,11 @@ class TestMeal(unittest.TestCase):
     def test_getters(self):
         x = Meal(
             name="Meal Name",
-            ingredient_quantities=(
-                IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
-                IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
+            ingredient_quantities=IngredientQuantityCollection(
+                (
+                    IngredientQuantity(Ingredient.from_name("Bay Leaves"), Unit.BOOL, True),
+                    IngredientQuantity(Ingredient.from_name("Carrot"), Unit.NUMBER, 1),
+                )
             ),
             properties={MealProperty.MEAT: MealMeat.BEEF},
             tags=(MealTag.PASTA,),
@@ -115,9 +120,11 @@ class TestMeal(unittest.TestCase):
         # Construction from a single tag
         x = Meal(
             name="Meal Name",
-            ingredient_quantities=(
-                IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
-                IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 1),
+            ingredient_quantities=IngredientQuantityCollection(
+                (
+                    IngredientQuantity(Ingredient.from_name("Bay Leaves"), Unit.BOOL, True),
+                    IngredientQuantity(Ingredient.from_name("Carrot"), Unit.NUMBER, 1),
+                )
             ),
             properties={MealProperty.MEAT: MealMeat.BEEF},
             tags=MealTag.PASTA,
