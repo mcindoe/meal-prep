@@ -141,7 +141,7 @@ class ShoppingList:
                     ].values()
                     meals = self.ingredient_summary[category][ingredient]["meals"]
 
-                    ingredient_entry = f"- [ ] {ingredient.value.name}"
+                    ingredient_entry = f"- [ ] {ingredient.name}"
 
                     ingredient_quantity_description = self.get_ingredient_quantity_description(
                         quantities
