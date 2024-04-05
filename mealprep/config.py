@@ -21,7 +21,7 @@ class Config:
             self.config = yaml.load(fp, yaml.SafeLoader)
 
     @property
-    def email_addresses(self) -> Tuple[str]:
+    def email_addresses(self) -> Tuple[str, ...]:
         ret = tuple(self.config[ConfigEntries.EMAIL_ADDRESSES.value])
 
         bad_addresses = tuple(x for x in ret if not self.email_address_regex.match(x))
@@ -31,7 +31,7 @@ class Config:
         return ret
 
     @property
-    def dates(self) -> Tuple[dt.date]:
+    def dates(self) -> Tuple[dt.date, ...]:
         ret = tuple(self.config[ConfigEntries.DATES.value])
         if not all(isinstance(x, dt.date) for x in ret):
             raise ValueError("Not all config date entries are in the correct format")
