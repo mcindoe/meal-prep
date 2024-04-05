@@ -168,7 +168,7 @@ class MealDiary:
         self.meal_diary[date] = meal
 
     @property
-    def dates(self) -> Tuple[dt.date]:
+    def dates(self) -> Tuple[dt.date, ...]:
         return tuple(self.meal_diary.keys())
 
     @property
