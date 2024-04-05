@@ -115,9 +115,9 @@ def _parse_ingredient_quantity_from_recipe_entry(
     {"Bacon": "300g"}, etc
 
     Example inputs:
-        "Bacon" -> (Ingredient.BACON, Unit.BOOL, True)
-        {"Bacon": "300g"} -> (Ingredient.BACON, Unit.GRAMS, 300)
-        {"Bacon": 3} -> (Ingredient.BACON, Unit.NUMBER, 3)
+        "Bacon" -> (Ingredient.from_name("Bacon"), Unit.BOOL, True)
+        {"Bacon": "300g"} -> (Ingredient.from_name("Bacon"), Unit.GRAMS, 300)
+        {"Bacon": 3} -> (Ingredient.from_name("Bacon"), Unit.NUMBER, 3)
     """
 
     if isinstance(entry, str):
