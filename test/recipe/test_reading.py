@@ -3,7 +3,7 @@ from __future__ import annotations
 import unittest
 
 from mealprep.constants import MealMeat, MealProperty, MealTag, Unit
-from mealprep.ingredient import IngredientQuantity, IngredientQuantityCollection, Ingredients
+from mealprep.ingredient import Ingredient, IngredientQuantity, IngredientQuantityCollection
 from mealprep.loc import ROOT_DIR
 from mealprep.meal import Meal
 from mealprep.recipe.common import RecipeError
@@ -19,7 +19,6 @@ from mealprep.recipe.reading import (
 TEST_RESOURCES_DIR = ROOT_DIR / "test/resources"
 
 
-# TODO: Mark the inconsistent type here as a GitHub issue. I'm confusing Ingredients and Ingredient
 class TestRecipeParser(unittest.TestCase):
     def test_parse_unit_quantity_description(self):
         test_cases = (
@@ -36,19 +35,19 @@ class TestRecipeParser(unittest.TestCase):
         test_cases = (
             (
                 {"Carrot": "50g"},
-                IngredientQuantity(Ingredients.CARROT, Unit.GRAM, 50),
+                IngredientQuantity(Ingredient.from_name("Carrot"), Unit.GRAM, 50),
             ),
             (
                 {"Flour": "2 bags"},
-                IngredientQuantity(Ingredients.FLOUR, Unit.BAG, 2),
+                IngredientQuantity(Ingredient.from_name("Flour"), Unit.BAG, 2),
             ),
             (
                 "Bay Leaves",
-                IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
+                IngredientQuantity(Ingredient.from_name("Bay Leaves"), Unit.BOOL, True),
             ),
             (
                 {"Chicken Breast": 2},
-                IngredientQuantity(Ingredients.CHICKEN_BREAST, Unit.NUMBER, 2),
+                IngredientQuantity(Ingredient.from_name("Chicken Breast"), Unit.NUMBER, 2),
             ),
         )
 
@@ -89,15 +88,15 @@ class TestRecipeParser(unittest.TestCase):
             name="Test Meal",
             ingredient_quantities=IngredientQuantityCollection(
                 (
-                    IngredientQuantity(Ingredients.BAY_LEAVES, Unit.BOOL, True),
-                    IngredientQuantity(Ingredients.CARROT, Unit.NUMBER, 2),
-                    IngredientQuantity(Ingredients.CELERY, Unit.NUMBER, 2),
-                    IngredientQuantity(Ingredients.CHOPPED_TOMATOES, Unit.NUMBER, 1),
-                    IngredientQuantity(Ingredients.FLOUR, Unit.BOOL, True),
-                    IngredientQuantity(Ingredients.GUINNESS, Unit.MILLILITRE, 500),
-                    IngredientQuantity(Ingredients.ONION, Unit.NUMBER, 2),
-                    IngredientQuantity(Ingredients.POTATO, Unit.GRAM, 900),
-                    IngredientQuantity(Ingredients.STEWING_BEEF, Unit.GRAM, 750),
+                    IngredientQuantity(Ingredient.from_name("Bay Leaves"), Unit.BOOL, True),
+                    IngredientQuantity(Ingredient.from_name("Carrot"), Unit.NUMBER, 2),
+                    IngredientQuantity(Ingredient.from_name("Celery"), Unit.NUMBER, 2),
+                    IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 1),
+                    IngredientQuantity(Ingredient.from_name("Flour"), Unit.BOOL, True),
+                    IngredientQuantity(Ingredient.from_name("Guinness"), Unit.MILLILITRE, 500),
+                    IngredientQuantity(Ingredient.from_name("Onion"), Unit.NUMBER, 2),
+                    IngredientQuantity(Ingredient.from_name("Potato"), Unit.GRAM, 900),
+                    IngredientQuantity(Ingredient.from_name("Stewing Beef"), Unit.GRAM, 750),
                 )
             ),
             properties={
