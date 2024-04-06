@@ -110,7 +110,7 @@ class TestIngredientQuantityCollection(unittest.TestCase):
                 IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 3),
             )
         )
-        assert collection == equal_collection
+        self.assertEqual(collection, equal_collection)
 
         subset_collection = IngredientQuantityCollection(
             (
@@ -118,7 +118,7 @@ class TestIngredientQuantityCollection(unittest.TestCase):
                 IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 3),
             )
         )
-        assert collection != subset_collection
+        self.assertNotEqual(collection, subset_collection)
 
         superset_collection = IngredientQuantityCollection(
             (
@@ -128,7 +128,7 @@ class TestIngredientQuantityCollection(unittest.TestCase):
                 IngredientQuantity(Ingredient.from_name("Tomato Puree"), Unit.GRAM, 250),
             )
         )
-        assert collection != superset_collection
+        self.assertNotEqual(collection, superset_collection)
 
         different_quantity_collection = IngredientQuantityCollection(
             (
@@ -137,4 +137,4 @@ class TestIngredientQuantityCollection(unittest.TestCase):
                 IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 3),
             )
         )
-        assert collection != different_quantity_collection
+        self.assertNotEqual(collection, different_quantity_collection)
