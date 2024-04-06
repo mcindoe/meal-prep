@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import copy
 from collections.abc import Iterable
+import copy
 from typing import Union
 
 from mealprep.basic_iterator import BasicIterator

@@ -1,17 +1,13 @@
 import os
-import re
 from pathlib import Path
+import re
 from typing import Any
 
 import yaml
 
 from mealprep.constants import MealProperty, MealTag, Unit, UNIT_IDENTIFIERS
-from mealprep.ingredient import (
-    Ingredient,
-    IngredientQuantity,
-    IngredientQuantityCollection,
-)
-from mealprep.loc import INCLUDED_RECIPES_DIR, EXCLUDED_RECIPES_DIR
+from mealprep.ingredient import Ingredient, IngredientQuantity, IngredientQuantityCollection
+from mealprep.loc import EXCLUDED_RECIPES_DIR, INCLUDED_RECIPES_DIR
 from mealprep.meal import Meal
 from mealprep.meal_collection import MealCollection
 from mealprep.recipe.common import RecipeEntry, RecipeError

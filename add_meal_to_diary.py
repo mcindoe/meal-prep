@@ -6,10 +6,7 @@ diary
 from userinputgetter import DateInputGetter, IntegerInputGetter
 
 from mealprep.meal_diary import MealDiary
-from mealprep.recipe.reading import (
-    get_project_included_meals,
-    get_meal_from_name,
-)
+from mealprep.recipe.reading import get_meal_from_name, get_project_included_meals
 from mealprep.utils import get_print_collection_with_indices_str
 
 

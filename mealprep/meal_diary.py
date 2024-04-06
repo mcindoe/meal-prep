@@ -1,9 +1,9 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 import copy
 import datetime as dt
 import json
-from collections.abc import Iterable
 from pathlib import Path
 from typing import Optional, Tuple
 
