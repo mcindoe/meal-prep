@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from pathlib import Path
 
 import yaml
@@ -24,12 +22,11 @@ def write_meal_as_recipe(meal: Meal, recipe_filepath: Path) -> None:
             if value is True:
                 meal_tags.append(key.value)
             elif value is not False:
-                raise RuntimeError("Unexpected value")
+                raise RuntimeError(f"Unexpected value - {value}")
         else:
             raise RuntimeError(f"Unsupported type {type(key)} in meal metadata")
 
     meal_contents = {
-        RecipeEntry.NAME: meal.name,
         RecipeEntry.INGREDIENTS: meal_ingredients,
         RecipeEntry.PROPERTIES: meal_properties,
     }
@@ -56,8 +53,8 @@ def _get_recipe_entry_from_ingredient_quantity(
     write to file in a way which matches how a human would input this ingredient
     quantity into a recipe.
 
-    NB: The awkward return type is that strings come with unwanted quote marks if
-    they include "a: b" syntax etc.
+    NB: The awkward return type is because strings come with unwanted quote marks
+    if they include "a: b" syntax etc.
 
     Examples Outputs:
         {"Beef Mince": "500g"} --> Beef Mince: 500g
@@ -67,9 +64,7 @@ def _get_recipe_entry_from_ingredient_quantity(
         {"Chopped Tomatoes": "2 jars"} -> Chopped Tomatoes: 2 jars
     """
 
-    # TODO: Raise a PR / issue to correct the confusion between Ingredients instances and Ingredient instances,
-    # and then this line should just read ingredient_quantity.ingredient.name
-    ingredient_name = ingredient_quantity.ingredient.value.name
+    ingredient_name = ingredient_quantity.ingredient.name
 
     if ingredient_quantity.unit == Unit.BOOL:
         return ingredient_name

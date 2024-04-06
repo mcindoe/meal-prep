@@ -6,10 +6,9 @@ class RecipeError(BaseException):
 
 
 class RecipeEntry(Enum):
-    NAME = "Name", True, 0
-    INGREDIENTS = "Ingredients", True, 1
-    PROPERTIES = "Properties", True, 2
-    TAGS = "Tags", False, 3
+    INGREDIENTS = "Ingredients", True, 0
+    PROPERTIES = "Properties", True, 1
+    TAGS = "Tags", False, 2
 
     def __init__(self, entry_name: str, required: bool, recipe_index: int):
         self.entry_name = entry_name

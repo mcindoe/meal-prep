@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import re
 from pathlib import Path
 from typing import Any
@@ -30,7 +28,7 @@ def parse_recipe_as_meal(recipe_filepath: Path) -> Meal:
 
     _assert_recipe_contains_required_fields(recipe_contents)
 
-    meal_name = recipe_contents[RecipeEntry.NAME.entry_name]
+    meal_name = recipe_filepath.name.removesuffix(".yaml")
     meal_ingredient_quantities = tuple(
         _parse_ingredient_quantity_from_recipe_entry(x)
         for x in recipe_contents[RecipeEntry.INGREDIENTS.entry_name]
@@ -88,6 +86,7 @@ def _parse_unit_quantity_description(description: str | int) -> tuple[Unit, int]
     assert isinstance(description, str), f"Unsupported type {type(description)}"
 
     # Separate description into the left-hand numeric portion and right-hand unit identifier
+    original_description = description
     description = description.replace(" ", "")
     first_alphabetical_character_index = ALPHABETICAL_CHARACTER_REGEX.search(description).start()
     numeric_portion = description[:first_alphabetical_character_index]
@@ -96,13 +95,17 @@ def _parse_unit_quantity_description(description: str | int) -> tuple[Unit, int]
     try:
         quantity_value = int(numeric_portion)
     except ValueError as exc:
-        raise RecipeError(f"Unable to parse unit quantity {description}") from exc
+        raise RecipeError(
+            f"Unable to parse unit quantity {original_description} - can't parse {numeric_portion} as an integer"
+        ) from exc
 
     for identifier, unit in UNIT_IDENTIFIERS.items():
         if unit_portion.endswith(identifier):
             return unit, quantity_value
 
-    raise RecipeError(f"Unable to parse unit quantity description {description}")
+    raise RecipeError(
+        f"Unable to parse unit quantity description {original_description} - can't infer a unit from {unit_portion}"
+    )
 
 
 def _parse_ingredient_quantity_from_recipe_entry(
@@ -161,4 +164,4 @@ def _parse_meal_tag_entry(entry: str) -> MealTag:
     try:
         return MealTag[entry.strip().upper()]
     except KeyError as exc:
-        raise RecipeError(f"Unable to parse {entry} as a MealTag instance") from exc
+        raise RecipeError(f"Unable to parse {entry} as a MealTag") from exc
