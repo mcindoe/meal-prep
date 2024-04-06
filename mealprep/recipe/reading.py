@@ -1,3 +1,4 @@
+import os
 import re
 from pathlib import Path
 from typing import Any
@@ -10,12 +11,30 @@ from mealprep.ingredient import (
     IngredientQuantity,
     IngredientQuantityCollection,
 )
+from mealprep.loc import INCLUDED_RECIPES_DIR, EXCLUDED_RECIPES_DIR
 from mealprep.meal import Meal
+from mealprep.meal_collection import MealCollection
 from mealprep.recipe.common import RecipeEntry, RecipeError
 
 
 ALPHABETICAL_CHARACTER_REGEX = re.compile("[a-zA-Z]")
 REQUIRED_RECIPE_ENTRIES = set(x.entry_name for x in RecipeEntry if x.required)
+
+
+def get_project_included_meals() -> MealCollection:
+    return MealCollection(
+        parse_recipe_as_meal(INCLUDED_RECIPES_DIR / recipe_name)
+        for recipe_name in os.listdir(INCLUDED_RECIPES_DIR)
+    )
+
+
+def get_meal_from_name(meal_name: str) -> Meal:
+    recipe_name = f"{meal_name}.yaml"
+    for directory in (INCLUDED_RECIPES_DIR, EXCLUDED_RECIPES_DIR):
+        if recipe_name in os.listdir(directory):
+            return parse_recipe_as_meal(directory / recipe_name)
+
+    raise ValueError(f'Unable to find the recipe for "{recipe_name}"')
 
 
 def parse_recipe_as_meal(recipe_filepath: Path) -> Meal:
@@ -67,7 +86,7 @@ def _assert_recipe_contains_required_fields(recipe_contents: dict) -> None:
         raise RecipeError(error_message)
 
 
-def _parse_unit_quantity_description(description: str | int) -> tuple[Unit, int]:
+def _parse_unit_quantity_description(description: str | int | float) -> tuple[Unit, int | float]:
     """
     Parse a representation of a unit quantity, as loaded from the yaml reader,
     into a (Unit, quantity) tuple. Since the input is from the yaml reader,
@@ -78,9 +97,10 @@ def _parse_unit_quantity_description(description: str | int) -> tuple[Unit, int]
         "7 bags" -> (Unit.BAG, 7)
         7 -> (Unit.NUMBER, 7)
         "100g" -> (Unit.GRAM, 100)
+        0.5 -> (Unit.NUMBER, 0.5)
     """
 
-    if isinstance(description, int):
+    if isinstance(description, (int, float)):
         return Unit.NUMBER, description
 
     assert isinstance(description, str), f"Unsupported type {type(description)}"
@@ -93,10 +113,13 @@ def _parse_unit_quantity_description(description: str | int) -> tuple[Unit, int]
     unit_portion = description[first_alphabetical_character_index:]
 
     try:
-        quantity_value = int(numeric_portion)
+        if "." in numeric_portion:
+            quantity_value = float(numeric_portion)
+        else:
+            quantity_value = int(numeric_portion)
     except ValueError as exc:
         raise RecipeError(
-            f"Unable to parse unit quantity {original_description} - can't parse {numeric_portion} as an integer"
+            f"Unable to parse unit quantity {original_description} - can't parse {numeric_portion} as a number"
         ) from exc
 
     for identifier, unit in UNIT_IDENTIFIERS.items():
@@ -109,7 +132,7 @@ def _parse_unit_quantity_description(description: str | int) -> tuple[Unit, int]
 
 
 def _parse_ingredient_quantity_from_recipe_entry(
-    entry: str | dict[str, str | int]
+    entry: str | dict[str, str | int | float]
 ) -> IngredientQuantity:
     """
     Parse an ingredient quantity, as parsed by the yaml reader, to an
@@ -121,6 +144,7 @@ def _parse_ingredient_quantity_from_recipe_entry(
         "Bacon" -> (Ingredient.from_name("Bacon"), Unit.BOOL, True)
         {"Bacon": "300g"} -> (Ingredient.from_name("Bacon"), Unit.GRAMS, 300)
         {"Bacon": 3} -> (Ingredient.from_name("Bacon"), Unit.NUMBER, 3)
+        {"Red Chilli": 0.5} -> (Ingredient.from_name("Red Chilli"), Unit.NUMBER, 0.5)
     """
 
     if isinstance(entry, str):

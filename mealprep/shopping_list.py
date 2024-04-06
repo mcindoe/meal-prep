@@ -5,7 +5,7 @@ from typing import Iterable, Union
 
 from mealprep.constants import Unit
 from mealprep.ingredient import IngredientQuantity
-from mealprep.meal import MealCollection
+from mealprep.meal_collection import MealCollection
 
 
 class ShoppingList:

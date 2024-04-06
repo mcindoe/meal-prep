@@ -8,7 +8,7 @@ import datetime as dt
 from userinputgetter import DateInputGetter
 
 from mealprep.loc import SHOPPING_LIST_DIR
-from mealprep.meal import MealDiary
+from mealprep.meal_diary import MealDiary
 from mealprep.shopping_list import ShoppingList
 
 

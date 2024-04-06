@@ -5,7 +5,8 @@ from typing import Iterable, Optional, Union
 from userinputgetter import CaseInsensitiveStringInputGetter, DateInputGetter
 
 from mealprep.exceptions import OutOfMealsError
-from mealprep.meal import MealCollection, MealDiary
+from mealprep.meal_collection import MealCollection
+from mealprep.meal_diary import MealDiary
 from mealprep.rule import NotSpecifiedMealOnSpecifiedDate, RuleCollection
 
 

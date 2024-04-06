@@ -1,11 +1,14 @@
-from abc import ABC, abstractmethod
 import copy
 import datetime as dt
+from abc import ABC, abstractmethod
 from typing import Iterable
 
 from mealprep.basic_iterator import BasicIterator
 from mealprep.constants import BaseEnum
-from mealprep.meal import Meal, MealCollection, MealDiary, MealMeat, MealProperty, MealTag
+from mealprep.constants import MealMeat
+from mealprep.meal import Meal, MealProperty, MealTag
+from mealprep.meal_collection import MealCollection
+from mealprep.meal_diary import MealDiary
 
 
 class Rule(ABC):

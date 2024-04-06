@@ -3,12 +3,12 @@ from typing import Any, Iterable
 
 from mealprep.basic_iterator import BasicIterator
 from mealprep.constants import Category, Unit
-from mealprep.loc import SUPPORTED_INGREDIENT_INFO_FILE
+from mealprep.loc import SUPPORTED_INGREDIENT_INFO_FILE_PATH
 
 
 class Ingredient:
     _SUPPORTED_INGREDIENT_INFO: dict[str, dict[str, str]] = {}
-    with open(SUPPORTED_INGREDIENT_INFO_FILE, "r") as fp:
+    with open(SUPPORTED_INGREDIENT_INFO_FILE_PATH, "r") as fp:
         reader = csv.DictReader(fp)
         for ingredient_info in reader:
             _SUPPORTED_INGREDIENT_INFO[ingredient_info["name"]] = ingredient_info

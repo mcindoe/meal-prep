@@ -2,7 +2,7 @@ import unittest
 
 from mealprep.constants import Unit
 from mealprep.ingredient import Ingredient, IngredientQuantity
-from mealprep.meal import MealCollection
+from mealprep.meal_collection import MealCollection
 from mealprep.shopping_list import ShoppingList
 
 

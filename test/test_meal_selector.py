@@ -1,20 +1,22 @@
 import datetime as dt
 import unittest
 
-from mealprep.meal import Meal, MealCollection, MealDiary
+from mealprep.meal_collection import MealCollection
+from mealprep.meal_diary import MealDiary
 from mealprep.meal_selector import MealSelector
+from mealprep.recipe.reading import get_meal_from_name
 from mealprep.rule import RuleCollection, Rules
 
 
 class TestMealSelector(unittest.TestCase):
     meal_collection = MealCollection(
         (
-            Meal.from_name("Spaghetti Bolognese"),
-            Meal.from_name("Sticky Chinese Pork Belly"),
-            Meal.from_name("Chicken Fajitas"),
-            Meal.from_name("Fish Pie"),
-            Meal.from_name("Indian Lamb with Spiced Lentils"),
-            Meal.from_name("Roast Beef"),
+            get_meal_from_name("Spaghetti Bolognese"),
+            get_meal_from_name("Sticky Chinese Pork Belly"),
+            get_meal_from_name("Chicken Fajitas"),
+            get_meal_from_name("Fish Pie"),
+            get_meal_from_name("Indian Lamb with Spiced Lentils"),
+            get_meal_from_name("Roast Beef"),
         )
     )
 
@@ -28,8 +30,8 @@ class TestMealSelector(unittest.TestCase):
 
     meal_diary = MealDiary(
         {
-            dt.date(2022, 1, 1): Meal.from_name("Fish Pie"),
-            dt.date(2022, 2, 1): Meal.from_name("Indian Lamb with Spiced Lentils"),
+            dt.date(2022, 1, 1): get_meal_from_name("Fish Pie"),
+            dt.date(2022, 2, 1): get_meal_from_name("Indian Lamb with Spiced Lentils"),
         }
     )
 

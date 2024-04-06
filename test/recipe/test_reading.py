@@ -81,8 +81,8 @@ class TestRecipeParser(unittest.TestCase):
             self.assertEqual(_parse_meal_tag_entry(entry), expected)
 
     def test_parse_recipe_as_meal(self):
-        beef_and_ale_stew_file_path = TEST_RESOURCES_DIR / "test_recipe.yaml"
-        meal = parse_recipe_as_meal(beef_and_ale_stew_file_path)
+        test_meal_file_path = TEST_RESOURCES_DIR / "Test Meal.yaml"
+        meal = parse_recipe_as_meal(test_meal_file_path)
 
         expected_meal = Meal(
             name="Test Meal",

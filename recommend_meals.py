@@ -8,13 +8,14 @@ to file and generate a shopping list
 
 from mealprep.config import config
 from mealprep.loc import SHOPPING_LIST_DIR
-from mealprep.meal import MealDiary
+from mealprep.meal_diary import MealDiary
 from mealprep.meal_selector import MealSelector
+from mealprep.recipe.reading import get_project_included_meals
 from mealprep.shopping_list import ShoppingList
 
 
 if __name__ == "__main__":
-    meal_collection = config.meal_collection
+    meal_collection = get_project_included_meals()
     rule_collection = config.rule_collection
     meal_diary = MealDiary.from_project_diary()
     meal_selector = MealSelector(meal_collection, rule_collection, meal_diary)

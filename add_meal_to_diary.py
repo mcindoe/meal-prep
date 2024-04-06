@@ -5,8 +5,11 @@ diary
 
 from userinputgetter import DateInputGetter, IntegerInputGetter
 
-from mealprep.config import config
-from mealprep.meal import Meal, MealDiary
+from mealprep.meal_diary import MealDiary
+from mealprep.recipe.reading import (
+    get_project_included_meals,
+    get_meal_from_name,
+)
 from mealprep.utils import get_print_collection_with_indices_str
 
 
@@ -27,7 +30,7 @@ if __name__ == "__main__":
     if date is None:
         exit()
 
-    meal_collection = config.meal_collection
+    meal_collection = get_project_included_meals()
     supported_meal_names = sorted(x.name for x in meal_collection)
     print("\nSupported meals:")
     print(get_print_collection_with_indices_str(supported_meal_names))
@@ -36,7 +39,7 @@ if __name__ == "__main__":
     meal_index = meal_index_input_getter.get_input()
     if meal_index is None:
         exit()
-    meal = Meal.from_name(supported_meal_names[meal_index - 1])
+    meal = get_meal_from_name(supported_meal_names[meal_index - 1])
 
     printed_diary[date] = meal
     meal_diary[date] = meal
