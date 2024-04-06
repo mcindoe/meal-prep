@@ -3,17 +3,15 @@ from typing import Any, Iterable
 
 from mealprep.basic_iterator import BasicIterator
 from mealprep.constants import Category, Unit
-from mealprep.loc import DATA_DIR
+from mealprep.loc import SUPPORTED_INGREDIENT_INFO_FILE
 
 
 class Ingredient:
-    _SUPPORTED_INGREDIENT_INFO_FILE = DATA_DIR / "ingredients.csv"
-
-    SUPPORTED_INGREDIENT_INFO: dict[str, dict[str, str]] = {}
-    with open(_SUPPORTED_INGREDIENT_INFO_FILE, "r") as fp:
+    _SUPPORTED_INGREDIENT_INFO: dict[str, dict[str, str]] = {}
+    with open(SUPPORTED_INGREDIENT_INFO_FILE, "r") as fp:
         reader = csv.DictReader(fp)
         for ingredient_info in reader:
-            SUPPORTED_INGREDIENT_INFO[ingredient_info["name"].upper()] = ingredient_info
+            _SUPPORTED_INGREDIENT_INFO[ingredient_info["name"]] = ingredient_info
 
     def __init__(self, name: str, category: Category):
         if not isinstance(name, str):
@@ -27,7 +25,7 @@ class Ingredient:
     @staticmethod
     def from_name(ingredient_name: str) -> "Ingredient":
         try:
-            ingredient_info = Ingredient.SUPPORTED_INGREDIENT_INFO[ingredient_name.upper()]
+            ingredient_info = Ingredient._SUPPORTED_INGREDIENT_INFO[ingredient_name]
         except KeyError:
             raise ValueError(f"Unsupported ingredient name {ingredient_name}")
 
