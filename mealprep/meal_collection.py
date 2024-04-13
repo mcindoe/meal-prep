@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 import copy
-from typing import Union, Iterator
+from typing import Iterator, Union
 
 from mealprep.meal import Meal
 
