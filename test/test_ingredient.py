@@ -94,3 +94,47 @@ class TestIngredientQuantityCollection(unittest.TestCase):
             IngredientQuantityCollection(
                 ingredient_quantities[:2] + (Ingredient.from_name("Cream"), Unit.GRAM, 100)
             )
+
+    def test_eq(self):
+        collection = IngredientQuantityCollection(
+            (
+                IngredientQuantity(Ingredient.from_name("Basil"), Unit.BOOL, True),
+                IngredientQuantity(Ingredient.from_name("Celery"), Unit.NUMBER, 1),
+                IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 3),
+            )
+        )
+        equal_collection = IngredientQuantityCollection(
+            (
+                IngredientQuantity(Ingredient.from_name("Basil"), Unit.BOOL, True),
+                IngredientQuantity(Ingredient.from_name("Celery"), Unit.NUMBER, 1),
+                IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 3),
+            )
+        )
+        self.assertEqual(collection, equal_collection)
+
+        subset_collection = IngredientQuantityCollection(
+            (
+                IngredientQuantity(Ingredient.from_name("Celery"), Unit.NUMBER, 1),
+                IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 3),
+            )
+        )
+        self.assertNotEqual(collection, subset_collection)
+
+        superset_collection = IngredientQuantityCollection(
+            (
+                IngredientQuantity(Ingredient.from_name("Basil"), Unit.BOOL, True),
+                IngredientQuantity(Ingredient.from_name("Celery"), Unit.NUMBER, 1),
+                IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 3),
+                IngredientQuantity(Ingredient.from_name("Tomato Puree"), Unit.GRAM, 250),
+            )
+        )
+        self.assertNotEqual(collection, superset_collection)
+
+        different_quantity_collection = IngredientQuantityCollection(
+            (
+                IngredientQuantity(Ingredient.from_name("Basil"), Unit.BOOL, True),
+                IngredientQuantity(Ingredient.from_name("Celery"), Unit.NUMBER, 42),
+                IngredientQuantity(Ingredient.from_name("Chopped Tomatoes"), Unit.NUMBER, 3),
+            )
+        )
+        self.assertNotEqual(collection, different_quantity_collection)

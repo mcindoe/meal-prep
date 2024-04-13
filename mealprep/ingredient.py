@@ -1,19 +1,16 @@
 import csv
-from typing import Any, Iterable
+from typing import Any, Iterable, Iterator
 
-from mealprep.basic_iterator import BasicIterator
 from mealprep.constants import Category, Unit
-from mealprep.loc import DATA_DIR
+from mealprep.loc import SUPPORTED_INGREDIENT_INFO_FILE_PATH
 
 
 class Ingredient:
-    _SUPPORTED_INGREDIENT_INFO_FILE = DATA_DIR / "ingredients.csv"
-
-    SUPPORTED_INGREDIENT_INFO: dict[str, dict[str, str]] = {}
-    with open(_SUPPORTED_INGREDIENT_INFO_FILE, "r") as fp:
+    _SUPPORTED_INGREDIENT_INFO: dict[str, dict[str, str]] = {}
+    with open(SUPPORTED_INGREDIENT_INFO_FILE_PATH, "r") as fp:
         reader = csv.DictReader(fp)
         for ingredient_info in reader:
-            SUPPORTED_INGREDIENT_INFO[ingredient_info["name"].upper()] = ingredient_info
+            _SUPPORTED_INGREDIENT_INFO[ingredient_info["name"]] = ingredient_info
 
     def __init__(self, name: str, category: Category):
         if not isinstance(name, str):
@@ -27,7 +24,7 @@ class Ingredient:
     @staticmethod
     def from_name(ingredient_name: str) -> "Ingredient":
         try:
-            ingredient_info = Ingredient.SUPPORTED_INGREDIENT_INFO[ingredient_name.upper()]
+            ingredient_info = Ingredient._SUPPORTED_INGREDIENT_INFO[ingredient_name]
         except KeyError:
             raise ValueError(f"Unsupported ingredient name {ingredient_name}")
 
@@ -108,5 +105,18 @@ class IngredientQuantityCollection:
                     f"{x} is not an IngredientQuantity in IngredientQuantityCollection init"
                 )
 
-    def __iter__(self):
-        return BasicIterator(self.ingredient_quantities)
+    def __iter__(self) -> Iterator[IngredientQuantity]:
+        return iter(self.ingredient_quantities)
+
+    def __eq__(self, other: "IngredientQuantityCollection") -> bool:
+        if not isinstance(other, IngredientQuantityCollection):
+            return False
+
+        if len(self.ingredient_quantities) != len(other.ingredient_quantities):
+            return False
+
+        for x in self:
+            if x not in other:
+                return False
+
+        return True

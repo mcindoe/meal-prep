@@ -3,7 +3,10 @@ import unittest
 
 from mealprep.constants import MealMeat, MealProperty, MealTag, Unit
 from mealprep.ingredient import Ingredient, IngredientQuantity, IngredientQuantityCollection
-from mealprep.meal import Meal, MealCollection, MealDiary
+from mealprep.meal import Meal
+from mealprep.meal_collection import MealCollection
+from mealprep.meal_diary import MealDiary
+from mealprep.recipe.reading import get_meal_from_name
 
 
 class TestMeal(unittest.TestCase):
@@ -112,7 +115,7 @@ class TestMeal(unittest.TestCase):
         self.assertTrue(x[MealTag.PASTA])
         self.assertFalse(x[MealTag.VEGETARIAN])
 
-        chinese_pork_belly = Meal.from_name("Sticky Chinese Pork Belly")
+        chinese_pork_belly = get_meal_from_name("Sticky Chinese Pork Belly")
         self.assertIs(chinese_pork_belly[MealProperty.MEAT], MealMeat.PORK)
         self.assertFalse(chinese_pork_belly[MealTag.VEGETARIAN])
 
@@ -133,7 +136,7 @@ class TestMeal(unittest.TestCase):
         self.assertIsInstance(x, Meal)
 
     def test_construction_from_name(self):
-        meal = Meal.from_name("Spaghetti Bolognese")
+        meal = get_meal_from_name("Spaghetti Bolognese")
 
         self.assertIsInstance(meal, Meal)
         self.assertIs(meal[MealProperty.MEAT], MealMeat.BEEF)
@@ -141,8 +144,8 @@ class TestMeal(unittest.TestCase):
 
 class TestMealCollection(unittest.TestCase):
     meals = (
-        Meal.from_name("Spaghetti Bolognese"),
-        Meal.from_name("Sticky Chinese Pork Belly"),
+        get_meal_from_name("Spaghetti Bolognese"),
+        get_meal_from_name("Sticky Chinese Pork Belly"),
     )
 
     meal_collection = MealCollection(meals)
@@ -177,9 +180,9 @@ class TestMealCollection(unittest.TestCase):
 
 class TestMealDiary(unittest.TestCase):
     meal_diary_dict = {
-        dt.date(2022, 1, 1): Meal.from_name("Spaghetti Bolognese"),
-        dt.date(2022, 1, 10): Meal.from_name("Lasagne"),
-        dt.date(2022, 1, 11): Meal.from_name("Kedgeree"),
+        dt.date(2022, 1, 1): get_meal_from_name("Spaghetti Bolognese"),
+        dt.date(2022, 1, 10): get_meal_from_name("Lasagne"),
+        dt.date(2022, 1, 11): get_meal_from_name("Kedgeree"),
     }
 
     meal_diary = MealDiary(meal_diary_dict)
@@ -195,7 +198,7 @@ class TestMealDiary(unittest.TestCase):
         with self.assertRaises(TypeError):
             MealDiary(
                 {
-                    "2022-01-01": Meal.from_name("Spaghetti Bolognese"),
+                    "2022-01-01": get_meal_from_name("Spaghetti Bolognese"),
                 }
             )
 
@@ -216,20 +219,20 @@ class TestMealDiary(unittest.TestCase):
             self.meal_diary["2022-01-01"]
 
         self.assertEqual(
-            self.meal_diary[dt.date(2022, 1, 1)], Meal.from_name("Spaghetti Bolognese")
+            self.meal_diary[dt.date(2022, 1, 1)], get_meal_from_name("Spaghetti Bolognese")
         )
 
         altered_diary = self.meal_diary.copy()
 
         # Setting with a non-date key is not allowed
         with self.assertRaises(TypeError):
-            altered_diary["2022-01-01"] = Meal.from_name("Spaghetti Bolognese")
+            altered_diary["2022-01-01"] = get_meal_from_name("Spaghetti Bolognese")
 
         # Setting with a non-meal value is not allowed
         with self.assertRaises(TypeError):
             altered_diary[dt.date(2022, 1, 1)] = "Spaghetti Bolognese"
 
-        altered_diary[dt.date(2022, 2, 1)] = Meal.from_name("Sticky Chinese Pork Belly")
+        altered_diary[dt.date(2022, 2, 1)] = get_meal_from_name("Sticky Chinese Pork Belly")
         self.assertEqual(len(altered_diary), 4)
         self.assertIn(dt.date(2022, 2, 1), altered_diary.dates)
 
@@ -238,7 +241,7 @@ class TestMealDiary(unittest.TestCase):
         self.assertIsInstance(project_diary, MealDiary)
 
     def test_upsert(self):
-        addition = MealDiary({dt.date(2022, 2, 1): Meal.from_name("Sticky Chinese Pork Belly")})
+        addition = MealDiary({dt.date(2022, 2, 1): get_meal_from_name("Sticky Chinese Pork Belly")})
         altered_diary = self.meal_diary.copy()
 
         self.assertIsNot(altered_diary.upsert(addition).meal_diary, altered_diary.meal_diary)
@@ -247,7 +250,7 @@ class TestMealDiary(unittest.TestCase):
     def test_difference(self):
         overlapping_diary = MealDiary(
             {
-                dt.date(2022, 1, 1): Meal.from_name("Spaghetti Bolognese"),
+                dt.date(2022, 1, 1): get_meal_from_name("Spaghetti Bolognese"),
             }
         )
         difference_diary = self.meal_diary.difference(overlapping_diary)
@@ -255,14 +258,14 @@ class TestMealDiary(unittest.TestCase):
         self.assertEqual(len(difference_diary), 2)
         self.assertNotIn(dt.date(2022, 1, 1), difference_diary.dates)
         self.assertIn(dt.date(2022, 1, 10), difference_diary.dates)
-        self.assertNotIn(Meal.from_name("Spaghetti Bolognese"), difference_diary.meals)
-        self.assertIn(Meal.from_name("Kedgeree"), difference_diary.meals)
+        self.assertNotIn(get_meal_from_name("Spaghetti Bolognese"), difference_diary.meals)
+        self.assertIn(get_meal_from_name("Kedgeree"), difference_diary.meals)
 
     def test_filter_by_time_delta(self):
         expected_diary = MealDiary(
             {
-                dt.date(2022, 1, 10): Meal.from_name("Lasagne"),
-                dt.date(2022, 1, 11): Meal.from_name("Kedgeree"),
+                dt.date(2022, 1, 10): get_meal_from_name("Lasagne"),
+                dt.date(2022, 1, 11): get_meal_from_name("Kedgeree"),
             }
         )
         observed_diary = self.meal_diary.filter_by_time_delta(
@@ -277,25 +280,25 @@ class TestMealDiary(unittest.TestCase):
         )
         expected_diary_1 = MealDiary(
             {
-                dt.date(2022, 1, 1): Meal.from_name("Spaghetti Bolognese"),
-                dt.date(2022, 1, 10): Meal.from_name("Lasagne"),
+                dt.date(2022, 1, 1): get_meal_from_name("Spaghetti Bolognese"),
+                dt.date(2022, 1, 10): get_meal_from_name("Lasagne"),
             }
         )
 
         observed_diary_2 = self.meal_diary.filter_dates(min_date=dt.date(2022, 1, 1))
         expected_diary_2 = MealDiary(
             {
-                dt.date(2022, 1, 1): Meal.from_name("Spaghetti Bolognese"),
-                dt.date(2022, 1, 10): Meal.from_name("Lasagne"),
-                dt.date(2022, 1, 11): Meal.from_name("Kedgeree"),
+                dt.date(2022, 1, 1): get_meal_from_name("Spaghetti Bolognese"),
+                dt.date(2022, 1, 10): get_meal_from_name("Lasagne"),
+                dt.date(2022, 1, 11): get_meal_from_name("Kedgeree"),
             }
         )
 
         observed_diary_3 = self.meal_diary.filter_dates(min_date=dt.date(2022, 1, 5))
         expected_diary_3 = MealDiary(
             {
-                dt.date(2022, 1, 10): Meal.from_name("Lasagne"),
-                dt.date(2022, 1, 11): Meal.from_name("Kedgeree"),
+                dt.date(2022, 1, 10): get_meal_from_name("Lasagne"),
+                dt.date(2022, 1, 11): get_meal_from_name("Kedgeree"),
             }
         )
 
@@ -312,8 +315,8 @@ class TestMealDiary(unittest.TestCase):
     def test_except_dates(self):
         expected_diary = MealDiary(
             {
-                dt.date(2022, 1, 1): Meal.from_name("Spaghetti Bolognese"),
-                dt.date(2022, 1, 11): Meal.from_name("Kedgeree"),
+                dt.date(2022, 1, 1): get_meal_from_name("Spaghetti Bolognese"),
+                dt.date(2022, 1, 11): get_meal_from_name("Kedgeree"),
             }
         )
 

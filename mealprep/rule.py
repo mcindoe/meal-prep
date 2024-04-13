@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
 import copy
 import datetime as dt
-from typing import Iterable
+from typing import Iterable, Iterator
 
-from mealprep.basic_iterator import BasicIterator
-from mealprep.constants import BaseEnum
-from mealprep.meal import Meal, MealCollection, MealDiary, MealMeat, MealProperty, MealTag
+from mealprep.constants import BaseEnum, MealMeat
+from mealprep.meal import Meal, MealProperty, MealTag
+from mealprep.meal_collection import MealCollection
+from mealprep.meal_diary import MealDiary
 
 
 class Rule(ABC):
@@ -68,8 +69,8 @@ class RuleCollection:
 
         return RuleCollection(self.rules + (rule,))
 
-    def __iter__(self) -> BasicIterator:
-        return BasicIterator(self.rules)
+    def __iter__(self) -> Iterator[Rule]:
+        return iter(self.rules)
 
     def __call__(
         self, meal_collection: MealCollection, date: dt.date, meal_diary: MealDiary

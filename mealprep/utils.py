@@ -1,5 +1,4 @@
 import datetime as dt
-import itertools
 from typing import Iterable
 
 
@@ -12,7 +11,7 @@ def get_day_suffix(day_number: int) -> str:
     if not isinstance(day_number, int):
         raise TypeError("Error in get_day_suffix: 'day_number' argument must be an integer")
 
-    if day_number in itertools.chain(range(4, 21), range(24, 31)):
+    if (4 <= day_number <= 20) or (24 <= day_number <= 30):
         return "th"
     return ("st", "nd", "rd")[day_number % 10 - 1]
 

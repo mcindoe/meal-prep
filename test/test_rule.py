@@ -1,7 +1,10 @@
 import datetime as dt
 import unittest
 
-from mealprep.meal import Meal, MealCollection, MealDiary
+from mealprep.meal import Meal
+from mealprep.meal_collection import MealCollection
+from mealprep.meal_diary import MealDiary
+from mealprep.recipe.reading import get_meal_from_name
 from mealprep.rule import NotSpecifiedMealOnSpecifiedDate, Rule, Rules
 
 
@@ -23,21 +26,21 @@ class BadlySpecifiedRule(Rule):
 class TestRule(unittest.TestCase):
     meal_collection = MealCollection(
         (
-            Meal.from_name("Spaghetti Bolognese"),
-            Meal.from_name("Sticky Chinese Pork Belly"),
-            Meal.from_name("Chicken Fajitas"),
-            Meal.from_name("Fish Pie"),
-            Meal.from_name("Indian Lamb with Spiced Lentils"),
-            Meal.from_name("Roast Beef"),
+            get_meal_from_name("Spaghetti Bolognese"),
+            get_meal_from_name("Sticky Chinese Pork Belly"),
+            get_meal_from_name("Chicken Fajitas"),
+            get_meal_from_name("Fish Pie"),
+            get_meal_from_name("Indian Lamb with Spiced Lentils"),
+            get_meal_from_name("Roast Beef"),
         )
     )
 
     meal_diary = MealDiary(
         {
-            dt.date(2022, 1, 1): Meal.from_name("Fish Pie"),
-            dt.date(2022, 1, 2): Meal.from_name("Sticky Chinese Pork Belly"),
-            dt.date(2022, 1, 3): Meal.from_name("Spaghetti Bolognese"),
-            dt.date(2022, 2, 1): Meal.from_name("Indian Lamb with Spiced Lentils"),
+            dt.date(2022, 1, 1): get_meal_from_name("Fish Pie"),
+            dt.date(2022, 1, 2): get_meal_from_name("Sticky Chinese Pork Belly"),
+            dt.date(2022, 1, 3): get_meal_from_name("Spaghetti Bolognese"),
+            dt.date(2022, 2, 1): get_meal_from_name("Indian Lamb with Spiced Lentils"),
         }
     )
 
@@ -53,8 +56,8 @@ class TestRule(unittest.TestCase):
         with self.assertRaises(TypeError):
             example_rule(
                 (
-                    Meal.from_name("Spaghetti Bolognese"),
-                    Meal.from_name("Sticky Chinese Pork Belly"),
+                    get_meal_from_name("Spaghetti Bolognese"),
+                    get_meal_from_name("Sticky Chinese Pork Belly"),
                 ),
                 self.date,
                 self.meal_diary,
@@ -66,9 +69,9 @@ class TestRule(unittest.TestCase):
                 self.meal_collection,
                 self.date,
                 {
-                    dt.date(2022, 1, 1): Meal.from_name("Fish Pie"),
-                    dt.date(2022, 1, 2): Meal.from_name("Sticky Chinese Pork Belly"),
-                    dt.date(2022, 2, 1): Meal.from_name("Indian Lamb with Spiced Lentils"),
+                    dt.date(2022, 1, 1): get_meal_from_name("Fish Pie"),
+                    dt.date(2022, 1, 2): get_meal_from_name("Sticky Chinese Pork Belly"),
+                    dt.date(2022, 2, 1): get_meal_from_name("Indian Lamb with Spiced Lentils"),
                 },
             )
 
@@ -96,7 +99,9 @@ class TestRule(unittest.TestCase):
             self.meal_collection, self.sunday_date, self.meal_diary
         )
 
-        self.assertEqual(returned_meal_collection, MealCollection((Meal.from_name("Roast Beef"),)))
+        self.assertEqual(
+            returned_meal_collection, MealCollection((get_meal_from_name("Roast Beef"),))
+        )
         self.assertNotEqual(returned_meal_collection, self.meal_collection)
 
     def test_force_roast_on_sunday(self):
@@ -109,7 +114,7 @@ class TestRule(unittest.TestCase):
             self.meal_collection, self.date, self.meal_diary
         )
 
-        self.assertEqual(sunday_collection, MealCollection((Meal.from_name("Roast Beef"),)))
+        self.assertEqual(sunday_collection, MealCollection((get_meal_from_name("Roast Beef"),)))
         self.assertEqual(monday_collection, self.meal_collection)
 
     def test_not_pasta_twice_within_five_days_rule(self):
@@ -122,7 +127,7 @@ class TestRule(unittest.TestCase):
             self.meal_collection, dt.date(2022, 1, 9), self.meal_diary
         )
 
-        pasta_meal = Meal.from_name("Spaghetti Bolognese")
+        pasta_meal = get_meal_from_name("Spaghetti Bolognese")
 
         self.assertNotIn(pasta_meal, filtered_collection)
         self.assertIn(pasta_meal, unfiltered_collection)
@@ -137,7 +142,7 @@ class TestRule(unittest.TestCase):
             self.meal_collection, self.sunday_date, self.meal_diary
         )
 
-        roast_meal = Meal.from_name("Roast Beef")
+        roast_meal = get_meal_from_name("Roast Beef")
 
         self.assertNotIn(roast_meal, filtered_collection)
         self.assertEqual(unfiltered_collection, self.meal_collection)
@@ -153,16 +158,16 @@ class TestRule(unittest.TestCase):
         )
 
         expected_missing_meals = (
-            Meal.from_name("Fish Pie"),
-            Meal.from_name("Sticky Chinese Pork Belly"),
-            Meal.from_name("Spaghetti Bolognese"),
+            get_meal_from_name("Fish Pie"),
+            get_meal_from_name("Sticky Chinese Pork Belly"),
+            get_meal_from_name("Spaghetti Bolognese"),
         )
 
         self.assertFalse(any(x in filtered_collection for x in expected_missing_meals))
         self.assertEqual(unfiltered_collection, self.meal_collection)
 
     def test_not_specified_meal_on_specified_date(self):
-        chicken_fajitas_meal = Meal.from_name("Chicken Fajitas")
+        chicken_fajitas_meal = get_meal_from_name("Chicken Fajitas")
 
         not_specified_meal_on_specified_date_rule = NotSpecifiedMealOnSpecifiedDate(
             self.date, chicken_fajitas_meal

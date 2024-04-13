@@ -4,7 +4,7 @@ Remove user-specified dates from the project diary
 
 from userinputgetter import DateInputGetter
 
-from mealprep.meal import MealDiary
+from mealprep.meal_diary import MealDiary
 
 
 MAX_PRINTED_PREVIOUS_DIARY_ENTRIES = 15

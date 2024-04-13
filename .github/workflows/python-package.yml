@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.12"]
 
     steps:
     - uses: actions/checkout@v3
@@ -36,3 +36,6 @@ jobs:
     - name: Run unit tests
       run: |
         python -m unittest discover
+    - name: Check provided recipes
+      run: |
+        python check_recipe_definitions.py

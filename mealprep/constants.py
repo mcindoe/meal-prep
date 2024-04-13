@@ -1,4 +1,4 @@
-from enum import auto, Enum
+from enum import Enum
 
 
 class BaseEnum(Enum):
@@ -17,22 +17,34 @@ class BaseEnum(Enum):
 class ConfigEntries(BaseEnum):
     DATES = "dates"
     EMAIL_ADDRESSES = "email_addresses"
-    MEALS = "meals"
     RULES = "rules"
 
 
 class Unit(BaseEnum):
-    BOOL = 1, "bool", "bool"
-    BAG = 2, "bag", "bags"
-    JAR = 3, "jar", "jars"
-    GRAM = 4, "gram", "grams"
-    MILLILITRE = 5, "ml", "mls"
-    NUMBER = 6, "unit", "units"
+    BOOL = 1, None, None, None
+    BAG = 2, "bag", "bags", None
+    JAR = 3, "jar", "jars", None
+    GRAM = 4, "gram", "grams", "g"
+    MILLILITRE = 5, "ml", "ml", "ml"
+    NUMBER = 6, "unit", "units", None
 
-    def __init__(self, order, singular, plural):
+    def __init__(self, order, singular, plural, abbreviation):
         self.order = order
         self.singular = singular
         self.plural = plural
+        self.abbreviation = abbreviation
+
+
+# Mapping from all unit descriptions back to the unit. E.g. g, gram, grams -> Unit.GRAM
+UNIT_IDENTIFIERS = {}
+for unit in Unit:
+    for attribute_name in ("singular", "plural", "abbreviation"):
+        unit_attribute_value = getattr(unit, attribute_name)
+        if unit_attribute_value is not None:
+            assert (unit_attribute_value not in UNIT_IDENTIFIERS) or (
+                UNIT_IDENTIFIERS[unit_attribute_value] == unit
+            )
+            UNIT_IDENTIFIERS[unit_attribute_value] = unit
 
 
 class Category(BaseEnum):
@@ -62,22 +74,27 @@ class MealMetadata(BaseEnum):
     pass
 
 
+class MealMeat(BaseEnum):
+    BEEF = "Beef"
+    CHICKEN = "Chicken"
+    FISH = "Fish"
+    LAMB = "Lamb"
+    NONE = "None"
+    PORK = "Pork"
+    TURKEY = "Turkey"
+
+
 class MealProperty(MealMetadata):
-    MEAT = auto()
+    MEAT = "Meat", MealMeat
+
+    def __init__(self, description: str, supported_values: BaseEnum):
+        self.description = description
+        self.supported_values = supported_values
 
 
 class MealTag(MealMetadata):
-    INDIAN = auto()
-    ROAST = auto()
-    PASTA = auto()
-    VEGETARIAN = auto()
-
-
-class MealMeat(BaseEnum):
-    BEEF = auto()
-    CHICKEN = auto()
-    FISH = auto()
-    LAMB = auto()
-    NONE = auto()
-    PORK = auto()
-    TURKEY = auto()
+    INDIAN = "Indian"
+    ROAST = "Roast"
+    PASTA = "Pasta"
+    VEGETARIAN = "Vegetarian"
+    WINTER = "Winter"
