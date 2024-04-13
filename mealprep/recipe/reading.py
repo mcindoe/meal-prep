@@ -18,10 +18,15 @@ REQUIRED_RECIPE_ENTRIES = set(x.entry_name for x in RecipeEntry if x.required)
 
 
 def _get_meals_from_directory(recipe_directory: Path) -> MealCollection:
-    return MealCollection(
-        parse_recipe_as_meal(recipe_directory / recipe_name)
-        for recipe_name in os.listdir(recipe_directory)
-    )
+    meals = []
+    for recipe_name in os.listdir(recipe_directory):
+        try:
+            meals.append(parse_recipe_as_meal(recipe_directory / recipe_name))
+        except RecipeError as exc:
+            meal_name = recipe_name.removesuffix(".yaml")
+            raise RecipeError(f'Unable to parse the recipe for "{meal_name}"') from exc
+
+    return MealCollection(meals)
 
 
 def get_project_included_meals() -> MealCollection:
@@ -125,7 +130,7 @@ def _parse_unit_quantity_description(description: str | int | float) -> tuple[Un
             quantity_value = int(numeric_portion)
     except ValueError as exc:
         raise RecipeError(
-            f'Unable to parse unit quantity {original_description} - can\'t parse "{numeric_portion}" as a number'
+            f'Unable to parse unit quantity "{original_description}" - can\'t parse "{numeric_portion}" as a number'
         ) from exc
 
     for identifier, unit in UNIT_IDENTIFIERS.items():
@@ -133,7 +138,8 @@ def _parse_unit_quantity_description(description: str | int | float) -> tuple[Un
             return unit, quantity_value
 
     raise RecipeError(
-        f'Unable to parse unit quantity description {original_description} - can\'t infer a unit from "{unit_portion}"'
+        f'Unable to parse unit quantity description "{original_description}" '
+        f'- can\'t infer a unit from "{unit_portion}"'
     )
 
 
