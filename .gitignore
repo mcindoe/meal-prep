@@ -6,3 +6,4 @@ mail_credentials.txt
 linuxRequirements.txt
 tags
 *ipynb_checkpoints
+.idea
