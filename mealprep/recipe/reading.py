@@ -17,11 +17,21 @@ ALPHABETICAL_CHARACTER_REGEX = re.compile("[a-zA-Z]")
 REQUIRED_RECIPE_ENTRIES = set(x.entry_name for x in RecipeEntry if x.required)
 
 
-def get_project_included_meals() -> MealCollection:
+def _get_project_meals(recipe_directory: Path) -> MealCollection:
     return MealCollection(
-        parse_recipe_as_meal(INCLUDED_RECIPES_DIR / recipe_name)
-        for recipe_name in os.listdir(INCLUDED_RECIPES_DIR)
+        parse_recipe_as_meal(recipe_directory / recipe_name)
+        for recipe_name in os.listdir(recipe_directory)
     )
+
+
+def get_project_included_meals() -> MealCollection:
+    return _get_project_meals(recipe_directory=INCLUDED_RECIPES_DIR)
+
+
+def get_project_defined_meals() -> MealCollection:
+    included_meals = _get_project_meals(recipe_directory=INCLUDED_RECIPES_DIR)
+    excluded_meals = _get_project_meals(recipe_directory=EXCLUDED_RECIPES_DIR)
+    return included_meals + excluded_meals
 
 
 def get_meal_from_name(meal_name: str) -> Meal:

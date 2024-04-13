@@ -1,12 +1,11 @@
 """
-Add a user-specified (date, meal) pair into the project
-diary
+Add a user-specified (date, meal) pair into the project diary
 """
 
 from userinputgetter import DateInputGetter, IntegerInputGetter
 
 from mealprep.meal_diary import MealDiary
-from mealprep.recipe.reading import get_meal_from_name, get_project_included_meals
+from mealprep.recipe.reading import get_meal_from_name, get_project_defined_meals
 from mealprep.utils import get_print_collection_with_indices_str
 
 
@@ -27,7 +26,7 @@ if __name__ == "__main__":
     if date is None:
         exit()
 
-    meal_collection = get_project_included_meals()
+    meal_collection = get_project_defined_meals()
     supported_meal_names = sorted(x.name for x in meal_collection)
     print("\nSupported meals:")
     print(get_print_collection_with_indices_str(supported_meal_names))
