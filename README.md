@@ -44,4 +44,4 @@ of the user-provided meals. This script is ran as part of the project continuous
 ## Environment
 
 * Check the tested Python version in the CI. At the time of writing this is Python 3.12
-* Set up a new Python virtual environment, install `poetry` (if not already present on your machine) and `poetry install` 
+* Set up a new Python virtual environment, install `poetry` (if not already present on your machine, for example with `pip install poetry`) and run `poetry install` 

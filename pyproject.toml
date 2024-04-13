@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "mealprep"
+name = "meal-prep"
 version = "1.1.0"
 description = ""
 authors = ["Conor McIndoe <conormcindoe1@gmail.com>"]
