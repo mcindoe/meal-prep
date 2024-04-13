@@ -1,7 +1,6 @@
 import csv
-from typing import Any, Iterable
+from typing import Any, Iterable, Iterator
 
-from mealprep.basic_iterator import BasicIterator
 from mealprep.constants import Category, Unit
 from mealprep.loc import SUPPORTED_INGREDIENT_INFO_FILE_PATH
 
@@ -106,8 +105,8 @@ class IngredientQuantityCollection:
                     f"{x} is not an IngredientQuantity in IngredientQuantityCollection init"
                 )
 
-    def __iter__(self):
-        return BasicIterator(self.ingredient_quantities)
+    def __iter__(self) -> Iterator[IngredientQuantity]:
+        return iter(self.ingredient_quantities)
 
     def __eq__(self, other: "IngredientQuantityCollection") -> bool:
         if not isinstance(other, IngredientQuantityCollection):

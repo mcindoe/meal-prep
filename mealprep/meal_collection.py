@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 import copy
-from typing import Union
+from typing import Union, Iterator
 
-from mealprep.basic_iterator import BasicIterator
 from mealprep.meal import Meal
 
 
@@ -30,8 +29,8 @@ class MealCollection:
     def __bool__(self) -> bool:
         return len(self) > 0
 
-    def __iter__(self) -> BasicIterator:
-        return BasicIterator(self.meals)
+    def __iter__(self) -> Iterator[Meal]:
+        return iter(self.meals)
 
     def __getitem__(self, index) -> Meal:
         return self.meals[index]
