@@ -17,7 +17,7 @@ ALPHABETICAL_CHARACTER_REGEX = re.compile("[a-zA-Z]")
 REQUIRED_RECIPE_ENTRIES = set(x.entry_name for x in RecipeEntry if x.required)
 
 
-def _get_project_meals(recipe_directory: Path) -> MealCollection:
+def _get_meals_from_directory(recipe_directory: Path) -> MealCollection:
     return MealCollection(
         parse_recipe_as_meal(recipe_directory / recipe_name)
         for recipe_name in os.listdir(recipe_directory)
@@ -25,12 +25,12 @@ def _get_project_meals(recipe_directory: Path) -> MealCollection:
 
 
 def get_project_included_meals() -> MealCollection:
-    return _get_project_meals(recipe_directory=INCLUDED_RECIPES_DIR)
+    return _get_meals_from_directory(recipe_directory=INCLUDED_RECIPES_DIR)
 
 
 def get_project_defined_meals() -> MealCollection:
-    included_meals = _get_project_meals(recipe_directory=INCLUDED_RECIPES_DIR)
-    excluded_meals = _get_project_meals(recipe_directory=EXCLUDED_RECIPES_DIR)
+    included_meals = _get_meals_from_directory(recipe_directory=INCLUDED_RECIPES_DIR)
+    excluded_meals = _get_meals_from_directory(recipe_directory=EXCLUDED_RECIPES_DIR)
     return included_meals + excluded_meals
 
 
@@ -125,7 +125,7 @@ def _parse_unit_quantity_description(description: str | int | float) -> tuple[Un
             quantity_value = int(numeric_portion)
     except ValueError as exc:
         raise RecipeError(
-            f"Unable to parse unit quantity {original_description} - can't parse {numeric_portion} as a number"
+            f'Unable to parse unit quantity {original_description} - can\'t parse "{numeric_portion}" as a number'
         ) from exc
 
     for identifier, unit in UNIT_IDENTIFIERS.items():
@@ -133,7 +133,7 @@ def _parse_unit_quantity_description(description: str | int | float) -> tuple[Un
             return unit, quantity_value
 
     raise RecipeError(
-        f"Unable to parse unit quantity description {original_description} - can't infer a unit from {unit_portion}"
+        f'Unable to parse unit quantity description {original_description} - can\'t infer a unit from "{unit_portion}"'
     )
 
 
