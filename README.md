@@ -5,9 +5,9 @@ the generation of the corresponding shopping list.
 
 ## Usage
 
-Meals are defined by recipes (YAML description of ingredients) found in the `data/recipes` directory. The supported
-ingredients are defined in the `ingredients.csv` file. Recipes in the `excluded` recipes directory will not be
-suggested to the user.
+Meals are defined by recipes (YAML description of ingredients and addition meal information) found in the`data/recipes`
+directory. The supported ingredients are defined in the `ingredients.csv` file. Recipes in the `excluded` recipes
+directory will not be suggested to the user.
 
 Meals have associated *properties* and *tags*. A *property* is a key-value pair, and all properties should be provided
 for all meals. An example would be `meat=chicken`. A *tag* is a boolean flag which is taken to be True if present, and
