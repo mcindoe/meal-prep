@@ -9,6 +9,7 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.12"
 userinputgetter = "^1.1.0"
+pyyaml = "^6.0.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"
