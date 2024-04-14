@@ -46,7 +46,7 @@ vailidity of the user-provided meals. This script is ran as part of the project 
 
 ## Environment
 
-Set up a new Python virtual environment, ideally using the Python version listed in the `pyproject.toml` file, although
-the application has few dependencies so most Python 3 versions should be fine. Then install `poetry` if not already
-present on your machine (for example with `pip install poetry`). Finally, run `poetry install` from the root directory
-to pull install the environment defined in the project's `poetry.lock` file.
+Set up a new Python virtual environment, with a Python version conforming to the support versions specified in the
+`pyproject.toml` file. Then install `poetry` if not already present on your machine (for example with `pip install
+poetry`). Finally, run `poetry install` from the root directory to pull install the environment defined in the project's
+`poetry.lock` file.
