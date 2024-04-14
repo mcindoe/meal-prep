@@ -10,10 +10,6 @@ if __name__ == "__main__":
     supported_ingredient_info = get_supported_ingredient_info()
     ingredient_names = list(supported_ingredient_info.keys())
     if ingredient_names != sorted(ingredient_names):
-        for x, y in zip(ingredient_names, sorted(ingredient_names)):
-            if x != y:
-                print(f"{x} | {y}")
-
         raise RuntimeError("Provided ingredient definitions are not sorted alphabetically")
 
     for name in ingredient_names:
