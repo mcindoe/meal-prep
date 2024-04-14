@@ -1,8 +1,8 @@
 name,category
 Active Dry Yeast,CONDIMENT
 Aubergine,VEGETABLE
-Baby Corn,VEGETABLE
 Baby Carrot,VEGETABLE
+Baby Corn,VEGETABLE
 Baby Red Potato,VEGETABLE
 Baby Spinach,VEGETABLE
 Bacon,MEAT
@@ -52,8 +52,8 @@ Double Cream,DAIRY
 Dried Basil,HERB
 Dried Fenugreek,CONDIMENT
 Dried Mustard,CONDIMENT
-Dried Thyme,HERB
 Dried Oregano,HERB
+Dried Thyme,HERB
 Dry Red Wine,CONDIMENT
 Eggs,DAIRY
 Flour,CONDIMENT
@@ -85,8 +85,8 @@ Lasagne Sheets,CARBOHYDRATE
 Leek,VEGETABLE
 Leg of Lamb,MEAT
 Lemon,VEGETABLE
-Lemongrass Paste,CONDIMENT
 Lemon Juice,CONDIMENT
+Lemongrass Paste,CONDIMENT
 Lentils,CAN
 Lettuce,VEGETABLE
 Light Coconut Milk,CONDIMENT
@@ -122,12 +122,12 @@ Potato,VEGETABLE
 Prosciutto,MEAT
 Raw King Prawns,FISH
 Ready Rolled Puff Pastry,CARBOHYDRATE
-Redcurrant Jelly,CONDIMENT
 Red Chilli,VEGETABLE
 Red Onion,VEGETABLE
 Red Pepper,VEGETABLE
 Red Pepper Flakes,CONDIMENT
 Red Wine,CONDIMENT
+Redcurrant Jelly,CONDIMENT
 Rice,CARBOHYDRATE
 Rice Wine,SAUCE
 Salmon Fillet,FISH
