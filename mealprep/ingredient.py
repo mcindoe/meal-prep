@@ -5,12 +5,18 @@ from mealprep.constants import Category, Unit
 from mealprep.loc import SUPPORTED_INGREDIENT_INFO_FILE_PATH
 
 
-class Ingredient:
-    _SUPPORTED_INGREDIENT_INFO: dict[str, dict[str, str]] = {}
+def get_supported_ingredient_info():
+    supported_ingredient_info: dict[str, dict[str, str]] = {}
     with open(SUPPORTED_INGREDIENT_INFO_FILE_PATH, "r") as fp:
         reader = csv.DictReader(fp)
         for ingredient_info in reader:
-            _SUPPORTED_INGREDIENT_INFO[ingredient_info["name"]] = ingredient_info
+            supported_ingredient_info[ingredient_info["name"]] = ingredient_info
+
+    return supported_ingredient_info
+
+
+class Ingredient:
+    _SUPPORTED_INGREDIENT_INFO: dict[str, dict[str, str]] = get_supported_ingredient_info()
 
     def __init__(self, name: str, category: Category):
         if not isinstance(name, str):

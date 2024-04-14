@@ -36,6 +36,9 @@ jobs:
     - name: Run unit tests
       run: |
         poetry run python -m unittest discover
-    - name: Check provided recipes
+    - name: Check ingredient definitions
+      run: |
+        poetry run python -m mealprep.app.ci.check_ingredient_definitions
+    - name: Check recipe definitions
       run: |
         poetry run python -m mealprep.app.ci.check_recipe_definitions
